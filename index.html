@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIFERAY-TESTS — DIEGOALO</title>
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --fg: #f5f5f5;
+    --dim: #6a6a6a;
+    --line: #222;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    padding: 8vh 6vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    margin-bottom: 6vh;
+  }
+  h1 {
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1;
+  }
+  .sub {
+    margin-top: 0.8rem;
+    color: var(--dim);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+  }
+  ul { list-style: none; }
+  li { border-top: 1px solid var(--line); }
+  li:last-child { border-bottom: 1px solid var(--line); }
+  a {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 1.4rem 0;
+    color: var(--fg);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    transition: color 0.15s ease, padding-left 0.15s ease;
+  }
+  a:hover {
+    color: var(--dim);
+    padding-left: 1rem;
+  }
+  a .idx {
+    color: var(--dim);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+  }
+  footer {
+    margin-top: auto;
+    padding-top: 8vh;
+    color: var(--dim);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  footer a {
+    display: inline;
+    padding: 0;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+  }
+  footer a:hover { padding-left: 0; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Liferay-Tests</h1>
+    <div class="sub">HTML Previews — Product Design on Liferay</div>
+  </header>
+
+  <ul>
+    <li>
+      <a href="lexicon-skeleton-previews.html">
+        <span>Lexicon Skeleton Previews</span>
+        <span class="idx">001</span>
+      </a>
+    </li>
+  </ul>
+
+  <footer>
+    <span>DIEGOALO</span>
+    <span>
+      <a href="https://diegoalo.com">diegoalo.com</a>
+    </span>
+  </footer>
+</body>
+</html>
