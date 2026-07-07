@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lexicon Components — Skeleton Previews</title>
+<style>
+	:root {
+		--skeleton-shimmer-color: 247, 248, 249;
+		--skeleton-shape: #E7E7ED;
+		--skeleton-bg: #F7F8F9;
+		--border: #E7E7ED;
+		--text: #272833;
+		--text-secondary: #6B6C7E;
+	}
+
+	* { box-sizing: border-box; }
+
+	body {
+		margin: 0;
+		padding: 0;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+		background: #FFF;
+		color: var(--text);
+	}
+
+	header.page {
+		padding: 40px 48px 24px;
+		border-bottom: 1px solid var(--border);
+	}
+	header.page h1 { margin: 0 0 8px; font-size: 24px; }
+	header.page p { margin: 0; color: var(--text-secondary); max-width: 720px; line-height: 1.5; }
+	header.page .tokens { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+	header.page .token {
+		font-size: 12px; color: var(--text-secondary);
+		border: 1px solid var(--border); border-radius: 4px; padding: 4px 8px;
+		display: inline-flex; align-items: center; gap: 6px;
+	}
+	.swatch { width: 12px; height: 12px; border-radius: 3px; display: inline-block; border: 1px solid rgba(0,0,0,.06); }
+
+	main {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+		gap: 24px;
+		padding: 32px 48px 64px;
+	}
+
+	section.demo {
+		border: 1px solid var(--border);
+		border-radius: 8px;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+	}
+	section.demo > h2 {
+		margin: 0; padding: 12px 16px; font-size: 14px; font-weight: 600;
+		border-bottom: 1px solid var(--border);
+	}
+	section.demo > h2 small { font-weight: 400; color: var(--text-secondary); margin-left: 8px; }
+	.stage {
+		background: var(--skeleton-bg);
+		padding: 24px;
+		flex: 1;
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+	}
+
+	/* ============ Core skeleton pattern (from CMS menu CodePen) ============ */
+	.skeleton {
+		position: relative;
+		display: inline-block;
+		overflow: hidden;
+	}
+	.skeleton::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			90deg,
+			rgba(var(--skeleton-shimmer-color), 0) 0%,
+			rgba(var(--skeleton-shimmer-color), 0.6) 50%,
+			rgba(var(--skeleton-shimmer-color), 0) 100%
+		);
+		transform: translateX(-100%);
+		animation: shimmer 1.6s infinite;
+	}
+	@keyframes shimmer {
+		100% { transform: translateX(100%); }
+	}
+
+	/* Building blocks */
+	.sk { background: var(--skeleton-shape); border-radius: 4px; }
+	.sk.circle { border-radius: 50%; }
+	.row { display: flex; align-items: center; gap: 8px; }
+
+	/* Vertical fade for repeating structures */
+	.fade > *:nth-child(4) { opacity: .85; }
+	.fade > *:nth-child(5) { opacity: .75; }
+	.fade > *:nth-child(6) { opacity: .6; }
+	.fade > *:nth-child(7) { opacity: .4; }
+	.fade > *:nth-child(8) { opacity: .3; }
+	.fade > *:nth-child(9) { opacity: .2; }
+
+	/* Surfaces */
+	.surface {
+		background: #FFF;
+		border: 1px solid var(--border);
+		border-radius: 8px;
+	}
+
+	/* ============ Card ============ */
+	.sk-card { width: 280px; padding: 0; overflow: hidden; }
+	.sk-card .img { width: 100%; height: 140px; border-radius: 0; }
+	.sk-card .body { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+
+	/* ============ Table ============ */
+	.sk-table { width: 100%; max-width: 460px; padding: 12px 16px; display: flex; flex-direction: column; gap: 0; }
+	.sk-table .tr { display: grid; grid-template-columns: 16px 1.6fr 1fr 64px 20px; gap: 16px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--skeleton-bg); }
+	.sk-table .tr:last-child { border-bottom: 0; }
+
+	/* ============ List ============ */
+	.sk-list { width: 100%; max-width: 420px; padding: 8px 16px; display: flex; flex-direction: column; }
+	.sk-list .li { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--skeleton-bg); }
+	.sk-list .li:last-child { border-bottom: 0; }
+	.sk-list .li .grow { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+
+	/* ============ Vertical Navigation (CMS menu reference) ============ */
+	.sk-vnav { width: 280px; padding: 16px; display: flex; flex-direction: column; gap: 0; background: var(--skeleton-bg); border: 0; border-right: 1px solid #9393A4; border-radius: 0; }
+	.sk-vnav .head { display: flex; align-items: center; gap: 8px; padding-bottom: 24px; }
+	.sk-vnav .group { display: flex; align-items: center; justify-content: space-between; padding: 14px 0 8px; }
+	.sk-vnav .item { display: flex; align-items: center; gap: 8px; padding: 10px 0; }
+
+	/* ============ Navigation Bar ============ */
+	.sk-navbar { width: 100%; max-width: 460px; padding: 12px 16px; display: flex; align-items: center; gap: 16px; }
+	.sk-navbar .spacer { flex: 1; }
+
+	/* ============ Tabs ============ */
+	.sk-tabs { width: 100%; max-width: 420px; padding: 16px; }
+	.sk-tabs .bar { display: flex; gap: 24px; border-bottom: 2px solid var(--skeleton-bg); padding-bottom: 12px; margin-bottom: 16px; position: relative; }
+	.sk-tabs .content { display: flex; flex-direction: column; gap: 10px; }
+
+	/* ============ Dropdown ============ */
+	.sk-dropdown { width: 240px; padding: 8px; display: flex; flex-direction: column; box-shadow: 0 4px 12px rgba(0,0,0,.06); }
+	.sk-dropdown .search { padding: 4px 4px 10px; }
+	.sk-dropdown .item { display: flex; align-items: center; gap: 8px; padding: 9px 4px; }
+
+	/* ============ Modal ============ */
+	.sk-modal { width: 100%; max-width: 420px; box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+	.sk-modal .head { display: flex; align-items: center; justify-content: space-between; padding: 16px; border-bottom: 1px solid var(--skeleton-bg); }
+	.sk-modal .body { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+	.sk-modal .foot { display: flex; justify-content: flex-end; gap: 8px; padding: 16px; border-top: 1px solid var(--skeleton-bg); }
+
+	/* ============ Side Panel ============ */
+	.sk-sidepanel { width: 300px; min-height: 340px; border-radius: 0; border-left: 1px solid var(--border); display: flex; flex-direction: column; }
+	.sk-sidepanel .head { display: flex; align-items: center; justify-content: space-between; padding: 16px; border-bottom: 1px solid var(--skeleton-bg); }
+	.sk-sidepanel .body { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+
+	/* ============ Breadcrumb ============ */
+	.sk-breadcrumb { display: flex; align-items: center; gap: 10px; padding: 8px 0; background: transparent; border: 0; }
+	.sk-breadcrumb .sep { width: 6px; height: 10px; opacity: .5; }
+
+	/* ============ Multi Step ============ */
+	.sk-multistep { width: 100%; max-width: 440px; padding: 24px 16px; display: flex; align-items: flex-start; background: transparent; border: 0; }
+	.sk-multistep .step { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 72px; }
+	.sk-multistep .line { flex: 1; height: 4px; margin-top: 14px; }
+
+	/* ============ Form (Input) ============ */
+	.sk-form { width: 100%; max-width: 400px; padding: 20px; display: flex; flex-direction: column; gap: 18px; }
+	.sk-form .field { display: flex; flex-direction: column; gap: 8px; }
+
+	footer.page {
+		padding: 24px 48px 48px;
+		color: var(--text-secondary);
+		font-size: 13px;
+		border-top: 1px solid var(--border);
+		line-height: 1.6;
+	}
+	footer.page code { background: var(--skeleton-bg); padding: 2px 5px; border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<header class="page">
+	<h1>Lexicon Components — Skeleton Previews</h1>
+	<p>Animated skeleton loading states for the Lexicon component library, based on the CMS menu skeleton reference (LPD-49007). Shapes use <strong>#E7E7ED</strong> at 4px radius over a <strong>#F7F8F9</strong> surface, with a 1.6s wave (shimmer) animation and a vertical opacity fade on repeating structures.</p>
+	<div class="tokens">
+		<span class="token"><span class="swatch" style="background:#E7E7ED"></span> Shape: #E7E7ED</span>
+		<span class="token"><span class="swatch" style="background:#F7F8F9"></span> Surface: #F7F8F9</span>
+		<span class="token"><span class="swatch" style="background:linear-gradient(90deg,#F7F8F9,#FFF,#F7F8F9)"></span> Shimmer: rgba(247,248,249,.6)</span>
+		<span class="token">Radius: 4px</span>
+		<span class="token">Animation: 1.6s infinite</span>
+		<span class="token">Fade: 1 → .85 → .75 → .6 → .4 → .3 → .2</span>
+	</div>
+</header>
+
+<main>
+
+	<section class="demo">
+		<h2>Card <small>image + title + description + metadata</small></h2>
+		<div class="stage">
+			<div class="skeleton surface sk-card">
+				<div class="sk img"></div>
+				<div class="body">
+					<div class="sk" style="width:65%;height:16px"></div>
+					<div class="sk" style="width:90%;height:10px"></div>
+					<div class="sk" style="width:75%;height:10px"></div>
+					<div class="row" style="margin-top:6px">
+						<div class="sk" style="width:56px;height:20px"></div>
+						<div class="sk" style="width:72px;height:20px"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="demo">
+		<h2>Table <small>header + rows with opacity fade</small></h2>
+		<div class="stage">
+			<div class="skeleton surface sk-table fade">
+				<div class="tr">
+					<div class="sk" style="width:16px;height:16px"></div>
+					<div class="sk" style="height:12px;width:60%"></div>
+					<div class="sk" style="height:12px;width:70%"></div>
+					<div class="sk" style="height:12px"></div>
+					<div class="sk" style="width:16px;height:16px"></div>
+				</div>
+				<div class="tr">
+					<div class="sk" style="width:16px;height:16px"></div>
+					<div class="sk" style="height:14px;width:85%"></div>
+					<div class="sk" style="height:14px;width:60%"></div>
+					<div class="sk" style="height:20px"></div>
+					<div class="sk" style="width:16px;height:16px"></div>
+				</div>
+				<div class="tr">
+					<div class="sk" style="width:16px;height:16px"></div>
+					<div class="sk" style="height:14px;width:70%"></div>
+					<div class="sk" style="height:14px;width:75%"></div>
+					<div class="sk" style="height:20px"></div>
+					<div class="sk" style="width:16px;height:16px"></div>
+				</div>
+				<div class="tr">
+					<div class="sk" style="width:16px;height:16px"></div>
+					<div class="sk" style="height:14px;width:90%"></div>
+					<div class="sk" style="height:14px;width:55%"></div>
+					<div class="sk" style="height:20px"></div>
+					<div class="sk" style="width:16px;height:16px"></div>
+				</div>
+				<div class="tr">
+					<div class="sk" style="width:16px;height:16px"></div>
+					<div class="sk" style="height:14px;width:75%"></div>
+					<div class="sk" style="height:14px;width:65%"></div>
+					<div class="sk" style="height:20px"></div>
+					<div class="sk" style="width:16px;height:16px"></div>
+				</div>
+				<div class="tr">
+					<div class="sk" style="width:16px;height:16px"></div>
+					<div class="sk" style="height:14px;width:80%"></div>
+					<div class="sk" style="height:14px;width:70%"></div>
+					<div class="sk" style="height:20px"></div>
+					<div class="sk" style="width:16px;height:16px"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="demo">
+		<h2>List <small>icon + primary/secondary text + action</small></h2>
+		<div class="stage">
+			<div class="skeleton surface sk-list fade">
+				<div class="li">
+					<div class="sk" style="width:24px;height:24px"></div>
+					<div class="grow">
+						<div class="sk" style="width:55%;height:14px"></div>
+						<div class="sk" style="width:35%;height:10px"></div>
+					</div>
+					<div class="sk" style="width:16px;height:16px"></div>
+				</div>
+				<div class="li">
+					<div class="sk" style="width:24px;height:24px"></div>
+					<div class="grow">
+						<div class="sk" style="width:70%;height:14px"></div>
+						<div class="sk" style="width:40%;height:10px"></div>
+					</div>
+					<div class="sk" style="width:16px;height:16px"></div>
+				</div>
+				<div class="li">
+					<div class="sk" style="width:24px;height:24px"></div>
+					<div class="grow">
+						<div class="sk" style="width:60%;height:14px"></div>
+						<div class="sk" style="width:30%;height:10px"></div>
+					</div>
+					<div class="sk" style="width:16px;height:16px"></div>
+				</div>
+				<div class="li">
+					<div class="sk" style="width:24px;height:24px"></div>
+					<div class="grow">
+						<div class="sk" style="width:65%;height:14px"></div>
+						<div class="sk" style="width:45%;height:10px"></div>
+					</div>
+					<div class="sk" style="width:16px;height:16px"></div>
+				</div>
+				<div class="li">
+					<div class="sk" style="width:24px;height:24px"></div>
+					<div class="grow">
+						<div class="sk" style="width:50%;height:14px"></div>
+						<div class="sk" style="width:35%;height:10px"></div>
+					</div>
+					<div class="sk" style="width:16px;height:16px"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="demo">
+		<h2>Vertical Navigation <small>CMS menu reference structure</small></h2>
+		<div class="stage" style="padding:0;justify-content:flex-start">
+			<div class="skeleton sk-vnav fade">
+				<div class="head">
+					<div class="sk" style="width:32px;height:32px"></div>
+					<div class="sk" style="width:132px;height:18px"></div>
+					<span style="flex:1"></span>
+					<div class="sk" style="width:20px;height:20px"></div>
+				</div>
+				<div class="item">
+					<div class="sk" style="width:24px;height:24px"></div>
+					<div class="sk" style="width:140px;height:18px"></div>
+				</div>
+				<div class="group">
+					<div class="sk" style="width:100px;height:18px"></div>
+					<div class="sk" style="width:14px;height:9px"></div>
+				</div>
+				<div class="item">
+					<div class="sk" style="width:24px;height:24px"></div>
+					<div class="sk" style="width:176px;height:18px"></div>
+				</div>
+				<div class="item">
+					<div class="sk" style="width:24px;height:24px"></div>
+					<div class="sk" style="width:176px;height:18px"></div>
+				</div>
+				<div class="group">
+					<div class="sk" style="width:100px;height:18px"></div>
+					<div class="sk" style="width:14px;height:9px"></div>
+				</div>
+				<div class="item">
+					<div class="sk" style="width:24px;height:24px"></div>
+					<div class="sk" style="width:176px;height:18px"></div>
+				</div>
+				<div class="item">
+					<div class="sk" style="width:24px;height:24px"></div>
+					<div class="sk" style="width:176px;height:18px"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="demo">
+		<h2>Navigation Bar <small>brand + items + actions</small></h2>
+		<div class="stage">
+			<div class="skeleton surface sk-navbar">
+				<div class="sk" style="width:28px;height:28px"></div>
+				<div class="sk" style="width:72px;height:14px"></div>
+				<div class="sk" style="width:56px;height:14px"></div>
+				<div class="sk" style="width:64px;height:14px"></div>
+				<span class="spacer"></span>
+				<div class="sk" style="width:20px;height:20px"></div>
+				<div class="sk circle" style="width:28px;height:28px"></div>
+			</div>
+		</div>
+	</section>
+
+	<section class="demo">
+		<h2>Tabs <small>tab bar + panel content</small></h2>
+		<div class="stage">
+			<div class="skeleton surface sk-tabs">
+				<div class="bar">
+					<div class="sk" style="width:64px;height:14px"></div>
+					<div class="sk" style="width:80px;height:14px;opacity:.6"></div>
+					<div class="sk" style="width:56px;height:14px;opacity:.6"></div>
+				</div>
+				<div class="content fade">
+					<div class="sk" style="width:50%;height:16px"></div>
+					<div class="sk" style="width:95%;height:10px"></div>
+					<div class="sk" style="width:88%;height:10px"></div>
+					<div class="sk" style="width:92%;height:10px"></div>
+					<div class="sk" style="width:60%;height:10px"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="demo">
+		<h2>Dropdown <small>search + menu items</small></h2>
+		<div class="stage">
+			<div class="skeleton surface sk-dropdown fade">
+				<div class="search"><div class="sk" style="width:100%;height:32px"></div></div>
+				<div class="item"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:70%;height:12px"></div></div>
+				<div class="item"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:55%;height:12px"></div></div>
+				<div class="item"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:65%;height:12px"></div></div>
+				<div class="item"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:50%;height:12px"></div></div>
+				<div class="item"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:60%;height:12px"></div></div>
+			</div>
+		</div>
+	</section>
+
+	<section class="demo">
+		<h2>Modal <small>header + body + footer actions</small></h2>
+		<div class="stage">
+			<div class="skeleton surface sk-modal">
+				<div class="head">
+					<div class="sk" style="width:45%;height:16px"></div>
+					<div class="sk" style="width:16px;height:16px"></div>
+				</div>
+				<div class="body fade">
+					<div class="sk" style="width:95%;height:10px"></div>
+					<div class="sk" style="width:88%;height:10px"></div>
+					<div class="sk" style="width:92%;height:10px"></div>
+					<div class="sk" style="width:55%;height:10px"></div>
+				</div>
+				<div class="foot">
+					<div class="sk" style="width:72px;height:32px"></div>
+					<div class="sk" style="width:88px;height:32px"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="demo">
+		<h2>Side Panel <small>header + content blocks</small></h2>
+		<div class="stage" style="padding:0;justify-content:flex-end">
+			<div class="skeleton surface sk-sidepanel">
+				<div class="head">
+					<div class="sk" style="width:50%;height:16px"></div>
+					<div class="sk" style="width:16px;height:16px"></div>
+				</div>
+				<div class="body fade">
+					<div class="sk" style="width:40%;height:12px"></div>
+					<div class="sk" style="width:100%;height:32px"></div>
+					<div class="sk" style="width:35%;height:12px"></div>
+					<div class="sk" style="width:100%;height:32px"></div>
+					<div class="sk" style="width:100%;height:80px"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="demo">
+		<h2>Breadcrumb <small>path segments</small></h2>
+		<div class="stage" style="align-items:center">
+			<div class="skeleton sk-breadcrumb">
+				<div class="sk" style="width:56px;height:12px"></div>
+				<div class="sk sep"></div>
+				<div class="sk" style="width:72px;height:12px"></div>
+				<div class="sk sep"></div>
+				<div class="sk" style="width:64px;height:12px"></div>
+				<div class="sk sep"></div>
+				<div class="sk" style="width:88px;height:12px;opacity:.6"></div>
+			</div>
+		</div>
+	</section>
+
+	<section class="demo">
+		<h2>Multi Step <small>step indicators + connectors</small></h2>
+		<div class="stage" style="align-items:center">
+			<div class="skeleton sk-multistep">
+				<div class="step">
+					<div class="sk circle" style="width:32px;height:32px"></div>
+					<div class="sk" style="width:48px;height:10px"></div>
+				</div>
+				<div class="sk line"></div>
+				<div class="step">
+					<div class="sk circle" style="width:32px;height:32px;opacity:.75"></div>
+					<div class="sk" style="width:56px;height:10px;opacity:.75"></div>
+				</div>
+				<div class="sk line" style="opacity:.6"></div>
+				<div class="step">
+					<div class="sk circle" style="width:32px;height:32px;opacity:.4"></div>
+					<div class="sk" style="width:44px;height:10px;opacity:.4"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="demo">
+		<h2>Form / Input <small>label + field pairs</small></h2>
+		<div class="stage">
+			<div class="skeleton surface sk-form fade">
+				<div class="field">
+					<div class="sk" style="width:30%;height:12px"></div>
+					<div class="sk" style="width:100%;height:36px"></div>
+				</div>
+				<div class="field">
+					<div class="sk" style="width:40%;height:12px"></div>
+					<div class="sk" style="width:100%;height:36px"></div>
+				</div>
+				<div class="field">
+					<div class="sk" style="width:35%;height:12px"></div>
+					<div class="sk" style="width:100%;height:88px"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</main>
+
+<footer class="page">
+	<strong>Not skeleton candidates:</strong> Button, Button Group, Radio Button, Badge, Picker, Progress Bar, Pagination, Focus Ring, Slot, Alert.
+	These are either instant-rendering chrome (buttons, badges, pagination), feedback components that appear as a result of an action (alert, progress bar), or utilities (focus ring, slot). Skeletons should only stand in for <em>content that is being fetched</em>.
+	<br><br>
+	Reference: <a href="https://codepen.io/marcoscv/pen/VYjgMyX">Animated Liferay Skeleton (CMS menu) on CodePen</a> · Epic LPD-49007 · Task LPD-49163.
+	Core pattern: shapes in <code>#E7E7ED</code>, 4px radius, shimmer overlay <code>rgba(247,248,249,.6)</code> animated <code>1.6s infinite</code>, opacity fade on repeating rows.
+</footer>
+
+</body>
+</html>
