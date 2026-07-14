@@ -1,98 +1,220 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lexicon Components — Skeleton Previews</title>
+<title>Lexicon Components — Skeleton Previews (Light / Dark)</title>
+
+<!-- Skin bootstrap (same convention as lexicon-vanilla: class on <html>, persisted) -->
+<script>(function(){try{
+	var s=localStorage.getItem('vanilla-skin')||'light';
+	document.documentElement.classList.remove('light','dark');
+	document.documentElement.classList.add(s==='dark'?'dark':'light');
+}catch(e){}})()</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <style>
-	:root {
-		--skeleton-shimmer-color: 247, 248, 249;
-		--skeleton-shape: #E7E7ED;
-		--skeleton-bg: #F7F8F9;
-		--border: #E7E7ED;
-		--text: #272833;
-		--text-secondary: #6B6C7E;
+	/* ============================================================
+	   Lexicon tokens (subset of lexicon-vanilla tokens.css)
+	   ============================================================ */
+	:root, .light {
+		--color-primary: #0B5FFF;
+		--color-primary-l1: #80ACFF;
+		--color-primary-l3: #F0F5FF;
+		--color-secondary: #6B6C7E;
+		--color-secondary-l0: #9393A4;
+		--color-secondary-l1: #A7A9BC;
+		--color-secondary-l2: #CDCED9;
+		--color-secondary-l3: #E7E7ED;
+		--color-dark: #272833;
+		--color-light-d1: #E2E4EA;
+		--color-light: #F1F2F5;
+		--color-light-l1: #F7F8F9;
+		--color-white: #FFFFFF;
+
+		--spacing-2: 4px; --spacing-3: 8px; --spacing-4: 12px;
+		--spacing-5: 16px; --spacing-6: 20px; --spacing-7: 24px;
+		--rounded-sm: 2px; --rounded-md: 4px; --rounded-lg: 8px; --rounded-full: 9999px;
+		--font-family-base: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+		--shadow-card: 0 2px 4px rgba(39, 40, 51, 0.12);
+		--shadow-dropdown: 0 4px 8px rgba(39, 40, 51, 0.12);
+
+		/* Skeleton tokens */
+		--skeleton-shape: var(--color-secondary-l3);
+		--skeleton-surface: var(--color-light-l1);
+		--skeleton-shimmer-rgb: 247, 248, 249;
+		--skeleton-shimmer-alpha: 0.6;
+	}
+
+	/* Dark skin (subset of lexicon-vanilla tokens-dark.css) */
+	.dark {
+		--color-primary: #6198FF;
+		--color-primary-l1: #004CDB;
+		--color-primary-l3: #002266;
+		--color-secondary: #A2A2B9;
+		--color-secondary-l0: #7D7F9C;
+		--color-secondary-l1: #636682;
+		--color-secondary-l2: #525361;
+		--color-secondary-l3: #34343D;
+		--color-dark: #F1F2F5;
+		--color-light-d1: #30313F;
+		--color-light: #272833;
+		--color-light-l1: #1C1C24;
+		--color-white: #111116;
+
+		--shadow-card: 0 2px 4px rgba(0, 0, 0, 0.4);
+		--shadow-dropdown: 0 4px 8px rgba(0, 0, 0, 0.4);
+
+		--skeleton-shape: var(--color-secondary-l3);
+		--skeleton-surface: var(--color-light-l1);
+		--skeleton-shimmer-rgb: 99, 102, 130;   /* secondary-l1 */
+		--skeleton-shimmer-alpha: 0.35;
 	}
 
 	* { box-sizing: border-box; }
-
+	html, body { margin: 0; }
 	body {
-		margin: 0;
-		padding: 0;
-		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-		background: #FFF;
-		color: var(--text);
+		font-family: var(--font-family-base);
+		font-size: 14px;
+		line-height: 1.5;
+		color: var(--color-dark);
+		background: var(--color-white);
+		transition: background 200ms ease, color 200ms ease;
 	}
 
-	header.page {
-		padding: 40px 48px 24px;
-		border-bottom: 1px solid var(--border);
+	/* ============================================================
+	   Toolbar
+	   ============================================================ */
+	.toolbar {
+		position: sticky; top: 0; z-index: 30;
+		display: flex; align-items: center; flex-wrap: wrap; gap: var(--spacing-4);
+		padding: var(--spacing-4) var(--spacing-7);
+		background: var(--color-white);
+		border-bottom: 1px solid var(--color-secondary-l2);
 	}
-	header.page h1 { margin: 0 0 8px; font-size: 24px; }
-	header.page p { margin: 0; color: var(--text-secondary); max-width: 720px; line-height: 1.5; }
-	header.page .tokens { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
-	header.page .token {
-		font-size: 12px; color: var(--text-secondary);
-		border: 1px solid var(--border); border-radius: 4px; padding: 4px 8px;
-		display: inline-flex; align-items: center; gap: 6px;
+	.toolbar h1 { font-size: 16px; font-weight: 600; margin: 0; margin-right: auto; }
+	.toolbar h1 small { font-weight: 300; color: var(--color-secondary); }
+
+	.control { display: inline-flex; align-items: center; gap: var(--spacing-3); font-size: 12px; color: var(--color-secondary); }
+
+	.seg {
+		display: inline-flex; border: 1px solid var(--color-secondary-l2);
+		border-radius: var(--rounded-md); overflow: hidden;
 	}
-	.swatch { width: 12px; height: 12px; border-radius: 3px; display: inline-block; border: 1px solid rgba(0,0,0,.06); }
+	.seg button {
+		border: 0; background: transparent; color: var(--color-secondary);
+		font: inherit; font-size: 12px; padding: 6px 12px; cursor: pointer;
+	}
+	.seg button.is-active { background: var(--color-primary-l3); color: var(--color-primary); font-weight: 600; }
+	.seg button + button { border-left: 1px solid var(--color-secondary-l2); }
+
+	.filter-input {
+		height: 32px; padding: 0 var(--spacing-4);
+		border: 1px solid var(--color-secondary-l2); border-radius: var(--rounded-md);
+		background: var(--color-white); color: var(--color-dark);
+		font: inherit; font-size: 12px; width: 180px;
+	}
+	.filter-input:focus { outline: none; border-color: var(--color-primary); }
+
+	select.speed {
+		height: 32px; border: 1px solid var(--color-secondary-l2); border-radius: var(--rounded-md);
+		background: var(--color-white); color: var(--color-dark); font: inherit; font-size: 12px; padding: 0 var(--spacing-3);
+	}
+
+	/* ============================================================
+	   Layout
+	   ============================================================ */
+	.intro { padding: var(--spacing-6) var(--spacing-7) 0; color: var(--color-secondary); max-width: 860px; }
+	.intro code { background: var(--color-light); border-radius: var(--rounded-sm); padding: 1px 5px; font-size: 12px; }
 
 	main {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-		gap: 24px;
-		padding: 32px 48px 64px;
+		grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+		gap: var(--spacing-7);
+		padding: var(--spacing-7);
 	}
 
 	section.demo {
-		border: 1px solid var(--border);
-		border-radius: 8px;
+		border: 1px solid var(--color-secondary-l2);
+		border-radius: var(--rounded-lg);
 		overflow: hidden;
-		display: flex;
-		flex-direction: column;
+		display: flex; flex-direction: column;
+		background: var(--color-white);
 	}
-	section.demo > h2 {
-		margin: 0; padding: 12px 16px; font-size: 14px; font-weight: 600;
-		border-bottom: 1px solid var(--border);
+	section.demo.is-hidden { display: none; }
+	section.demo > header {
+		display: flex; align-items: baseline; gap: var(--spacing-3);
+		padding: var(--spacing-4) var(--spacing-5);
+		border-bottom: 1px solid var(--color-secondary-l2);
 	}
-	section.demo > h2 small { font-weight: 400; color: var(--text-secondary); margin-left: 8px; }
-	.stage {
-		background: var(--skeleton-bg);
-		padding: 24px;
-		flex: 1;
-		display: flex;
-		align-items: flex-start;
-		justify-content: center;
+	section.demo > header h2 { margin: 0; font-size: 14px; font-weight: 600; }
+	section.demo > header small { color: var(--color-secondary); font-weight: 300; }
+	section.demo > header a {
+		margin-left: auto; font-size: 12px; color: var(--color-primary); text-decoration: none; white-space: nowrap;
 	}
+	section.demo > header a:hover { text-decoration: underline; }
 
-	/* ============ Core skeleton pattern (from CMS menu CodePen) ============ */
+	.stages { display: flex; flex: 1; }
+	.stage {
+		background: var(--skeleton-surface);
+		padding: var(--spacing-7);
+		flex: 1; min-width: 0;
+		display: flex; align-items: flex-start; justify-content: center;
+		position: relative;
+	}
+	.stage--dark { display: none; }
+	body.compare .stage--dark { display: flex; }
+	body.compare .stage { flex: 1 1 50%; }
+	.stage__tag {
+		position: absolute; top: 8px; left: 8px;
+		font-size: 10px; text-transform: uppercase; letter-spacing: .06em;
+		color: var(--color-secondary-l0);
+		opacity: 0; transition: opacity 120ms ease;
+	}
+	body.compare .stage__tag { opacity: 1; }
+
+	/* ============================================================
+	   Core skeleton pattern (CMS menu CodePen reference)
+	   ============================================================ */
 	.skeleton {
 		position: relative;
 		display: inline-block;
 		overflow: hidden;
 	}
-	.skeleton::after {
-		content: "";
-		position: absolute;
-		inset: 0;
-		background: linear-gradient(
-			90deg,
-			rgba(var(--skeleton-shimmer-color), 0) 0%,
-			rgba(var(--skeleton-shimmer-color), 0.6) 50%,
-			rgba(var(--skeleton-shimmer-color), 0) 100%
+
+	/* Building blocks.
+	   The shimmer is painted per shape (not as a container overlay) so it
+	   never shows over empty space — critical on dark surfaces. All shapes
+	   share one viewport-fixed gradient (background-attachment: fixed), so
+	   the wave still sweeps the whole composition as a single front. */
+	.sk {
+		background-color: var(--skeleton-shape);
+		background-image: linear-gradient(
+			100deg,
+			rgba(var(--skeleton-shimmer-rgb), 0) 25%,
+			rgba(var(--skeleton-shimmer-rgb), var(--skeleton-shimmer-alpha)) 50%,
+			rgba(var(--skeleton-shimmer-rgb), 0) 75%
 		);
-		transform: translateX(-100%);
-		animation: shimmer 1.6s infinite;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size: 60vw 100vh;
+		animation: shimmer var(--skeleton-duration, 1.6s) linear infinite;
+		animation-play-state: var(--skeleton-play, running);
+		border-radius: var(--rounded-md);
+		flex-shrink: 0;
 	}
 	@keyframes shimmer {
-		100% { transform: translateX(100%); }
+		0%   { background-position: -60vw 0; }
+		100% { background-position: 100vw 0; }
 	}
-
-	/* Building blocks */
-	.sk { background: var(--skeleton-shape); border-radius: 4px; }
-	.sk.circle { border-radius: 50%; }
-	.row { display: flex; align-items: center; gap: 8px; }
+	@media (prefers-reduced-motion: reduce) {
+		.sk { animation: none; background-image: none; }
+	}
+	.sk.circle { border-radius: var(--rounded-full); }
+	.row { display: flex; align-items: center; gap: var(--spacing-3); }
 
 	/* Vertical fade for repeating structures */
 	.fade > *:nth-child(4) { opacity: .85; }
@@ -102,171 +224,214 @@
 	.fade > *:nth-child(8) { opacity: .3; }
 	.fade > *:nth-child(9) { opacity: .2; }
 
-	/* Surfaces */
+	/* Elevated surfaces (cards, dropdowns, modals) */
 	.surface {
-		background: #FFF;
-		border: 1px solid var(--border);
-		border-radius: 8px;
+		background: var(--color-white);
+		border: 1px solid var(--color-secondary-l3);
+		border-radius: var(--rounded-lg);
 	}
 
-	/* ============ Card ============ */
-	.sk-card { width: 280px; padding: 0; overflow: hidden; }
+	/* ── Card — media + body (lexicon-vanilla .card) ───────────── */
+	.sk-card { width: 280px; overflow: hidden; box-shadow: var(--shadow-card); }
 	.sk-card .img { width: 100%; height: 140px; border-radius: 0; }
-	.sk-card .body { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+	.sk-card .body { padding: var(--spacing-5); display: flex; flex-direction: column; gap: 10px; }
 
-	/* ============ Table ============ */
-	.sk-table { width: 100%; max-width: 460px; padding: 12px 16px; display: flex; flex-direction: column; gap: 0; }
-	.sk-table .tr { display: grid; grid-template-columns: 16px 1.6fr 1fr 64px 20px; gap: 16px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--skeleton-bg); }
-	.sk-table .tr:last-child { border-bottom: 0; }
+	/* ── Table — zebra + 48px gutters (lexicon-vanilla .table) ── */
+	.sk-table { width: 100%; max-width: 480px; }
+	.sk-table .tr {
+		display: grid; grid-template-columns: 48px 1.6fr 1fr 72px 48px;
+		align-items: center; height: 48px; padding: 0 var(--spacing-3);
+	}
+	.sk-table .tr:nth-child(even) { background: var(--skeleton-surface); }
+	.sk-table .tr > * { justify-self: start; }
+	.sk-table .tr > *:first-child, .sk-table .tr > *:last-child { justify-self: center; }
 
-	/* ============ List ============ */
-	.sk-list { width: 100%; max-width: 420px; padding: 8px 16px; display: flex; flex-direction: column; }
-	.sk-list .li { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--skeleton-bg); }
+	/* ── List — .list__row: sticker + content + actions ───────── */
+	.sk-list { width: 100%; max-width: 440px; padding: var(--spacing-3) var(--spacing-5); display: flex; flex-direction: column; }
+	.sk-list .li { display: flex; align-items: center; gap: var(--spacing-4); padding: var(--spacing-4) 0; border-bottom: 1px solid var(--skeleton-surface); }
 	.sk-list .li:last-child { border-bottom: 0; }
 	.sk-list .li .grow { flex: 1; display: flex; flex-direction: column; gap: 6px; }
 
-	/* ============ Vertical Navigation (CMS menu reference) ============ */
-	.sk-vnav { width: 280px; padding: 16px; display: flex; flex-direction: column; gap: 0; background: var(--skeleton-bg); border: 0; border-right: 1px solid #9393A4; border-radius: 0; }
-	.sk-vnav .head { display: flex; align-items: center; gap: 8px; padding-bottom: 24px; }
-	.sk-vnav .group { display: flex; align-items: center; justify-content: space-between; padding: 14px 0 8px; }
-	.sk-vnav .item { display: flex; align-items: center; gap: 8px; padding: 10px 0; }
+	/* ── Vertical Navigation — 40px rows, 24px icon cell ──────── */
+	.sk-vnav {
+		width: 280px; padding: var(--spacing-5) var(--spacing-5) var(--spacing-7);
+		display: flex; flex-direction: column;
+		background: var(--skeleton-surface);
+		border-right: 1px solid var(--color-secondary-l0);
+	}
+	.sk-vnav .head { display: flex; align-items: center; gap: var(--spacing-3); padding-bottom: var(--spacing-7); }
+	.sk-vnav .group { display: flex; align-items: center; justify-content: space-between; height: 40px; }
+	.sk-vnav .item { display: flex; align-items: center; gap: var(--spacing-3); height: 40px; }
 
-	/* ============ Navigation Bar ============ */
-	.sk-navbar { width: 100%; max-width: 460px; padding: 12px 16px; display: flex; align-items: center; gap: 16px; }
+	/* ── Navigation Bar — items over baseline ──────────────────── */
+	.sk-navbar { width: 100%; max-width: 480px; padding: var(--spacing-4) var(--spacing-5); display: flex; align-items: center; gap: var(--spacing-5); }
 	.sk-navbar .spacer { flex: 1; }
 
-	/* ============ Tabs ============ */
-	.sk-tabs { width: 100%; max-width: 420px; padding: 16px; }
-	.sk-tabs .bar { display: flex; gap: 24px; border-bottom: 2px solid var(--skeleton-bg); padding-bottom: 12px; margin-bottom: 16px; position: relative; }
+	/* ── Tabs — row over baseline + panel ──────────────────────── */
+	.sk-tabs { width: 100%; max-width: 440px; padding: var(--spacing-5); }
+	.sk-tabs .bar { display: flex; gap: var(--spacing-7); border-bottom: 2px solid var(--skeleton-surface); padding-bottom: var(--spacing-4); margin-bottom: var(--spacing-5); }
 	.sk-tabs .content { display: flex; flex-direction: column; gap: 10px; }
 
-	/* ============ Dropdown ============ */
-	.sk-dropdown { width: 240px; padding: 8px; display: flex; flex-direction: column; box-shadow: 0 4px 12px rgba(0,0,0,.06); }
-	.sk-dropdown .search { padding: 4px 4px 10px; }
-	.sk-dropdown .item { display: flex; align-items: center; gap: 8px; padding: 9px 4px; }
+	/* ── Dropdown — white card menu of 32px items ──────────────── */
+	.sk-dropdown { width: 240px; padding: var(--spacing-3); display: flex; flex-direction: column; box-shadow: var(--shadow-dropdown); }
+	.sk-dropdown .search { padding: var(--spacing-2) var(--spacing-2) var(--spacing-3); }
+	.sk-dropdown .item { display: flex; align-items: center; gap: var(--spacing-3); height: 32px; padding: 0 var(--spacing-2); }
 
-	/* ============ Modal ============ */
-	.sk-modal { width: 100%; max-width: 420px; box-shadow: 0 8px 24px rgba(0,0,0,.08); }
-	.sk-modal .head { display: flex; align-items: center; justify-content: space-between; padding: 16px; border-bottom: 1px solid var(--skeleton-bg); }
-	.sk-modal .body { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
-	.sk-modal .foot { display: flex; justify-content: flex-end; gap: 8px; padding: 16px; border-top: 1px solid var(--skeleton-bg); }
+	/* ── Modal — header / body / footer ────────────────────────── */
+	.sk-modal { width: 100%; max-width: 440px; box-shadow: var(--shadow-dropdown); }
+	.sk-modal .head { display: flex; align-items: center; justify-content: space-between; padding: var(--spacing-5); border-bottom: 1px solid var(--skeleton-surface); }
+	.sk-modal .body { padding: var(--spacing-5); display: flex; flex-direction: column; gap: 10px; }
+	.sk-modal .foot { display: flex; justify-content: flex-end; gap: var(--spacing-3); padding: var(--spacing-5); border-top: 1px solid var(--skeleton-surface); }
 
-	/* ============ Side Panel ============ */
-	.sk-sidepanel { width: 300px; min-height: 340px; border-radius: 0; border-left: 1px solid var(--border); display: flex; flex-direction: column; }
-	.sk-sidepanel .head { display: flex; align-items: center; justify-content: space-between; padding: 16px; border-bottom: 1px solid var(--skeleton-bg); }
-	.sk-sidepanel .body { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+	/* ── Side Panel — 280px right drawer ───────────────────────── */
+	.sk-sidepanel { width: 280px; min-height: 340px; border-radius: 0; border-left: 1px solid var(--color-secondary-l3); display: flex; flex-direction: column; }
+	.sk-sidepanel .head { display: flex; align-items: center; justify-content: space-between; padding: var(--spacing-5); border-bottom: 1px solid var(--skeleton-surface); }
+	.sk-sidepanel .body { padding: var(--spacing-5); display: flex; flex-direction: column; gap: var(--spacing-4); flex: 1; }
+	.sk-sidepanel .foot { display: flex; justify-content: flex-end; gap: var(--spacing-3); padding: var(--spacing-5); border-top: 1px solid var(--skeleton-surface); }
 
-	/* ============ Breadcrumb ============ */
-	.sk-breadcrumb { display: flex; align-items: center; gap: 10px; padding: 8px 0; background: transparent; border: 0; }
+	/* ── Breadcrumb — bars + separators ────────────────────────── */
+	.sk-breadcrumb { display: flex; align-items: center; gap: 10px; padding: var(--spacing-3) 0; }
 	.sk-breadcrumb .sep { width: 6px; height: 10px; opacity: .5; }
 
-	/* ============ Multi Step ============ */
-	.sk-multistep { width: 100%; max-width: 440px; padding: 24px 16px; display: flex; align-items: flex-start; background: transparent; border: 0; }
-	.sk-multistep .step { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 72px; }
+	/* ── Multi Step — 32px circles + connectors ────────────────── */
+	.sk-multistep { width: 100%; max-width: 460px; padding: var(--spacing-7) var(--spacing-5); display: flex; align-items: flex-start; }
+	.sk-multistep .step { display: flex; flex-direction: column; align-items: center; gap: var(--spacing-3); width: 72px; }
 	.sk-multistep .line { flex: 1; height: 4px; margin-top: 14px; }
 
-	/* ============ Form (Input) ============ */
-	.sk-form { width: 100%; max-width: 400px; padding: 20px; display: flex; flex-direction: column; gap: 18px; }
-	.sk-form .field { display: flex; flex-direction: column; gap: 8px; }
+	/* ── Form / Input — label + 32px fields ────────────────────── */
+	.sk-form { width: 100%; max-width: 400px; padding: var(--spacing-6); display: flex; flex-direction: column; gap: var(--spacing-5); }
+	.sk-form .field { display: flex; flex-direction: column; gap: var(--spacing-3); }
+
+	/* ── Dual Listbox — 1fr auto 1fr ───────────────────────────── */
+	.sk-duallist { width: 100%; max-width: 460px; padding: var(--spacing-5); display: grid; grid-template-columns: 1fr auto 1fr; gap: var(--spacing-4); align-items: center; background: transparent; border: 0; }
+	.sk-duallist .box { background: var(--color-white); border: 1px solid var(--color-secondary-l3); border-radius: var(--rounded-md); padding: var(--spacing-3); display: flex; flex-direction: column; gap: var(--spacing-3); }
+	.sk-duallist .moves { display: flex; flex-direction: column; gap: var(--spacing-3); }
 
 	footer.page {
-		padding: 24px 48px 48px;
-		color: var(--text-secondary);
+		padding: var(--spacing-7);
+		color: var(--color-secondary);
 		font-size: 13px;
-		border-top: 1px solid var(--border);
-		line-height: 1.6;
+		border-top: 1px solid var(--color-secondary-l2);
+		line-height: 1.7;
 	}
-	footer.page code { background: var(--skeleton-bg); padding: 2px 5px; border-radius: 4px; }
+	footer.page code { background: var(--color-light); padding: 2px 5px; border-radius: var(--rounded-sm); }
+	footer.page a { color: var(--color-primary); }
 </style>
 </head>
 <body>
 
-<header class="page">
-	<h1>Lexicon Components — Skeleton Previews</h1>
-	<p>Animated skeleton loading states for the Lexicon component library, based on the CMS menu skeleton reference (LPD-49007). Shapes use <strong>#E7E7ED</strong> at 4px radius over a <strong>#F7F8F9</strong> surface, with a 1.6s wave (shimmer) animation and a vertical opacity fade on repeating structures.</p>
-	<div class="tokens">
-		<span class="token"><span class="swatch" style="background:#E7E7ED"></span> Shape: #E7E7ED</span>
-		<span class="token"><span class="swatch" style="background:#F7F8F9"></span> Surface: #F7F8F9</span>
-		<span class="token"><span class="swatch" style="background:linear-gradient(90deg,#F7F8F9,#FFF,#F7F8F9)"></span> Shimmer: rgba(247,248,249,.6)</span>
-		<span class="token">Radius: 4px</span>
-		<span class="token">Animation: 1.6s infinite</span>
-		<span class="token">Fade: 1 → .85 → .75 → .6 → .4 → .3 → .2</span>
-	</div>
-</header>
+<div class="toolbar">
+	<h1>Lexicon Skeletons <small>· light &amp; dark previews</small></h1>
 
-<main>
+	<label class="control">
+		<input class="filter-input" id="filter" type="search" placeholder="Filter components…" aria-label="Filter components">
+	</label>
 
-	<section class="demo">
-		<h2>Card <small>image + title + description + metadata</small></h2>
-		<div class="stage">
+	<span class="control">Skin
+		<span class="seg" role="group" aria-label="Skin">
+			<button id="skin-light" type="button">Light</button>
+			<button id="skin-dark" type="button">Dark</button>
+		</span>
+	</span>
+
+	<span class="control">
+		<span class="seg" role="group" aria-label="View">
+			<button id="view-single" type="button" class="is-active">Single</button>
+			<button id="view-compare" type="button">Side by side</button>
+		</span>
+	</span>
+
+	<label class="control">Speed
+		<select class="speed" id="speed" aria-label="Shimmer speed">
+			<option value="3.2s">0.5×</option>
+			<option value="1.6s" selected>1×</option>
+			<option value="0.8s">2×</option>
+			<option value="paused">Paused</option>
+		</select>
+	</label>
+</div>
+
+<p class="intro">
+	Animated skeleton loading states for the Lexicon component library (Epic LPD-49007), built on the
+	<a href="https://marcoscv-work.github.io/lexicon-vanilla/prototypes/token-editor.html">lexicon-vanilla</a> token system:
+	shapes use <code>--color-secondary-l3</code> on a <code>--color-light-l1</code> surface, 4px radius, a 1.6s shimmer wave and
+	an opacity fade on repeating rows. Skins follow the kit convention (<code>.light</code> / <code>.dark</code> class), so every
+	skeleton adapts automatically — use <em>Side by side</em> to review both at once.
+</p>
+
+<main id="grid">
+
+	<section class="demo" data-name="card">
+		<header><h2>Card</h2><small>media + body</small><a href="https://www.figma.com/design/YNNkt9Xd6ImDtEvIz4tETF/Lexicon-Components?node-id=675-4191">Figma ↗</a></header>
+		<div class="stages"><div class="stage"><span class="stage__tag">Light</span>
 			<div class="skeleton surface sk-card">
 				<div class="sk img"></div>
 				<div class="body">
 					<div class="sk" style="width:65%;height:16px"></div>
+					<div class="sk" style="width:45%;height:12px"></div>
 					<div class="sk" style="width:90%;height:10px"></div>
-					<div class="sk" style="width:75%;height:10px"></div>
 					<div class="row" style="margin-top:6px">
-						<div class="sk" style="width:56px;height:20px"></div>
-						<div class="sk" style="width:72px;height:20px"></div>
+						<div class="sk" style="width:64px;height:20px"></div>
+						<div class="sk" style="width:16px;height:16px;margin-left:auto"></div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</div></div>
 	</section>
 
-	<section class="demo">
-		<h2>Table <small>header + rows with opacity fade</small></h2>
-		<div class="stage">
+	<section class="demo" data-name="table">
+		<header><h2>Table</h2><small>zebra rows · 48px gutters</small><a href="https://www.figma.com/design/YNNkt9Xd6ImDtEvIz4tETF/Lexicon-Components?node-id=1844-20952">Figma ↗</a></header>
+		<div class="stages"><div class="stage"><span class="stage__tag">Light</span>
 			<div class="skeleton surface sk-table fade">
 				<div class="tr">
 					<div class="sk" style="width:16px;height:16px"></div>
-					<div class="sk" style="height:12px;width:60%"></div>
-					<div class="sk" style="height:12px;width:70%"></div>
-					<div class="sk" style="height:12px"></div>
+					<div class="sk" style="height:12px;width:55%"></div>
+					<div class="sk" style="height:12px;width:65%"></div>
+					<div class="sk" style="height:12px;width:100%"></div>
 					<div class="sk" style="width:16px;height:16px"></div>
 				</div>
 				<div class="tr">
 					<div class="sk" style="width:16px;height:16px"></div>
 					<div class="sk" style="height:14px;width:85%"></div>
 					<div class="sk" style="height:14px;width:60%"></div>
-					<div class="sk" style="height:20px"></div>
+					<div class="sk" style="height:20px;width:100%"></div>
 					<div class="sk" style="width:16px;height:16px"></div>
 				</div>
 				<div class="tr">
 					<div class="sk" style="width:16px;height:16px"></div>
 					<div class="sk" style="height:14px;width:70%"></div>
 					<div class="sk" style="height:14px;width:75%"></div>
-					<div class="sk" style="height:20px"></div>
+					<div class="sk" style="height:20px;width:100%"></div>
 					<div class="sk" style="width:16px;height:16px"></div>
 				</div>
 				<div class="tr">
 					<div class="sk" style="width:16px;height:16px"></div>
 					<div class="sk" style="height:14px;width:90%"></div>
 					<div class="sk" style="height:14px;width:55%"></div>
-					<div class="sk" style="height:20px"></div>
+					<div class="sk" style="height:20px;width:100%"></div>
 					<div class="sk" style="width:16px;height:16px"></div>
 				</div>
 				<div class="tr">
 					<div class="sk" style="width:16px;height:16px"></div>
 					<div class="sk" style="height:14px;width:75%"></div>
 					<div class="sk" style="height:14px;width:65%"></div>
-					<div class="sk" style="height:20px"></div>
+					<div class="sk" style="height:20px;width:100%"></div>
 					<div class="sk" style="width:16px;height:16px"></div>
 				</div>
 				<div class="tr">
 					<div class="sk" style="width:16px;height:16px"></div>
 					<div class="sk" style="height:14px;width:80%"></div>
 					<div class="sk" style="height:14px;width:70%"></div>
-					<div class="sk" style="height:20px"></div>
+					<div class="sk" style="height:20px;width:100%"></div>
 					<div class="sk" style="width:16px;height:16px"></div>
 				</div>
 			</div>
-		</div>
+		</div></div>
 	</section>
 
-	<section class="demo">
-		<h2>List <small>icon + primary/secondary text + action</small></h2>
-		<div class="stage">
+	<section class="demo" data-name="list">
+		<header><h2>List</h2><small>sticker + content + actions</small><a href="https://www.figma.com/design/YNNkt9Xd6ImDtEvIz4tETF/Lexicon-Components?node-id=1570-7647">Figma ↗</a></header>
+		<div class="stages"><div class="stage"><span class="stage__tag">Light</span>
 			<div class="skeleton surface sk-list fade">
 				<div class="li">
 					<div class="sk" style="width:24px;height:24px"></div>
@@ -309,12 +474,12 @@
 					<div class="sk" style="width:16px;height:16px"></div>
 				</div>
 			</div>
-		</div>
+		</div></div>
 	</section>
 
-	<section class="demo">
-		<h2>Vertical Navigation <small>CMS menu reference structure</small></h2>
-		<div class="stage" style="padding:0;justify-content:flex-start">
+	<section class="demo" data-name="vertical navigation cms menu">
+		<header><h2>Vertical Navigation</h2><small>CMS menu · 40px rows</small><a href="https://www.figma.com/design/YNNkt9Xd6ImDtEvIz4tETF/Lexicon-Components?node-id=512-5857">Figma ↗</a></header>
+		<div class="stages"><div class="stage" style="padding:0;justify-content:flex-start"><span class="stage__tag">Light</span>
 			<div class="skeleton sk-vnav fade">
 				<div class="head">
 					<div class="sk" style="width:32px;height:32px"></div>
@@ -351,27 +516,27 @@
 					<div class="sk" style="width:176px;height:18px"></div>
 				</div>
 			</div>
-		</div>
+		</div></div>
 	</section>
 
-	<section class="demo">
-		<h2>Navigation Bar <small>brand + items + actions</small></h2>
-		<div class="stage">
+	<section class="demo" data-name="navigation bar navbar">
+		<header><h2>Navigation Bar</h2><small>items + actions</small><a href="https://www.figma.com/design/YNNkt9Xd6ImDtEvIz4tETF/Lexicon-Components?node-id=478-8481">Figma ↗</a></header>
+		<div class="stages"><div class="stage"><span class="stage__tag">Light</span>
 			<div class="skeleton surface sk-navbar">
 				<div class="sk" style="width:28px;height:28px"></div>
 				<div class="sk" style="width:72px;height:14px"></div>
-				<div class="sk" style="width:56px;height:14px"></div>
-				<div class="sk" style="width:64px;height:14px"></div>
+				<div class="sk" style="width:56px;height:14px;opacity:.6"></div>
+				<div class="sk" style="width:64px;height:14px;opacity:.6"></div>
 				<span class="spacer"></span>
 				<div class="sk" style="width:20px;height:20px"></div>
 				<div class="sk circle" style="width:28px;height:28px"></div>
 			</div>
-		</div>
+		</div></div>
 	</section>
 
-	<section class="demo">
-		<h2>Tabs <small>tab bar + panel content</small></h2>
-		<div class="stage">
+	<section class="demo" data-name="tabs">
+		<header><h2>Tabs</h2><small>tab bar + panel</small><a href="https://www.figma.com/design/YNNkt9Xd6ImDtEvIz4tETF/Lexicon-Components?node-id=1008-17763">Figma ↗</a></header>
+		<div class="stages"><div class="stage"><span class="stage__tag">Light</span>
 			<div class="skeleton surface sk-tabs">
 				<div class="bar">
 					<div class="sk" style="width:64px;height:14px"></div>
@@ -386,12 +551,12 @@
 					<div class="sk" style="width:60%;height:10px"></div>
 				</div>
 			</div>
-		</div>
+		</div></div>
 	</section>
 
-	<section class="demo">
-		<h2>Dropdown <small>search + menu items</small></h2>
-		<div class="stage">
+	<section class="demo" data-name="dropdown menu">
+		<header><h2>Dropdown</h2><small>search + 32px items</small><a href="https://www.figma.com/design/YNNkt9Xd6ImDtEvIz4tETF/Lexicon-Components?node-id=1410-23811">Figma ↗</a></header>
+		<div class="stages"><div class="stage"><span class="stage__tag">Light</span>
 			<div class="skeleton surface sk-dropdown fade">
 				<div class="search"><div class="sk" style="width:100%;height:32px"></div></div>
 				<div class="item"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:70%;height:12px"></div></div>
@@ -400,12 +565,12 @@
 				<div class="item"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:50%;height:12px"></div></div>
 				<div class="item"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:60%;height:12px"></div></div>
 			</div>
-		</div>
+		</div></div>
 	</section>
 
-	<section class="demo">
-		<h2>Modal <small>header + body + footer actions</small></h2>
-		<div class="stage">
+	<section class="demo" data-name="modal dialog">
+		<header><h2>Modal</h2><small>header / body / footer</small><a href="https://www.figma.com/design/YNNkt9Xd6ImDtEvIz4tETF/Lexicon-Components?node-id=472-4478">Figma ↗</a></header>
+		<div class="stages"><div class="stage"><span class="stage__tag">Light</span>
 			<div class="skeleton surface sk-modal">
 				<div class="head">
 					<div class="sk" style="width:45%;height:16px"></div>
@@ -422,12 +587,12 @@
 					<div class="sk" style="width:88px;height:32px"></div>
 				</div>
 			</div>
-		</div>
+		</div></div>
 	</section>
 
-	<section class="demo">
-		<h2>Side Panel <small>header + content blocks</small></h2>
-		<div class="stage" style="padding:0;justify-content:flex-end">
+	<section class="demo" data-name="side panel drawer">
+		<header><h2>Side Panel</h2><small>280px right drawer</small><a href="https://www.figma.com/design/YNNkt9Xd6ImDtEvIz4tETF/Lexicon-Components?node-id=4664-8242">Figma ↗</a></header>
+		<div class="stages"><div class="stage" style="padding:0;justify-content:flex-end"><span class="stage__tag">Light</span>
 			<div class="skeleton surface sk-sidepanel">
 				<div class="head">
 					<div class="sk" style="width:50%;height:16px"></div>
@@ -438,15 +603,19 @@
 					<div class="sk" style="width:100%;height:32px"></div>
 					<div class="sk" style="width:35%;height:12px"></div>
 					<div class="sk" style="width:100%;height:32px"></div>
-					<div class="sk" style="width:100%;height:80px"></div>
+					<div class="sk" style="width:100%;height:72px"></div>
+				</div>
+				<div class="foot">
+					<div class="sk" style="width:64px;height:32px"></div>
+					<div class="sk" style="width:88px;height:32px"></div>
 				</div>
 			</div>
-		</div>
+		</div></div>
 	</section>
 
-	<section class="demo">
-		<h2>Breadcrumb <small>path segments</small></h2>
-		<div class="stage" style="align-items:center">
+	<section class="demo" data-name="breadcrumb">
+		<header><h2>Breadcrumb</h2><small>path segments</small><a href="https://www.figma.com/design/YNNkt9Xd6ImDtEvIz4tETF/Lexicon-Components?node-id=473-4340">Figma ↗</a></header>
+		<div class="stages"><div class="stage" style="align-items:center"><span class="stage__tag">Light</span>
 			<div class="skeleton sk-breadcrumb">
 				<div class="sk" style="width:56px;height:12px"></div>
 				<div class="sk sep"></div>
@@ -456,12 +625,12 @@
 				<div class="sk sep"></div>
 				<div class="sk" style="width:88px;height:12px;opacity:.6"></div>
 			</div>
-		</div>
+		</div></div>
 	</section>
 
-	<section class="demo">
-		<h2>Multi Step <small>step indicators + connectors</small></h2>
-		<div class="stage" style="align-items:center">
+	<section class="demo" data-name="multi step stepper">
+		<header><h2>Multi Step</h2><small>32px circles + connectors</small><a href="https://www.figma.com/design/YNNkt9Xd6ImDtEvIz4tETF/Lexicon-Components?node-id=1410-22318">Figma ↗</a></header>
+		<div class="stages"><div class="stage" style="align-items:center"><span class="stage__tag">Light</span>
 			<div class="skeleton sk-multistep">
 				<div class="step">
 					<div class="sk circle" style="width:32px;height:32px"></div>
@@ -478,38 +647,126 @@
 					<div class="sk" style="width:44px;height:10px;opacity:.4"></div>
 				</div>
 			</div>
-		</div>
+		</div></div>
 	</section>
 
-	<section class="demo">
-		<h2>Form / Input <small>label + field pairs</small></h2>
-		<div class="stage">
+	<section class="demo" data-name="form input sheet">
+		<header><h2>Form / Input</h2><small>label + 32px fields</small><a href="https://www.figma.com/design/YNNkt9Xd6ImDtEvIz4tETF/Lexicon-Components?node-id=733-14906">Figma ↗</a></header>
+		<div class="stages"><div class="stage"><span class="stage__tag">Light</span>
 			<div class="skeleton surface sk-form fade">
 				<div class="field">
 					<div class="sk" style="width:30%;height:12px"></div>
-					<div class="sk" style="width:100%;height:36px"></div>
+					<div class="sk" style="width:100%;height:32px"></div>
 				</div>
 				<div class="field">
 					<div class="sk" style="width:40%;height:12px"></div>
-					<div class="sk" style="width:100%;height:36px"></div>
+					<div class="sk" style="width:100%;height:32px"></div>
 				</div>
 				<div class="field">
 					<div class="sk" style="width:35%;height:12px"></div>
-					<div class="sk" style="width:100%;height:88px"></div>
+					<div class="sk" style="width:100%;height:80px"></div>
 				</div>
 			</div>
-		</div>
+		</div></div>
+	</section>
+
+	<section class="demo" data-name="dual listbox">
+		<header><h2>Dual Listbox</h2><small>1fr · moves · 1fr</small><a href="https://www.figma.com/design/YNNkt9Xd6ImDtEvIz4tETF/Lexicon-Components?node-id=1397-19158">Figma ↗</a></header>
+		<div class="stages"><div class="stage"><span class="stage__tag">Light</span>
+			<div class="skeleton sk-duallist">
+				<div class="box fade">
+					<div class="sk" style="width:50%;height:12px"></div>
+					<div class="sk" style="width:100%;height:28px"></div>
+					<div class="sk" style="width:100%;height:28px"></div>
+					<div class="sk" style="width:100%;height:28px"></div>
+					<div class="sk" style="width:100%;height:28px"></div>
+				</div>
+				<div class="moves">
+					<div class="sk" style="width:32px;height:32px"></div>
+					<div class="sk" style="width:32px;height:32px"></div>
+				</div>
+				<div class="box fade">
+					<div class="sk" style="width:50%;height:12px"></div>
+					<div class="sk" style="width:100%;height:28px"></div>
+					<div class="sk" style="width:100%;height:28px"></div>
+				</div>
+			</div>
+		</div></div>
 	</section>
 
 </main>
 
 <footer class="page">
-	<strong>Not skeleton candidates:</strong> Button, Button Group, Radio Button, Badge, Picker, Progress Bar, Pagination, Focus Ring, Slot, Alert.
-	These are either instant-rendering chrome (buttons, badges, pagination), feedback components that appear as a result of an action (alert, progress bar), or utilities (focus ring, slot). Skeletons should only stand in for <em>content that is being fetched</em>.
+	<strong>Not skeleton candidates:</strong> Button, Button Group, Radio Button, Checkbox, Badge, Label, Sticker, Picker, Progress Bar, Loading Indicator, Pagination, Tooltip, Toggle, Focus Ring — instant-rendering chrome, feedback components, or utilities. Skeletons only stand in for <em>content that is being fetched</em>.
 	<br><br>
-	Reference: <a href="https://codepen.io/marcoscv/pen/VYjgMyX">Animated Liferay Skeleton (CMS menu) on CodePen</a> · Epic LPD-49007 · Task LPD-49163.
-	Core pattern: shapes in <code>#E7E7ED</code>, 4px radius, shimmer overlay <code>rgba(247,248,249,.6)</code> animated <code>1.6s infinite</code>, opacity fade on repeating rows.
+	Construction reference: <a href="https://marcoscv-work.github.io/lexicon-vanilla/prototypes/token-editor.html">lexicon-vanilla token editor</a> ·
+	Pattern reference: <a href="https://codepen.io/marcoscv/pen/VYjgMyX">Animated Liferay Skeleton (CodePen)</a> ·
+	<a href="https://www.figma.com/design/YNNkt9Xd6ImDtEvIz4tETF/Lexicon-Components">Lexicon Components (Figma)</a> · Epic LPD-49007 · LPD-49163.
+	<br>
+	Tokens: shape <code>--color-secondary-l3</code> · surface <code>--color-light-l1</code> · radius <code>--rounded-md</code> · shimmer 1.6s · fade 1 → .85 → .75 → .6 → .4 → .3 → .2.
+	Dark skin shimmer uses <code>rgba(99,102,130,.35)</code> instead of <code>rgba(247,248,249,.6)</code>.
 </footer>
+
+<script>
+(function () {
+	var root = document.documentElement;
+	var body = document.body;
+	var btnLight = document.getElementById('skin-light');
+	var btnDark = document.getElementById('skin-dark');
+	var btnSingle = document.getElementById('view-single');
+	var btnCompare = document.getElementById('view-compare');
+	var speed = document.getElementById('speed');
+	var filter = document.getElementById('filter');
+
+	/* ── Skin toggle (lexicon-vanilla convention) ── */
+	function setSkin(s) {
+		root.classList.remove('light', 'dark');
+		root.classList.add(s);
+		try { localStorage.setItem('vanilla-skin', s); } catch (e) {}
+		btnLight.classList.toggle('is-active', s === 'light');
+		btnDark.classList.toggle('is-active', s === 'dark');
+	}
+	btnLight.addEventListener('click', function () { setSkin('light'); });
+	btnDark.addEventListener('click', function () { setSkin('dark'); });
+	setSkin(root.classList.contains('dark') ? 'dark' : 'light');
+
+	/* ── Side-by-side compare: clone each stage into a .dark scope ── */
+	document.querySelectorAll('.stages').forEach(function (wrap) {
+		var stage = wrap.querySelector('.stage');
+		var clone = stage.cloneNode(true);
+		clone.classList.add('dark', 'stage--dark');
+		var tag = clone.querySelector('.stage__tag');
+		if (tag) tag.textContent = 'Dark';
+		wrap.appendChild(clone);
+	});
+	function setView(compare) {
+		body.classList.toggle('compare', compare);
+		btnSingle.classList.toggle('is-active', !compare);
+		btnCompare.classList.toggle('is-active', compare);
+	}
+	btnSingle.addEventListener('click', function () { setView(false); });
+	btnCompare.addEventListener('click', function () { setView(true); });
+
+	/* ── Shimmer speed / pause ── */
+	speed.addEventListener('change', function () {
+		if (speed.value === 'paused') {
+			root.style.setProperty('--skeleton-play', 'paused');
+		} else {
+			root.style.setProperty('--skeleton-play', 'running');
+			root.style.setProperty('--skeleton-duration', speed.value);
+		}
+	});
+
+	/* ── Filter ── */
+	filter.addEventListener('input', function () {
+		var q = filter.value.trim().toLowerCase();
+		document.querySelectorAll('section.demo').forEach(function (s) {
+			var name = (s.dataset.name || '') + ' ' + s.querySelector('h2').textContent;
+			s.classList.toggle('is-hidden', q !== '' && name.toLowerCase().indexOf(q) === -1);
+		});
+	});
+})();
+</script>
 
 </body>
 </html>
