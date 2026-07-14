@@ -310,6 +310,123 @@
 	.sk-duallist .box { background: var(--color-white); border: 1px solid var(--color-secondary-l3); border-radius: var(--rounded-md); padding: var(--spacing-3); display: flex; flex-direction: column; gap: var(--spacing-3); }
 	.sk-duallist .moves { display: flex; flex-direction: column; gap: var(--spacing-3); }
 
+
+	/* ============================================================
+	   Layouts view — full DXP screens composed with the skeletons
+	   (reference: Style Books control-panel screen)
+	   ============================================================ */
+	body.view-layouts section.demo:not(.layout) { display: none; }
+	body:not(.view-layouts) section.layout { display: none; }
+	section.layout { grid-column: 1 / -1; }
+
+	/* Layouts: full-bleed screens, no containers, one at a time via tabs */
+	body.view-layouts main { padding: 0; gap: 0; }
+	body.view-layouts section.layout:not(.is-current) { display: none; }
+	section.layout { border: 0; border-radius: 0; background: transparent; }
+	section.layout > header { display: none; }
+
+	/* Layout tabs bar */
+	.layout-tabs {
+		display: none; align-items: center; gap: var(--spacing-6);
+		padding: var(--spacing-4) var(--spacing-7) 0;
+		border-bottom: 1px solid var(--color-secondary-l2);
+	}
+	body.view-layouts .layout-tabs { display: flex; }
+	.layout-tabs button {
+		border: 0; background: transparent; cursor: pointer;
+		font: inherit; font-size: 13px; color: var(--color-secondary);
+		padding: 6px 2px 10px; border-bottom: 2px solid transparent;
+	}
+	.layout-tabs button.is-active {
+		color: var(--color-primary); font-weight: 600;
+		border-bottom-color: var(--color-primary);
+	}
+	section.layout .stage { padding: 0 !important; }
+	section.layout .screen {
+		border: 0; border-radius: 0;
+		min-height: 100vh;   /* full desktop-viewport height, like the real DXP page */
+	}
+	section.layout .skeleton.screen { display: flex; width: 100%; }
+
+	.screen {
+		display: flex; flex-direction: column; width: 100%; min-height: 480px;
+		background: var(--color-white);
+		border: 1px solid var(--color-secondary-l3); border-radius: var(--rounded-lg);
+		overflow: hidden;
+	}
+	/* control menu (top bar) */
+	.screen .cbar {
+		display: flex; align-items: center; gap: var(--spacing-4);
+		height: 56px; padding: 0 var(--spacing-5); flex-shrink: 0;
+		border-bottom: 1px solid var(--skeleton-surface);
+	}
+	.screen .grow { flex: 1; }
+	.screen .cols { display: flex; flex: 1; min-height: 0; }
+	/* product menu (left sidebar) */
+	.screen .pnav {
+		width: 280px; flex-shrink: 0;
+		background: var(--skeleton-surface);
+		border-right: 1px solid var(--color-secondary-l3);
+		padding: var(--spacing-4); display: flex; flex-direction: column;
+	}
+	.screen .pnav .it { display: flex; align-items: center; gap: var(--spacing-3); height: 40px; }
+	.screen .pnav .it--active { background: var(--color-white); border-left: 4px solid var(--skeleton-shape); border-radius: var(--rounded-sm); padding-left: var(--spacing-3); }
+	.screen .pnav .hd { display: flex; align-items: center; justify-content: space-between; height: 40px; margin-top: var(--spacing-2); }
+	.screen .work { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+	/* management toolbar */
+	.screen .mgmt {
+		display: flex; align-items: center; gap: var(--spacing-4);
+		padding: var(--spacing-3) var(--spacing-5); min-height: 56px;
+		border-bottom: 1px solid var(--skeleton-surface);
+	}
+	.screen .content { padding: var(--spacing-6) var(--spacing-5); flex: 1; min-width: 0; }
+	/* card grid content (Style Books) */
+	.screen .cardgrid { display: grid; grid-template-columns: repeat(auto-fill, 280px); gap: var(--spacing-5); }
+	.screen .cardgrid .c { border: 1px solid var(--skeleton-surface); border-radius: var(--rounded-lg); overflow: hidden; }
+	.screen .cardgrid .c .cimg { height: 160px; }
+	.screen .cardgrid .c .cimg .sk { width: 100%; height: 100%; border-radius: 0; }
+	.screen .cardgrid .c .cbody { padding: var(--spacing-4); display: flex; flex-direction: column; gap: var(--spacing-3); }
+	/* table content */
+	.screen .trow {
+		display: grid; grid-template-columns: 48px 1.6fr 1.2fr 1fr 80px 48px;
+		align-items: center; height: 48px; padding: 0 var(--spacing-3);
+	}
+	.screen .trow:nth-child(even) { background: var(--skeleton-surface); }
+	.screen .trow > * { justify-self: start; }
+	.screen .trow > *:first-child, .screen .trow > *:last-child { justify-self: center; }
+	/* form + side panel content */
+	.screen .formcols { display: flex; flex: 1; min-height: 0; }
+	.screen .formmain { flex: 1; padding: var(--spacing-6) var(--spacing-5); display: flex; flex-direction: column; gap: var(--spacing-5); max-width: 560px; }
+	.screen .ffield { display: flex; flex-direction: column; gap: var(--spacing-3); }
+	.screen .spanel {
+		width: 320px; flex-shrink: 0; border-left: 1px solid var(--skeleton-surface);
+		padding: var(--spacing-5); display: flex; flex-direction: column; gap: var(--spacing-4);
+	}
+
+
+	/* master-detail (Fragments): sets pane + detail area */
+	.screen .setpane {
+		width: 300px; flex-shrink: 0;
+		border-right: 1px solid var(--skeleton-surface);
+		padding: var(--spacing-6) var(--spacing-5);
+		display: flex; flex-direction: column; gap: var(--spacing-4);
+	}
+	.screen .setpane .sethead { display: flex; align-items: center; gap: var(--spacing-3); }
+	.screen .setpane .setitem { display: flex; align-items: center; gap: var(--spacing-3); height: 40px; }
+	.screen .setpane .setitem--active { background: var(--skeleton-surface); border-left: 4px solid var(--skeleton-shape); border-radius: var(--rounded-sm); padding-left: var(--spacing-3); }
+	.screen .detail { flex: 1; padding: var(--spacing-6) var(--spacing-6); display: flex; flex-direction: column; gap: var(--spacing-5); min-width: 0; }
+	.screen .searchrow { display: flex; align-items: center; gap: var(--spacing-4); }
+	/* page tree sidebar */
+	.screen .treenav {
+		width: 280px; flex-shrink: 0;
+		background: var(--skeleton-surface);
+		border-right: 1px solid var(--color-secondary-l3);
+		padding: var(--spacing-5) var(--spacing-4);
+		display: flex; flex-direction: column; gap: var(--spacing-4);
+	}
+	.screen .treenav .trow2 { display: flex; align-items: center; gap: var(--spacing-3); }
+	.screen .treenav .indent { padding-left: var(--spacing-6); }
+
 </style>
 </head>
 <body>
@@ -320,6 +437,13 @@
 
 <div class="toolbar">
 	<h1>Lexicon Skeletons <small>· light &amp; dark previews</small></h1>
+
+	<span class="control">
+		<span class="seg" role="group" aria-label="Section">
+			<button id="mode-components" type="button" class="is-active">Components</button>
+			<button id="mode-layouts" type="button">Layouts</button>
+		</span>
+	</span>
 
 	<label class="control">
 		<input class="filter-input" id="filter" type="search" placeholder="Filter components…" aria-label="Filter components">
@@ -348,6 +472,8 @@
 		</select>
 	</label>
 </div>
+
+<nav class="layout-tabs" id="layout-tabs" aria-label="Layouts"></nav>
 
 <main id="grid">
 
@@ -633,6 +759,104 @@
 		</div></div>
 	</section>
 
+	<section class="demo layout" data-name="layout style books control panel cards">
+		<header><h2>Layout · Style Books</h2><small>product menu + control menu + management toolbar + card grid</small></header>
+		<div class="stages"><div class="stage"><span class="stage__tag">Light</span>
+			<div class="skeleton screen">
+				<div class="cbar"><div class="sk" style="width:20px;height:20px"></div><div class="sk" style="width:120px;height:16px"></div><span class="grow"></span><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:20px;height:20px"></div><div class="sk circle" style="width:28px;height:28px"></div></div>
+				<div class="cols">
+					<div class="pnav fade"><div class="it"><div class="sk" style="width:24px;height:24px"></div><div class="sk" style="width:110px;height:14px"></div></div><div class="it"><div class="sk" style="width:20px;height:20px"></div><div class="sk" style="width:70px;height:12px"></div></div><div class="hd"><div class="sk" style="width:80px;height:12px"></div><div class="sk" style="width:12px;height:8px"></div></div><div class="it it--active"><div class="sk" style="width:90px;height:12px"></div></div><div class="it"><div class="sk" style="width:80px;height:12px"></div></div><div class="it"><div class="sk" style="width:86px;height:12px"></div></div><div class="hd"><div class="sk" style="width:92px;height:12px"></div><div class="sk" style="width:12px;height:8px"></div></div><div class="hd"><div class="sk" style="width:100px;height:12px"></div><div class="sk" style="width:12px;height:8px"></div></div><div class="hd"><div class="sk" style="width:86px;height:12px"></div><div class="sk" style="width:12px;height:8px"></div></div></div>
+					<div class="work">
+						<div class="mgmt"><div class="sk" style="width:72px;height:16px"></div><div class="sk" style="flex:1;height:40px"></div><div class="sk" style="width:88px;height:40px"></div></div>
+						<div class="content"><div class="cardgrid fade"><div class="c"><div class="cimg"><div class="sk" style="width:100%;height:100%"></div></div><div class="cbody"><div class="sk" style="width:75%;height:14px"></div><div class="sk" style="width:55%;height:10px"></div><div class="sk" style="width:64px;height:18px"></div></div></div><div class="c"><div class="cimg"><div class="sk" style="width:100%;height:100%"></div></div><div class="cbody"><div class="sk" style="width:75%;height:14px"></div><div class="sk" style="width:55%;height:10px"></div><div class="sk" style="width:64px;height:18px"></div></div></div><div class="c"><div class="cimg"><div class="sk" style="width:100%;height:100%"></div></div><div class="cbody"><div class="sk" style="width:75%;height:14px"></div><div class="sk" style="width:55%;height:10px"></div><div class="sk" style="width:64px;height:18px"></div></div></div></div></div>
+					</div>
+				</div>
+			</div>
+		</div></div>
+	</section>
+
+	<section class="demo layout" data-name="layout admin list table users">
+		<header><h2>Layout · Admin List</h2><small>product menu + management toolbar + table + pagination</small></header>
+		<div class="stages"><div class="stage"><span class="stage__tag">Light</span>
+			<div class="skeleton screen">
+				<div class="cbar"><div class="sk" style="width:20px;height:20px"></div><div class="sk" style="width:120px;height:16px"></div><span class="grow"></span><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:20px;height:20px"></div><div class="sk circle" style="width:28px;height:28px"></div></div>
+				<div class="cols">
+					<div class="pnav fade"><div class="it"><div class="sk" style="width:24px;height:24px"></div><div class="sk" style="width:110px;height:14px"></div></div><div class="it"><div class="sk" style="width:20px;height:20px"></div><div class="sk" style="width:70px;height:12px"></div></div><div class="hd"><div class="sk" style="width:80px;height:12px"></div><div class="sk" style="width:12px;height:8px"></div></div><div class="it it--active"><div class="sk" style="width:90px;height:12px"></div></div><div class="it"><div class="sk" style="width:80px;height:12px"></div></div><div class="it"><div class="sk" style="width:86px;height:12px"></div></div><div class="hd"><div class="sk" style="width:92px;height:12px"></div><div class="sk" style="width:12px;height:8px"></div></div><div class="hd"><div class="sk" style="width:100px;height:12px"></div><div class="sk" style="width:12px;height:8px"></div></div><div class="hd"><div class="sk" style="width:86px;height:12px"></div><div class="sk" style="width:12px;height:8px"></div></div></div>
+					<div class="work">
+						<div class="mgmt"><div class="sk" style="width:72px;height:16px"></div><div class="sk" style="flex:1;height:40px"></div><div class="sk" style="width:88px;height:40px"></div></div>
+						<div class="content" style="padding:0"><div class="fade"><div class="trow"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:50%;height:12px"></div><div class="sk" style="width:45%;height:12px"></div><div class="sk" style="width:40%;height:12px"></div><div class="sk" style="width:80%;height:12px"></div><div class="sk" style="width:16px;height:16px"></div></div><div class="trow"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:70%;height:14px"></div><div class="sk" style="width:60%;height:14px"></div><div class="sk" style="width:55%;height:14px"></div><div class="sk" style="width:100%;height:20px"></div><div class="sk" style="width:16px;height:16px"></div></div><div class="trow"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:70%;height:14px"></div><div class="sk" style="width:60%;height:14px"></div><div class="sk" style="width:55%;height:14px"></div><div class="sk" style="width:100%;height:20px"></div><div class="sk" style="width:16px;height:16px"></div></div><div class="trow"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:70%;height:14px"></div><div class="sk" style="width:60%;height:14px"></div><div class="sk" style="width:55%;height:14px"></div><div class="sk" style="width:100%;height:20px"></div><div class="sk" style="width:16px;height:16px"></div></div><div class="trow"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:70%;height:14px"></div><div class="sk" style="width:60%;height:14px"></div><div class="sk" style="width:55%;height:14px"></div><div class="sk" style="width:100%;height:20px"></div><div class="sk" style="width:16px;height:16px"></div></div><div class="trow"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:70%;height:14px"></div><div class="sk" style="width:60%;height:14px"></div><div class="sk" style="width:55%;height:14px"></div><div class="sk" style="width:100%;height:20px"></div><div class="sk" style="width:16px;height:16px"></div></div></div></div>
+						<div class="mgmt" style="border-bottom:0;border-top:1px solid var(--skeleton-surface)"><div class="sk" style="width:90px;height:12px"></div><span class="grow"></span><div class="sk" style="width:160px;height:12px"></div></div>
+					</div>
+				</div>
+			</div>
+		</div></div>
+	</section>
+
+	<section class="demo layout" data-name="layout edit entry form side panel">
+		<header><h2>Layout · Edit Entry</h2><small>control menu + form sheet + side panel</small></header>
+		<div class="stages"><div class="stage"><span class="stage__tag">Light</span>
+			<div class="skeleton screen">
+				<div class="cbar"><div class="sk" style="width:20px;height:20px"></div><div class="sk" style="width:120px;height:16px"></div><span class="grow"></span><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:20px;height:20px"></div><div class="sk circle" style="width:28px;height:28px"></div></div>
+				<div class="formcols">
+					<div class="formmain fade">
+						<div class="sk" style="width:45%;height:18px"></div>
+						<div class="ffield"><div class="sk" style="width:30%;height:12px"></div><div class="sk" style="width:100%;height:40px"></div></div><div class="ffield"><div class="sk" style="width:40%;height:12px"></div><div class="sk" style="width:100%;height:40px"></div></div><div class="ffield"><div class="sk" style="width:35%;height:12px"></div><div class="sk" style="width:100%;height:72px"></div></div>
+						<div class="row" style="justify-content:flex-end;gap:var(--spacing-3)"><div class="sk" style="width:88px;height:40px"></div><div class="sk" style="width:96px;height:40px"></div></div>
+					</div>
+					<div class="spanel fade">
+						<div class="sk" style="width:50%;height:14px"></div>
+						<div class="sk" style="width:40%;height:12px"></div><div class="sk" style="width:100%;height:40px"></div>
+						<div class="sk" style="width:35%;height:12px"></div><div class="sk" style="width:100%;height:40px"></div>
+						<div class="sk" style="width:100%;height:64px"></div>
+					</div>
+				</div>
+			</div>
+		</div></div>
+	</section>
+
+	<section class="demo layout" data-name="layout fragments master detail sets">
+		<header><h2>Layout · Fragments</h2><small>product menu + sets pane + detail with search and cards</small></header>
+		<div class="stages"><div class="stage"><span class="stage__tag">Light</span>
+			<div class="skeleton screen">
+				<div class="cbar"><div class="sk" style="width:20px;height:20px"></div><div class="sk" style="width:120px;height:16px"></div><span class="grow"></span><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:20px;height:20px"></div><div class="sk circle" style="width:28px;height:28px"></div></div>
+				<div class="cols">
+					<div class="pnav fade"><div class="it"><div class="sk" style="width:24px;height:24px"></div><div class="sk" style="width:110px;height:14px"></div></div><div class="it"><div class="sk" style="width:20px;height:20px"></div><div class="sk" style="width:70px;height:12px"></div></div><div class="hd"><div class="sk" style="width:80px;height:12px"></div><div class="sk" style="width:12px;height:8px"></div></div><div class="it it--active"><div class="sk" style="width:90px;height:12px"></div></div><div class="it"><div class="sk" style="width:80px;height:12px"></div></div><div class="it"><div class="sk" style="width:86px;height:12px"></div></div><div class="hd"><div class="sk" style="width:92px;height:12px"></div><div class="sk" style="width:12px;height:8px"></div></div><div class="hd"><div class="sk" style="width:100px;height:12px"></div><div class="sk" style="width:12px;height:8px"></div></div><div class="hd"><div class="sk" style="width:86px;height:12px"></div><div class="sk" style="width:12px;height:8px"></div></div></div>
+					<div class="setpane fade">
+						<div class="sethead"><div class="sk" style="width:110px;height:14px"></div><span class="grow"></span><div class="sk" style="width:14px;height:14px"></div><div class="sk" style="width:14px;height:14px"></div><div class="sk" style="width:14px;height:14px"></div></div>
+						<div class="sk" style="width:60px;height:12px"></div>
+						<div class="setitem setitem--active"><div class="sk" style="width:70%;height:12px"></div></div>
+						<div class="setitem"><div class="sk" style="width:80%;height:12px"></div></div>
+						<div class="setitem"><div class="sk" style="width:75%;height:12px"></div></div>
+						<div class="setitem"><div class="sk" style="width:50%;height:12px"></div></div>
+						<div class="setitem"><div class="sk" style="width:65%;height:12px"></div></div>
+						<div class="setitem"><div class="sk" style="width:55%;height:12px"></div></div>
+					</div>
+					<div class="detail">
+						<div class="sk" style="width:120px;height:18px"></div>
+						<div class="searchrow"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="flex:1;height:40px"></div></div>
+						<div class="cardgrid fade"><div class="c" style="max-width:280px"><div class="cimg"><div class="sk" style="width:100%;height:100%"></div></div><div class="cbody"><div class="row"><div class="sk" style="width:60%;height:12px"></div><span class="grow"></span><div class="sk" style="width:12px;height:12px"></div></div></div></div><div class="c" style="max-width:280px"><div class="cimg"><div class="sk" style="width:100%;height:100%"></div></div><div class="cbody"><div class="row"><div class="sk" style="width:60%;height:12px"></div><span class="grow"></span><div class="sk" style="width:12px;height:12px"></div></div></div></div><div class="c" style="max-width:280px"><div class="cimg"><div class="sk" style="width:100%;height:100%"></div></div><div class="cbody"><div class="row"><div class="sk" style="width:60%;height:12px"></div><span class="grow"></span><div class="sk" style="width:12px;height:12px"></div></div></div></div></div>
+					</div>
+				</div>
+			</div>
+		</div></div>
+	</section>
+
+	<section class="demo layout" data-name="layout page tree site builder">
+		<header><h2>Layout · Page Tree</h2><small>tree sidebar + management toolbar + table</small></header>
+		<div class="stages"><div class="stage"><span class="stage__tag">Light</span>
+			<div class="skeleton screen">
+				<div class="cbar"><div class="sk" style="width:20px;height:20px"></div><div class="sk" style="width:120px;height:16px"></div><span class="grow"></span><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:20px;height:20px"></div><div class="sk circle" style="width:28px;height:28px"></div></div>
+				<div class="cols">
+					<div class="treenav fade"><div class="trow2"><div class="sk" style="width:12px;height:12px"></div><div class="sk" style="width:90px;height:12px"></div></div><div class="sk" style="width:100%;height:40px"></div><div class="trow2"><div class="sk" style="width:150px;height:32px"></div><span class="grow"></span><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:16px;height:16px"></div></div><div class="trow2"><div class="sk" style="width:12px;height:8px"></div><div class="sk" style="width:60px;height:12px"></div></div><div class="trow2 indent"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:70px;height:12px"></div></div><div class="trow2 indent"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:80px;height:12px"></div></div><div class="trow2 indent"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:64px;height:12px"></div></div></div>
+					<div class="work">
+						<div class="mgmt"><div class="sk" style="width:72px;height:16px"></div><div class="sk" style="flex:1;height:40px"></div><div class="sk" style="width:88px;height:40px"></div></div>
+						<div class="content" style="padding:0"><div class="fade"><div class="trow"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:70%;height:14px"></div><div class="sk" style="width:60%;height:14px"></div><div class="sk" style="width:55%;height:14px"></div><div class="sk" style="width:100%;height:20px"></div><div class="sk" style="width:16px;height:16px"></div></div><div class="trow"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:70%;height:14px"></div><div class="sk" style="width:60%;height:14px"></div><div class="sk" style="width:55%;height:14px"></div><div class="sk" style="width:100%;height:20px"></div><div class="sk" style="width:16px;height:16px"></div></div><div class="trow"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:70%;height:14px"></div><div class="sk" style="width:60%;height:14px"></div><div class="sk" style="width:55%;height:14px"></div><div class="sk" style="width:100%;height:20px"></div><div class="sk" style="width:16px;height:16px"></div></div><div class="trow"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:70%;height:14px"></div><div class="sk" style="width:60%;height:14px"></div><div class="sk" style="width:55%;height:14px"></div><div class="sk" style="width:100%;height:20px"></div><div class="sk" style="width:16px;height:16px"></div></div><div class="trow"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:70%;height:14px"></div><div class="sk" style="width:60%;height:14px"></div><div class="sk" style="width:55%;height:14px"></div><div class="sk" style="width:100%;height:20px"></div><div class="sk" style="width:16px;height:16px"></div></div></div></div>
+					</div>
+				</div>
+			</div>
+		</div></div>
+	</section>
+
 </main>
 
 <div class="wipe" aria-hidden="true"></div>
@@ -686,6 +910,35 @@
 			root.style.setProperty('--skeleton-duration', speed.value);
 		}
 	});
+
+	/* ── Components / Layouts view tabs ── */
+	var mComp = document.getElementById('mode-components');
+	var mLay = document.getElementById('mode-layouts');
+	function setMode(layouts) {
+		body.classList.toggle('view-layouts', layouts);
+		mComp.classList.toggle('is-active', !layouts);
+		mLay.classList.toggle('is-active', layouts);
+	}
+	mComp.addEventListener('click', function () { setMode(false); });
+	mLay.addEventListener('click', function () { setMode(true); });
+
+	/* ── Layout tabs: one screen at a time ── */
+	var layoutTabs = document.getElementById('layout-tabs');
+	var layouts = Array.prototype.slice.call(document.querySelectorAll('section.layout'));
+	layouts.forEach(function (sec, i) {
+		var btn = document.createElement('button');
+		btn.type = 'button';
+		btn.textContent = sec.querySelector('h2').textContent.replace(/^Layout\s*·\s*/, '');
+		btn.addEventListener('click', function () { setLayout(i); });
+		layoutTabs.appendChild(btn);
+	});
+	function setLayout(i) {
+		layouts.forEach(function (sec, j) { sec.classList.toggle('is-current', j === i); });
+		Array.prototype.forEach.call(layoutTabs.children, function (b, j) {
+			b.classList.toggle('is-active', j === i);
+		});
+	}
+	setLayout(0);
 
 	/* ── Wipe transition on the tiger back-link (portfolio behaviour) ── */
 	var wipe = document.querySelector('.wipe');
