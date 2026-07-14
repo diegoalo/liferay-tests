@@ -95,8 +95,29 @@
 		background: var(--color-white);
 		border-bottom: 1px solid var(--color-secondary-l2);
 	}
-	.toolbar h1 { font-size: 16px; font-weight: 600; margin: 0; margin-right: auto; }
+	.toolbar h1 { font-size: 16px; font-weight: 600; margin: 0; margin-right: auto; display: flex; align-items: center; gap: var(--spacing-4); }
 	.toolbar h1 small { font-weight: 300; color: var(--color-secondary); }
+
+	/* Site header: tiger back-link above the toolbar, left-aligned
+	   (portfolio header creature → back to liferay-tests) */
+	.site-header {
+		display: flex; justify-content: flex-start;
+		padding: var(--spacing-6) var(--spacing-7) var(--spacing-2);
+	}
+	.back { display: inline-flex; align-items: center; }
+	.back svg { height: 48px; width: auto; display: block; }
+	.back svg path { fill: var(--color-dark); transition: fill 150ms ease; }
+	.back:hover svg path { fill: #F40B0F; }
+
+	/* Page-transition curtain (same as the portfolio: red wipe on exit) */
+	.wipe {
+		position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+		background: #F40B0F; transform: translateX(-101%);
+		z-index: 99999; pointer-events: none;
+	}
+	.wipe.anim { transition: transform .45s cubic-bezier(.7, 0, .3, 1); }
+	.wipe.cover { transform: translateX(0); }
+	.wipe.reveal { transform: translateX(101%); }
 
 	.control { display: inline-flex; align-items: center; gap: var(--spacing-3); font-size: 12px; color: var(--color-secondary); }
 
@@ -127,9 +148,6 @@
 	/* ============================================================
 	   Layout
 	   ============================================================ */
-	.intro { padding: var(--spacing-6) var(--spacing-7) 0; color: var(--color-secondary); max-width: 860px; }
-	.intro code { background: var(--color-light); border-radius: var(--rounded-sm); padding: 1px 5px; font-size: 12px; }
-
 	main {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
@@ -272,26 +290,11 @@
 	.sk-tabs .bar { display: flex; gap: var(--spacing-7); border-bottom: 2px solid var(--skeleton-surface); padding-bottom: var(--spacing-4); margin-bottom: var(--spacing-5); }
 	.sk-tabs .content { display: flex; flex-direction: column; gap: 10px; }
 
-	/* ── Dropdown — white card menu of 32px items ──────────────── */
-	.sk-dropdown { width: 240px; padding: var(--spacing-3); display: flex; flex-direction: column; box-shadow: var(--shadow-dropdown); }
-	.sk-dropdown .search { padding: var(--spacing-2) var(--spacing-2) var(--spacing-3); }
-	.sk-dropdown .item { display: flex; align-items: center; gap: var(--spacing-3); height: 32px; padding: 0 var(--spacing-2); }
-
-	/* ── Modal — header / body / footer ────────────────────────── */
-	.sk-modal { width: 100%; max-width: 440px; box-shadow: var(--shadow-dropdown); }
-	.sk-modal .head { display: flex; align-items: center; justify-content: space-between; padding: var(--spacing-5); border-bottom: 1px solid var(--skeleton-surface); }
-	.sk-modal .body { padding: var(--spacing-5); display: flex; flex-direction: column; gap: 10px; }
-	.sk-modal .foot { display: flex; justify-content: flex-end; gap: var(--spacing-3); padding: var(--spacing-5); border-top: 1px solid var(--skeleton-surface); }
-
 	/* ── Side Panel — 280px right drawer ───────────────────────── */
 	.sk-sidepanel { width: 280px; min-height: 340px; border-radius: 0; border-left: 1px solid var(--color-secondary-l3); display: flex; flex-direction: column; }
 	.sk-sidepanel .head { display: flex; align-items: center; justify-content: space-between; padding: var(--spacing-5); border-bottom: 1px solid var(--skeleton-surface); }
 	.sk-sidepanel .body { padding: var(--spacing-5); display: flex; flex-direction: column; gap: var(--spacing-4); flex: 1; }
 	.sk-sidepanel .foot { display: flex; justify-content: flex-end; gap: var(--spacing-3); padding: var(--spacing-5); border-top: 1px solid var(--skeleton-surface); }
-
-	/* ── Breadcrumb — bars + separators ────────────────────────── */
-	.sk-breadcrumb { display: flex; align-items: center; gap: 10px; padding: var(--spacing-3) 0; }
-	.sk-breadcrumb .sep { width: 6px; height: 10px; opacity: .5; }
 
 	/* ── Multi Step — 32px circles + connectors ────────────────── */
 	.sk-multistep { width: 100%; max-width: 460px; padding: var(--spacing-7) var(--spacing-5); display: flex; align-items: flex-start; }
@@ -307,18 +310,13 @@
 	.sk-duallist .box { background: var(--color-white); border: 1px solid var(--color-secondary-l3); border-radius: var(--rounded-md); padding: var(--spacing-3); display: flex; flex-direction: column; gap: var(--spacing-3); }
 	.sk-duallist .moves { display: flex; flex-direction: column; gap: var(--spacing-3); }
 
-	footer.page {
-		padding: var(--spacing-7);
-		color: var(--color-secondary);
-		font-size: 13px;
-		border-top: 1px solid var(--color-secondary-l2);
-		line-height: 1.7;
-	}
-	footer.page code { background: var(--color-light); padding: 2px 5px; border-radius: var(--rounded-sm); }
-	footer.page a { color: var(--color-primary); }
 </style>
 </head>
 <body>
+
+<header class="site-header">
+	<a class="back" href="https://diegoalo.github.io/liferay-tests/" aria-label="Back to liferay-tests" title="Back to liferay-tests" data-wipe="#f40b0f"><svg width="289" height="180" viewBox="0 0 289 180" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M57.3224 2C58.0985 2.00019 59.7675 2.26634 61.7004 2.61426C63.6952 2.97336 66.1397 3.45233 68.5695 3.92773C71.0052 4.4043 73.4287 4.87845 75.4006 5.2334C77.4328 5.59917 78.8339 5.80841 79.3283 5.80859C80.1936 5.80887 80.8218 6.33285 81.215 6.80469C81.6215 7.2927 81.9542 7.92828 82.2336 8.60156C82.7976 9.96119 83.2675 11.7781 83.6437 13.7129C84.1382 16.2561 84.4931 19.1208 84.6799 21.6514C85.1211 20.5459 85.6116 19.277 86.134 17.9375C87.1627 15.2998 88.3042 12.4226 89.381 10.2012C89.9166 9.09644 90.4632 8.09792 90.9972 7.35938C91.2627 6.99238 91.56 6.63962 91.8888 6.36816C92.2005 6.11111 92.6831 5.80875 93.2941 5.80859L93.673 5.82129C94.6794 5.88177 96.5229 6.14515 98.6945 6.48535C101.235 6.8834 104.379 7.41307 107.523 7.94141C110.672 8.47063 113.824 8.99945 116.399 9.39453C119.023 9.79727 120.921 10.0398 121.648 10.04C122.44 10.0404 122.967 10.5257 123.251 10.9873C123.513 11.4129 123.649 11.9268 123.732 12.4014C123.901 13.3727 123.923 14.6744 123.869 16.1182C123.761 19.032 123.332 22.8945 122.91 26.6855C122.485 30.5117 122.069 34.2673 121.965 37.0664C121.913 38.4786 121.944 39.5581 122.066 40.2529C122.075 40.3051 122.085 40.3538 122.095 40.3984C122.132 40.3871 122.175 40.3751 122.218 40.3613C122.598 40.2393 123.094 40.0529 123.712 39.8027C124.95 39.3012 126.583 38.584 128.609 37.7061C132.643 35.9571 138.137 33.6147 144.765 31.2725C158.015 26.5896 175.835 21.8897 195.707 21.8896C216.152 21.8902 227.801 36.5605 234.329 52.0254C238.561 62.0505 241.78 70.2171 241.78 80.0908C241.781 89.9643 256.224 89.8801 256.224 80.0908C256.224 70.3012 257.176 34.3405 257.916 17.2354C258.657 0.130422 285.001 1.48008 285.001 17.2354V80.0908C285.001 91.5849 278.509 114.569 256.224 114.569C244.045 114.569 239.195 111.486 239.195 114.569C239.194 117.65 235.678 132.419 235.671 132.448C235.671 132.448 231.587 150.653 229.657 157.314C228.694 160.638 227.768 163.431 226.922 165.408C226.502 166.389 226.078 167.228 225.65 167.842C225.436 168.147 225.187 168.447 224.897 168.682C224.612 168.911 224.182 169.161 223.638 169.161H194.861C194.401 169.161 193.896 169.01 193.51 168.596C193.157 168.217 193.038 167.761 192.998 167.419C192.922 166.762 193.081 165.994 193.275 165.302C193.678 163.857 194.469 161.975 195.227 160.199C196.007 158.37 196.756 156.642 197.162 155.366C197.235 155.137 197.288 154.939 197.33 154.772H188.53C188.504 154.783 188.428 154.826 188.302 154.967C188.081 155.215 187.825 155.637 187.554 156.259C187.013 157.498 186.545 159.2 186.094 161.006C185.656 162.758 185.229 164.629 184.783 166.028C184.562 166.725 184.307 167.399 184 167.919C183.846 168.179 183.642 168.464 183.372 168.695C183.092 168.935 182.683 169.161 182.165 169.161H167.777C167.53 169.161 167.233 169.107 166.948 168.934C166.659 168.756 166.468 168.506 166.355 168.261C166.155 167.828 166.181 167.382 166.213 167.12C166.283 166.548 166.523 165.852 166.797 165.17C167.363 163.762 168.29 161.91 169.18 160.13C170.088 158.313 170.96 156.567 171.479 155.277C171.554 155.091 171.616 154.922 171.669 154.772H164.406C164.245 155.063 164.051 155.527 163.832 156.164C163.388 157.46 162.925 159.209 162.445 161.022C161.973 162.805 161.483 164.654 161.002 166.056C160.764 166.749 160.505 167.402 160.223 167.9C160.083 168.146 159.903 168.418 159.671 168.643C159.448 168.858 159.039 169.161 158.466 169.161H138.999C138.514 169.161 138.111 168.938 137.844 168.636C137.611 168.372 137.497 168.073 137.436 167.856C137.313 167.422 137.291 166.904 137.303 166.406C137.328 165.376 137.52 163.972 137.824 162.365C138.438 159.129 139.55 154.847 140.91 150.579C142.269 146.316 143.893 142.012 145.543 138.753C146.365 137.13 147.222 135.708 148.088 134.675C148.89 133.718 149.97 132.767 151.272 132.767H175.501C175.705 132.404 175.989 131.892 176.335 131.251C177.077 129.876 178.105 127.91 179.242 125.55C181.521 120.821 184.224 114.548 185.968 108.303C187.727 102.002 188.439 95.9675 186.996 91.585C186.29 89.4387 185.073 87.7097 183.205 86.501C181.321 85.2821 178.664 84.5226 174.971 84.5225C144.612 84.5226 128.419 120.494 128.419 120.494C126.637 125.974 118.071 158.768 116.07 162.524C115.073 164.397 114.045 165.992 113.006 167.137C112.011 168.233 110.782 169.161 109.375 169.161C107.722 169.161 101.561 169.476 93.1564 169.874C84.7841 170.271 74.2469 170.747 63.9211 171.064C53.6018 171.382 43.4648 171.542 35.8986 171.303C32.1245 171.183 28.9399 170.964 26.6808 170.604C25.564 170.425 24.5917 170.201 23.8703 169.901C23.5129 169.753 23.1355 169.552 22.8303 169.269C22.5111 168.972 22.1974 168.508 22.1974 167.892C22.1974 165.317 22.4113 158.074 23.1584 151.457C23.5309 148.158 24.0423 144.949 24.7482 142.54C25.0984 141.345 25.5204 140.261 26.048 139.45C26.5511 138.677 27.3601 137.845 28.5451 137.845C29.7287 137.845 31.6707 138.132 34.0724 138.522C36.5283 138.922 39.5629 139.447 43.0705 139.975C47.7566 140.679 53.2544 141.38 59.2033 141.768C58.9754 137.465 57.9037 131.499 56.0783 131.497C53.5393 131.497 48.859 131.497 44.6271 131.497C40.3952 131.497 35.7394 126.419 35.7394 118.378C35.7394 110.338 32.3536 107.375 27.2756 107.375C22.1974 107.375 15.0035 106.529 15.0031 104.836C15.0031 103.143 22.6209 98.4883 31.508 98.4883C40.3949 98.4892 51.3979 116.686 53.5138 116.686C55.6293 116.685 55.6302 113.3 61.131 113.3C66.6324 113.3 71.5363 120.472 71.5363 128.089C71.5365 133.167 77.7899 136.506 81.6652 139.883C85.8435 138.331 89.6751 135.871 92.9308 132.236C99.4636 124.943 103.874 112.713 103.874 92.9863C103.874 88.4235 102.732 84.7699 100.766 81.834C100.205 82.6394 99.4883 83.595 98.6691 84.6348C96.7454 87.0765 94.1779 90.1111 91.5705 93.0645C88.9631 96.0178 86.2915 98.9181 84.1535 101.09C83.0888 102.171 82.1297 103.099 81.3654 103.768C80.9881 104.098 80.6177 104.4 80.2824 104.632C80.1168 104.746 79.915 104.875 79.6955 104.981C79.532 105.061 79.1052 105.259 78.5588 105.259C77.546 105.259 76.9461 104.622 76.7219 104.326C76.4815 104.009 76.3489 103.679 76.2756 103.471C76.1207 103.031 76.0198 102.512 75.9465 102.018C75.7943 100.992 75.6922 99.5966 75.6252 98.0088C75.4902 94.8098 75.4904 90.5788 75.5969 86.373C75.7033 82.1673 75.9162 77.9366 76.2131 74.7383C76.3605 73.1505 76.5349 71.7577 76.7385 70.7344C76.7448 70.7024 76.7514 70.6698 76.758 70.6377C75.0151 70.432 73.2296 70.2823 71.4162 70.1807C71.4155 70.1827 71.4149 70.1854 71.4142 70.1875C71.0722 71.1451 70.5034 72.4446 69.8019 73.9277C68.3879 76.9174 66.3282 80.8742 64.1457 84.8135C61.9639 88.7513 59.6353 92.7147 57.6789 95.71C56.7056 97.2001 55.7936 98.498 55.0187 99.4424C54.6365 99.9082 54.2402 100.348 53.8488 100.689C53.6536 100.86 53.4098 101.05 53.1291 101.206C52.874 101.348 52.4116 101.561 51.8215 101.562C50.7304 101.562 50.0306 100.88 49.7336 100.538C49.3874 100.139 49.1196 99.6625 48.9113 99.2285C48.4856 98.3416 48.0898 97.1677 47.7228 95.8799C46.9807 93.2753 46.252 89.8244 45.6135 86.3389C44.9725 82.84 44.4124 79.2503 44.0119 76.3467C43.7469 74.4255 43.5403 72.7216 43.4347 71.5391C40.0442 71.971 36.8402 72.4542 33.9357 72.9336C29.8278 73.6117 26.3222 74.281 23.7336 74.7812C22.4442 75.0304 21.3697 75.24 20.5685 75.3867C20.1685 75.4599 19.8233 75.5198 19.548 75.5615C19.3 75.5991 19.0258 75.6357 18.8117 75.6357C17.9543 75.6354 17.4304 75.0663 17.1838 74.5586C16.9612 74.1002 16.8793 73.5569 16.8469 73.0615C16.7801 72.0397 16.8987 70.6653 17.1193 69.1211C17.1385 68.9866 17.1589 68.8502 17.1799 68.7119C13.0313 70.1477 5.93656 71.8262 5.33709 71.8271C4.49104 71.8264 4.06763 69.7108 4.06756 68.4414C4.06754 67.4034 13.97 64.1022 18.2756 62.9326C18.6417 61.2365 19.0531 59.4556 19.4826 57.6699C19.6367 57.0292 19.7935 56.3862 19.9513 55.7451H4.91424C3.6447 55.745 4.06765 53.6289 4.06756 52.3594C4.07076 51.3037 16.6608 51.4198 20.8947 51.9756C21.4543 49.7693 21.9962 47.6716 22.4621 45.8438C22.5644 45.4425 22.6608 45.0539 22.7551 44.6807C19.1841 44.2983 6.53748 42.2045 5.76092 42.2031C4.91445 42.2031 3.22152 39.2413 4.91424 39.2412C6.46759 39.2415 20.091 40.66 23.6681 40.8984C23.7223 40.648 23.7683 40.4267 23.8039 40.2373C23.8367 40.0627 23.8598 39.9228 23.8742 39.8164C23.8879 39.715 23.8895 39.6696 23.8898 39.6641C23.8898 39.1208 24.1281 38.6852 24.3849 38.3799C24.6355 38.0825 24.9517 37.849 25.257 37.665C25.8683 37.297 26.6731 36.986 27.5431 36.7178C29.3035 36.1752 31.6368 35.7148 34.008 35.3418C38.4718 34.6397 43.304 34.2139 45.1652 34.167C45.2727 34.032 45.423 33.8057 45.6047 33.46C46.0216 32.6662 46.4983 31.4809 47.0187 29.9883C48.0551 27.0159 49.1953 23.034 50.3351 19.0049C51.4684 14.9989 52.602 10.9441 53.6115 7.89551C54.1143 6.37701 54.6028 5.05704 55.0617 4.10156C55.2879 3.6306 55.5358 3.18631 55.8088 2.8418C55.9457 2.66914 56.123 2.47862 56.3439 2.32324C56.5656 2.1676 56.9006 2.00017 57.3224 2ZM261.687 86.8848C260.735 86.888 258.006 100.068 258.005 100.704C258.005 101.334 276.807 99.3731 276.81 97.3633C276.81 95.3533 262.638 86.8848 261.687 86.8848ZM80.7746 72.2051C80.6541 72.9647 80.5362 73.9534 80.4269 75.1309C80.142 78.2009 79.9334 82.3286 79.8283 86.4805C79.7232 90.6328 79.7232 94.7605 79.8527 97.8301C79.8754 98.3665 79.9031 98.8637 79.9328 99.3174C80.3022 98.9578 80.7064 98.5583 81.1369 98.1211C83.204 96.0214 85.8224 93.1816 88.3986 90.2637C90.9749 87.3456 93.4866 84.3753 95.3449 82.0166C96.2774 80.8331 97.0225 79.8311 97.5256 79.0811C97.546 79.0506 97.5648 79.0194 97.5842 78.9902C97.2186 78.7615 96.7471 78.4937 96.1711 78.1973C94.4517 77.3125 92.0926 76.2986 89.632 75.3301C87.182 74.3657 84.6806 73.4665 82.6965 72.8115C81.9696 72.5716 81.3201 72.3667 80.7746 72.2051ZM59.1779 70.1494C55.4259 70.3128 51.6994 70.614 48.1144 70.9932C47.9388 71.0353 47.7821 71.0765 47.6457 71.1182C47.7326 72.0922 47.9203 73.7104 48.2043 75.7695C48.5972 78.6185 49.1481 82.1446 49.7765 85.5752C50.4075 89.019 51.1071 92.3132 51.7931 94.7207C51.9454 95.2552 52.0941 95.7277 52.2336 96.1377C52.7768 95.4192 53.4194 94.4935 54.1359 93.3965C56.0147 90.52 58.2887 86.6537 60.4445 82.7627C62.5995 78.8731 64.6136 75.0003 65.9767 72.1182C66.3174 71.3978 66.6103 70.7519 66.8527 70.1924C64.8819 70.153 62.1049 70.1129 59.1779 70.1494ZM276.816 44.957C275.479 44.9571 263.448 69.5433 263.391 70.8809C263.334 72.2187 275.518 80.5098 276.815 80.5098C278.111 80.5049 278.153 44.957 276.816 44.957ZM202.907 38.4629C202.904 36.2242 175.724 34.6078 175.722 37.1465C175.722 39.6873 170 75.7042 172.015 75.7041C174.035 75.6964 202.907 40.7016 202.907 38.4629ZM211.058 43.4727C209.788 43.4727 202.594 75.2119 205.133 75.2119C207.676 75.2094 227.563 64.2085 227.563 62.0928C227.56 59.9753 212.334 43.4808 211.058 43.4727ZM167.777 35.8555C166.93 35.8555 145.347 41.3566 145.347 43.4727C145.347 45.5886 147.463 66.3237 149.155 66.3252C149.213 66.2349 168.608 35.8756 167.777 35.8555ZM42.0646 45.7578C35.9924 45.815 28.1093 44.3599 28.2775 51.8965C28.446 59.4333 33.4086 61.5632 36.0685 61.5635C38.7284 61.5636 52.4553 61.0146 52.4552 57.0791C52.4552 53.1437 48.1367 45.701 42.0646 45.7578ZM100.065 23.583C97.9471 23.5876 87.7922 43.8963 87.7922 45.5889C87.7929 47.2815 98.7918 51.9349 100.91 51.9365C103.027 51.9324 108.105 28.6608 108.105 27.8145C108.104 26.968 102.181 23.5839 100.065 23.583ZM101.684 28.5176C102.699 28.5193 102.621 35.9141 102.621 37.5713C102.621 39.2288 98.7391 45.8666 97.3371 45.8662C95.9355 45.8647 96.3849 38.3355 96.3849 36.3428C96.3849 34.3505 100.668 28.5176 101.684 28.5176ZM273.475 18.6895C272.687 18.6881 263.765 44.957 264.954 44.957C266.143 44.957 276.817 32.3939 276.817 30.5273C276.816 28.66 274.261 18.693 273.475 18.6895ZM65.3625 15.542C63.2466 15.5466 60.2844 36.2791 60.2844 37.9717C60.2861 39.6639 69.5926 40.5105 71.7101 40.5107C73.8251 40.5066 71.7102 17.2351 71.7101 16.8115C71.7101 16.3884 67.4786 15.5422 65.3625 15.542ZM67.5041 20.3545C68.9061 20.3555 69.756 27.5471 69.756 28.9492C69.756 30.3514 68.2548 36.7624 66.8527 36.7627C65.4507 36.7623 64.2511 30.3513 64.2511 28.9492C64.2511 27.5471 66.1021 20.3549 67.5041 20.3545Z" fill="#10DAF9"/></svg></a>
+</header>
 
 <div class="toolbar">
 	<h1>Lexicon Skeletons <small>· light &amp; dark previews</small></h1>
@@ -350,14 +348,6 @@
 		</select>
 	</label>
 </div>
-
-<p class="intro">
-	Animated skeleton loading states for the Lexicon component library (Epic LPD-49007), built on the
-	<a href="https://marcoscv-work.github.io/lexicon-vanilla/prototypes/token-editor.html">lexicon-vanilla</a> token system:
-	shapes use <code>--color-secondary-l3</code> on a <code>--color-light-l1</code> surface, 4px radius, a 1.6s shimmer wave and
-	an opacity fade on repeating rows. Skins follow the kit convention (<code>.light</code> / <code>.dark</code> class), so every
-	skeleton adapts automatically — use <em>Side by side</em> to review both at once.
-</p>
 
 <main id="grid">
 
@@ -554,42 +544,6 @@
 		</div></div>
 	</section>
 
-	<section class="demo" data-name="dropdown menu">
-		<header><h2>Dropdown</h2><small>search + 32px items</small><a href="https://www.figma.com/design/YNNkt9Xd6ImDtEvIz4tETF/Lexicon-Components?node-id=1410-23811">Figma ↗</a></header>
-		<div class="stages"><div class="stage"><span class="stage__tag">Light</span>
-			<div class="skeleton surface sk-dropdown fade">
-				<div class="search"><div class="sk" style="width:100%;height:32px"></div></div>
-				<div class="item"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:70%;height:12px"></div></div>
-				<div class="item"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:55%;height:12px"></div></div>
-				<div class="item"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:65%;height:12px"></div></div>
-				<div class="item"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:50%;height:12px"></div></div>
-				<div class="item"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:60%;height:12px"></div></div>
-			</div>
-		</div></div>
-	</section>
-
-	<section class="demo" data-name="modal dialog">
-		<header><h2>Modal</h2><small>header / body / footer</small><a href="https://www.figma.com/design/YNNkt9Xd6ImDtEvIz4tETF/Lexicon-Components?node-id=472-4478">Figma ↗</a></header>
-		<div class="stages"><div class="stage"><span class="stage__tag">Light</span>
-			<div class="skeleton surface sk-modal">
-				<div class="head">
-					<div class="sk" style="width:45%;height:16px"></div>
-					<div class="sk" style="width:16px;height:16px"></div>
-				</div>
-				<div class="body fade">
-					<div class="sk" style="width:95%;height:10px"></div>
-					<div class="sk" style="width:88%;height:10px"></div>
-					<div class="sk" style="width:92%;height:10px"></div>
-					<div class="sk" style="width:55%;height:10px"></div>
-				</div>
-				<div class="foot">
-					<div class="sk" style="width:72px;height:32px"></div>
-					<div class="sk" style="width:88px;height:32px"></div>
-				</div>
-			</div>
-		</div></div>
-	</section>
-
 	<section class="demo" data-name="side panel drawer">
 		<header><h2>Side Panel</h2><small>280px right drawer</small><a href="https://www.figma.com/design/YNNkt9Xd6ImDtEvIz4tETF/Lexicon-Components?node-id=4664-8242">Figma ↗</a></header>
 		<div class="stages"><div class="stage" style="padding:0;justify-content:flex-end"><span class="stage__tag">Light</span>
@@ -609,21 +563,6 @@
 					<div class="sk" style="width:64px;height:32px"></div>
 					<div class="sk" style="width:88px;height:32px"></div>
 				</div>
-			</div>
-		</div></div>
-	</section>
-
-	<section class="demo" data-name="breadcrumb">
-		<header><h2>Breadcrumb</h2><small>path segments</small><a href="https://www.figma.com/design/YNNkt9Xd6ImDtEvIz4tETF/Lexicon-Components?node-id=473-4340">Figma ↗</a></header>
-		<div class="stages"><div class="stage" style="align-items:center"><span class="stage__tag">Light</span>
-			<div class="skeleton sk-breadcrumb">
-				<div class="sk" style="width:56px;height:12px"></div>
-				<div class="sk sep"></div>
-				<div class="sk" style="width:72px;height:12px"></div>
-				<div class="sk sep"></div>
-				<div class="sk" style="width:64px;height:12px"></div>
-				<div class="sk sep"></div>
-				<div class="sk" style="width:88px;height:12px;opacity:.6"></div>
 			</div>
 		</div></div>
 	</section>
@@ -696,16 +635,7 @@
 
 </main>
 
-<footer class="page">
-	<strong>Not skeleton candidates:</strong> Button, Button Group, Radio Button, Checkbox, Badge, Label, Sticker, Picker, Progress Bar, Loading Indicator, Pagination, Tooltip, Toggle, Focus Ring — instant-rendering chrome, feedback components, or utilities. Skeletons only stand in for <em>content that is being fetched</em>.
-	<br><br>
-	Construction reference: <a href="https://marcoscv-work.github.io/lexicon-vanilla/prototypes/token-editor.html">lexicon-vanilla token editor</a> ·
-	Pattern reference: <a href="https://codepen.io/marcoscv/pen/VYjgMyX">Animated Liferay Skeleton (CodePen)</a> ·
-	<a href="https://www.figma.com/design/YNNkt9Xd6ImDtEvIz4tETF/Lexicon-Components">Lexicon Components (Figma)</a> · Epic LPD-49007 · LPD-49163.
-	<br>
-	Tokens: shape <code>--color-secondary-l3</code> · surface <code>--color-light-l1</code> · radius <code>--rounded-md</code> · shimmer 1.6s · fade 1 → .85 → .75 → .6 → .4 → .3 → .2.
-	Dark skin shimmer uses <code>rgba(99,102,130,.35)</code> instead of <code>rgba(247,248,249,.6)</code>.
-</footer>
+<div class="wipe" aria-hidden="true"></div>
 
 <script>
 (function () {
@@ -755,6 +685,22 @@
 			root.style.setProperty('--skeleton-play', 'running');
 			root.style.setProperty('--skeleton-duration', speed.value);
 		}
+	});
+
+	/* ── Wipe transition on the tiger back-link (portfolio behaviour) ── */
+	var wipe = document.querySelector('.wipe');
+	document.querySelectorAll('a[data-wipe]').forEach(function (link) {
+		link.addEventListener('click', function (e) {
+			if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+			e.preventDefault();
+			wipe.style.background = link.dataset.wipe;
+			wipe.classList.add('anim', 'cover');
+			setTimeout(function () { window.location.href = link.href; }, 460);
+		});
+	});
+	/* Reset the curtain when coming back via bfcache */
+	window.addEventListener('pageshow', function () {
+		wipe.classList.remove('anim', 'cover', 'reveal');
 	});
 
 	/* ── Filter ── */
