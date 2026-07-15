@@ -310,6 +310,25 @@
 	.sk-duallist .box { background: var(--color-white); border: 1px solid var(--color-secondary-l3); border-radius: var(--rounded-md); padding: var(--spacing-3); display: flex; flex-direction: column; gap: var(--spacing-3); }
 	.sk-duallist .moves { display: flex; flex-direction: column; gap: var(--spacing-3); }
 
+	/* ── Breadcrumb — path segments + separators ───────────────── */
+	.sk-breadcrumb { width: 100%; max-width: 420px; padding: var(--spacing-4) var(--spacing-5); display: flex; align-items: center; gap: var(--spacing-3); }
+
+	/* ── Tree View — 32px rows, 24px indent per level ──────────── */
+	.sk-treeview { width: 100%; max-width: 320px; padding: var(--spacing-4) var(--spacing-5); display: flex; flex-direction: column; }
+	.sk-treeview .trow3 { display: flex; align-items: center; gap: var(--spacing-3); height: 32px; }
+	.sk-treeview .indent { padding-left: 24px; }
+
+	/* ── Modal — header + body + footer dialog ─────────────────── */
+	.sk-modal { width: 360px; box-shadow: var(--shadow-dropdown); }
+	.sk-modal .mhead { display: flex; align-items: center; justify-content: space-between; padding: var(--spacing-5); border-bottom: 1px solid var(--skeleton-surface); }
+	.sk-modal .mbody { padding: var(--spacing-6) var(--spacing-5); display: flex; flex-direction: column; gap: var(--spacing-3); }
+	.sk-modal .mfoot { display: flex; justify-content: flex-end; gap: var(--spacing-3); padding: var(--spacing-5); border-top: 1px solid var(--skeleton-surface); }
+
+	/* ── Autocomplete — input + open results menu (also reused inside layout search fields) ── */
+	.sk-autocomplete { width: 100%; max-width: 300px; padding: var(--spacing-5); display: flex; flex-direction: column; gap: var(--spacing-3); }
+	.amenu { border: 1px solid var(--color-secondary-l3); border-radius: var(--rounded-md); overflow: hidden; box-shadow: var(--shadow-dropdown); background: var(--color-white); }
+	.amenu .aitem { display: flex; align-items: center; height: 36px; padding: 0 var(--spacing-4); }
+
 
 	/* ============================================================
 	   Layouts view — full DXP screens composed with the skeletons
@@ -426,6 +445,15 @@
 	}
 	.screen .treenav .trow2 { display: flex; align-items: center; gap: var(--spacing-3); }
 	.screen .treenav .indent { padding-left: var(--spacing-6); }
+
+	/* document library: breadcrumb row above the management toolbar, open autocomplete under search */
+	.screen { position: relative; }
+	.screen .sbreadcrumb { display: flex; align-items: center; gap: var(--spacing-3); padding: var(--spacing-5) var(--spacing-5) 0; }
+	.screen .mgmt-search { position: relative; flex: 1; }
+	.screen .mgmt-search .amenu { position: absolute; top: 44px; left: 0; right: 0; z-index: 5; }
+
+	/* modal overlay: dims the screen behind an in-context dialog (Add User) */
+	.screen .scrim { position: absolute; inset: 0; background: rgba(0, 0, 0, .4); display: flex; align-items: center; justify-content: center; z-index: 10; }
 
 </style>
 </head>
@@ -759,6 +787,69 @@
 		</div></div>
 	</section>
 
+	<section class="demo" data-name="breadcrumb path navigation">
+		<header><h2>Breadcrumb</h2><small>path segments + separators</small><a href="https://www.figma.com/design/YNNkt9Xd6ImDtEvIz4tETF/Lexicon-Components?node-id=473-4340">Figma ↗</a></header>
+		<div class="stages"><div class="stage"><span class="stage__tag">Light</span>
+			<div class="skeleton surface sk-breadcrumb">
+				<div class="sk" style="width:64px;height:12px;opacity:.6"></div>
+				<div class="sk" style="width:10px;height:10px;opacity:.4"></div>
+				<div class="sk" style="width:88px;height:12px;opacity:.6"></div>
+				<div class="sk" style="width:10px;height:10px;opacity:.4"></div>
+				<div class="sk" style="width:120px;height:14px"></div>
+			</div>
+		</div></div>
+	</section>
+
+	<section class="demo" data-name="tree view folders document library">
+		<header><h2>Tree View</h2><small>32px rows · 24px indent</small><a href="https://www.figma.com/design/YNNkt9Xd6ImDtEvIz4tETF/Lexicon-Components?node-id=1410-25688">Figma ↗</a></header>
+		<div class="stages"><div class="stage"><span class="stage__tag">Light</span>
+			<div class="skeleton surface sk-treeview fade">
+				<div class="trow3"><div class="sk" style="width:12px;height:12px"></div><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:120px;height:12px"></div></div>
+				<div class="trow3 indent"><div class="sk" style="width:12px;height:12px"></div><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:80px;height:12px"></div></div>
+				<div class="trow3 indent"><div class="sk" style="width:12px;height:12px"></div><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:140px;height:12px"></div></div>
+				<div class="trow3 indent"><div class="sk" style="width:12px;height:12px;opacity:0"></div><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:64px;height:12px"></div></div>
+				<div class="trow3"><div class="sk" style="width:12px;height:12px"></div><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:96px;height:12px"></div></div>
+				<div class="trow3"><div class="sk" style="width:12px;height:12px"></div><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:76px;height:12px"></div></div>
+				<div class="trow3"><div class="sk" style="width:12px;height:12px"></div><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:84px;height:12px"></div></div>
+			</div>
+		</div></div>
+	</section>
+
+	<section class="demo" data-name="modal dialog">
+		<header><h2>Modal</h2><small>header + body + footer</small><a href="https://www.figma.com/design/YNNkt9Xd6ImDtEvIz4tETF/Lexicon-Components?node-id=472-4478">Figma ↗</a></header>
+		<div class="stages"><div class="stage"><span class="stage__tag">Light</span>
+			<div class="skeleton surface sk-modal">
+				<div class="mhead"><div class="sk" style="width:45%;height:16px"></div><div class="sk" style="width:16px;height:16px"></div></div>
+				<div class="mbody fade">
+					<div class="sk" style="width:100%;height:10px"></div>
+					<div class="sk" style="width:92%;height:10px"></div>
+					<div class="sk" style="width:65%;height:10px"></div>
+				</div>
+				<div class="mfoot">
+					<div class="sk" style="width:64px;height:32px"></div>
+					<div class="sk" style="width:80px;height:32px"></div>
+					<div class="sk" style="width:72px;height:32px"></div>
+				</div>
+			</div>
+		</div></div>
+	</section>
+
+	<section class="demo" data-name="autocomplete search results dropdown">
+		<header><h2>Autocomplete</h2><small>input + open results</small><a href="https://www.figma.com/design/YNNkt9Xd6ImDtEvIz4tETF/Lexicon-Components?node-id=5906-610">Figma ↗</a></header>
+		<div class="stages"><div class="stage"><span class="stage__tag">Light</span>
+			<div class="skeleton sk-autocomplete">
+				<div class="sk" style="width:35%;height:12px"></div>
+				<div class="sk" style="width:100%;height:32px"></div>
+				<div class="amenu fade">
+					<div class="aitem"><div class="sk" style="width:55%;height:12px"></div></div>
+					<div class="aitem"><div class="sk" style="width:40%;height:12px"></div></div>
+					<div class="aitem"><div class="sk" style="width:70%;height:12px"></div></div>
+					<div class="aitem"><div class="sk" style="width:48%;height:12px"></div></div>
+				</div>
+			</div>
+		</div></div>
+	</section>
+
 	<section class="demo layout" data-name="layout style books control panel cards">
 		<header><h2>Layout · Style Books</h2><small>product menu + control menu + management toolbar + card grid</small></header>
 		<div class="stages"><div class="stage"><span class="stage__tag">Light</span>
@@ -851,6 +942,66 @@
 					<div class="work">
 						<div class="mgmt"><div class="sk" style="width:72px;height:16px"></div><div class="sk" style="flex:1;height:40px"></div><div class="sk" style="width:88px;height:40px"></div></div>
 						<div class="content" style="padding:0"><div class="fade"><div class="trow"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:70%;height:14px"></div><div class="sk" style="width:60%;height:14px"></div><div class="sk" style="width:55%;height:14px"></div><div class="sk" style="width:100%;height:20px"></div><div class="sk" style="width:16px;height:16px"></div></div><div class="trow"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:70%;height:14px"></div><div class="sk" style="width:60%;height:14px"></div><div class="sk" style="width:55%;height:14px"></div><div class="sk" style="width:100%;height:20px"></div><div class="sk" style="width:16px;height:16px"></div></div><div class="trow"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:70%;height:14px"></div><div class="sk" style="width:60%;height:14px"></div><div class="sk" style="width:55%;height:14px"></div><div class="sk" style="width:100%;height:20px"></div><div class="sk" style="width:16px;height:16px"></div></div><div class="trow"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:70%;height:14px"></div><div class="sk" style="width:60%;height:14px"></div><div class="sk" style="width:55%;height:14px"></div><div class="sk" style="width:100%;height:20px"></div><div class="sk" style="width:16px;height:16px"></div></div><div class="trow"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:70%;height:14px"></div><div class="sk" style="width:60%;height:14px"></div><div class="sk" style="width:55%;height:14px"></div><div class="sk" style="width:100%;height:20px"></div><div class="sk" style="width:16px;height:16px"></div></div></div></div>
+					</div>
+				</div>
+			</div>
+		</div></div>
+	</section>
+
+	<section class="demo layout" data-name="layout document library tree breadcrumb autocomplete">
+		<header><h2>Layout · Document Library</h2><small>tree sidebar + breadcrumb + open autocomplete search + card grid</small></header>
+		<div class="stages"><div class="stage"><span class="stage__tag">Light</span>
+			<div class="skeleton screen">
+				<div class="cbar"><div class="sk" style="width:20px;height:20px"></div><div class="sk" style="width:120px;height:16px"></div><span class="grow"></span><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:20px;height:20px"></div><div class="sk circle" style="width:28px;height:28px"></div></div>
+				<div class="cols">
+					<div class="treenav fade"><div class="trow2"><div class="sk" style="width:12px;height:12px"></div><div class="sk" style="width:90px;height:12px"></div></div><div class="sk" style="width:100%;height:40px"></div><div class="trow2"><div class="sk" style="width:150px;height:32px"></div><span class="grow"></span><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:16px;height:16px"></div></div><div class="trow2"><div class="sk" style="width:12px;height:8px"></div><div class="sk" style="width:60px;height:12px"></div></div><div class="trow2 indent"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:70px;height:12px"></div></div><div class="trow2 indent"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:80px;height:12px"></div></div><div class="trow2 indent"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:64px;height:12px"></div></div></div>
+					<div class="work">
+						<div class="sbreadcrumb"><div class="sk" style="width:70px;height:12px;opacity:.6"></div><div class="sk" style="width:10px;height:10px;opacity:.4"></div><div class="sk" style="width:130px;height:12px"></div></div>
+						<div class="mgmt">
+							<div class="sk" style="width:72px;height:16px"></div>
+							<div class="mgmt-search">
+								<div class="sk" style="height:40px;width:100%"></div>
+								<div class="amenu fade">
+									<div class="aitem"><div class="sk" style="width:55%;height:12px"></div></div>
+									<div class="aitem"><div class="sk" style="width:42%;height:12px"></div></div>
+									<div class="aitem"><div class="sk" style="width:65%;height:12px"></div></div>
+								</div>
+							</div>
+							<div class="sk" style="width:88px;height:40px"></div>
+						</div>
+						<div class="content"><div class="cardgrid fade">
+							<div class="c"><div class="cimg"><div class="sk" style="width:100%;height:100%"></div></div><div class="cbody"><div class="sk" style="width:75%;height:14px"></div><div class="sk" style="width:45%;height:10px"></div></div></div>
+							<div class="c"><div class="cimg"><div class="sk" style="width:100%;height:100%"></div></div><div class="cbody"><div class="sk" style="width:65%;height:14px"></div><div class="sk" style="width:40%;height:10px"></div></div></div>
+							<div class="c"><div class="cimg"><div class="sk" style="width:100%;height:100%"></div></div><div class="cbody"><div class="sk" style="width:80%;height:14px"></div><div class="sk" style="width:50%;height:10px"></div></div></div>
+							<div class="c"><div class="cimg"><div class="sk" style="width:100%;height:100%"></div></div><div class="cbody"><div class="sk" style="width:70%;height:14px"></div><div class="sk" style="width:35%;height:10px"></div></div></div>
+						</div></div>
+					</div>
+				</div>
+			</div>
+		</div></div>
+	</section>
+
+	<section class="demo layout" data-name="layout add user modal overlay">
+		<header><h2>Layout · Add User (Modal)</h2><small>admin list dimmed behind + centered modal form</small></header>
+		<div class="stages"><div class="stage"><span class="stage__tag">Light</span>
+			<div class="skeleton screen">
+				<div class="cbar"><div class="sk" style="width:20px;height:20px"></div><div class="sk" style="width:120px;height:16px"></div><span class="grow"></span><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:20px;height:20px"></div><div class="sk circle" style="width:28px;height:28px"></div></div>
+				<div class="cols">
+					<div class="pnav fade"><div class="it"><div class="sk" style="width:24px;height:24px"></div><div class="sk" style="width:110px;height:14px"></div></div><div class="it"><div class="sk" style="width:20px;height:20px"></div><div class="sk" style="width:70px;height:12px"></div></div><div class="hd"><div class="sk" style="width:80px;height:12px"></div><div class="sk" style="width:12px;height:8px"></div></div><div class="it it--active"><div class="sk" style="width:90px;height:12px"></div></div><div class="it"><div class="sk" style="width:80px;height:12px"></div></div><div class="it"><div class="sk" style="width:86px;height:12px"></div></div></div>
+					<div class="work">
+						<div class="mgmt"><div class="sk" style="width:72px;height:16px"></div><div class="sk" style="flex:1;height:40px"></div><div class="sk" style="width:88px;height:40px"></div></div>
+						<div class="content" style="padding:0"><div class="fade"><div class="trow"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:50%;height:12px"></div><div class="sk" style="width:45%;height:12px"></div><div class="sk" style="width:40%;height:12px"></div><div class="sk" style="width:80%;height:12px"></div><div class="sk" style="width:16px;height:16px"></div></div><div class="trow"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:70%;height:14px"></div><div class="sk" style="width:60%;height:14px"></div><div class="sk" style="width:55%;height:14px"></div><div class="sk" style="width:100%;height:20px"></div><div class="sk" style="width:16px;height:16px"></div></div><div class="trow"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:70%;height:14px"></div><div class="sk" style="width:60%;height:14px"></div><div class="sk" style="width:55%;height:14px"></div><div class="sk" style="width:100%;height:20px"></div><div class="sk" style="width:16px;height:16px"></div></div><div class="trow"><div class="sk" style="width:16px;height:16px"></div><div class="sk" style="width:70%;height:14px"></div><div class="sk" style="width:60%;height:14px"></div><div class="sk" style="width:55%;height:14px"></div><div class="sk" style="width:100%;height:20px"></div><div class="sk" style="width:16px;height:16px"></div></div></div></div>
+					</div>
+				</div>
+				<div class="scrim">
+					<div class="surface sk-modal">
+						<div class="mhead"><div class="sk" style="width:40%;height:16px"></div><div class="sk" style="width:16px;height:16px"></div></div>
+						<div class="mbody fade">
+							<div class="sk" style="width:30%;height:12px"></div><div class="sk" style="width:100%;height:36px"></div>
+							<div class="sk" style="width:35%;height:12px"></div><div class="sk" style="width:100%;height:36px"></div>
+							<div class="sk" style="width:40%;height:12px"></div><div class="sk" style="width:100%;height:36px"></div>
+						</div>
+						<div class="mfoot"><div class="sk" style="width:80px;height:36px"></div><div class="sk" style="width:96px;height:36px"></div></div>
 					</div>
 				</div>
 			</div>
