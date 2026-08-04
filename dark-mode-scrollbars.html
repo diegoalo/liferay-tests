@@ -1,0 +1,1805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrollbars in Dark Mode from DIEGOALO</title>
+<meta name="description" content="Four token pairs for the scrollbar thumb and track in Liferay DXP dark mode, compared live across every dark and high-contrast palette and inside real Lexicon components.">
+<link rel="icon" type="image/png" href="https://diegoalo.com/assets/favicon.png">
+<link rel="canonical" href="https://diegoalo.github.io/liferay-tests/dark-mode-scrollbars.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DIEGOALO">
+<meta property="og:title" content="Scrollbars in Dark Mode">
+<meta property="og:description" content="Four token pairs for the scrollbar thumb and track in Liferay DXP dark mode, compared live across every dark and high-contrast palette and inside real Lexicon components.">
+<meta property="og:url" content="https://diegoalo.github.io/liferay-tests/dark-mode-scrollbars.html">
+<meta property="og:image" content="https://diegoalo.com/assets/og-image.jpg">
+<meta property="og:image:width" content="2400">
+<meta property="og:image:height" content="1260">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@_diegoalo">
+<meta name="twitter:image" content="https://diegoalo.com/assets/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══ Lexicon base tokens ═══════════════════════════════════════════ */
+/* ============================================================
+   Lexicon base tokens — vanilla
+   Copy of tokens.css trimmed to colors, spacing, typography,
+   radius and shadow. Light mode only — no theming layer.
+   ============================================================ */
+
+:root {
+
+  /* ── Color: Primary ── */
+  --color-primary-d2: #004AD7;
+  --color-primary-d1: #0053F0;
+  --color-primary:    #0B5FFF;
+  --color-primary-l0: #5791FF;
+  --color-primary-l1: #80ACFF;
+  --color-primary-l2: #B3CDFF;
+  --color-primary-l3: #F0F5FF;
+
+  /* ── Color: Secondary ── */
+  --color-secondary:    #6B6C7E;
+  --color-secondary-l0: #9393A4;
+  --color-secondary-l1: #A7A9BC;
+  --color-secondary-l2: #CDCED9;
+  --color-secondary-l3: #E7E7ED;
+
+  /* ── Color: Dark / Light ── */
+  --color-dark-d2: #111116;
+  --color-dark-d1: #1C1C24;
+  --color-dark:    #272833;
+  --color-dark-l1: #30313F;
+  --color-dark-l2: #393A4A;
+  --color-light-d2: #D3D6E0;
+  --color-light-d1: #E2E4EA;
+  --color-light:    #F1F2F5;
+  --color-light-l1: #F7F8F9;
+  --color-white:    #FFFFFF;
+
+  /* ── Color: Success ── */
+  --color-success-d2: #1C5629;
+  --color-success-d1: #226A33;
+  --color-success:    #287D3C;
+  --color-success-l1: #5ACA75;
+  --color-success-l2: #EDF9F0;
+
+  /* ── Color: Info ── */
+  --color-info-d2: #234584;
+  --color-info-d1: #294F98;
+  --color-info:    #2E5AAC;
+  --color-info-l1: #89A7E0;
+  --color-info-l2: #EEF2FA;
+
+  /* ── Color: Warning ── */
+  --color-warning-d2: #863A00;
+  --color-warning-d1: #9F4500;
+  --color-warning:    #B95000;
+  --color-warning-l1: #FF8F39;
+  --color-warning-l2: #FFF4EC;
+
+  /* ── Color: Danger ── */
+  --color-danger-d2: #AB1010;
+  --color-danger-d1: #C31212;
+  --color-danger:    #DA1414;
+  --color-danger-l1: #F48989;
+  --color-danger-l2: #FEEFEF;
+
+  /* ── Spacing ── */
+  --spacing-1:   2px;
+  --spacing-2:   4px;
+  --spacing-2-5: 6px;
+  --spacing-3:   8px;
+  --spacing-4:   12px;
+  --spacing-5:   16px;
+  --spacing-6:   20px;
+  --spacing-7:   24px;
+  --spacing-8:   32px;
+  --spacing-9:   40px;
+  --spacing-10: 48px;
+
+  /* ── Border radius ── */
+  --rounded-sm:    2px;
+  --rounded-md:    4px;
+  --rounded-lg:    8px;
+  --rounded-xl:    16px;
+  --rounded-full:  9999px;
+
+  /* ── Typography ── */
+  --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-size-xs:   10px;
+  --font-size-sm:   12px;
+  --font-size-base: 14px;
+  --font-size-md:   16px;
+  --font-size-lg:   18px;
+  --font-size-xl:   20px;
+  --font-size-2xl:  28px;
+  --font-size-3xl:  32px;
+  --font-weight-normal: 300;
+  --font-weight-semi:   400;
+  --font-weight-bold:   600;
+  --line-height-base:   1.5;
+
+  /* ── Shadow ── */
+  --shadow-sm:         0 1px 2px rgba(39, 40, 51, 0.10);
+  --shadow-card:       0 2px 4px rgba(39, 40, 51, 0.12);
+  --shadow-md:         0 2px 8px rgba(39, 40, 51, 0.14);
+  --shadow-dropdown:   0 4px 8px rgba(39, 40, 51, 0.12);
+  --shadow-lg:         0 4px 16px rgba(39, 40, 51, 0.18);
+  --shadow-alert:      0 8px 16px rgba(39, 40, 51, 0.20);
+  /* Scroll shadows — a soft edge cast by sticky chrome (header / footer) over
+     scrolling content, shown only while content is clipped past that edge. */
+  --shadow-scroll-top:    0 4px 24px rgba(0, 0, 0, 0.08);
+  --shadow-scroll-bottom: 0 -4px 24px rgba(0, 0, 0, 0.08);
+
+  /* ── Focus ring ── */
+  --focus-ring: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-primary-l0);
+
+  /* ── Chart colors ── */
+  --blue-d4: #004799;
+  --blue-d3: #0053B3;
+  --blue-d2: #005FCC;
+  --blue-d1: #006BE6;
+  --blue:    #006EFF;
+  --blue-l1: #338FFF;
+  --blue-l2: #66ABFF;
+  --blue-l3: #97C5FF;
+  --blue-l4: #CCE3FF;
+  --blue-l5: #E5F1FF;
+
+  --orange-d4: #662700;
+  --orange-d3: #803100;
+  --orange-d2: #993B00;
+  --orange-d1: #B34400;
+  --orange:    #CC4E00;
+  --orange-l1: #FF6200;
+  --orange-l2: #FF8133;
+  --orange-l3: #FFA166;
+  --orange-l4: #FFC099;
+  --orange-l5: #FFF0E5;
+
+  --red-d4: #800000;
+  --red-d3: #990000;
+  --red-d2: #B30000;
+  --red-d1: #CC0000;
+  --red:    #E50000;
+  --red-l1: #FF4D4D;
+  --red-l2: #FF6666;
+  --red-l3: #FF8080;
+  --red-l4: #FF9999;
+  --red-l5: #FFE5E5;
+
+  --teal-d4: #092A25;
+  --teal-d3: #0D3F37;
+  --teal-d2: #125449;
+  --teal-d1: #16695B;
+  --teal:    #1B7E6E;
+  --teal-l1: #24A892;
+  --teal-l2: #42D7BE;
+  --teal-l3: #6CE0CC;
+  --teal-l4: #96E9DB;
+  --teal-l5: #EAFBF8;
+
+  --pink-d4: #800048;
+  --pink-d3: #990057;
+  --pink-d2: #B30065;
+  --pink-d1: #CC0074;
+  --pink:    #E50082;
+  --pink-l1: #FF4DB2;
+  --pink-l2: #FF80C8;
+  --pink-l3: #FF99D3;
+  --pink-l4: #FFB2DE;
+  --pink-l5: #FFE5F4;
+
+  --green-d4: #162D06;
+  --green-d3: #22430A;
+  --green-d2: #2E590D;
+  --green-d1: #397010;
+  --green:    #458613;
+  --green-l1: #53A117;
+  --green-l2: #67C91D;
+  --green-l3: #81E236;
+  --green-l4: #9DE963;
+  --green-l5: #F1FCE9;
+
+  --purple-d4: #7700CC;
+  --purple-d3: #8600E6;
+  --purple-d2: #9500FF;
+  --purple-d1: #9F1AFF;
+  --purple:    #AA33FF;
+  --purple-l1: #BF66FF;
+  --purple-l2: #CA80FF;
+  --purple-l3: #D499FF;
+  --purple-l4: #DFB3FF;
+  --purple-l5: #F2E5FF;
+
+  --yellow-d4: #997000;
+  --yellow-d3: #B38900;
+  --yellow-d2: #CC9600;
+  --yellow-d1: #E6A800;
+  --yellow:    #FFBB00;
+  --yellow-l1: #FFC933;
+  --yellow-l2: #FFD666;
+  --yellow-l3: #FFE499;
+  --yellow-l4: #FFF1CC;
+  --yellow-l5: #FFF8E5;
+
+  --cyan-d4: #00334D;
+  --cyan-d3: #004466;
+  --cyan-d2: #005580;
+  --cyan-d1: #006699;
+  --cyan:    #0077B3;
+  --cyan-l1: #0099E6;
+  --cyan-l2: #33BBFF;
+  --cyan-l3: #66CCFF;
+  --cyan-l4: #99DDFF;
+  --cyan-l5: #E5F6FF;
+
+  --indigo-d4: #0017E5;
+  --indigo-d3: #001AFF;
+  --indigo-d2: #1A30FF;
+  --indigo-d1: #3347FF;
+  --indigo:    #4D5FFF;
+  --indigo-l1: #808CFF;
+  --indigo-l2: #99A3FF;
+  --indigo-l3: #B2BAFF;
+  --indigo-l4: #CCD1FF;
+  --indigo-l5: #E5E8FF;
+}
+
+/* Sensible defaults for the document */
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+
+body {
+  margin: 0;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--color-dark);
+  background: var(--color-white);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.25;
+  margin: 0;
+}
+
+p { margin: 0; }
+
+a { color: var(--color-primary); }
+a:hover { color: var(--color-primary-d1); }
+
+/* ============================================================
+   SKELETON tokens — loading-state shapes and shimmer sweep.
+   Shape and surface resolve from the semantic scale (they flip
+   per skin automatically); the shimmer gradient needs raw RGB
+   components, overridden for dark skins in tokens-dark.css.
+   ============================================================ */
+:root {
+  --skeleton-shape: var(--color-secondary-l3);
+  --skeleton-surface: var(--color-light-l1);
+  --skeleton-shimmer-rgb: 247, 248, 249;  /* light-l1 */
+  --skeleton-shimmer-alpha: 0.6;
+}
+
+/* ============================================================
+   CHART tokens — categorical series, sequential buckets and
+   plot structure.
+   Categorical series alias the base chart hues (--yellow, --blue,
+   …) in a fixed order chosen for maximum adjacent contrast and
+   accessibility; the base hues already carry per-skin overrides,
+   so charts reskin for free. (Never point a series at a -l2/-l3
+   tint — those collapse to near-white in the HC skins.) The
+   sequential buckets alias the --blue scale, and the structural
+   tokens alias the semantic scale so grid / track / halo / axis /
+   land flip per skin automatically.
+   ============================================================ */
+:root {
+  /* Categorical series — bar (stacked), pie, multi-series line.
+     Ordered for maximum adjacent contrast + accessibility; alias
+     the base chart hues so each series reskins per skin. */
+  --chart-1:  var(--yellow);
+  --chart-2:  var(--blue);
+  --chart-3:  var(--orange);
+  --chart-4:  var(--teal);
+  --chart-5:  var(--pink);
+  --chart-6:  var(--cyan);
+  --chart-7:  var(--red);
+  --chart-8:  var(--purple);
+  --chart-9:  var(--green);
+  --chart-10: var(--indigo);
+
+  /* Sequential buckets — single hue, less → more (map, heat) */
+  --chart-seq-1: var(--blue-l4);
+  --chart-seq-2: var(--blue-l2);
+  --chart-seq-3: var(--blue);
+
+  /* Plot structure — flip per skin through the semantic scale */
+  --chart-track:     var(--color-light-d1);   /* bar track / gridlines (#E2E4EA) */
+  --chart-grid:      var(--color-light-d1);   /* axis gridlines */
+  --chart-halo:      var(--color-white);      /* marker + segment separators */
+  --chart-axis:      var(--color-secondary);  /* axis + tick labels */
+  --chart-land:      var(--color-light);      /* map land fill (#F1F2F5) */
+  --chart-land-line: var(--color-light-d1);   /* map land borders (#E2E4EA) */
+}
+
+/* ═══ Lexicon components — solo los bloques que esta página usa ═════ */
+.lexicon-icon {
+  display: inline-block;
+  width: 16px;   /* default size */
+  height: 16px;
+  fill: currentColor;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-3);
+  height: 40px;
+  padding: 0 var(--spacing-5);
+  border-radius: var(--rounded-md);
+  border: 1px solid transparent;
+  background: transparent;
+  font-family: inherit;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  color: var(--color-dark);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color 0.1s ease,
+    border-color 0.1s ease,
+    color 0.1s ease,
+    box-shadow 0.1s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.btn:focus-visible {
+  outline: 0;
+  box-shadow: var(--focus-ring);
+}
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.btn--primary {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+.btn--primary:hover  { background: var(--color-primary-d1); }
+.btn--primary:active { background: var(--color-primary-d2); }
+.btn--secondary {
+  background: var(--color-white);
+  border-color: var(--color-secondary-l0);
+  color: var(--color-secondary);
+}
+.btn--secondary:hover  { background: var(--color-light-l1); }
+.btn--secondary:active { background: var(--color-light); }
+.btn--borderless {
+  background: transparent;
+  color: var(--color-secondary);
+}
+.btn--borderless:hover  { background: var(--color-light); }
+.btn--borderless:active { background: var(--color-light-d1); }
+.btn--primary.btn--info    { background: var(--color-info); }
+.btn--primary.btn--info:hover    { background: var(--color-info-d1); }
+.btn--primary.btn--success { background: var(--color-success); }
+.btn--primary.btn--success:hover { background: var(--color-success-d1); }
+.btn--primary.btn--warning { background: var(--color-warning); }
+.btn--primary.btn--warning:hover { background: var(--color-warning-d1); }
+.btn--primary.btn--danger  { background: var(--color-danger); }
+.btn--primary.btn--danger:hover  { background: var(--color-danger-d1); }
+.btn--secondary.btn--info    { color: var(--color-info);    border-color: var(--color-info);    }
+.btn--secondary.btn--info:hover    { background: var(--color-info-l2);    }
+.btn--secondary.btn--success { color: var(--color-success); border-color: var(--color-success); }
+.btn--secondary.btn--success:hover { background: var(--color-success-l2); }
+.btn--secondary.btn--warning { color: var(--color-warning); border-color: var(--color-warning); }
+.btn--secondary.btn--warning:hover { background: var(--color-warning-l2); }
+.btn--secondary.btn--danger  { color: var(--color-danger);  border-color: var(--color-danger);  }
+.btn--secondary.btn--danger:hover  { background: var(--color-danger-l2);  }
+.btn--borderless.btn--info    { color: var(--color-info);    }
+.btn--borderless.btn--info:hover    { background: var(--color-info-l2);    }
+.btn--borderless.btn--success { color: var(--color-success); }
+.btn--borderless.btn--success:hover { background: var(--color-success-l2); }
+.btn--borderless.btn--warning { color: var(--color-warning); }
+.btn--borderless.btn--warning:hover { background: var(--color-warning-l2); }
+.btn--borderless.btn--danger  { color: var(--color-danger);  }
+.btn--borderless.btn--danger:hover  { background: var(--color-danger-l2);  }
+.btn--sm { height: 32px; padding: 0 var(--spacing-4); font-size: var(--font-size-sm); }
+.btn--icon          { width: 40px; min-width: 40px; padding: 0; flex-shrink: 0; }
+.btn--icon.btn--xs  { width: 24px; min-width: 24px; }
+.btn--icon.btn--sm  { width: 32px; min-width: 32px; }
+.btn--icon.btn--lg  { width: 48px; min-width: 48px; }
+.alert__content .lexicon-icon { margin-top: var(--spacing-1); flex-shrink: 0; }
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  height: 24px;
+  padding: 0 var(--spacing-3);
+  border: 1px solid var(--color-secondary-l2);
+  border-radius: var(--rounded-sm);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  line-height: 18px;
+  white-space: nowrap;
+  background: var(--color-white);
+  color: var(--color-secondary);
+}
+.label--sm {
+  height: 16px;
+  padding: 0 var(--spacing-2);
+  gap: var(--spacing-1);
+  font-size: var(--font-size-xs);
+  line-height: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+.label--secondary { color: var(--color-secondary); border-color: var(--color-secondary-l2); }
+.label--success   { color: var(--color-success);   border-color: var(--color-success-l1);   }
+.label--warning   { color: var(--color-warning);   border-color: var(--color-warning-l1);   }
+.label--danger    { color: var(--color-danger);    border-color: var(--color-danger-l1);    }
+.label--bold.label--secondary { background: var(--color-secondary); }
+.label--bold.label--success   { background: var(--color-success);   }
+.label--bold.label--warning   { background: var(--color-warning);   }
+.label--bold.label--danger    { background: var(--color-danger);    }
+.progress--completed .lexicon-icon   { color: var(--color-success); flex-shrink: 0; }
+.toggle__dot .lexicon-icon {
+  width: 12px;
+  height: 12px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+.toggle:has(.toggle__input:checked) .toggle__dot .lexicon-icon,
+.toggle.is-checked .toggle__dot .lexicon-icon { opacity: 1; }
+.toggle--sm .toggle__dot .lexicon-icon { width: 10px; height: 10px; }
+.sticker--icon .lexicon-icon { width: 50%; height: 50%; }
+.input__field {
+  display: block;
+  width: 100%;
+  height: 40px;
+  padding: 0 var(--spacing-5);
+  border: 1px solid var(--color-secondary-l3);
+  border-radius: var(--rounded-md);
+  background: var(--color-light);
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  color: var(--color-dark);
+  -webkit-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  transition: background 0.1s ease, border-color 0.1s ease, box-shadow 0.1s ease;
+}
+.input--sm .input__field { height: 32px; }
+.input__field::placeholder { color: var(--color-dark); opacity: 0.55; }
+.input__field:focus-visible,
+.input__field.is-focused {
+  outline: 0;
+  background: var(--color-primary-l3);
+  border-color: var(--color-primary-l1);
+  box-shadow: var(--focus-ring);
+}
+.input__field:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.input__feedback .lexicon-icon { flex-shrink: 0; }
+.input--info    .input__field { background: var(--color-info-l2);    border-color: var(--color-info-l1);    }
+.input--success .input__field { background: var(--color-success-l2); border-color: var(--color-success-l1); }
+.input--warning .input__field { background: var(--color-warning-l2); border-color: var(--color-warning-l1); }
+.input--danger  .input__field { background: var(--color-danger-l2);  border-color: var(--color-danger-l1);  }
+.input-group > .input__field { flex: 1 1 auto; min-width: 0; }
+.input-group > .input__field:focus-visible { position: relative; z-index: 1; }
+.input-group:has(.input__field:focus-visible) .input-group__addon {
+  border-color: var(--color-primary-l0);
+}
+.input-group--sm .input__field { height: 32px; }
+.input-group--sm > .btn {
+  height: 32px;
+  padding: 0 var(--spacing-4);
+  font-size: var(--font-size-sm);
+}
+.btn-group > .btn { border-radius: 0; position: relative; }
+.btn-group > .btn:first-child {
+  border-top-left-radius: var(--rounded-md);
+  border-bottom-left-radius: var(--rounded-md);
+}
+.btn-group > .btn:last-child {
+  border-top-right-radius: var(--rounded-md);
+  border-bottom-right-radius: var(--rounded-md);
+}
+.btn-group > .btn + .btn { margin-left: -1px; }
+.btn-group > .btn:hover,
+.btn-group > .btn:focus-visible { z-index: 1; }
+.btn-group > .btn--secondary.is-active {
+  background: var(--color-light);
+  z-index: 1;
+}
+.btn-group--pill > .btn:first-child {
+  border-top-left-radius: var(--rounded-full);
+  border-bottom-left-radius: var(--rounded-full);
+}
+.btn-group--pill > .btn:last-child {
+  border-top-right-radius: var(--rounded-full);
+  border-bottom-right-radius: var(--rounded-full);
+}
+.btn--translucent.btn--primary { background: rgba(11, 95, 255, 0.25);   color: var(--color-primary-l1); }
+.btn--translucent.btn--primary:hover { background: rgba(11, 95, 255, 0.4); }
+.breadcrumb .lexicon-icon { color: var(--color-secondary); }
+.tabs__tab.is-active,
+.tabs__tab[aria-selected="true"] {
+  background: var(--color-white);
+  color: var(--color-dark);
+  border-color: var(--color-light-d2);
+  /* Hide the slice of the baseline that runs under the active card */
+  box-shadow: 0 1px 0 0 var(--color-white);
+}
+.pagination__btn.is-active,
+.pagination__btn[aria-current="page"] {
+  background: var(--color-primary-l3);
+  color: var(--color-dark);
+  box-shadow: inset 0 -2px 0 0 var(--color-primary);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.empty-state__media .lexicon-icon { width: 64px; height: 64px; }
+.empty-state .btn { margin-top: var(--spacing-3); }
+.empty-state--sm .empty-state__media .lexicon-icon { width: 40px; height: 40px; }
+.card__media .lexicon-icon { width: 64px; height: 64px; }
+.card__body > .label,
+.card__body > .badge { margin-top: var(--spacing-2); align-self: flex-start; }
+.card--inline .card__media .lexicon-icon { width: 16px; height: 16px; }
+.section .lexicon-icon { color: var(--color-secondary); flex-shrink: 0; }
+.section--link:hover .section__title,
+.section--link:hover .lexicon-icon { color: var(--color-dark); }
+.list--zebra .list__row.is-active { background: var(--color-primary-l3); }
+.list__row.is-active { background: var(--color-primary-l3); }
+.dropdown {
+  list-style: none;
+  margin: 0;
+  padding: var(--spacing-3) 0;
+  background: var(--color-white);
+  border: 1px solid var(--color-secondary-l3);
+  border-radius: var(--rounded-md);
+  /* Figma: Shadow/Dropdown — y=4, blur=8, opacity=12% */
+  box-shadow: var(--shadow-dropdown);
+  font-family: var(--font-family-base);
+  min-width: 240px;
+}
+.dropdown__item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  width: 100%;
+  /* Figma: pt=5px pb=6px px=16px — nearest token is spacing-2-5 (6px) */
+  padding: var(--spacing-2-5) var(--spacing-5);
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  /* Figma: 14/Regular = weight 400 = --font-weight-semi in this token scale */
+  font-weight: var(--font-weight-semi);
+  color: var(--color-secondary);
+  background: var(--color-white);
+  border: 0;
+  text-align: left;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: var(--line-height-base);
+}
+.dropdown__item:hover { background: var(--color-light-l1); color: var(--color-dark); }
+.dropdown__item:disabled { color: var(--color-secondary-l1); cursor: not-allowed; background: var(--color-white); }
+.dropdown__item.is-active { color: var(--color-secondary); }
+.dropdown__group-title {
+  /* Figma: py=7px — nearest token is spacing-2-5 (6px) */
+  padding: var(--spacing-2-5) var(--spacing-5);
+  font-size: var(--font-size-sm);
+  /* Figma: 12/Semibold = weight 600 = --font-weight-bold in this token scale */
+  font-weight: var(--font-weight-bold);
+  color: var(--color-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: var(--line-height-base);
+}
+.dropdown .alert {
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  padding: var(--spacing-3) var(--spacing-5);
+  margin-bottom: 0;
+}
+.modal {
+  background: var(--color-white);
+  border-radius: var(--rounded-md);
+  box-shadow: var(--shadow-lg);
+  font-family: var(--font-family-base);
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - var(--spacing-9));
+  overflow: hidden;
+}
+.modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  padding: var(--spacing-5) var(--spacing-7);
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-secondary-l3);
+  flex-shrink: 0;
+}
+.modal__title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-dark);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.modal__close { flex-shrink: 0; }
+.modal__body {
+  padding: var(--spacing-7);
+  overflow-y: auto;
+  flex: 1 1 auto;
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  color: var(--color-dark);
+}
+.modal__footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--spacing-5);
+  padding: var(--spacing-5) var(--spacing-7);
+  border-top: 1px solid var(--color-secondary-l3);
+  flex-shrink: 0;
+}
+.modal__footer > .btn--borderless:first-child { margin-right: auto; }
+.modal--info .modal__header    { background: var(--color-info-l2);    border-bottom-color: var(--color-info-l1); }
+.modal--info .modal__title     { color: var(--color-info); }
+.modal--info .modal__close     { color: var(--color-info); }
+.modal--success .modal__header { background: var(--color-success-l2); border-bottom-color: var(--color-success-l1); }
+.modal--success .modal__title  { color: var(--color-success); }
+.modal--success .modal__close  { color: var(--color-success); }
+.modal--warning .modal__header { background: var(--color-warning-l2); border-bottom-color: var(--color-warning-l1); }
+.modal--warning .modal__title  { color: var(--color-warning); }
+.modal--warning .modal__close  { color: var(--color-warning); }
+.modal--danger  .modal__header { background: var(--color-danger-l2);  border-bottom-color: var(--color-danger-l1); }
+.modal--danger  .modal__title  { color: var(--color-danger); }
+.modal--danger  .modal__close  { color: var(--color-danger); }
+.picker__trigger > .lexicon-icon { color: var(--color-secondary); flex-shrink: 0; }
+.picker .dropdown__item.is-active {
+  background: var(--color-primary-l3);
+  color: var(--color-dark);
+}
+.picker .dropdown__item.is-active .dropdown__item-icon { color: var(--color-dark); }
+.picker .dropdown__item { gap: var(--spacing-2); }
+.picker .dropdown__item:not(.is-active) .dropdown__item-icon { opacity: 0; }
+.lang-picker__item:not(.is-active) .dropdown__item-icon { opacity: 0; }
+.lang-picker__item.is-active .lang-picker__locale {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-dark);
+}
+.date-picker-panel__time .lexicon-icon { color: var(--color-secondary); }
+.dual-listbox__item.is-active { background: var(--color-primary-d2); color: var(--color-white); }
+.tree__row.is-active { background: var(--color-primary-l3); color: var(--color-dark); }
+.stepper__step.is-active   .stepper__circle { background: var(--color-primary);   color: var(--color-white); }
+.navbar__item.is-active { color: var(--color-dark); font-weight: var(--font-weight-bold); border-bottom-color: var(--color-primary-l1); }
+.navbar__more > .lexicon-icon { color: var(--color-secondary); }
+.vert-nav {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  color: var(--color-dark);
+  width: 240px;
+  border-right: 1px solid var(--color-secondary-l2);
+}
+.vert-nav__list,
+.vert-nav__sublist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.vert-nav__item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) var(--spacing-5);
+  cursor: pointer;
+  font-weight: var(--font-weight-semi);
+  color: var(--color-dark);
+  overflow: hidden;
+}
+.vert-nav__item:hover { background: var(--color-light); }
+.vert-nav__item.is-muted { color: var(--color-secondary); }
+.vert-nav__item.is-active {
+  background: var(--color-primary-l3);
+  border-left: 6px solid var(--color-primary);
+  padding-left: calc(var(--spacing-5) - 6px);
+}
+.vert-nav__icon-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+.vert-nav__icon { color: var(--color-secondary); flex-shrink: 0; }
+.vert-nav__item .lexicon-icon[href*="angle"],
+.vert-nav__item > .lexicon-icon:last-child { margin-left: auto; color: var(--color-secondary); }
+.vert-bar__btn.is-active { background: var(--color-primary-l3); color: var(--color-primary); }
+.vert-bar__btn.is-active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--color-primary-l1);
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  color: var(--color-dark);
+  border: 1px solid var(--color-secondary-l3);
+  border-radius: var(--rounded-md);
+  overflow: hidden;
+  background: var(--color-white);
+}
+.table th,
+.table td {
+  padding: var(--spacing-5) var(--spacing-5);
+  text-align: left;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--color-secondary-l3);
+}
+.table th {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-secondary);
+  background: var(--color-white);
+}
+.table tbody tr { background: var(--color-white); }
+.table tbody tr:nth-child(even) { background: var(--color-light-l1); }
+.table tbody tr.is-selected,
+.table tbody tr.is-selected:nth-child(even) { background: var(--color-primary-l3); }
+.table tbody tr:last-child td { border-bottom: 0; }
+.table__title-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+.table__icon {
+  width: 24px;
+  height: 24px;
+  color: var(--color-secondary);
+  flex-shrink: 0;
+}
+.table__title {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-dark);
+  text-decoration: underline;
+}
+.table__title:hover { color: var(--color-primary); }
+.cms-structure-dropdown__item.is-active {
+  background: var(--color-primary-l3);
+}
+.cms-menu .vert-nav__icon { color: var(--color-dark); }
+.cms-menu .vert-nav__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+.control-menu {
+  align-items: center;
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-light-d2);
+  display: flex;
+  gap: var(--spacing-5);
+  padding: calc(var(--spacing-2) + var(--spacing-2-5)) var(--spacing-5);
+  width: 100%;
+}
+.control-menu__left {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  gap: var(--spacing-5);
+  min-width: 0;
+}
+.control-menu__title {
+  color: var(--color-dark);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.control-menu__right {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--spacing-5);
+}
+@media (max-width: 767px) {
+.control-menu {
+    padding: var(--spacing-2-5) var(--spacing-4);
+  }
+}
+.light-hc .input__field {
+  background: var(--color-white);
+  border-color: var(--color-secondary);
+}
+.light-hc .input__field:focus-visible,
+.light-hc .input__field.is-focused {
+  background: var(--color-white);
+  border-color: var(--color-primary);
+}
+.light-hc .input--info    .input__field { border-color: var(--color-info); }
+.light-hc .input--success .input__field { border-color: var(--color-success); }
+.light-hc .input--warning .input__field { border-color: var(--color-warning); }
+.light-hc .input--danger  .input__field { border-color: var(--color-danger); }
+.light-hc .btn--secondary.btn--success  { color: var(--color-success-d1); border-color: var(--color-success-d1); }
+.light-hc .btn--borderless.btn--success { color: var(--color-success-d1); }
+.light-hc .btn--primary.btn--success        { background: var(--color-success-d1); }
+.light-hc .btn--primary.btn--success:hover  { background: var(--color-success-d2); }
+.light-hc .btn--primary.btn--success:active { background: var(--color-success-d2); }
+.light-hc .modal--info    .modal__header { border-bottom-color: var(--color-info); }
+.light-hc .modal--success .modal__header { border-bottom-color: var(--color-success-d1); }
+.light-hc .modal--warning .modal__header { border-bottom-color: var(--color-warning); }
+.light-hc .modal--danger  .modal__header { border-bottom-color: var(--color-danger); }
+.light-hc .modal--success .modal__title,
+.light-hc .modal--success .modal__close { color: var(--color-success-d1); }
+.light-hc .vert-nav__item.is-active { background: rgba(24, 82, 191, 0.1); }
+.light-hc .navbar__item.is-active { background: rgba(24, 82, 191, 0.1); }
+.control-panel__item.is-active {
+  background: var(--color-primary-l3);
+  border-left-color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+}
+/* ═══ Chrome del repo ══════════════════════════════════════════════ */
+
+/* ── cabecera del repo: misma que las otras páginas de liferay-tests.
+   Comparte superficie con el control-menu de abajo para que las dos se
+   lean como un solo bloque. ─────────────────────────────────────────── */
+.site-header { display: flex; justify-content: flex-start;
+  padding: var(--spacing-6) var(--spacing-7) var(--spacing-4);
+  background: var(--color-light-l1); }
+.back { display: inline-flex; align-items: center; }
+.back svg { height: 48px; width: auto; display: block; }
+.back svg path { fill: var(--color-dark); transition: fill 150ms ease; }
+.back:hover svg path { fill: #F40B0F; }
+
+.wipe { position: fixed; inset: 0; background: #10DAF9; transform: translateX(-101%);
+  z-index: 99999; pointer-events: none; }
+.wipe.anim { transition: transform .45s cubic-bezier(.7,0,.3,1); }
+.wipe.cover { transform: translateX(0); }
+
+/* Geist solo en el chrome de la página. Los componentes de Lexicon se
+   quedan con el stack del producto: cambiarles la tipografía falsearía
+   el preview, que es justo lo que se viene a mirar aquí. */
+.sb-section-title, .control-menu__title { font-family: 'Geist', var(--font-family-base);
+  font-weight: 500; }
+
+@media (max-width: 860px) {
+  .site-header { padding: var(--spacing-5) var(--spacing-5) var(--spacing-3); }
+  .back svg { height: 36px; }
+}
+
+/* ═══ Esta página ══════════════════════════════════════════════════ */
+
+
+/* ============================================================
+   SCROLLBARS IN DARK MODE — page chrome
+   ============================================================ */
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--color-light); color: var(--color-dark);
+  font-family: var(--font-family-base); font-size: var(--font-size-base); }
+
+.sb-page { padding: var(--spacing-7); display: flex; flex-direction: column; gap: var(--spacing-9);
+  max-width: 1400px; margin: 0 auto; }
+
+/* ── Toolbar ─────────────────────────────────────────────── */
+.sb-bar { display: flex; align-items: center; gap: var(--spacing-6); flex-wrap: wrap;
+  padding: var(--spacing-4) var(--spacing-5); background: var(--color-white);
+  border: 1px solid var(--color-secondary-l3); border-radius: var(--rounded-lg);
+  position: sticky; top: 0; z-index: 30; box-shadow: var(--shadow-sm); }
+.sb-bar__group { display: flex; align-items: center; gap: var(--spacing-3); flex-wrap: wrap; }
+.sb-bar__label { font-size: var(--font-size-sm); font-weight: var(--font-weight-bold);
+  color: var(--color-secondary); }
+.sb-bar__sep { width: 1px; align-self: stretch; background: var(--color-secondary-l3); }
+.sb-bar__spacer { flex: 1 1 auto; }
+
+.sb-chips { display: flex; gap: var(--spacing-2); flex-wrap: wrap; }
+.sb-chip { appearance: none; border: 1px solid var(--color-secondary-l2); background: transparent;
+  color: var(--color-dark); font: inherit; font-size: var(--font-size-sm);
+  padding: var(--spacing-2) var(--spacing-4); border-radius: var(--rounded-full);
+  cursor: pointer; transition: background .12s ease, border-color .12s ease, color .12s ease; }
+.sb-chip:hover { background: var(--color-light); }
+.sb-chip:focus-visible { outline: 0; box-shadow: var(--focus-ring); }
+.sb-chip.is-active { background: var(--color-primary); border-color: var(--color-primary);
+  color: var(--color-white); font-weight: var(--font-weight-bold); }
+
+.sb-select { width: 96px; height: 32px; padding: 0 var(--spacing-3); font-size: var(--font-size-sm); }
+.sb-range { width: 108px; accent-color: var(--color-primary); }
+.sb-readout { font-size: var(--font-size-sm); color: var(--color-secondary); white-space: nowrap;
+  min-width: 38px; }
+
+/* ── Sections ────────────────────────────────────────────── */
+.sb-section { display: flex; flex-direction: column; gap: var(--spacing-6); }
+.sb-section__head { display: flex; flex-direction: column; gap: var(--spacing-3); }
+.sb-section-title { margin: 0; font-size: 20px; font-weight: var(--font-weight-bold);
+  color: var(--color-dark); letter-spacing: -0.01em; }
+.sb-lead { margin: 0; font-size: var(--font-size-base); color: var(--color-secondary);
+  max-width: 72ch; line-height: 1.6; }
+
+/* ── Option cards ────────────────────────────────────────── */
+.sb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: var(--spacing-7); }
+.sb-card { display: flex; flex-direction: column; gap: var(--spacing-4); min-width: 0; }
+.sb-card__head { display: flex; align-items: baseline; gap: var(--spacing-3); }
+.sb-card__head h3 { margin: 0; font-size: var(--font-size-md); font-weight: var(--font-weight-bold);
+  color: var(--color-dark); }
+.sb-card__note { margin: 0; font-size: var(--font-size-sm); color: var(--color-secondary);
+  line-height: 1.55; }
+.sb-card__body { background: var(--color-white); border: 1px solid var(--color-secondary-l3);
+  border-radius: var(--rounded-lg); overflow: hidden; display: flex; flex-direction: column; }
+.sb-card__foot { display: flex; align-items: center; gap: var(--spacing-4); flex-wrap: wrap;
+  font-size: var(--font-size-sm); color: var(--color-secondary); }
+.sb-pair { display: inline-flex; align-items: center; gap: var(--spacing-2); }
+.sb-swatch { width: 14px; height: 14px; border-radius: var(--rounded-sm);
+  border: 1px solid var(--color-secondary-l3); flex: 0 0 auto; }
+.sb-swatch--empty { background: transparent; border-style: dashed; }
+.sb-verdict { margin-left: auto; font-weight: var(--font-weight-bold); }
+
+.sb-box { height: 200px; overflow-y: auto; padding: var(--spacing-5); }
+.sb-box p { margin: 0 0 var(--spacing-4); font-size: var(--font-size-sm); line-height: 1.6;
+  color: var(--color-dark); }
+.sb-box p:last-child { margin-bottom: 0; }
+.sb-box--x { height: auto; overflow-x: auto; overflow-y: hidden;
+  border-top: 1px solid var(--color-secondary-l3); }
+.sb-wide { width: 1100px; height: 32px; border-radius: var(--rounded-md);
+  background: var(--color-light); display: flex; align-items: center; padding: 0 var(--spacing-4);
+  font-size: var(--font-size-sm); color: var(--color-secondary); }
+
+/* ── Surfaces ────────────────────────────────────────────── */
+.sb-surfaces { display: grid; grid-template-columns: repeat(3, 1fr);
+  background: var(--color-white); border: 1px solid var(--color-secondary-l3);
+  border-radius: var(--rounded-lg); overflow: hidden; }
+.sb-surfaces > * { border-right: 1px solid var(--color-secondary-l3); }
+.sb-surfaces > *:last-child { border-right: 0; }
+.sb-surf { height: 156px; overflow-y: auto; padding: var(--spacing-4); }
+.sb-surf__tag { font-size: var(--font-size-sm); font-weight: var(--font-weight-bold);
+  color: var(--color-secondary); display: block; margin-bottom: var(--spacing-3); }
+.sb-surf__tag em { font-style: normal; font-weight: var(--font-weight-normal);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; opacity: .8; }
+.sb-surf--white { background: var(--color-white); }
+.sb-surf--l1    { background: var(--color-light-l1); }
+.sb-surf--light { background: var(--color-light); }
+.sb-surf p { margin: 0 0 var(--spacing-3); font-size: var(--font-size-sm); line-height: 1.55; }
+
+/* ── Real contexts ───────────────────────────────────────── */
+.sb-ctx-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: var(--spacing-7); align-items: start; }
+.sb-ctx { display: flex; flex-direction: column; gap: var(--spacing-4); min-width: 0; }
+.sb-ctx__label { font-size: var(--font-size-sm); font-weight: var(--font-weight-bold);
+  color: var(--color-dark); }
+.sb-ctx__frame { background: var(--color-light); border: 1px solid var(--color-secondary-l3);
+  border-radius: var(--rounded-lg); padding: var(--spacing-5); display: flex; justify-content: center; }
+
+.sb-nav-shell { width: 100%; max-width: 264px; background: var(--color-white);
+  border: 1px solid var(--color-secondary-l3); border-radius: var(--rounded-md);
+  height: 300px; overflow-y: auto; }
+.sb-modal-shell { width: 100%; max-width: 420px; }
+.sb-modal-shell .modal__body { max-height: 200px; overflow-y: auto; }
+.sb-table-wrap { width: 100%; overflow-x: auto; background: var(--color-white);
+  border: 1px solid var(--color-secondary-l3); border-radius: var(--rounded-md); }
+.sb-table-wrap .table { min-width: 740px; margin: 0; }
+.sb-drop-shell { width: 100%; max-width: 260px; }
+.sb-drop-shell .dropdown { max-height: 220px; overflow-y: auto; }
+.sb-ta { width: 100%; height: 190px; resize: none; }
+
+/* ── Numbers table ───────────────────────────────────────── */
+.sb-tablewrap { background: var(--color-white); border: 1px solid var(--color-secondary-l3);
+  border-radius: var(--rounded-lg); overflow-x: auto; }
+table.sb-data { width: 100%; border-collapse: collapse; font-size: var(--font-size-sm); }
+table.sb-data th, table.sb-data td { padding: var(--spacing-4) var(--spacing-5);
+  text-align: left; border-bottom: 1px solid var(--color-secondary-l3); white-space: nowrap; }
+table.sb-data th { font-weight: var(--font-weight-bold); color: var(--color-secondary); }
+table.sb-data tbody tr:last-child td { border-bottom: 0; }
+table.sb-data td.num { font-variant-numeric: tabular-nums; }
+.sb-hex { display: inline-flex; align-items: center; gap: var(--spacing-2); }
+.sb-none { color: var(--color-secondary); opacity: .7; }
+.sb-vs { color: var(--color-secondary); font-variant-numeric: tabular-nums; }
+.sb-vs::before { content: '· '; }
+.sb-pass { color: var(--color-success); font-weight: var(--font-weight-bold); }
+.sb-mid  { color: var(--color-warning); font-weight: var(--font-weight-bold); }
+.sb-low  { color: var(--color-danger);  font-weight: var(--font-weight-bold); }
+
+/* ── Tokens and notes ────────────────────────────────────── */
+.sb-pre { margin: 0; background: var(--color-white); border: 1px solid var(--color-secondary-l3);
+  border-radius: var(--rounded-lg); padding: var(--spacing-6); overflow-x: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: var(--font-size-sm);
+  line-height: 1.7; color: var(--color-dark); }
+.sb-notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-6); list-style: none; margin: 0; padding: 0; }
+.sb-note { background: var(--color-white); border: 1px solid var(--color-secondary-l3);
+  border-radius: var(--rounded-lg); padding: var(--spacing-5);
+  display: flex; flex-direction: column; gap: var(--spacing-3); }
+.sb-note h4 { margin: 0; font-size: var(--font-size-base); font-weight: var(--font-weight-bold);
+  color: var(--color-dark); }
+.sb-note p { margin: 0; font-size: var(--font-size-sm); color: var(--color-secondary);
+  line-height: 1.6; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px;
+  background: var(--color-light); color: var(--color-dark);
+  padding: 1px 5px; border-radius: var(--rounded-sm); }
+table.sb-data code { background: transparent; padding: 0; }
+
+@media (max-width: 900px) {
+  .sb-page { padding: var(--spacing-5); gap: var(--spacing-8); }
+  .sb-grid, .sb-ctx-grid, .sb-notes { grid-template-columns: 1fr; }
+  .sb-surfaces { grid-template-columns: 1fr; }
+  .sb-surfaces > * { border-right: 0; border-bottom: 1px solid var(--color-secondary-l3); }
+  .sb-surfaces > *:last-child { border-bottom: 0; }
+  .sb-bar { position: static; }
+}
+
+/* ============================================================
+   THE OPTIONS
+   Each one is a pair of tokens: one for the thumb, one for the
+   track. No opacities and no colour mixing — just steps of the
+   semantic ramp, which already inverts per theme.
+   ============================================================ */
+[data-sb] { --sb-size: 12px; --sb-radius: var(--rounded-full); }
+
+/* native — carries no --sb-* at all; every rule below excludes it
+   by selector, so the browser paints its own. */
+
+[data-sb="ghost"] {
+  --sb-track: transparent;
+  --sb-thumb: var(--color-secondary-l2);
+  --sb-thumb-hover: var(--color-secondary-l1);
+  --sb-thumb-active: var(--color-secondary-l0);
+}
+[data-sb="lexicon"] {
+  --sb-track: var(--color-light);
+  --sb-thumb: var(--color-secondary-l2);
+  --sb-thumb-hover: var(--color-secondary-l1);
+  --sb-thumb-active: var(--color-secondary-l0);
+}
+[data-sb="quiet"] {
+  --sb-track: var(--color-light-l1);
+  --sb-thumb: var(--color-light-d2);
+  --sb-thumb-hover: var(--color-secondary-l3);
+  --sb-thumb-active: var(--color-secondary-l2);
+}
+[data-sb="strong"] {
+  --sb-track: var(--color-light);
+  --sb-thumb: var(--color-secondary-l1);
+  --sb-thumb-hover: var(--color-secondary-l0);
+  --sb-thumb-active: var(--color-secondary);
+}
+
+/* Painting. Chrome, Safari and Edge; in Firefox the thumb comes
+   out at system thickness but with the same two colours. */
+[data-sb]:not([data-sb="native"])::-webkit-scrollbar {
+  width: var(--sb-size); height: var(--sb-size);
+}
+[data-sb]:not([data-sb="native"])::-webkit-scrollbar-track {
+  background: var(--sb-track);
+}
+[data-sb]:not([data-sb="native"])::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb);
+  border-radius: var(--sb-radius);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+[data-sb]:not([data-sb="native"])::-webkit-scrollbar-thumb:hover {
+  background: var(--sb-thumb-hover); background-clip: padding-box;
+}
+[data-sb]:not([data-sb="native"])::-webkit-scrollbar-thumb:active {
+  background: var(--sb-thumb-active); background-clip: padding-box;
+}
+[data-sb]:not([data-sb="native"])::-webkit-scrollbar-corner {
+  background: var(--sb-track);
+}
+/* Firefox and the standard: same two tokens, no hover, no size. */
+@supports not selector(::-webkit-scrollbar) {
+  [data-sb]:not([data-sb="native"]) {
+    scrollbar-width: thin;
+    scrollbar-color: var(--sb-thumb) var(--sb-track);
+  }
+}
+
+
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true"><symbol id="documents-and-media" viewBox="0 0 512 512">	<path class="lexicon-icon-body" d="M448,96h-64V64c0-35.3-28.7-64-64-64H64C28.7,0,0,28.7,0,64v256c0,35.3,28.7,64,64,64h32v64c0,35.3,28.7,64,64,64h288c35.3,0,64-28.7,64-64V160C512,124.7,483.3,96,448,96z" fill="none"></path>
+	<path class="lexicon-icon-outline documents-and-media-border" d="M448,96h-64V64c0-35.3-28.7-64-64-64H64C28.7,0,0,28.7,0,64v256c0,35.3,28.7,64,64,64h32v64c0,35.3,28.7,64,64,64h288c35.3,0,64-28.7,64-64V160C512,124.7,483.3,96,448,96z M64,320V64h256l0,32h0v64h0l0,160c0,0,0,0,0,0H160v0H96v0H64z M448,448H160v-64h160c35.3,0,64-28.7,64-64V160h64V448C448,448,448,448,448,448z"></path>
+	<path class="lexicon-icon-outline documents-and-media-line-top" d="M148,188.8c2.5,2.2,5.5,3.2,8.7,3.2c3.9,0,6.9-1.2,8.9-3.5c1.5-1.8,3.2-4.9,5.1-9.6l3.7-8.9h34.4l3.7,8.7l0,0.1c0.6,1.4,1.4,2.9,2.2,4.7c1,2,1.9,3.6,2.9,4.6c1.1,1.2,2.4,2.2,3.9,2.9c1.5,0.7,3.3,1,5.4,1c3.5,0,6.5-1.1,9-3.4c2.6-2.3,3.9-5.1,3.9-8.1c0-2.5-1-5.9-3.3-10.7l-25.1-55.5c-1.2-2.8-2.2-5-2.9-6.7c-0.9-1.9-2-3.7-3.2-5.3c-1.4-1.9-3.3-3.4-5.6-4.5c-2.3-1.2-5.1-1.8-8.4-1.8c-3.2,0-6,0.6-8.3,1.8c-2.3,1.2-4.2,2.7-5.6,4.6c-1.3,1.7-2.5,3.8-3.5,6.3l-2.5,5.8l-24.5,55.9c-1.1,2.3-1.8,4.1-2.3,5.5c-0.6,1.6-0.8,3.2-0.8,4.8C144,182.8,144.7,185.9,148,188.8z M191.5,127.2l9.3,22.8h-18.4L191.5,127.2z"></path>
+	<path class="lexicon-icon-outline documents-and-media-line-bottom" d="M128,288h128c17.7,0,32-14.3,32-32s-14.3-32-32-32H128c-17.7,0-32,14.3-32,32S110.3,288,128,288z"></path>
+</symbol><symbol id="folder" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M448,128h-96L241.1,44.8C230,36.5,216.5,32,202.7,32H64C28.7,32,0,60.7,0,96v320c0,35.3,28.7,64,64,64h384c35.3,0,64-28.7,64-64V192C512,156.7,483.3,128,448,128z"></path>
+</symbol><symbol id="times" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M300.4,256L467,89.4c29.6-29.6-14.8-74.1-44.4-44.4L256,211.6L89.4,45C59.8,15.3,15.3,59.8,45,89.4L211.6,256L45,422.6 c-29.7,29.7,14.7,74.1,44.4,44.4L256,300.4L422.6,467c29.7,29.7,74.1-14.7,44.4-44.4L300.4,256z" />
+</symbol></svg>
+<header class="site-header"><a class="back" href="https://diegoalo.github.io/liferay-tests/" data-wipe="#10daf9" aria-label="Back to liferay-tests" title="Back to liferay-tests"><svg width="289" height="180" viewBox="0 0 289 180" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M57.3224 2C58.0985 2.00019 59.7675 2.26634 61.7004 2.61426C63.6952 2.97336 66.1397 3.45233 68.5695 3.92773C71.0052 4.4043 73.4287 4.87845 75.4006 5.2334C77.4328 5.59917 78.8339 5.80841 79.3283 5.80859C80.1936 5.80887 80.8218 6.33285 81.215 6.80469C81.6215 7.2927 81.9542 7.92828 82.2336 8.60156C82.7976 9.96119 83.2675 11.7781 83.6437 13.7129C84.1382 16.2561 84.4931 19.1208 84.6799 21.6514C85.1211 20.5459 85.6116 19.277 86.134 17.9375C87.1627 15.2998 88.3042 12.4226 89.381 10.2012C89.9166 9.09644 90.4632 8.09792 90.9972 7.35938C91.2627 6.99238 91.56 6.63962 91.8888 6.36816C92.2005 6.11111 92.6831 5.80875 93.2941 5.80859L93.673 5.82129C94.6794 5.88177 96.5229 6.14515 98.6945 6.48535C101.235 6.8834 104.379 7.41307 107.523 7.94141C110.672 8.47063 113.824 8.99945 116.399 9.39453C119.023 9.79727 120.921 10.0398 121.648 10.04C122.44 10.0404 122.967 10.5257 123.251 10.9873C123.513 11.4129 123.649 11.9268 123.732 12.4014C123.901 13.3727 123.923 14.6744 123.869 16.1182C123.761 19.032 123.332 22.8945 122.91 26.6855C122.485 30.5117 122.069 34.2673 121.965 37.0664C121.913 38.4786 121.944 39.5581 122.066 40.2529C122.075 40.3051 122.085 40.3538 122.095 40.3984C122.132 40.3871 122.175 40.3751 122.218 40.3613C122.598 40.2393 123.094 40.0529 123.712 39.8027C124.95 39.3012 126.583 38.584 128.609 37.7061C132.643 35.9571 138.137 33.6147 144.765 31.2725C158.015 26.5896 175.835 21.8897 195.707 21.8896C216.152 21.8902 227.801 36.5605 234.329 52.0254C238.561 62.0505 241.78 70.2171 241.78 80.0908C241.781 89.9643 256.224 89.8801 256.224 80.0908C256.224 70.3012 257.176 34.3405 257.916 17.2354C258.657 0.130422 285.001 1.48008 285.001 17.2354V80.0908C285.001 91.5849 278.509 114.569 256.224 114.569C244.045 114.569 239.195 111.486 239.195 114.569C239.194 117.65 235.678 132.419 235.671 132.448C235.671 132.448 231.587 150.653 229.657 157.314C228.694 160.638 227.768 163.431 226.922 165.408C226.502 166.389 226.078 167.228 225.65 167.842C225.436 168.147 225.187 168.447 224.897 168.682C224.612 168.911 224.182 169.161 223.638 169.161H194.861C194.401 169.161 193.896 169.01 193.51 168.596C193.157 168.217 193.038 167.761 192.998 167.419C192.922 166.762 193.081 165.994 193.275 165.302C193.678 163.857 194.469 161.975 195.227 160.199C196.007 158.37 196.756 156.642 197.162 155.366C197.235 155.137 197.288 154.939 197.33 154.772H188.53C188.504 154.783 188.428 154.826 188.302 154.967C188.081 155.215 187.825 155.637 187.554 156.259C187.013 157.498 186.545 159.2 186.094 161.006C185.656 162.758 185.229 164.629 184.783 166.028C184.562 166.725 184.307 167.399 184 167.919C183.846 168.179 183.642 168.464 183.372 168.695C183.092 168.935 182.683 169.161 182.165 169.161H167.777C167.53 169.161 167.233 169.107 166.948 168.934C166.659 168.756 166.468 168.506 166.355 168.261C166.155 167.828 166.181 167.382 166.213 167.12C166.283 166.548 166.523 165.852 166.797 165.17C167.363 163.762 168.29 161.91 169.18 160.13C170.088 158.313 170.96 156.567 171.479 155.277C171.554 155.091 171.616 154.922 171.669 154.772H164.406C164.245 155.063 164.051 155.527 163.832 156.164C163.388 157.46 162.925 159.209 162.445 161.022C161.973 162.805 161.483 164.654 161.002 166.056C160.764 166.749 160.505 167.402 160.223 167.9C160.083 168.146 159.903 168.418 159.671 168.643C159.448 168.858 159.039 169.161 158.466 169.161H138.999C138.514 169.161 138.111 168.938 137.844 168.636C137.611 168.372 137.497 168.073 137.436 167.856C137.313 167.422 137.291 166.904 137.303 166.406C137.328 165.376 137.52 163.972 137.824 162.365C138.438 159.129 139.55 154.847 140.91 150.579C142.269 146.316 143.893 142.012 145.543 138.753C146.365 137.13 147.222 135.708 148.088 134.675C148.89 133.718 149.97 132.767 151.272 132.767H175.501C175.705 132.404 175.989 131.892 176.335 131.251C177.077 129.876 178.105 127.91 179.242 125.55C181.521 120.821 184.224 114.548 185.968 108.303C187.727 102.002 188.439 95.9675 186.996 91.585C186.29 89.4387 185.073 87.7097 183.205 86.501C181.321 85.2821 178.664 84.5226 174.971 84.5225C144.612 84.5226 128.419 120.494 128.419 120.494C126.637 125.974 118.071 158.768 116.07 162.524C115.073 164.397 114.045 165.992 113.006 167.137C112.011 168.233 110.782 169.161 109.375 169.161C107.722 169.161 101.561 169.476 93.1564 169.874C84.7841 170.271 74.2469 170.747 63.9211 171.064C53.6018 171.382 43.4648 171.542 35.8986 171.303C32.1245 171.183 28.9399 170.964 26.6808 170.604C25.564 170.425 24.5917 170.201 23.8703 169.901C23.5129 169.753 23.1355 169.552 22.8303 169.269C22.5111 168.972 22.1974 168.508 22.1974 167.892C22.1974 165.317 22.4113 158.074 23.1584 151.457C23.5309 148.158 24.0423 144.949 24.7482 142.54C25.0984 141.345 25.5204 140.261 26.048 139.45C26.5511 138.677 27.3601 137.845 28.5451 137.845C29.7287 137.845 31.6707 138.132 34.0724 138.522C36.5283 138.922 39.5629 139.447 43.0705 139.975C47.7566 140.679 53.2544 141.38 59.2033 141.768C58.9754 137.465 57.9037 131.499 56.0783 131.497C53.5393 131.497 48.859 131.497 44.6271 131.497C40.3952 131.497 35.7394 126.419 35.7394 118.378C35.7394 110.338 32.3536 107.375 27.2756 107.375C22.1974 107.375 15.0035 106.529 15.0031 104.836C15.0031 103.143 22.6209 98.4883 31.508 98.4883C40.3949 98.4892 51.3979 116.686 53.5138 116.686C55.6293 116.685 55.6302 113.3 61.131 113.3C66.6324 113.3 71.5363 120.472 71.5363 128.089C71.5365 133.167 77.7899 136.506 81.6652 139.883C85.8435 138.331 89.6751 135.871 92.9308 132.236C99.4636 124.943 103.874 112.713 103.874 92.9863C103.874 88.4235 102.732 84.7699 100.766 81.834C100.205 82.6394 99.4883 83.595 98.6691 84.6348C96.7454 87.0765 94.1779 90.1111 91.5705 93.0645C88.9631 96.0178 86.2915 98.9181 84.1535 101.09C83.0888 102.171 82.1297 103.099 81.3654 103.768C80.9881 104.098 80.6177 104.4 80.2824 104.632C80.1168 104.746 79.915 104.875 79.6955 104.981C79.532 105.061 79.1052 105.259 78.5588 105.259C77.546 105.259 76.9461 104.622 76.7219 104.326C76.4815 104.009 76.3489 103.679 76.2756 103.471C76.1207 103.031 76.0198 102.512 75.9465 102.018C75.7943 100.992 75.6922 99.5966 75.6252 98.0088C75.4902 94.8098 75.4904 90.5788 75.5969 86.373C75.7033 82.1673 75.9162 77.9366 76.2131 74.7383C76.3605 73.1505 76.5349 71.7577 76.7385 70.7344C76.7448 70.7024 76.7514 70.6698 76.758 70.6377C75.0151 70.432 73.2296 70.2823 71.4162 70.1807C71.4155 70.1827 71.4149 70.1854 71.4142 70.1875C71.0722 71.1451 70.5034 72.4446 69.8019 73.9277C68.3879 76.9174 66.3282 80.8742 64.1457 84.8135C61.9639 88.7513 59.6353 92.7147 57.6789 95.71C56.7056 97.2001 55.7936 98.498 55.0187 99.4424C54.6365 99.9082 54.2402 100.348 53.8488 100.689C53.6536 100.86 53.4098 101.05 53.1291 101.206C52.874 101.348 52.4116 101.561 51.8215 101.562C50.7304 101.562 50.0306 100.88 49.7336 100.538C49.3874 100.139 49.1196 99.6625 48.9113 99.2285C48.4856 98.3416 48.0898 97.1677 47.7228 95.8799C46.9807 93.2753 46.252 89.8244 45.6135 86.3389C44.9725 82.84 44.4124 79.2503 44.0119 76.3467C43.7469 74.4255 43.5403 72.7216 43.4347 71.5391C40.0442 71.971 36.8402 72.4542 33.9357 72.9336C29.8278 73.6117 26.3222 74.281 23.7336 74.7812C22.4442 75.0304 21.3697 75.24 20.5685 75.3867C20.1685 75.4599 19.8233 75.5198 19.548 75.5615C19.3 75.5991 19.0258 75.6357 18.8117 75.6357C17.9543 75.6354 17.4304 75.0663 17.1838 74.5586C16.9612 74.1002 16.8793 73.5569 16.8469 73.0615C16.7801 72.0397 16.8987 70.6653 17.1193 69.1211C17.1385 68.9866 17.1589 68.8502 17.1799 68.7119C13.0313 70.1477 5.93656 71.8262 5.33709 71.8271C4.49104 71.8264 4.06763 69.7108 4.06756 68.4414C4.06754 67.4034 13.97 64.1022 18.2756 62.9326C18.6417 61.2365 19.0531 59.4556 19.4826 57.6699C19.6367 57.0292 19.7935 56.3862 19.9513 55.7451H4.91424C3.6447 55.745 4.06765 53.6289 4.06756 52.3594C4.07076 51.3037 16.6608 51.4198 20.8947 51.9756C21.4543 49.7693 21.9962 47.6716 22.4621 45.8438C22.5644 45.4425 22.6608 45.0539 22.7551 44.6807C19.1841 44.2983 6.53748 42.2045 5.76092 42.2031C4.91445 42.2031 3.22152 39.2413 4.91424 39.2412C6.46759 39.2415 20.091 40.66 23.6681 40.8984C23.7223 40.648 23.7683 40.4267 23.8039 40.2373C23.8367 40.0627 23.8598 39.9228 23.8742 39.8164C23.8879 39.715 23.8895 39.6696 23.8898 39.6641C23.8898 39.1208 24.1281 38.6852 24.3849 38.3799C24.6355 38.0825 24.9517 37.849 25.257 37.665C25.8683 37.297 26.6731 36.986 27.5431 36.7178C29.3035 36.1752 31.6368 35.7148 34.008 35.3418C38.4718 34.6397 43.304 34.2139 45.1652 34.167C45.2727 34.032 45.423 33.8057 45.6047 33.46C46.0216 32.6662 46.4983 31.4809 47.0187 29.9883C48.0551 27.0159 49.1953 23.034 50.3351 19.0049C51.4684 14.9989 52.602 10.9441 53.6115 7.89551C54.1143 6.37701 54.6028 5.05704 55.0617 4.10156C55.2879 3.6306 55.5358 3.18631 55.8088 2.8418C55.9457 2.66914 56.123 2.47862 56.3439 2.32324C56.5656 2.1676 56.9006 2.00017 57.3224 2ZM261.687 86.8848C260.735 86.888 258.006 100.068 258.005 100.704C258.005 101.334 276.807 99.3731 276.81 97.3633C276.81 95.3533 262.638 86.8848 261.687 86.8848ZM80.7746 72.2051C80.6541 72.9647 80.5362 73.9534 80.4269 75.1309C80.142 78.2009 79.9334 82.3286 79.8283 86.4805C79.7232 90.6328 79.7232 94.7605 79.8527 97.8301C79.8754 98.3665 79.9031 98.8637 79.9328 99.3174C80.3022 98.9578 80.7064 98.5583 81.1369 98.1211C83.204 96.0214 85.8224 93.1816 88.3986 90.2637C90.9749 87.3456 93.4866 84.3753 95.3449 82.0166C96.2774 80.8331 97.0225 79.8311 97.5256 79.0811C97.546 79.0506 97.5648 79.0194 97.5842 78.9902C97.2186 78.7615 96.7471 78.4937 96.1711 78.1973C94.4517 77.3125 92.0926 76.2986 89.632 75.3301C87.182 74.3657 84.6806 73.4665 82.6965 72.8115C81.9696 72.5716 81.3201 72.3667 80.7746 72.2051ZM59.1779 70.1494C55.4259 70.3128 51.6994 70.614 48.1144 70.9932C47.9388 71.0353 47.7821 71.0765 47.6457 71.1182C47.7326 72.0922 47.9203 73.7104 48.2043 75.7695C48.5972 78.6185 49.1481 82.1446 49.7765 85.5752C50.4075 89.019 51.1071 92.3132 51.7931 94.7207C51.9454 95.2552 52.0941 95.7277 52.2336 96.1377C52.7768 95.4192 53.4194 94.4935 54.1359 93.3965C56.0147 90.52 58.2887 86.6537 60.4445 82.7627C62.5995 78.8731 64.6136 75.0003 65.9767 72.1182C66.3174 71.3978 66.6103 70.7519 66.8527 70.1924C64.8819 70.153 62.1049 70.1129 59.1779 70.1494ZM276.816 44.957C275.479 44.9571 263.448 69.5433 263.391 70.8809C263.334 72.2187 275.518 80.5098 276.815 80.5098C278.111 80.5049 278.153 44.957 276.816 44.957ZM202.907 38.4629C202.904 36.2242 175.724 34.6078 175.722 37.1465C175.722 39.6873 170 75.7042 172.015 75.7041C174.035 75.6964 202.907 40.7016 202.907 38.4629ZM211.058 43.4727C209.788 43.4727 202.594 75.2119 205.133 75.2119C207.676 75.2094 227.563 64.2085 227.563 62.0928C227.56 59.9753 212.334 43.4808 211.058 43.4727ZM167.777 35.8555C166.93 35.8555 145.347 41.3566 145.347 43.4727C145.347 45.5886 147.463 66.3237 149.155 66.3252C149.213 66.2349 168.608 35.8756 167.777 35.8555ZM42.0646 45.7578C35.9924 45.815 28.1093 44.3599 28.2775 51.8965C28.446 59.4333 33.4086 61.5632 36.0685 61.5635C38.7284 61.5636 52.4553 61.0146 52.4552 57.0791C52.4552 53.1437 48.1367 45.701 42.0646 45.7578ZM100.065 23.583C97.9471 23.5876 87.7922 43.8963 87.7922 45.5889C87.7929 47.2815 98.7918 51.9349 100.91 51.9365C103.027 51.9324 108.105 28.6608 108.105 27.8145C108.104 26.968 102.181 23.5839 100.065 23.583ZM101.684 28.5176C102.699 28.5193 102.621 35.9141 102.621 37.5713C102.621 39.2288 98.7391 45.8666 97.3371 45.8662C95.9355 45.8647 96.3849 38.3355 96.3849 36.3428C96.3849 34.3505 100.668 28.5176 101.684 28.5176ZM273.475 18.6895C272.687 18.6881 263.765 44.957 264.954 44.957C266.143 44.957 276.817 32.3939 276.817 30.5273C276.816 28.66 274.261 18.693 273.475 18.6895ZM65.3625 15.542C63.2466 15.5466 60.2844 36.2791 60.2844 37.9717C60.2861 39.6639 69.5926 40.5105 71.7101 40.5107C73.8251 40.5066 71.7102 17.2351 71.7101 16.8115C71.7101 16.3884 67.4786 15.5422 65.3625 15.542ZM67.5041 20.3545C68.9061 20.3555 69.756 27.5471 69.756 28.9492C69.756 30.3514 68.2548 36.7624 66.8527 36.7627C65.4507 36.7623 64.2511 30.3513 64.2511 28.9492C64.2511 27.5471 66.1021 20.3549 67.5041 20.3545Z" fill="#10DAF9"/></svg></a></header>
+
+
+<div class="control-menu">
+  <div class="control-menu__left">
+    <span class="control-menu__title">Scrollbars in dark mode</span>
+  </div>
+  <div class="control-menu__right">
+    <span class="label label--sm label--secondary">LPD-93301</span>
+  </div>
+</div>
+
+<main class="sb-page">
+
+  <!-- ══ TOOLBAR ══════════════════════════════════════════ -->
+  <div class="sb-bar">
+    <div class="sb-bar__group">
+      <span class="sb-bar__label">Theme</span>
+      <div class="sb-chips" id="skin-chips"></div>
+    </div>
+    <div class="sb-bar__spacer"></div>
+    <div class="sb-bar__sep"></div>
+    <div class="sb-bar__group">
+      <span class="sb-bar__label">Thickness</span>
+      <input type="range" class="sb-range" id="size-range" min="6" max="18" step="1" value="12"
+             aria-label="Scrollbar thickness">
+      <span class="sb-readout" id="size-out">12px</span>
+    </div>
+    <div class="sb-bar__group">
+      <span class="sb-bar__label">Corners</span>
+      <select class="input__field sb-select" id="radius-sel" aria-label="Thumb corners">
+        <option value="var(--rounded-full)">Rounded</option>
+        <option value="var(--rounded-md)">Soft</option>
+        <option value="0">Square</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- ══ OPTIONS ══════════════════════════════════════════ -->
+  <section class="sb-section">
+    <div class="sb-section__head">
+      <h2 class="sb-section-title">Four ways to paint it</h2>
+      <p class="sb-lead">Every box holds the same text on the theme's card surface. Scroll with the
+        trackpad and hover the thumb: on macOS the scrollbar only appears while you move, so the
+        real judgement is in motion. Switch theme up top without losing your place.</p>
+    </div>
+    <div class="sb-grid">
+
+      <div class="sb-card">
+        <div class="sb-card__head">
+          <h3>Native</h3>
+        </div>
+        <p class="sb-card__note">Nothing painted. The theme just tells the browser it is dark and the browser draws its own scrollbar — the same one the rest of the system uses.</p>
+        <div class="sb-card__body">
+          <div class="sb-box" data-sb="native" tabindex="0">
+            <p>In light mode nobody looks at the scrollbar: the browser paints a grey channel that melts into the background. Switch the panel to dark and that same factory grey becomes the brightest thing on screen.</p><p>The thumb is a control — it gets dragged, hovered and pressed. Too faint and it doesn't read as something you can grab; too strong and it competes with the content sitting right next to it.</p><p>What gets decided here is not the colour, it's the weight. Every option draws from the same Lexicon grey ramp, so the only question is how far from the panel the thumb needs to sit.</p><p>Scroll this box in light and in dark with the same option selected. If it vanishes in one and shouts in the other, that pair of tokens doesn't weigh the same in both and needs its own value per theme.</p><p>The last check is the boring one: hover it and press it. An option that only reads on hover is an option that doesn't read.</p>
+          </div>
+          <div class="sb-box sb-box--x" data-sb="native" tabindex="0">
+            <div class="sb-wide">And horizontally, with the same pair</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sb-card">
+        <div class="sb-card__head">
+          <h3>Thumb only</h3>
+        </div>
+        <p class="sb-card__note">No track is painted, so all you see is the thumb floating over whatever panel is underneath. Behaves the same on every surface.</p>
+        <div class="sb-card__body">
+          <div class="sb-box" data-sb="ghost" tabindex="0">
+            <p>In light mode nobody looks at the scrollbar: the browser paints a grey channel that melts into the background. Switch the panel to dark and that same factory grey becomes the brightest thing on screen.</p><p>The thumb is a control — it gets dragged, hovered and pressed. Too faint and it doesn't read as something you can grab; too strong and it competes with the content sitting right next to it.</p><p>What gets decided here is not the colour, it's the weight. Every option draws from the same Lexicon grey ramp, so the only question is how far from the panel the thumb needs to sit.</p><p>Scroll this box in light and in dark with the same option selected. If it vanishes in one and shouts in the other, that pair of tokens doesn't weigh the same in both and needs its own value per theme.</p><p>The last check is the boring one: hover it and press it. An option that only reads on hover is an option that doesn't read.</p>
+          </div>
+          <div class="sb-box sb-box--x" data-sb="ghost" tabindex="0">
+            <div class="sb-wide">And horizontally, with the same pair</div>
+          </div>
+        </div>
+        <div class="sb-card__foot" id="foot-ghost">
+          <span class="sb-pair"><span class="sb-swatch" data-swatch="thumb"></span>
+            <span data-hex="thumb">…</span></span>
+          <span class="sb-pair"><span class="sb-swatch" data-swatch="track"></span>
+            <span data-hex="track">…</span></span>
+          <span class="sb-verdict" data-verdict>…</span>
+        </div>
+      </div>
+
+      <div class="sb-card">
+        <div class="sb-card__head">
+          <h3>Thumb + track</h3>
+        </div>
+        <p class="sb-card__note">The track takes the panel grey and the thumb sits one step above it. The classic reading: you can see where the thumb will travel before it moves.</p>
+        <div class="sb-card__body">
+          <div class="sb-box" data-sb="lexicon" tabindex="0">
+            <p>In light mode nobody looks at the scrollbar: the browser paints a grey channel that melts into the background. Switch the panel to dark and that same factory grey becomes the brightest thing on screen.</p><p>The thumb is a control — it gets dragged, hovered and pressed. Too faint and it doesn't read as something you can grab; too strong and it competes with the content sitting right next to it.</p><p>What gets decided here is not the colour, it's the weight. Every option draws from the same Lexicon grey ramp, so the only question is how far from the panel the thumb needs to sit.</p><p>Scroll this box in light and in dark with the same option selected. If it vanishes in one and shouts in the other, that pair of tokens doesn't weigh the same in both and needs its own value per theme.</p><p>The last check is the boring one: hover it and press it. An option that only reads on hover is an option that doesn't read.</p>
+          </div>
+          <div class="sb-box sb-box--x" data-sb="lexicon" tabindex="0">
+            <div class="sb-wide">And horizontally, with the same pair</div>
+          </div>
+        </div>
+        <div class="sb-card__foot" id="foot-lexicon">
+          <span class="sb-pair"><span class="sb-swatch" data-swatch="thumb"></span>
+            <span data-hex="thumb">…</span></span>
+          <span class="sb-pair"><span class="sb-swatch" data-swatch="track"></span>
+            <span data-hex="track">…</span></span>
+          <span class="sb-verdict" data-verdict>…</span>
+        </div>
+      </div>
+
+      <div class="sb-card">
+        <div class="sb-card__head">
+          <h3>Subtle</h3>
+        </div>
+        <p class="sb-card__note">Everything comes from the surface ramp, so the thumb is just a slightly lighter panel. The quietest of the four.</p>
+        <div class="sb-card__body">
+          <div class="sb-box" data-sb="quiet" tabindex="0">
+            <p>In light mode nobody looks at the scrollbar: the browser paints a grey channel that melts into the background. Switch the panel to dark and that same factory grey becomes the brightest thing on screen.</p><p>The thumb is a control — it gets dragged, hovered and pressed. Too faint and it doesn't read as something you can grab; too strong and it competes with the content sitting right next to it.</p><p>What gets decided here is not the colour, it's the weight. Every option draws from the same Lexicon grey ramp, so the only question is how far from the panel the thumb needs to sit.</p><p>Scroll this box in light and in dark with the same option selected. If it vanishes in one and shouts in the other, that pair of tokens doesn't weigh the same in both and needs its own value per theme.</p><p>The last check is the boring one: hover it and press it. An option that only reads on hover is an option that doesn't read.</p>
+          </div>
+          <div class="sb-box sb-box--x" data-sb="quiet" tabindex="0">
+            <div class="sb-wide">And horizontally, with the same pair</div>
+          </div>
+        </div>
+        <div class="sb-card__foot" id="foot-quiet">
+          <span class="sb-pair"><span class="sb-swatch" data-swatch="thumb"></span>
+            <span data-hex="thumb">…</span></span>
+          <span class="sb-pair"><span class="sb-swatch" data-swatch="track"></span>
+            <span data-hex="track">…</span></span>
+          <span class="sb-verdict" data-verdict>…</span>
+        </div>
+      </div>
+
+      <div class="sb-card">
+        <div class="sb-card__head">
+          <h3>Strong</h3>
+        </div>
+        <p class="sb-card__note">One step further up the grey ramp. The only option that, in dark, separates from the panel enough to read as a control without hovering it.</p>
+        <div class="sb-card__body">
+          <div class="sb-box" data-sb="strong" tabindex="0">
+            <p>In light mode nobody looks at the scrollbar: the browser paints a grey channel that melts into the background. Switch the panel to dark and that same factory grey becomes the brightest thing on screen.</p><p>The thumb is a control — it gets dragged, hovered and pressed. Too faint and it doesn't read as something you can grab; too strong and it competes with the content sitting right next to it.</p><p>What gets decided here is not the colour, it's the weight. Every option draws from the same Lexicon grey ramp, so the only question is how far from the panel the thumb needs to sit.</p><p>Scroll this box in light and in dark with the same option selected. If it vanishes in one and shouts in the other, that pair of tokens doesn't weigh the same in both and needs its own value per theme.</p><p>The last check is the boring one: hover it and press it. An option that only reads on hover is an option that doesn't read.</p>
+          </div>
+          <div class="sb-box sb-box--x" data-sb="strong" tabindex="0">
+            <div class="sb-wide">And horizontally, with the same pair</div>
+          </div>
+        </div>
+        <div class="sb-card__foot" id="foot-strong">
+          <span class="sb-pair"><span class="sb-swatch" data-swatch="thumb"></span>
+            <span data-hex="thumb">…</span></span>
+          <span class="sb-pair"><span class="sb-swatch" data-swatch="track"></span>
+            <span data-hex="track">…</span></span>
+          <span class="sb-verdict" data-verdict>…</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ IN PLACE ═════════════════════════════════════════ -->
+  <section class="sb-section">
+    <div class="sb-section__head">
+      <h2 class="sb-section-title">The chosen option, in place</h2>
+      <p class="sb-lead">Pick one and it applies at once to the three panel levels, to the five
+        real places below, and to this page's own scrollbar. The options with a track fail on the
+        first strip: the track is pinned to one panel level and the other two give it away.</p>
+    </div>
+
+    <div class="sb-chips" id="finalist-chips"></div>
+
+    <div class="sb-surfaces">
+      <div class="sb-surf sb-surf--white" data-sb="ghost" data-finalist tabindex="0">
+        <span class="sb-surf__tag">Card <em>--color-white</em></span>
+        <p>In light mode nobody looks at the scrollbar: the browser paints a grey channel that melts into the background. Switch the panel to dark and that same factory grey becomes the brightest thing on screen.</p><p>The thumb is a control — it gets dragged, hovered and pressed. Too faint and it doesn't read as something you can grab; too strong and it competes with the content sitting right next to it.</p><p>What gets decided here is not the colour, it's the weight. Every option draws from the same Lexicon grey ramp, so the only question is how far from the panel the thumb needs to sit.</p>
+      </div>
+      <div class="sb-surf sb-surf--l1" data-sb="ghost" data-finalist tabindex="0">
+        <span class="sb-surf__tag">Panel <em>--color-light-l1</em></span>
+        <p>In light mode nobody looks at the scrollbar: the browser paints a grey channel that melts into the background. Switch the panel to dark and that same factory grey becomes the brightest thing on screen.</p><p>The thumb is a control — it gets dragged, hovered and pressed. Too faint and it doesn't read as something you can grab; too strong and it competes with the content sitting right next to it.</p><p>What gets decided here is not the colour, it's the weight. Every option draws from the same Lexicon grey ramp, so the only question is how far from the panel the thumb needs to sit.</p>
+      </div>
+      <div class="sb-surf sb-surf--light" data-sb="ghost" data-finalist tabindex="0">
+        <span class="sb-surf__tag">Background <em>--color-light</em></span>
+        <p>In light mode nobody looks at the scrollbar: the browser paints a grey channel that melts into the background. Switch the panel to dark and that same factory grey becomes the brightest thing on screen.</p><p>The thumb is a control — it gets dragged, hovered and pressed. Too faint and it doesn't read as something you can grab; too strong and it competes with the content sitting right next to it.</p><p>What gets decided here is not the colour, it's the weight. Every option draws from the same Lexicon grey ramp, so the only question is how far from the panel the thumb needs to sit.</p>
+      </div>
+    </div>
+
+    <div class="sb-ctx-grid">
+
+      <div class="sb-ctx">
+        <span class="sb-ctx__label">Product menu</span>
+        <div class="sb-ctx__frame">
+          <div class="sb-nav-shell" data-sb="ghost" data-finalist tabindex="0">
+            <nav class="vert-nav"><ul class="vert-nav__list">
+              <li class="vert-nav__item">
+                <span class="vert-nav__icon-cell"><svg class="lexicon-icon vert-nav__icon"><use href="#documents-and-media"></use></svg></span>
+                Sites
+              </li>
+              <li class="vert-nav__item">
+                <span class="vert-nav__icon-cell"><svg class="lexicon-icon vert-nav__icon"><use href="#documents-and-media"></use></svg></span>
+                Content &amp; Data
+              </li>
+              <li class="vert-nav__item is-active">
+                <span class="vert-nav__icon-cell"><svg class="lexicon-icon vert-nav__icon"><use href="#documents-and-media"></use></svg></span>
+                Web Content
+              </li>
+              <li class="vert-nav__item">
+                <span class="vert-nav__icon-cell"><svg class="lexicon-icon vert-nav__icon"><use href="#documents-and-media"></use></svg></span>
+                Documents and Media
+              </li>
+              <li class="vert-nav__item">
+                <span class="vert-nav__icon-cell"><svg class="lexicon-icon vert-nav__icon"><use href="#documents-and-media"></use></svg></span>
+                Categorization
+              </li>
+              <li class="vert-nav__item">
+                <span class="vert-nav__icon-cell"><svg class="lexicon-icon vert-nav__icon"><use href="#documents-and-media"></use></svg></span>
+                Blogs
+              </li>
+              <li class="vert-nav__item">
+                <span class="vert-nav__icon-cell"><svg class="lexicon-icon vert-nav__icon"><use href="#documents-and-media"></use></svg></span>
+                Forms
+              </li>
+              <li class="vert-nav__item">
+                <span class="vert-nav__icon-cell"><svg class="lexicon-icon vert-nav__icon"><use href="#documents-and-media"></use></svg></span>
+                Knowledge Base
+              </li>
+              <li class="vert-nav__item">
+                <span class="vert-nav__icon-cell"><svg class="lexicon-icon vert-nav__icon"><use href="#documents-and-media"></use></svg></span>
+                Message Boards
+              </li>
+              <li class="vert-nav__item">
+                <span class="vert-nav__icon-cell"><svg class="lexicon-icon vert-nav__icon"><use href="#documents-and-media"></use></svg></span>
+                Dynamic Data Lists
+              </li>
+              <li class="vert-nav__item">
+                <span class="vert-nav__icon-cell"><svg class="lexicon-icon vert-nav__icon"><use href="#documents-and-media"></use></svg></span>
+                Recycle Bin
+              </li>
+              <li class="vert-nav__item">
+                <span class="vert-nav__icon-cell"><svg class="lexicon-icon vert-nav__icon"><use href="#documents-and-media"></use></svg></span>
+                Applications
+              </li>
+              <li class="vert-nav__item">
+                <span class="vert-nav__icon-cell"><svg class="lexicon-icon vert-nav__icon"><use href="#documents-and-media"></use></svg></span>
+                Configuration
+              </li>
+              <li class="vert-nav__item">
+                <span class="vert-nav__icon-cell"><svg class="lexicon-icon vert-nav__icon"><use href="#documents-and-media"></use></svg></span>
+                Users
+              </li>
+              <li class="vert-nav__item">
+                <span class="vert-nav__icon-cell"><svg class="lexicon-icon vert-nav__icon"><use href="#documents-and-media"></use></svg></span>
+                Roles
+              </li>
+              <li class="vert-nav__item">
+                <span class="vert-nav__icon-cell"><svg class="lexicon-icon vert-nav__icon"><use href="#documents-and-media"></use></svg></span>
+                Password Policies
+              </li>
+              <li class="vert-nav__item">
+                <span class="vert-nav__icon-cell"><svg class="lexicon-icon vert-nav__icon"><use href="#documents-and-media"></use></svg></span>
+                Monitoring
+              </li>
+              <li class="vert-nav__item">
+                <span class="vert-nav__icon-cell"><svg class="lexicon-icon vert-nav__icon"><use href="#documents-and-media"></use></svg></span>
+                Server Administration
+              </li>
+            </ul></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="sb-ctx">
+        <span class="sb-ctx__label">Modal with scroll</span>
+        <div class="sb-ctx__frame">
+          <div class="sb-modal-shell">
+            <div class="modal">
+              <header class="modal__header">
+                <h2 class="modal__title">Select Content</h2>
+                <button class="btn btn--borderless btn--sm btn--icon modal__close" aria-label="Close">
+                  <svg class="lexicon-icon"><use href="#times"></use></svg>
+                </button>
+              </header>
+              <div class="modal__body" data-sb="ghost" data-finalist tabindex="0">
+                <p>The thumb is a control — it gets dragged, hovered and pressed. Too faint and it doesn't read as something you can grab; too strong and it competes with the content sitting right next to it.</p><p>What gets decided here is not the colour, it's the weight. Every option draws from the same Lexicon grey ramp, so the only question is how far from the panel the thumb needs to sit.</p><p>Scroll this box in light and in dark with the same option selected. If it vanishes in one and shouts in the other, that pair of tokens doesn't weigh the same in both and needs its own value per theme.</p>
+              </div>
+              <footer class="modal__footer">
+                <button class="btn btn--secondary">Cancel</button>
+                <button class="btn btn--primary">Done</button>
+              </footer>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sb-ctx">
+        <span class="sb-ctx__label">Wide table</span>
+        <div class="sb-ctx__frame">
+          <div class="sb-table-wrap" data-sb="ghost" data-finalist tabindex="0">
+            <table class="table">
+              <thead><tr><th>Title</th><th>Author</th><th>Type</th><th>Version</th>
+                <th>Modified Date</th><th>Scope</th><th>Status</th></tr></thead>
+              <tbody>
+                  <tr>
+                    <td><span class="table__title-wrap"><svg class="lexicon-icon table__icon"><use href="#folder"></use></svg><a href="#" class="table__title">Very long title to be displayed in two lines</a></span></td>
+                    <td>Diego Alonso</td>
+                    <td>Web Content</td>
+                    <td>1.2</td>
+                    <td>3 Aug 2026</td>
+                    <td>Liferay DXP</td>
+                    <td><span class="label label--sm label--success">Approved</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="table__title-wrap"><svg class="lexicon-icon table__icon"><use href="#folder"></use></svg><a href="#" class="table__title">Dark mode token audit</a></span></td>
+                    <td>Marcos Castro</td>
+                    <td>Web Content</td>
+                    <td>1.3</td>
+                    <td>3 Aug 2026</td>
+                    <td>Liferay DXP</td>
+                    <td><span class="label label--sm label--warning">Pending</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="table__title-wrap"><svg class="lexicon-icon table__icon"><use href="#folder"></use></svg><a href="#" class="table__title">Scrollbar contrast measurements</a></span></td>
+                    <td>Uge Fern</td>
+                    <td>Web Content</td>
+                    <td>1.4</td>
+                    <td>3 Aug 2026</td>
+                    <td>Liferay DXP</td>
+                    <td><span class="label label--sm label--success">Approved</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="table__title-wrap"><svg class="lexicon-icon table__icon"><use href="#folder"></use></svg><a href="#" class="table__title">HC dark surface collapse</a></span></td>
+                    <td>David Rivera</td>
+                    <td>Web Content</td>
+                    <td>1.5</td>
+                    <td>3 Aug 2026</td>
+                    <td>Liferay DXP</td>
+                    <td><span class="label label--sm label--danger">Rejected</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="table__title-wrap"><svg class="lexicon-icon table__icon"><use href="#folder"></use></svg><a href="#" class="table__title">Skeleton shimmer per skin</a></span></td>
+                    <td>Sara Nieto</td>
+                    <td>Web Content</td>
+                    <td>1.6</td>
+                    <td>3 Aug 2026</td>
+                    <td>Liferay DXP</td>
+                    <td><span class="label label--sm label--success">Approved</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="table__title-wrap"><svg class="lexicon-icon table__icon"><use href="#folder"></use></svg><a href="#" class="table__title">Empty state illustration set</a></span></td>
+                    <td>Gabs Moreno</td>
+                    <td>Web Content</td>
+                    <td>1.7</td>
+                    <td>3 Aug 2026</td>
+                    <td>Liferay DXP</td>
+                    <td><span class="label label--sm label--warning">Pending</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="table__title-wrap"><svg class="lexicon-icon table__icon"><use href="#folder"></use></svg><a href="#" class="table__title">Product icon metaphors</a></span></td>
+                    <td>Daniel Ruiz</td>
+                    <td>Web Content</td>
+                    <td>1.8</td>
+                    <td>3 Aug 2026</td>
+                    <td>Liferay DXP</td>
+                    <td><span class="label label--sm label--success">Approved</span></td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="sb-ctx">
+        <span class="sb-ctx__label">Long dropdown</span>
+        <div class="sb-ctx__frame">
+          <div class="sb-drop-shell">
+            <ul class="dropdown" role="menu" data-sb="ghost" data-finalist tabindex="0">
+              <li class="dropdown__group-title">Actions</li>
+              <li><button class="dropdown__item" role="menuitem">Edit</button></li>
+              <li><button class="dropdown__item" role="menuitem">Permissions</button></li>
+              <li><button class="dropdown__item" role="menuitem">Move</button></li>
+              <li><button class="dropdown__item" role="menuitem">Copy</button></li>
+              <li><button class="dropdown__item" role="menuitem">Publish to Live</button></li>
+              <li><button class="dropdown__item" role="menuitem">Compare Versions</button></li>
+              <li><button class="dropdown__item" role="menuitem">Expire</button></li>
+              <li><button class="dropdown__item" role="menuitem">Add Category</button></li>
+              <li><button class="dropdown__item" role="menuitem">Configure</button></li>
+              <li><button class="dropdown__item" role="menuitem">Export</button></li>
+              <li><button class="dropdown__item" role="menuitem">Import</button></li>
+              <li><button class="dropdown__item" role="menuitem">Move to Recycle Bin</button></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="sb-ctx">
+        <span class="sb-ctx__label">Text field</span>
+        <div class="sb-ctx__frame">
+          <textarea class="input__field sb-ta" data-sb="ghost" data-finalist
+            aria-label="Sample text field">In light mode nobody looks at the scrollbar: the browser paints a grey channel that melts into the background. Switch the panel to dark and that same factory grey becomes the brightest thing on screen.
+
+The thumb is a control — it gets dragged, hovered and pressed. Too faint and it doesn't read as something you can grab; too strong and it competes with the content sitting right next to it.
+
+What gets decided here is not the colour, it's the weight. Every option draws from the same Lexicon grey ramp, so the only question is how far from the panel the thumb needs to sit.
+
+Scroll this box in light and in dark with the same option selected. If it vanishes in one and shouts in the other, that pair of tokens doesn't weigh the same in both and needs its own value per theme.</textarea>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ NUMBERS ══════════════════════════════════════════ -->
+  <section class="sb-section">
+    <div class="sb-section__head">
+      <h2 class="sb-section-title">How far the thumb sits from its background</h2>
+      <p class="sb-lead">Measured in whichever theme is selected above. The reference for anything
+        draggable is <strong>3</strong>: below that the thumb reads as decoration rather than as
+        something you can grab. Below 2 it is barely there at all.</p>
+    </div>
+    <div class="sb-tablewrap">
+      <table class="sb-data">
+        <thead>
+          <tr>
+            <th>Option</th><th>Thumb</th><th>Track</th>
+            <th>On card</th><th>On panel</th><th>On background</th><th>Reads as</th>
+          </tr>
+        </thead>
+        <tbody id="contrast-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ══ TOKENS ═══════════════════════════════════════════ -->
+  <section class="sb-section">
+    <div class="sb-section__head">
+      <h2 class="sb-section-title">What we would need to add</h2>
+      <p class="sb-lead">Six new tokens pointing at the ramp we already have, the same way
+        skeletons and charts already do it. Because they point at the ramp they flip with the theme
+        on their own: no separate block for dark, and no colour left hardcoded.</p>
+    </div>
+    <pre class="sb-pre">:root {
+  --scrollbar-thumb:        var(--color-secondary-l2);
+  --scrollbar-thumb-hover:  var(--color-secondary-l1);
+  --scrollbar-thumb-active: var(--color-secondary-l0);
+  --scrollbar-track:        transparent;
+  --scrollbar-size:         12px;
+  --scrollbar-radius:       var(--rounded-full);
+}</pre>
+    <ul class="sb-notes">
+      <li class="sb-note">
+        <h4>The same token does not weigh the same in both themes</h4>
+        <p>The grey ramp is not an exact mirror of itself: <code>--color-secondary-l2</code> reads noticeably
+          heavier in dark than in light. We have to decide what should match — the token or the visual
+          weight. If it is the weight, dark needs a pair of its own.</p>
+      </li>
+      <li class="sb-note">
+        <h4>Firefox gets no hover</h4>
+        <p>The colours apply in every browser, but the change on hover, the thickness and the
+          rounded corners only work in Chrome, Safari and Edge. In Firefox the thumb comes out with
+          the same pair of colours at the system thickness.</p>
+      </li>
+      <li class="sb-note">
+        <h4>The browser still needs telling</h4>
+        <p>On top of the tokens, the theme has to declare itself dark to the browser. That is what
+          fixes the scrollbars we cannot paint — native selects, third-party iframes — and the
+          system form controls.</p>
+      </li>
+      <li class="sb-note">
+        <h4>Focus cannot be painted</h4>
+        <p>No browser lets us mark the scrollbar when it holds keyboard focus. If the scrolling box
+          is focusable, the box's own focus ring is all we get.</p>
+      </li>
+    </ul>
+  </section>
+
+</main>
+
+
+<div class="wipe" aria-hidden="true"></div>
+<script>
+
+window.SB_PALETTES = {"base":{"--color-primary-d2":"#004AD7","--color-primary-d1":"#0053F0","--color-primary":"#0B5FFF","--color-primary-l0":"#5791FF","--color-primary-l1":"#80ACFF","--color-primary-l2":"#B3CDFF","--color-primary-l3":"#F0F5FF","--color-secondary":"#6B6C7E","--color-secondary-l0":"#9393A4","--color-secondary-l1":"#A7A9BC","--color-secondary-l2":"#CDCED9","--color-secondary-l3":"#E7E7ED","--color-dark-d2":"#111116","--color-dark-d1":"#1C1C24","--color-dark":"#272833","--color-dark-l1":"#30313F","--color-dark-l2":"#393A4A","--color-light-d2":"#D3D6E0","--color-light-d1":"#E2E4EA","--color-light":"#F1F2F5","--color-light-l1":"#F7F8F9","--color-white":"#FFFFFF","--color-success-d2":"#1C5629","--color-success-d1":"#226A33","--color-success":"#287D3C","--color-success-l1":"#5ACA75","--color-success-l2":"#EDF9F0","--color-info-d2":"#234584","--color-info-d1":"#294F98","--color-info":"#2E5AAC","--color-info-l1":"#89A7E0","--color-info-l2":"#EEF2FA","--color-warning-d2":"#863A00","--color-warning-d1":"#9F4500","--color-warning":"#B95000","--color-warning-l1":"#FF8F39","--color-warning-l2":"#FFF4EC","--color-danger-d2":"#AB1010","--color-danger-d1":"#C31212","--color-danger":"#DA1414","--color-danger-l1":"#F48989","--color-danger-l2":"#FEEFEF","--spacing-1":"2px","--spacing-2":"4px","--spacing-2-5":"6px","--spacing-3":"8px","--spacing-4":"12px","--spacing-5":"16px","--spacing-6":"20px","--spacing-7":"24px","--spacing-8":"32px","--spacing-9":"40px","--spacing-10":"48px","--rounded-sm":"2px","--rounded-md":"4px","--rounded-lg":"8px","--rounded-xl":"16px","--rounded-full":"9999px","--font-family-base":"-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif","--font-size-xs":"10px","--font-size-sm":"12px","--font-size-base":"14px","--font-size-md":"16px","--font-size-lg":"18px","--font-size-xl":"20px","--font-size-2xl":"28px","--font-size-3xl":"32px","--font-weight-normal":"300","--font-weight-semi":"400","--font-weight-bold":"600","--line-height-base":"1.5","--shadow-sm":"0 1px 2px rgba(39, 40, 51, 0.10)","--shadow-card":"0 2px 4px rgba(39, 40, 51, 0.12)","--shadow-md":"0 2px 8px rgba(39, 40, 51, 0.14)","--shadow-dropdown":"0 4px 8px rgba(39, 40, 51, 0.12)","--shadow-lg":"0 4px 16px rgba(39, 40, 51, 0.18)","--shadow-alert":"0 8px 16px rgba(39, 40, 51, 0.20)","--shadow-scroll-top":"0 4px 24px rgba(0, 0, 0, 0.08)","--shadow-scroll-bottom":"0 -4px 24px rgba(0, 0, 0, 0.08)","--focus-ring":"0 0 0 2px var(--color-white), 0 0 0 4px var(--color-primary-l0)","--blue-d4":"#004799","--blue-d3":"#0053B3","--blue-d2":"#005FCC","--blue-d1":"#006BE6","--blue":"#006EFF","--blue-l1":"#338FFF","--blue-l2":"#66ABFF","--blue-l3":"#97C5FF","--blue-l4":"#CCE3FF","--blue-l5":"#E5F1FF","--orange-d4":"#662700","--orange-d3":"#803100","--orange-d2":"#993B00","--orange-d1":"#B34400","--orange":"#CC4E00","--orange-l1":"#FF6200","--orange-l2":"#FF8133","--orange-l3":"#FFA166","--orange-l4":"#FFC099","--orange-l5":"#FFF0E5","--red-d4":"#800000","--red-d3":"#990000","--red-d2":"#B30000","--red-d1":"#CC0000","--red":"#E50000","--red-l1":"#FF4D4D","--red-l2":"#FF6666","--red-l3":"#FF8080","--red-l4":"#FF9999","--red-l5":"#FFE5E5","--teal-d4":"#092A25","--teal-d3":"#0D3F37","--teal-d2":"#125449","--teal-d1":"#16695B","--teal":"#1B7E6E","--teal-l1":"#24A892","--teal-l2":"#42D7BE","--teal-l3":"#6CE0CC","--teal-l4":"#96E9DB","--teal-l5":"#EAFBF8","--pink-d4":"#800048","--pink-d3":"#990057","--pink-d2":"#B30065","--pink-d1":"#CC0074","--pink":"#E50082","--pink-l1":"#FF4DB2","--pink-l2":"#FF80C8","--pink-l3":"#FF99D3","--pink-l4":"#FFB2DE","--pink-l5":"#FFE5F4","--green-d4":"#162D06","--green-d3":"#22430A","--green-d2":"#2E590D","--green-d1":"#397010","--green":"#458613","--green-l1":"#53A117","--green-l2":"#67C91D","--green-l3":"#81E236","--green-l4":"#9DE963","--green-l5":"#F1FCE9","--purple-d4":"#7700CC","--purple-d3":"#8600E6","--purple-d2":"#9500FF","--purple-d1":"#9F1AFF","--purple":"#AA33FF","--purple-l1":"#BF66FF","--purple-l2":"#CA80FF","--purple-l3":"#D499FF","--purple-l4":"#DFB3FF","--purple-l5":"#F2E5FF","--yellow-d4":"#997000","--yellow-d3":"#B38900","--yellow-d2":"#CC9600","--yellow-d1":"#E6A800","--yellow":"#FFBB00","--yellow-l1":"#FFC933","--yellow-l2":"#FFD666","--yellow-l3":"#FFE499","--yellow-l4":"#FFF1CC","--yellow-l5":"#FFF8E5","--cyan-d4":"#00334D","--cyan-d3":"#004466","--cyan-d2":"#005580","--cyan-d1":"#006699","--cyan":"#0077B3","--cyan-l1":"#0099E6","--cyan-l2":"#33BBFF","--cyan-l3":"#66CCFF","--cyan-l4":"#99DDFF","--cyan-l5":"#E5F6FF","--indigo-d4":"#0017E5","--indigo-d3":"#001AFF","--indigo-d2":"#1A30FF","--indigo-d1":"#3347FF","--indigo":"#4D5FFF","--indigo-l1":"#808CFF","--indigo-l2":"#99A3FF","--indigo-l3":"#B2BAFF","--indigo-l4":"#CCD1FF","--indigo-l5":"#E5E8FF"},"palettes":{"dark":{"label":"Dark","group":"Dark","over":{"--focus-ring":"0 0 0 2px var(--color-dark, #1C1C24), 0 0 0 4px var(--color-primary-l0, #7AA8FF)","--color-primary-d3":"#D6E4FF","--color-primary-d2":"#D6E4FF","--color-primary-d1":"#7AA8FF","--color-primary":"#6198FF","--color-primary-l0":"#0F62FF","--color-primary-l1":"#004CDB","--color-primary-l2":"#003AA8","--color-primary-l3":"#001A4D","--color-secondary":"#B3B3C6","--color-secondary-l0":"#9A9CB2","--color-secondary-l1":"#7D809C","--color-secondary-l2":"#696A7C","--color-secondary-l3":"#4D4E5B","--color-dark-d2":"#FFFFFF","--color-dark-d1":"#F7F8F9","--color-dark":"#F1F2F5","--color-dark-l1":"#E2E4EA","--color-dark-l2":"#E2E4EA","--color-light-d2":"#47485D","--color-light-d1":"#3E3F51","--color-light":"#313240","--color-light-l1":"#262631","--color-white":"#1B1B23","--color-success-d2":"#BAE8C6","--color-success-d1":"#59C974","--color-success":"#3BB959","--color-success-l1":"#2A8340","--color-success-l2":"#13391B","--color-info-d2":"#DCE4F5","--color-info-d1":"#9EB7E6","--color-info":"#7E9FDD","--color-info-l1":"#4E7BD0","--color-info-l2":"#142648","--color-warning-d2":"#FFDFC7","--color-warning-d1":"#FF9A4D","--color-warning":"#FF7A14","--color-warning-l1":"#D15B00","--color-warning-l2":"#4D2100","--color-danger-d2":"#FDE2E2","--color-danger-d1":"#F69D9D","--color-danger":"#F67474","--color-danger-l1":"#EC2D2D","--color-danger-l2":"#470606","--blue":"#429AFF","--blue-d4":"#E5F1FF","--blue-d3":"#B8D8FF","--blue-d2":"#94C4FF","--blue-d1":"#70B1FF","--blue-l1":"#2487FF","--blue-l2":"#006BE6","--blue-l3":"#0056B8","--blue-l4":"#004799","--blue-l5":"#002147","--orange":"#FF6E14","--orange-d4":"#FFE7D6","--orange-d3":"#FFC099","--orange-d2":"#FFA770","--orange-d1":"#FF8A42","--orange-l1":"#E55800","--orange-l2":"#B84600","--orange-l3":"#8F3700","--orange-l4":"#6B2900","--orange-l5":"#3D1700","--red":"#FF6666","--red-d4":"#FFE5E5","--red-d3":"#FFCCCC","--red-d2":"#FFB2B2","--red-d1":"#FF8F8F","--red-l1":"#FF2E2E","--red-l2":"#F50000","--red-l3":"#C70000","--red-l4":"#8F0000","--red-l5":"#420000","--teal":"#28BDA4","--teal-d4":"#DDF8F4","--teal-d3":"#ABEDE2","--teal-d2":"#7CE4D2","--teal-d1":"#4AD9C0","--teal-l1":"#22A08B","--teal-l2":"#1B7E6E","--teal-l3":"#156154","--teal-l4":"#0E443B","--teal-l5":"#0A2E29","--pink":"#FF5CB8","--pink-d4":"#FFF0F9","--pink-d3":"#FFD6ED","--pink-d2":"#FFB2DE","--pink-d1":"#FF8ACC","--pink-l1":"#FF33A7","--pink-l2":"#FA008E","--pink-l3":"#C2006D","--pink-l4":"#85004B","--pink-l5":"#570031","--green":"#5CB21A","--green-d4":"#DDF8C9","--green-d3":"#BCF094","--green-d2":"#9AE85F","--green-d1":"#79E029","--green-l1":"#4A8F14","--green-l2":"#397010","--green-l3":"#2C550C","--green-l4":"#22430A","--green-l5":"#162D06","--purple":"#C87AFF","--purple-d4":"#F5EBFF","--purple-d3":"#ECD1FF","--purple-d2":"#E1B8FF","--purple-d1":"#D499FF","--purple-l1":"#B54DFF","--purple-l2":"#9F1AFF","--purple-l3":"#8C00F0","--purple-l4":"#6800B2","--purple-l5":"#47007A","--yellow":"#FFC524","--yellow-d4":"#FFF8E5","--yellow-d3":"#FFEAB2","--yellow-d2":"#FFDC7A","--yellow-d1":"#FFCC42","--yellow-l1":"#D69C00","--yellow-l2":"#B88600","--yellow-l3":"#8A6500","--yellow-l4":"#664E00","--yellow-l5":"#473400","--cyan":"#05ACFF","--cyan-d4":"#D1EFFF","--cyan-d3":"#99DDFF","--cyan-d2":"#70CFFF","--cyan-d1":"#38BDFF","--cyan-l1":"#0095E0","--cyan-l2":"#007EBD","--cyan-l3":"#006699","--cyan-l4":"#004E75","--cyan-l5":"#00334D","--indigo":"#8A95FF","--indigo-d4":"#F0F1FF","--indigo-d3":"#D1D6FF","--indigo-d2":"#BDC3FF","--indigo-d1":"#A8B1FF","--indigo-l1":"#5C6DFF","--indigo-l2":"#384CFF","--indigo-l3":"#0019FA","--indigo-l4":"#0013C2","--indigo-l5":"#000A66"}},"dark-lrdc":{"label":"Dark LRDC","group":"Dark","over":{"--focus-ring":"0 0 0 2px var(--color-dark, #1C1C24), 0 0 0 4px var(--color-primary-l0, #7AA8FF)","--color-primary-d3":"#D6E4FF","--color-primary-d2":"#D6E4FF","--color-primary-d1":"#7AA8FF","--color-primary":"#6198FF","--color-primary-l0":"#0F62FF","--color-primary-l1":"#004CDB","--color-primary-l2":"#003AA8","--color-primary-l3":"#001A4D","--color-secondary":"#B3B3C6","--color-secondary-l0":"#9A9CB2","--color-secondary-l1":"#7D809C","--color-secondary-l2":"#696A7C","--color-secondary-l3":"#4D4E5B","--color-dark-d2":"#FFFFFF","--color-dark-d1":"#EAECF3","--color-dark":"#CBD2DC","--color-dark-l1":"#ACB4C2","--color-dark-l2":"#8C96A9","--color-light-d2":"#5E6B84","--color-light-d1":"#505E73","--color-light":"#404B5D","--color-light-l1":"#313948","--color-white":"#1F2531","--color-success-d2":"#BAE8C6","--color-success-d1":"#59C974","--color-success":"#3BB959","--color-success-l1":"#2A8340","--color-success-l2":"#13391B","--color-info-d2":"#DCE4F5","--color-info-d1":"#9EB7E6","--color-info":"#7E9FDD","--color-info-l1":"#4E7BD0","--color-info-l2":"#142648","--color-warning-d2":"#FFDFC7","--color-warning-d1":"#FF9A4D","--color-warning":"#FF7A14","--color-warning-l1":"#D15B00","--color-warning-l2":"#4D2100","--color-danger-d2":"#FDE2E2","--color-danger-d1":"#F69D9D","--color-danger":"#F67474","--color-danger-l1":"#EC2D2D","--color-danger-l2":"#470606","--blue":"#429AFF","--blue-d4":"#E5F1FF","--blue-d3":"#B8D8FF","--blue-d2":"#94C4FF","--blue-d1":"#70B1FF","--blue-l1":"#2487FF","--blue-l2":"#006BE6","--blue-l3":"#0056B8","--blue-l4":"#004799","--blue-l5":"#002147","--orange":"#FF6E14","--orange-d4":"#FFE7D6","--orange-d3":"#FFC099","--orange-d2":"#FFA770","--orange-d1":"#FF8A42","--orange-l1":"#E55800","--orange-l2":"#B84600","--orange-l3":"#8F3700","--orange-l4":"#6B2900","--orange-l5":"#3D1700","--red":"#FF6666","--red-d4":"#FFE5E5","--red-d3":"#FFCCCC","--red-d2":"#FFB2B2","--red-d1":"#FF8F8F","--red-l1":"#FF2E2E","--red-l2":"#F50000","--red-l3":"#C70000","--red-l4":"#8F0000","--red-l5":"#420000","--teal":"#28BDA4","--teal-d4":"#DDF8F4","--teal-d3":"#ABEDE2","--teal-d2":"#7CE4D2","--teal-d1":"#4AD9C0","--teal-l1":"#22A08B","--teal-l2":"#1B7E6E","--teal-l3":"#156154","--teal-l4":"#0E443B","--teal-l5":"#0A2E29","--pink":"#FF5CB8","--pink-d4":"#FFF0F9","--pink-d3":"#FFD6ED","--pink-d2":"#FFB2DE","--pink-d1":"#FF8ACC","--pink-l1":"#FF33A7","--pink-l2":"#FA008E","--pink-l3":"#C2006D","--pink-l4":"#85004B","--pink-l5":"#570031","--green":"#5CB21A","--green-d4":"#DDF8C9","--green-d3":"#BCF094","--green-d2":"#9AE85F","--green-d1":"#79E029","--green-l1":"#4A8F14","--green-l2":"#397010","--green-l3":"#2C550C","--green-l4":"#22430A","--green-l5":"#162D06","--purple":"#C87AFF","--purple-d4":"#F5EBFF","--purple-d3":"#ECD1FF","--purple-d2":"#E1B8FF","--purple-d1":"#D499FF","--purple-l1":"#B54DFF","--purple-l2":"#9F1AFF","--purple-l3":"#8C00F0","--purple-l4":"#6800B2","--purple-l5":"#47007A","--yellow":"#FFC524","--yellow-d4":"#FFF8E5","--yellow-d3":"#FFEAB2","--yellow-d2":"#FFDC7A","--yellow-d1":"#FFCC42","--yellow-l1":"#D69C00","--yellow-l2":"#B88600","--yellow-l3":"#8A6500","--yellow-l4":"#664E00","--yellow-l5":"#473400","--cyan":"#05ACFF","--cyan-d4":"#D1EFFF","--cyan-d3":"#99DDFF","--cyan-d2":"#70CFFF","--cyan-d1":"#38BDFF","--cyan-l1":"#0095E0","--cyan-l2":"#007EBD","--cyan-l3":"#006699","--cyan-l4":"#004E75","--cyan-l5":"#00334D","--indigo":"#8A95FF","--indigo-d4":"#F0F1FF","--indigo-d3":"#D1D6FF","--indigo-d2":"#BDC3FF","--indigo-d1":"#A8B1FF","--indigo-l1":"#5C6DFF","--indigo-l2":"#384CFF","--indigo-l3":"#0019FA","--indigo-l4":"#0013C2","--indigo-l5":"#000A66","--color-blue-d4":"#E5F1FF","--color-blue-d3":"#B8D8FF","--color-blue-d2":"#94C4FF","--color-blue-d1":"#70B1FF","--color-blue":"#429AFF","--color-blue-l1":"#2487FF","--color-blue-l2":"#006BE6","--color-blue-l3":"#0056B8","--color-blue-l4":"#004799","--color-blue-l5":"#002147","--color-orange-d4":"#FFE7D6","--color-orange-d3":"#FFC099","--color-orange-d2":"#FFA770","--color-orange-d1":"#FF8A42","--color-orange":"#FF6E14","--color-orange-l1":"#E55800","--color-orange-l2":"#B84600","--color-orange-l3":"#8F3700","--color-orange-l4":"#6B2900","--color-orange-l5":"#3D1700","--color-red-d4":"#FFE5E5","--color-red-d3":"#FFCCCC","--color-red-d2":"#FFB2B2","--color-red-d1":"#FF8F8F","--color-red":"#FF6666","--color-red-l1":"#FF2E2E","--color-red-l2":"#F50000","--color-red-l3":"#C70000","--color-red-l4":"#8F0000","--color-red-l5":"#420000","--color-teal-d4":"#DDF8F4","--color-teal-d3":"#ABEDE2","--color-teal-d2":"#7CE4D2","--color-teal-d1":"#4AD9C0","--color-teal":"#28BDA4","--color-teal-l1":"#22A08B","--color-teal-l2":"#1B7E6E","--color-teal-l3":"#156154","--color-teal-l4":"#0E443B","--color-teal-l5":"#0A2E29","--color-pink-d4":"#FFF0F9","--color-pink-d3":"#FFD6ED","--color-pink-d2":"#FFB2DE","--color-pink-d1":"#FF8ACC","--color-pink":"#FF5CB8","--color-pink-l1":"#FF33A7","--color-pink-l2":"#FA008E","--color-pink-l3":"#C2006D","--color-pink-l4":"#85004B","--color-pink-l5":"#570031","--color-green-d4":"#DDF8C9","--color-green-d3":"#BCF094","--color-green-d2":"#9AE85F","--color-green-d1":"#79E029","--color-green":"#5CB21A","--color-green-l1":"#4A8F14","--color-green-l2":"#397010","--color-green-l3":"#2C550C","--color-green-l4":"#22430A","--color-green-l5":"#162D06","--color-purple-d4":"#F5EBFF","--color-purple-d3":"#ECD1FF","--color-purple-d2":"#E1B8FF","--color-purple-d1":"#D499FF","--color-purple":"#C87AFF","--color-purple-l1":"#B54DFF","--color-purple-l2":"#9F1AFF","--color-purple-l3":"#8C00F0","--color-purple-l4":"#6800B2","--color-purple-l5":"#47007A","--color-yellow-d4":"#FFF8E5","--color-yellow-d3":"#FFEAB2","--color-yellow-d2":"#FFDC7A","--color-yellow-d1":"#FFCC42","--color-yellow":"#FFC524","--color-yellow-l1":"#D69C00","--color-yellow-l2":"#B88600","--color-yellow-l3":"#8A6500","--color-yellow-l4":"#664E00","--color-yellow-l5":"#473400","--color-cyan-d4":"#D1EFFF","--color-cyan-d3":"#99DDFF","--color-cyan-d2":"#70CFFF","--color-cyan-d1":"#38BDFF","--color-cyan":"#05ACFF","--color-cyan-l1":"#0095E0","--color-cyan-l2":"#007EBD","--color-cyan-l3":"#006699","--color-cyan-l4":"#004E75","--color-cyan-l5":"#00334D","--color-indigo-d4":"#F0F1FF","--color-indigo-d3":"#D1D6FF","--color-indigo-d2":"#BDC3FF","--color-indigo-d1":"#A8B1FF","--color-indigo":"#8A95FF","--color-indigo-l1":"#5C6DFF","--color-indigo-l2":"#384CFF","--color-indigo-l3":"#0019FA","--color-indigo-l4":"#0013C2","--color-indigo-l5":"#000A66"}},"dark-lrdc2":{"label":"Dark LRDC v2","group":"Dark","over":{"--focus-ring":"0 0 0 2px var(--color-dark, #1C1C24), 0 0 0 4px var(--color-primary-l0, #7AA8FF)","--color-primary-d3":"#D6E4FF","--color-primary-d2":"#D6E4FF","--color-primary-d1":"#7AA8FF","--color-primary":"#6198FF","--color-primary-l0":"#0F62FF","--color-primary-l1":"#004CDB","--color-primary-l2":"#003AA8","--color-primary-l3":"#001A4D","--color-secondary":"#B3B3C6","--color-secondary-l0":"#9A9CB2","--color-secondary-l1":"#7D809C","--color-secondary-l2":"#696A7C","--color-secondary-l3":"#4D4E5B","--color-dark-d2":"#FFFFFF","--color-dark-d1":"#EAECF3","--color-dark":"#D5D9E7","--color-dark-l1":"#BEC4DA","--color-dark-l2":"#A4ACCB","--color-light-d2":"#485265","--color-light-d1":"#3B4554","--color-light":"#2C333F","--color-light-l1":"#242933","--color-white":"#181C25","--color-success-d2":"#BAE8C6","--color-success-d1":"#59C974","--color-success":"#3BB959","--color-success-l1":"#2A8340","--color-success-l2":"#13391B","--color-info-d2":"#DCE4F5","--color-info-d1":"#9EB7E6","--color-info":"#7E9FDD","--color-info-l1":"#4E7BD0","--color-info-l2":"#142648","--color-warning-d2":"#FFDFC7","--color-warning-d1":"#FF9A4D","--color-warning":"#FF7A14","--color-warning-l1":"#D15B00","--color-warning-l2":"#4D2100","--color-danger-d2":"#FDE2E2","--color-danger-d1":"#F69D9D","--color-danger":"#F67474","--color-danger-l1":"#EC2D2D","--color-danger-l2":"#470606","--blue":"#429AFF","--blue-d4":"#E5F1FF","--blue-d3":"#B8D8FF","--blue-d2":"#94C4FF","--blue-d1":"#70B1FF","--blue-l1":"#2487FF","--blue-l2":"#006BE6","--blue-l3":"#0056B8","--blue-l4":"#004799","--blue-l5":"#002147","--orange":"#FF6E14","--orange-d4":"#FFE7D6","--orange-d3":"#FFC099","--orange-d2":"#FFA770","--orange-d1":"#FF8A42","--orange-l1":"#E55800","--orange-l2":"#B84600","--orange-l3":"#8F3700","--orange-l4":"#6B2900","--orange-l5":"#3D1700","--red":"#FF6666","--red-d4":"#FFE5E5","--red-d3":"#FFCCCC","--red-d2":"#FFB2B2","--red-d1":"#FF8F8F","--red-l1":"#FF2E2E","--red-l2":"#F50000","--red-l3":"#C70000","--red-l4":"#8F0000","--red-l5":"#420000","--teal":"#28BDA4","--teal-d4":"#DDF8F4","--teal-d3":"#ABEDE2","--teal-d2":"#7CE4D2","--teal-d1":"#4AD9C0","--teal-l1":"#22A08B","--teal-l2":"#1B7E6E","--teal-l3":"#156154","--teal-l4":"#0E443B","--teal-l5":"#0A2E29","--pink":"#FF5CB8","--pink-d4":"#FFF0F9","--pink-d3":"#FFD6ED","--pink-d2":"#FFB2DE","--pink-d1":"#FF8ACC","--pink-l1":"#FF33A7","--pink-l2":"#FA008E","--pink-l3":"#C2006D","--pink-l4":"#85004B","--pink-l5":"#570031","--green":"#5CB21A","--green-d4":"#DDF8C9","--green-d3":"#BCF094","--green-d2":"#9AE85F","--green-d1":"#79E029","--green-l1":"#4A8F14","--green-l2":"#397010","--green-l3":"#2C550C","--green-l4":"#22430A","--green-l5":"#162D06","--purple":"#C87AFF","--purple-d4":"#F5EBFF","--purple-d3":"#ECD1FF","--purple-d2":"#E1B8FF","--purple-d1":"#D499FF","--purple-l1":"#B54DFF","--purple-l2":"#9F1AFF","--purple-l3":"#8C00F0","--purple-l4":"#6800B2","--purple-l5":"#47007A","--yellow":"#FFC524","--yellow-d4":"#FFF8E5","--yellow-d3":"#FFEAB2","--yellow-d2":"#FFDC7A","--yellow-d1":"#FFCC42","--yellow-l1":"#D69C00","--yellow-l2":"#B88600","--yellow-l3":"#8A6500","--yellow-l4":"#664E00","--yellow-l5":"#473400","--cyan":"#05ACFF","--cyan-d4":"#D1EFFF","--cyan-d3":"#99DDFF","--cyan-d2":"#70CFFF","--cyan-d1":"#38BDFF","--cyan-l1":"#0095E0","--cyan-l2":"#007EBD","--cyan-l3":"#006699","--cyan-l4":"#004E75","--cyan-l5":"#00334D","--indigo":"#8A95FF","--indigo-d4":"#F0F1FF","--indigo-d3":"#D1D6FF","--indigo-d2":"#BDC3FF","--indigo-d1":"#A8B1FF","--indigo-l1":"#5C6DFF","--indigo-l2":"#384CFF","--indigo-l3":"#0019FA","--indigo-l4":"#0013C2","--indigo-l5":"#000A66","--color-blue-d4":"#E5F1FF","--color-blue-d3":"#B8D8FF","--color-blue-d2":"#94C4FF","--color-blue-d1":"#70B1FF","--color-blue":"#429AFF","--color-blue-l1":"#2487FF","--color-blue-l2":"#006BE6","--color-blue-l3":"#0056B8","--color-blue-l4":"#004799","--color-blue-l5":"#002147","--color-orange-d4":"#FFE7D6","--color-orange-d3":"#FFC099","--color-orange-d2":"#FFA770","--color-orange-d1":"#FF8A42","--color-orange":"#FF6E14","--color-orange-l1":"#E55800","--color-orange-l2":"#B84600","--color-orange-l3":"#8F3700","--color-orange-l4":"#6B2900","--color-orange-l5":"#3D1700","--color-red-d4":"#FFE5E5","--color-red-d3":"#FFCCCC","--color-red-d2":"#FFB2B2","--color-red-d1":"#FF8F8F","--color-red":"#FF6666","--color-red-l1":"#FF2E2E","--color-red-l2":"#F50000","--color-red-l3":"#C70000","--color-red-l4":"#8F0000","--color-red-l5":"#420000","--color-teal-d4":"#DDF8F4","--color-teal-d3":"#ABEDE2","--color-teal-d2":"#7CE4D2","--color-teal-d1":"#4AD9C0","--color-teal":"#28BDA4","--color-teal-l1":"#22A08B","--color-teal-l2":"#1B7E6E","--color-teal-l3":"#156154","--color-teal-l4":"#0E443B","--color-teal-l5":"#0A2E29","--color-pink-d4":"#FFF0F9","--color-pink-d3":"#FFD6ED","--color-pink-d2":"#FFB2DE","--color-pink-d1":"#FF8ACC","--color-pink":"#FF5CB8","--color-pink-l1":"#FF33A7","--color-pink-l2":"#FA008E","--color-pink-l3":"#C2006D","--color-pink-l4":"#85004B","--color-pink-l5":"#570031","--color-green-d4":"#DDF8C9","--color-green-d3":"#BCF094","--color-green-d2":"#9AE85F","--color-green-d1":"#79E029","--color-green":"#5CB21A","--color-green-l1":"#4A8F14","--color-green-l2":"#397010","--color-green-l3":"#2C550C","--color-green-l4":"#22430A","--color-green-l5":"#162D06","--color-purple-d4":"#F5EBFF","--color-purple-d3":"#ECD1FF","--color-purple-d2":"#E1B8FF","--color-purple-d1":"#D499FF","--color-purple":"#C87AFF","--color-purple-l1":"#B54DFF","--color-purple-l2":"#9F1AFF","--color-purple-l3":"#8C00F0","--color-purple-l4":"#6800B2","--color-purple-l5":"#47007A","--color-yellow-d4":"#FFF8E5","--color-yellow-d3":"#FFEAB2","--color-yellow-d2":"#FFDC7A","--color-yellow-d1":"#FFCC42","--color-yellow":"#FFC524","--color-yellow-l1":"#D69C00","--color-yellow-l2":"#B88600","--color-yellow-l3":"#8A6500","--color-yellow-l4":"#664E00","--color-yellow-l5":"#473400","--color-cyan-d4":"#D1EFFF","--color-cyan-d3":"#99DDFF","--color-cyan-d2":"#70CFFF","--color-cyan-d1":"#38BDFF","--color-cyan":"#05ACFF","--color-cyan-l1":"#0095E0","--color-cyan-l2":"#007EBD","--color-cyan-l3":"#006699","--color-cyan-l4":"#004E75","--color-cyan-l5":"#00334D","--color-indigo-d4":"#F0F1FF","--color-indigo-d3":"#D1D6FF","--color-indigo-d2":"#BDC3FF","--color-indigo-d1":"#A8B1FF","--color-indigo":"#8A95FF","--color-indigo-l1":"#5C6DFF","--color-indigo-l2":"#384CFF","--color-indigo-l3":"#0019FA","--color-indigo-l4":"#0013C2","--color-indigo-l5":"#000A66"}},"dark-hc":{"label":"High contrast","group":"HC Dark","over":{"--focus-ring":"0 0 0 2px var(--color-dark, #1C1C24), 0 0 0 4px var(--color-primary-l0, #C7DAFF)","--color-primary-d3":"#F0F5FF","--color-primary-d2":"#D6E4FF","--color-primary-d1":"#C7DAFF","--color-primary":"#B3CDFF","--color-primary-l0":"#003EB2","--color-primary-l1":"#00318F","--color-primary-l2":"#002366","--color-primary-l3":"#001A4D","--color-secondary":"#F6F6F8","--color-secondary-l0":"#D9D9E3","--color-secondary-l1":"#BCBDCC","--color-secondary-l2":"#A5A7BB","--color-secondary-l3":"#8B8DA7","--color-dark-d2":"#FFFFFF","--color-dark-d1":"#F7F8F9","--color-dark":"#F1F2F5","--color-dark-l1":"#E2E4EA","--color-dark-l2":"#E2E4EA","--color-light-d2":"#30313F","--color-light-d1":"#30313F","--color-light":"#272833","--color-light-l1":"#111116","--color-white":"#111116","--color-success-d2":"#C9EED2","--color-success-d1":"#A2E1B2","--color-success":"#8CD99E","--color-success-l1":"#26783A","--color-success-l2":"#1A5127","--color-info-d2":"#DFE7F7","--color-info-d1":"#CAD8F1","--color-info":"#B6C9EC","--color-info-l1":"#254A8D","--color-info-l2":"#1F3D75","--color-warning-d2":"#FFD9BD","--color-warning-d1":"#FFCBA3","--color-warning":"#FFB780","--color-warning-l1":"#B24D00","--color-warning-l2":"#863A00","--color-danger-d2":"#FDDEDE","--color-danger-d1":"#FAC7C7","--color-danger":"#F8B0B0","--color-danger-l1":"#B61111","--color-danger-l2":"#750B0B","--blue":"#94C4FF","--blue-d4":"#F0F7FF","--blue-d3":"#D6E9FF","--blue-d2":"#C2DDFF","--blue-d1":"#A8CFFF","--blue-l1":"#006CF0","--blue-l2":"#005DC7","--blue-l3":"#004594","--blue-l4":"#002F66","--blue-l5":"#002147","--orange":"#FFB385","--orange-d4":"#FFF6F0","--orange-d3":"#FFE6D6","--orange-d2":"#FFD6BD","--orange-d1":"#FFC39E","--orange-l1":"#EB5A00","--orange-l2":"#C24A00","--orange-l3":"#A33F00","--orange-l4":"#803100","--orange-l5":"#3D1700","--red":"#FFADAD","--red-d4":"#FFF5F5","--red-d3":"#FFE0E0","--red-d2":"#FFD6D6","--red-d1":"#FFC7C7","--red-l1":"#F50000","--red-l2":"#C20000","--red-l3":"#990000","--red-l4":"#700000","--red-l5":"#420000","--teal":"#67DFCA","--teal-d4":"#EAFBF8","--teal-d3":"#CCF4ED","--teal-d2":"#B3EFE5","--teal-d1":"#96E9DB","--teal-l1":"#28BEA4","--teal-l2":"#1F9380","--teal-l3":"#197667","--teal-l4":"#12594E","--teal-l5":"#0D3B34","--pink":"#FFADDC","--pink-d4":"#FFF5FB","--pink-d3":"#FFE5F4","--pink-d2":"#FFD6ED","--pink-d1":"#FFC7E7","--pink-l1":"#F5008B","--pink-l2":"#C2006E","--pink-l3":"#940053","--pink-l4":"#610037","--pink-l5":"#3D0022","--green":"#79E029","--green-d4":"#F1FCE9","--green-d3":"#CFF4B3","--green-d2":"#A6EA70","--green-d1":"#92E651","--green-l1":"#57AA18","--green-l2":"#498F14","--green-l3":"#3A6F10","--green-l4":"#29500C","--green-l5":"#162D06","--purple":"#E1B8FF","--purple-d4":"#F5EBFF","--purple-d3":"#ECD1FF","--purple-d2":"#ECD1FF","--purple-d1":"#ECD1FF","--purple-l1":"#9B0FFF","--purple-l2":"#7F00DB","--purple-l3":"#6E00BD","--purple-l4":"#590099","--purple-l5":"#3C0066","--yellow":"#FFC524","--yellow-d4":"#FFF8E5","--yellow-d3":"#FFEAB2","--yellow-d2":"#FFDC7A","--yellow-d1":"#FFCC42","--yellow-l1":"#D69C00","--yellow-l2":"#B88600","--yellow-l3":"#8A6500","--yellow-l4":"#664E00","--yellow-l5":"#473400","--cyan":"#75D1FF","--cyan-d4":"#E5F6FF","--cyan-d3":"#C7ECFF","--cyan-d2":"#ADE4FF","--cyan-d1":"#94DBFF","--cyan-l1":"#0095E0","--cyan-l2":"#0073AD","--cyan-l3":"#005F8F","--cyan-l4":"#00476B","--cyan-l5":"#00334D","--indigo":"#BDC3FF","--indigo-d4":"#F0F1FF","--indigo-d3":"#D6DAFF","--indigo-d2":"#D6DAFF","--indigo-d1":"#D6DAFF","--indigo-l1":"#051FFF","--indigo-l2":"#0015D1","--indigo-l3":"#0012B2","--indigo-l4":"#000D85","--indigo-l5":"#000A66"}},"dark-hc-lrdc":{"label":"High contrast LRDC","group":"HC Dark","over":{"--focus-ring":"0 0 0 2px var(--color-dark, #1C1C24), 0 0 0 4px var(--color-primary-l0, #C7DAFF)","--color-primary-d3":"#F0F5FF","--color-primary-d2":"#F0F5FF","--color-primary-d1":"#C7DAFF","--color-primary":"#B3CDFF","--color-primary-l0":"#003EB2","--color-primary-l1":"#00318F","--color-primary-l2":"#002366","--color-primary-l3":"#001A4D","--color-secondary":"#F6F6F8","--color-secondary-l0":"#D9D9E3","--color-secondary-l1":"#BCBDCC","--color-secondary-l2":"#A5A7BB","--color-secondary-l3":"#8B8DA7","--color-dark-d2":"#FFFFFF","--color-dark-d1":"#FFFFFF","--color-dark":"#EAECF3","--color-dark-l1":"#EAECF3","--color-dark-l2":"#EAECF3","--color-light-d2":"#404B5D","--color-light-d1":"#404B5D","--color-light":"#1F2531","--color-light-l1":"#070B13","--color-white":"#070B13","--color-success-d2":"#D9F2DF","--color-success-d1":"#A2E1B2","--color-success":"#8CD99E","--color-success-l1":"#26783A","--color-success-l2":"#102E16","--color-info-d2":"#F3F6FC","--color-info-d1":"#CAD8F1","--color-info":"#B6C9EC","--color-info-l1":"#254A8D","--color-info-l2":"#0C172C","--color-warning-d2":"#FFF4EC","--color-warning-d1":"#FFCBA3","--color-warning":"#FFB780","--color-warning-l1":"#B24D00","--color-warning-l2":"#331600","--color-danger-d2":"#FEF1F1","--color-danger-d1":"#FAC7C7","--color-danger":"#F8B0B0","--color-danger-l1":"#B61111","--color-danger-l2":"#420606","--blue":"#94C4FF","--blue-d4":"#F0F7FF","--blue-d3":"#D6E9FF","--blue-d2":"#C2DDFF","--blue-d1":"#A8CFFF","--blue-l1":"#006CF0","--blue-l2":"#005DC7","--blue-l3":"#004594","--blue-l4":"#002F66","--blue-l5":"#002147","--orange":"#FFB385","--orange-d4":"#FFF6F0","--orange-d3":"#FFE6D6","--orange-d2":"#FFD6BD","--orange-d1":"#FFC39E","--orange-l1":"#EB5A00","--orange-l2":"#C24A00","--orange-l3":"#A33F00","--orange-l4":"#803100","--orange-l5":"#3D1700","--red":"#FFADAD","--red-d4":"#FFF5F5","--red-d3":"#FFE0E0","--red-d2":"#FFD6D6","--red-d1":"#FFC7C7","--red-l1":"#F50000","--red-l2":"#C20000","--red-l3":"#990000","--red-l4":"#700000","--red-l5":"#420000","--teal":"#67DFCA","--teal-d4":"#EAFBF8","--teal-d3":"#CCF4ED","--teal-d2":"#B3EFE5","--teal-d1":"#96E9DB","--teal-l1":"#28BEA4","--teal-l2":"#1F9380","--teal-l3":"#197667","--teal-l4":"#12594E","--teal-l5":"#0D3B34","--pink":"#FFADDC","--pink-d4":"#FFF5FB","--pink-d3":"#FFE5F4","--pink-d2":"#FFD6ED","--pink-d1":"#FFC7E7","--pink-l1":"#F5008B","--pink-l2":"#C2006E","--pink-l3":"#940053","--pink-l4":"#610037","--pink-l5":"#3D0022","--green":"#79E029","--green-d4":"#F1FCE9","--green-d3":"#CFF4B3","--green-d2":"#A6EA70","--green-d1":"#92E651","--green-l1":"#57AA18","--green-l2":"#498F14","--green-l3":"#3A6F10","--green-l4":"#29500C","--green-l5":"#162D06","--purple":"#E1B8FF","--purple-d4":"#F5EBFF","--purple-d3":"#ECD1FF","--purple-d2":"#ECD1FF","--purple-d1":"#ECD1FF","--purple-l1":"#9B0FFF","--purple-l2":"#7F00DB","--purple-l3":"#6E00BD","--purple-l4":"#590099","--purple-l5":"#3C0066","--yellow":"#FFC524","--yellow-d4":"#FFF8E5","--yellow-d3":"#FFEAB2","--yellow-d2":"#FFDC7A","--yellow-d1":"#FFCC42","--yellow-l1":"#D69C00","--yellow-l2":"#B88600","--yellow-l3":"#8A6500","--yellow-l4":"#664E00","--yellow-l5":"#473400","--cyan":"#75D1FF","--cyan-d4":"#E5F6FF","--cyan-d3":"#C7ECFF","--cyan-d2":"#ADE4FF","--cyan-d1":"#94DBFF","--cyan-l1":"#0095E0","--cyan-l2":"#0073AD","--cyan-l3":"#005F8F","--cyan-l4":"#00476B","--cyan-l5":"#00334D","--indigo":"#BDC3FF","--indigo-d4":"#F0F1FF","--indigo-d3":"#D6DAFF","--indigo-d2":"#D6DAFF","--indigo-d1":"#D6DAFF","--indigo-l1":"#051FFF","--indigo-l2":"#0015D1","--indigo-l3":"#0012B2","--indigo-l4":"#000D85","--indigo-l5":"#000A66","--color-blue-d4":"#F0F7FF","--color-blue-d3":"#D6E9FF","--color-blue-d2":"#C2DDFF","--color-blue-d1":"#A8CFFF","--color-blue":"#94C4FF","--color-blue-l1":"#006CF0","--color-blue-l2":"#005DC7","--color-blue-l3":"#004594","--color-blue-l4":"#002F66","--color-blue-l5":"#002147","--color-orange-d4":"#FFF6F0","--color-orange-d3":"#FFE6D6","--color-orange-d2":"#FFD6BD","--color-orange-d1":"#FFC39E","--color-orange":"#FFB385","--color-orange-l1":"#EB5A00","--color-orange-l2":"#C24A00","--color-orange-l3":"#A33F00","--color-orange-l4":"#803100","--color-orange-l5":"#3D1700","--color-red-d4":"#FFF5F5","--color-red-d3":"#FFE0E0","--color-red-d2":"#FFD6D6","--color-red-d1":"#FFC7C7","--color-red":"#FFADAD","--color-red-l1":"#F50000","--color-red-l2":"#C20000","--color-red-l3":"#990000","--color-red-l4":"#700000","--color-red-l5":"#420000","--color-teal-d4":"#EAFBF8","--color-teal-d3":"#CCF4ED","--color-teal-d2":"#B3EFE5","--color-teal-d1":"#96E9DB","--color-teal":"#67DFCA","--color-teal-l1":"#28BEA4","--color-teal-l2":"#1F9380","--color-teal-l3":"#197667","--color-teal-l4":"#12594E","--color-teal-l5":"#0D3B34","--color-pink-d4":"#FFF5FB","--color-pink-d3":"#FFE5F4","--color-pink-d2":"#FFD6ED","--color-pink-d1":"#FFC7E7","--color-pink":"#FFADDC","--color-pink-l1":"#F5008B","--color-pink-l2":"#C2006E","--color-pink-l3":"#940053","--color-pink-l4":"#610037","--color-pink-l5":"#3D0022","--color-green-d4":"#F1FCE9","--color-green-d3":"#CFF4B3","--color-green-d2":"#A6EA70","--color-green-d1":"#92E651","--color-green":"#79E029","--color-green-l1":"#57AA18","--color-green-l2":"#498F14","--color-green-l3":"#3A6F10","--color-green-l4":"#29500C","--color-green-l5":"#162D06","--color-purple-d4":"#F5EBFF","--color-purple-d3":"#ECD1FF","--color-purple-d2":"#ECD1FF","--color-purple-d1":"#ECD1FF","--color-purple":"#E1B8FF","--color-purple-l1":"#9B0FFF","--color-purple-l2":"#7F00DB","--color-purple-l3":"#6E00BD","--color-purple-l4":"#590099","--color-purple-l5":"#3C0066","--color-yellow-d4":"#FFF8E5","--color-yellow-d3":"#FFEAB2","--color-yellow-d2":"#FFDC7A","--color-yellow-d1":"#FFCC42","--color-yellow":"#FFC524","--color-yellow-l1":"#D69C00","--color-yellow-l2":"#B88600","--color-yellow-l3":"#8A6500","--color-yellow-l4":"#664E00","--color-yellow-l5":"#473400","--color-cyan-d4":"#E5F6FF","--color-cyan-d3":"#C7ECFF","--color-cyan-d2":"#ADE4FF","--color-cyan-d1":"#94DBFF","--color-cyan":"#75D1FF","--color-cyan-l1":"#0095E0","--color-cyan-l2":"#0073AD","--color-cyan-l3":"#005F8F","--color-cyan-l4":"#00476B","--color-cyan-l5":"#00334D","--color-indigo-d4":"#F0F1FF","--color-indigo-d3":"#D6DAFF","--color-indigo-d2":"#D6DAFF","--color-indigo-d1":"#D6DAFF","--color-indigo":"#BDC3FF","--color-indigo-l1":"#051FFF","--color-indigo-l2":"#0015D1","--color-indigo-l3":"#0012B2","--color-indigo-l4":"#000D85","--color-indigo-l5":"#000A66"}},"light":{"label":"Light","group":"Referencia","over":{}}}};
+window.SB_CANDS = [{"id":"native","label":"Native","thumb":"\u2014","track":"\u2014"},{"id":"ghost","label":"Thumb only","thumb":"--color-secondary-l2","track":"none"},{"id":"lexicon","label":"Thumb + track","thumb":"--color-secondary-l2","track":"--color-light"},{"id":"quiet","label":"Subtle","thumb":"--color-light-d2","track":"--color-light-l1"},{"id":"strong","label":"Strong","thumb":"--color-secondary-l1","track":"--color-light"}];
+
+</script>
+<script>
+
+
+(function () {
+  'use strict';
+
+  var PAL   = window.SB_PALETTES;
+  var CANDS = window.SB_CANDS;
+  var SURF  = ['--color-white', '--color-light-l1', '--color-light'];
+  var root  = document.documentElement;
+  var tbody = document.getElementById('contrast-body');
+
+  var probe = document.createElement('span');
+  probe.style.cssText = 'position:absolute;left:-9999px;top:0;width:0;height:0';
+  document.body.appendChild(probe);
+
+  /* ── colour ───────────────────────────────────────────── */
+  function toRgb(value) {
+    if (!value || value === 'transparent') return null;
+    probe.style.color = '';
+    probe.style.color = value;
+    var m = getComputedStyle(probe).color.match(/rgba?\(([^)]+)\)/);
+    if (!m) return null;
+    var p = m[1].split(/[,\s\/]+/).filter(function (s) { return s !== ''; }).map(Number);
+    if (p.length > 3 && p[3] === 0) return null;
+    return { r: p[0], g: p[1], b: p[2] };
+  }
+  function lum(c) {
+    function f(v) { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }
+    return 0.2126 * f(c.r) + 0.7152 * f(c.g) + 0.0722 * f(c.b);
+  }
+  function ratio(a, b) {
+    if (!a || !b) return null;
+    var la = lum(a), lb = lum(b);
+    return (Math.max(la, lb) + 0.05) / (Math.min(la, lb) + 0.05);
+  }
+  function name(token) {
+    return token && token !== 'none'
+      ? '<code>' + token + '</code>'
+      : '<span class="sb-none">none</span>';
+  }
+  function css(c) { return c ? 'rgb(' + [c.r, c.g, c.b] + ')' : 'transparent'; }
+  function fmt(n) { return (n == null || !isFinite(n)) ? '—' : n.toFixed(2).replace('.', ','); }
+  function verdict(n) {
+    if (n == null || !isFinite(n)) return '<span>—</span>';
+    if (n >= 3)   return '<span class="sb-pass">a control</span>';
+    if (n >= 2)   return '<span class="sb-mid">borderline</span>';
+    return '<span class="sb-low">barely visible</span>';
+  }
+
+  /* ── themes ───────────────────────────────────────────── */
+  var current = 'dark';
+  function applyPalette(id) {
+    current = id;
+    var over = PAL.palettes[id].over;
+    Object.keys(PAL.base).forEach(function (k) { root.style.removeProperty(k); });
+    Object.keys(over).forEach(function (k) { root.style.setProperty(k, over[k]); });
+    root.style.colorScheme = id === 'light' ? 'light' : 'dark';
+    [].forEach.call(document.querySelectorAll('#skin-chips .sb-chip'), function (b) {
+      b.classList.toggle('is-active', b.dataset.skin === id);
+    });
+    render();
+  }
+
+  var chips = document.getElementById('skin-chips');
+  Object.keys(PAL.palettes).forEach(function (id) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'sb-chip';
+    b.dataset.skin = id;
+    b.textContent = PAL.palettes[id].label;
+    b.addEventListener('click', function () { applyPalette(id); });
+    chips.appendChild(b);
+  });
+
+  /* ── thickness and corners ────────────────────────────── */
+  var sr = document.getElementById('size-range'), so = document.getElementById('size-out');
+  function sizeGo() { root.style.setProperty('--sb-size', sr.value + 'px'); so.textContent = sr.value + 'px'; }
+  sr.addEventListener('input', sizeGo); sizeGo();
+
+  var rad = document.getElementById('radius-sel');
+  rad.addEventListener('change', function () { root.style.setProperty('--sb-radius', rad.value); });
+
+  /* ── the chosen option ────────────────────────────────── */
+  var finalist = 'ghost';
+  var fchips = document.getElementById('finalist-chips');
+  CANDS.forEach(function (c) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'sb-chip' + (c.id === finalist ? ' is-active' : '');
+    b.textContent = c.label;
+    b.addEventListener('click', function () {
+      finalist = c.id;
+      [].forEach.call(document.querySelectorAll('[data-finalist]'), function (el) {
+        el.setAttribute('data-sb', c.id);
+      });
+      root.setAttribute('data-sb', c.id);
+      [].forEach.call(fchips.children, function (o) { o.classList.toggle('is-active', o === b); });
+    });
+    fchips.appendChild(b);
+  });
+  root.setAttribute('data-sb', finalist);
+
+  /* ── readouts ─────────────────────────────────────────── */
+  function scheme(id) {
+    var el = document.querySelector('.sb-box[data-sb="' + id + '"]');
+    if (!el) return null;
+    var cs = getComputedStyle(el);
+    return {
+      thumb: toRgb(cs.getPropertyValue('--sb-thumb').trim()),
+      track: toRgb(cs.getPropertyValue('--sb-track').trim())
+    };
+  }
+
+  function render() {
+    var surf = SURF.map(function (t) {
+      return toRgb(getComputedStyle(root).getPropertyValue(t).trim());
+    });
+    tbody.innerHTML = '';
+
+    CANDS.forEach(function (c) {
+      if (c.id === 'native') return;
+      var s = scheme(c.id);
+      if (!s) return;
+
+      // thumb against each panel level: that is what the eye sees at the edge
+      var rows = surf.map(function (bg) { return ratio(s.thumb, bg); });
+      // and, when there is a track, against its own track
+      var vsTrack = s.track ? ratio(s.thumb, s.track) : null;
+      var all = rows.concat(vsTrack == null ? [] : [vsTrack]);
+      var worst = Math.min.apply(null, all.filter(function (r) { return r != null; }));
+
+      var tr = document.createElement('tr');
+      tr.innerHTML =
+        '<td>' + c.label + '</td>' +
+        '<td><span class="sb-hex"><span class="sb-swatch" style="background:' + css(s.thumb) + '"></span>' + name(c.thumb) + '</span></td>' +
+        '<td><span class="sb-hex"><span class="sb-swatch' + (s.track ? '' : ' sb-swatch--empty') + '" style="background:' + css(s.track) + '"></span>' + name(c.track) + (vsTrack ? ' <span class="sb-vs">' + fmt(vsTrack) + '</span>' : '') + '</span></td>' +
+        '<td class="num">' + fmt(rows[0]) + '</td>' +
+        '<td class="num">' + fmt(rows[1]) + '</td>' +
+        '<td class="num">' + fmt(rows[2]) + '</td>' +
+        '<td>' + verdict(worst) + '</td>';
+      tbody.appendChild(tr);
+
+      var foot = document.getElementById('foot-' + c.id);
+      if (foot) {
+        foot.querySelector('[data-swatch="thumb"]').style.background = css(s.thumb);
+        var tsw = foot.querySelector('[data-swatch="track"]');
+        tsw.style.background = css(s.track);
+        tsw.classList.toggle('sb-swatch--empty', !s.track);
+        foot.querySelector('[data-hex="thumb"]').innerHTML = name(c.thumb);
+        foot.querySelector('[data-hex="track"]').innerHTML = name(c.track);
+        foot.querySelector('[data-verdict]').innerHTML = fmt(worst) + ' · ' + verdict(worst);
+      }
+    });
+  }
+
+  /* ── shortcut ─────────────────────────────────────────── */
+  document.addEventListener('keydown', function (e) {
+    if (e.target && e.target.matches && e.target.matches('input, select, textarea')) return;
+    if (e.key === 't' || e.key === 'T') {
+      var ids = Object.keys(PAL.palettes);
+      applyPalette(ids[(ids.indexOf(current) + 1) % ids.length]);
+    }
+  });
+
+  applyPalette('dark');
+})();
+
+
+</script>
+<script>
+(function () {
+  var wipe = document.querySelector('.wipe');
+  if (!wipe) return;
+  document.querySelectorAll('a[data-wipe]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+      e.preventDefault();
+      wipe.style.background = link.dataset.wipe;
+      wipe.classList.add('anim', 'cover');
+      setTimeout(function () { window.location.href = link.href; }, 460);
+    });
+  });
+  window.addEventListener('pageshow', function () { wipe.classList.remove('anim', 'cover'); });
+})();
+</script>
+</body>
+</html>
