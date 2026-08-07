@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Input Text AI Variant from DIEGOALO</title>
+<meta name="description" content="The five AI states of Lexicon's text input, light and dark, rendered with the real stylesheet from DXP 7.4.13-u152.">
+<link rel="canonical" href="https://diegoalo.github.io/liferay-tests/input-text-ai-variant.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DIEGOALO">
+<meta property="og:title" content="Input Text AI Variant from DIEGOALO">
+<meta property="og:description" content="The five AI states of Lexicon's text input, light and dark, rendered with the real stylesheet from DXP 7.4.13-u152.">
+<meta property="og:url" content="https://diegoalo.github.io/liferay-tests/input-text-ai-variant.html">
+<meta property="og:image" content="https://diegoalo.com/assets/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@_diegoalo">
+<style>
+/* ── Lexicon tokens ─────────────────────────────────────────────────────── */
+/* ============================================================
+   Lexicon base tokens — vanilla
+   Copy of tokens.css trimmed to colors, spacing, typography,
+   radius and shadow. Light mode only — no theming layer.
+   ============================================================ */
+
+:root {
+
+  /* ── Color: Primary ── */
+  --color-primary-d2: #004AD7;
+  --color-primary-d1: #0053F0;
+  --color-primary:    #0B5FFF;
+  --color-primary-l0: #5791FF;
+  --color-primary-l1: #80ACFF;
+  --color-primary-l2: #B3CDFF;
+  --color-primary-l3: #F0F5FF;
+
+  /* ── Color: Secondary ── */
+  --color-secondary:    #6B6C7E;
+  --color-secondary-l0: #9393A4;
+  --color-secondary-l1: #A7A9BC;
+  --color-secondary-l2: #CDCED9;
+  --color-secondary-l3: #E7E7ED;
+
+  /* ── Color: Dark / Light ── */
+  --color-dark-d2: #111116;
+  --color-dark-d1: #1C1C24;
+  --color-dark:    #272833;
+  --color-dark-l1: #30313F;
+  --color-dark-l2: #393A4A;
+  --color-light-d2: #D3D6E0;
+  --color-light-d1: #E2E4EA;
+  --color-light:    #F1F2F5;
+  --color-light-l1: #F7F8F9;
+  --color-white:    #FFFFFF;
+
+  /* ── Color: Success ── */
+  --color-success-d2: #1C5629;
+  --color-success-d1: #226A33;
+  --color-success:    #287D3C;
+  --color-success-l1: #5ACA75;
+  --color-success-l2: #EDF9F0;
+
+  /* ── Color: Info ── */
+  --color-info-d2: #234584;
+  --color-info-d1: #294F98;
+  --color-info:    #2E5AAC;
+  --color-info-l1: #89A7E0;
+  --color-info-l2: #EEF2FA;
+
+  /* ── Color: Warning ── */
+  --color-warning-d2: #863A00;
+  --color-warning-d1: #9F4500;
+  --color-warning:    #B95000;
+  --color-warning-l1: #FF8F39;
+  --color-warning-l2: #FFF4EC;
+
+  /* ── Color: Danger ── */
+  --color-danger-d2: #AB1010;
+  --color-danger-d1: #C31212;
+  --color-danger:    #DA1414;
+  --color-danger-l1: #F48989;
+  --color-danger-l2: #FEEFEF;
+
+  /* ── Spacing ── */
+  --spacing-1:   2px;
+  --spacing-2:   4px;
+  --spacing-2-5: 6px;
+  --spacing-3:   8px;
+  --spacing-4:   12px;
+  --spacing-5:   16px;
+  --spacing-6:   20px;
+  --spacing-7:   24px;
+  --spacing-8:   32px;
+  --spacing-9:   40px;
+  --spacing-10: 48px;
+
+  /* ── Border radius ── */
+  --rounded-sm:    2px;
+  --rounded-md:    4px;
+  --rounded-lg:    8px;
+  --rounded-xl:    16px;
+  --rounded-full:  9999px;
+
+  /* ── Typography ── */
+  --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-size-xs:   10px;
+  --font-size-sm:   12px;
+  --font-size-base: 14px;
+  --font-size-md:   16px;
+  --font-size-lg:   18px;
+  --font-size-xl:   20px;
+  --font-size-2xl:  28px;
+  --font-size-3xl:  32px;
+  --font-weight-normal: 300;
+  --font-weight-semi:   400;
+  --font-weight-bold:   600;
+  --line-height-base:   1.5;
+
+  /* ── Shadow ── */
+  --shadow-sm:         0 1px 2px rgba(39, 40, 51, 0.10);
+  --shadow-card:       0 2px 4px rgba(39, 40, 51, 0.12);
+  --shadow-md:         0 2px 8px rgba(39, 40, 51, 0.14);
+  --shadow-dropdown:   0 4px 8px rgba(39, 40, 51, 0.12);
+  --shadow-lg:         0 4px 16px rgba(39, 40, 51, 0.18);
+  --shadow-alert:      0 8px 16px rgba(39, 40, 51, 0.20);
+  /* Scroll shadows — a soft edge cast by sticky chrome (header / footer) over
+     scrolling content, shown only while content is clipped past that edge. */
+  --shadow-scroll-top:    0 4px 24px rgba(0, 0, 0, 0.08);
+  --shadow-scroll-bottom: 0 -4px 24px rgba(0, 0, 0, 0.08);
+
+  /* ── Focus ring ── */
+  --focus-ring: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-primary-l0);
+
+  /* ── Chart colors ── */
+  --blue-d4: #004799;
+  --blue-d3: #0053B3;
+  --blue-d2: #005FCC;
+  --blue-d1: #006BE6;
+  --blue:    #006EFF;
+  --blue-l1: #338FFF;
+  --blue-l2: #66ABFF;
+  --blue-l3: #97C5FF;
+  --blue-l4: #CCE3FF;
+  --blue-l5: #E5F1FF;
+
+  --orange-d4: #662700;
+  --orange-d3: #803100;
+  --orange-d2: #993B00;
+  --orange-d1: #B34400;
+  --orange:    #CC4E00;
+  --orange-l1: #FF6200;
+  --orange-l2: #FF8133;
+  --orange-l3: #FFA166;
+  --orange-l4: #FFC099;
+  --orange-l5: #FFF0E5;
+
+  --red-d4: #800000;
+  --red-d3: #990000;
+  --red-d2: #B30000;
+  --red-d1: #CC0000;
+  --red:    #E50000;
+  --red-l1: #FF4D4D;
+  --red-l2: #FF6666;
+  --red-l3: #FF8080;
+  --red-l4: #FF9999;
+  --red-l5: #FFE5E5;
+
+  --teal-d4: #092A25;
+  --teal-d3: #0D3F37;
+  --teal-d2: #125449;
+  --teal-d1: #16695B;
+  --teal:    #1B7E6E;
+  --teal-l1: #24A892;
+  --teal-l2: #42D7BE;
+  --teal-l3: #6CE0CC;
+  --teal-l4: #96E9DB;
+  --teal-l5: #EAFBF8;
+
+  --pink-d4: #800048;
+  --pink-d3: #990057;
+  --pink-d2: #B30065;
+  --pink-d1: #CC0074;
+  --pink:    #E50082;
+  --pink-l1: #FF4DB2;
+  --pink-l2: #FF80C8;
+  --pink-l3: #FF99D3;
+  --pink-l4: #FFB2DE;
+  --pink-l5: #FFE5F4;
+
+  --green-d4: #162D06;
+  --green-d3: #22430A;
+  --green-d2: #2E590D;
+  --green-d1: #397010;
+  --green:    #458613;
+  --green-l1: #53A117;
+  --green-l2: #67C91D;
+  --green-l3: #81E236;
+  --green-l4: #9DE963;
+  --green-l5: #F1FCE9;
+
+  --purple-d4: #7700CC;
+  --purple-d3: #8600E6;
+  --purple-d2: #9500FF;
+  --purple-d1: #9F1AFF;
+  --purple:    #AA33FF;
+  --purple-l1: #BF66FF;
+  --purple-l2: #CA80FF;
+  --purple-l3: #D499FF;
+  --purple-l4: #DFB3FF;
+  --purple-l5: #F2E5FF;
+
+  --yellow-d4: #997000;
+  --yellow-d3: #B38900;
+  --yellow-d2: #CC9600;
+  --yellow-d1: #E6A800;
+  --yellow:    #FFBB00;
+  --yellow-l1: #FFC933;
+  --yellow-l2: #FFD666;
+  --yellow-l3: #FFE499;
+  --yellow-l4: #FFF1CC;
+  --yellow-l5: #FFF8E5;
+
+  --cyan-d4: #00334D;
+  --cyan-d3: #004466;
+  --cyan-d2: #005580;
+  --cyan-d1: #006699;
+  --cyan:    #0077B3;
+  --cyan-l1: #0099E6;
+  --cyan-l2: #33BBFF;
+  --cyan-l3: #66CCFF;
+  --cyan-l4: #99DDFF;
+  --cyan-l5: #E5F6FF;
+
+  --indigo-d4: #0017E5;
+  --indigo-d3: #001AFF;
+  --indigo-d2: #1A30FF;
+  --indigo-d1: #3347FF;
+  --indigo:    #4D5FFF;
+  --indigo-l1: #808CFF;
+  --indigo-l2: #99A3FF;
+  --indigo-l3: #B2BAFF;
+  --indigo-l4: #CCD1FF;
+  --indigo-l5: #E5E8FF;
+}
+
+/* Sensible defaults for the document */
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+
+body {
+  margin: 0;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--color-dark);
+  background: var(--color-white);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.25;
+  margin: 0;
+}
+
+p { margin: 0; }
+
+a { color: var(--color-primary); }
+a:hover { color: var(--color-primary-d1); }
+
+/* ============================================================
+   SKELETON tokens — loading-state shapes and shimmer sweep.
+   Shape and surface resolve from the semantic scale (they flip
+   per skin automatically); the shimmer gradient needs raw RGB
+   components, overridden for dark skins in tokens-dark.css.
+   ============================================================ */
+:root {
+  --skeleton-shape: var(--color-secondary-l3);
+  --skeleton-surface: var(--color-light-l1);
+  --skeleton-shimmer-rgb: 247, 248, 249;  /* light-l1 */
+  --skeleton-shimmer-alpha: 0.6;
+}
+
+/* ============================================================
+   CHART tokens — categorical series, sequential buckets and
+   plot structure.
+   Categorical series alias the base chart hues (--yellow, --blue,
+   …) in a fixed order chosen for maximum adjacent contrast and
+   accessibility; the base hues already carry per-skin overrides,
+   so charts reskin for free. (Never point a series at a -l2/-l3
+   tint — those collapse to near-white in the HC skins.) The
+   sequential buckets alias the --blue scale, and the structural
+   tokens alias the semantic scale so grid / track / halo / axis /
+   land flip per skin automatically.
+   ============================================================ */
+:root {
+  /* Categorical series — bar (stacked), pie, multi-series line.
+     Ordered for maximum adjacent contrast + accessibility; alias
+     the base chart hues so each series reskins per skin. */
+  --chart-1:  var(--yellow);
+  --chart-2:  var(--blue);
+  --chart-3:  var(--orange);
+  --chart-4:  var(--teal);
+  --chart-5:  var(--pink);
+  --chart-6:  var(--cyan);
+  --chart-7:  var(--red);
+  --chart-8:  var(--purple);
+  --chart-9:  var(--green);
+  --chart-10: var(--indigo);
+
+  /* Sequential buckets — single hue, less → more (map, heat) */
+  --chart-seq-1: var(--blue-l4);
+  --chart-seq-2: var(--blue-l2);
+  --chart-seq-3: var(--blue);
+
+  /* Plot structure — flip per skin through the semantic scale */
+  --chart-track:     var(--color-light-d1);   /* bar track / gridlines (#E2E4EA) */
+  --chart-grid:      var(--color-light-d1);   /* axis gridlines */
+  --chart-halo:      var(--color-white);      /* marker + segment separators */
+  --chart-axis:      var(--color-secondary);  /* axis + tick labels */
+  --chart-land:      var(--color-light);      /* map land fill (#F1F2F5) */
+  --chart-land-line: var(--color-light-d1);   /* map land borders (#E2E4EA) */
+}
+
+/* ── Lexicon components, only the rules this page uses ──────────────────── */
+.lexicon-icon{
+  display: inline-block;
+  width: 16px;   /* default size */
+  height: 16px;
+  fill: currentColor;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+.alert{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--spacing-5);          /* 16 between sections */
+  padding: var(--spacing-5);      /* 16 inside container */
+  border: 1px solid;
+  border-radius: var(--rounded-md);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+}
+.alert--toast{
+  box-shadow: var(--shadow-alert);
+}
+.alert__content{
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-3);          /* 8 between icon and text */
+  padding: var(--spacing-2-5) 0 var(--spacing-2); /* 6px top, 4px bottom */
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.alert__content .lexicon-icon{ margin-top: var(--spacing-1); flex-shrink: 0; }
+.alert__text{
+  margin: 0;
+  min-width: 0;
+  color: inherit;                 /* inherits validation color from .alert--{x} */
+}
+.alert__text strong{
+  font-weight: var(--font-weight-bold);
+}
+.alert--warning{ background: var(--color-warning-l2); border-color: var(--color-warning-l1); color: var(--color-warning); }
+.alert--danger{ background: var(--color-danger-l2);  border-color: var(--color-danger-l1);  color: var(--color-danger);  }
+.control-menu{
+  align-items: center;
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-light-d2);
+  display: flex;
+  gap: var(--spacing-5);
+  padding: calc(var(--spacing-2) + var(--spacing-2-5)) var(--spacing-5);
+  width: 100%;
+}
+.control-menu__left{
+  align-items: center;
+  display: flex;
+  flex: 1;
+  gap: var(--spacing-5);
+  min-width: 0;
+}
+.control-menu__title{
+  color: var(--color-dark);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* ── Compiled Lexicon admin styles from DXP 7.4.13-u152, subset to this page.
+      This is what paints the input itself, unmodified. ───────────────────── */
+html:not(#__):not(#___):root .cadmin{color-scheme:light dark;--cadmin-black:light-dark(#000, #fff);--cadmin-white:light-dark(#fff, #1b1b23);--cadmin-gray-100:light-dark(#f7f8f9, #272833);--cadmin-gray-200:light-dark(#f1f2f5, #393a4a);--cadmin-gray-300:light-dark(#e7e7ed, #495057);--cadmin-gray-400:light-dark(#cdced9, #6b6c7e);--cadmin-gray-500:light-dark(#a7a9bc, #a7a9bc);--cadmin-gray-600:light-dark(#6b6c7e, #cdced9);--cadmin-gray-700:light-dark(#495057, #e7e7ed);--cadmin-gray-800:light-dark(#393a4a, #f1f2f5);--cadmin-gray-900:light-dark(#272833, #f7f8f9);--cadmin-blue-d1:light-dark(#006be6, #70b1ff);--cadmin-blue-d2:light-dark(#005fcc, #94c4ff);--cadmin-blue-d3:light-dark(#0053b3, #b8d8ff);--cadmin-blue-d4:light-dark(#004799, #e5f1ff);--cadmin-blue-l1:light-dark(#338fff, #2487ff);--cadmin-blue-l2:light-dark(#66abff, #006be6);--cadmin-blue-l3:light-dark(#97c5ff, #0056b8);--cadmin-blue-l4:light-dark(#cce3ff, #004799);--cadmin-blue-l5:light-dark(#e5f1ff, #002147);--cadmin-blue:light-dark(#006eff, #429aff);--cadmin-cyan-d1:light-dark(#069, #38bdff);--cadmin-cyan-d2:light-dark(#005580, #70cfff);--cadmin-cyan-d3:light-dark(#046, #99ddff);--cadmin-cyan-d4:light-dark(#00334d, #d1efff);--cadmin-cyan-l1:light-dark(#0099e6, #0095e0);--cadmin-cyan-l2:light-dark(#3bf, #007ebd);--cadmin-cyan-l3:light-dark(#6cf, #006699);--cadmin-cyan-l4:light-dark(#9df, #004e75);--cadmin-cyan-l5:light-dark(#e5f6ff, #00334d);--cadmin-cyan:light-dark(#0077b3, #05acff);--cadmin-green-d1:light-dark(#397010, #79e029);--cadmin-green-d2:light-dark(#2e590d, #9ae85f);--cadmin-green-d3:light-dark(#22430a, #bcf094);--cadmin-green-d4:light-dark(#162d06, #ddf8c9);--cadmin-green-l1:light-dark(#53a117, #4a8f14);--cadmin-green-l2:light-dark(#67c91d, #397010);--cadmin-green-l3:light-dark(#81e236, #2c550c);--cadmin-green-l4:light-dark(#9de963, #22430a);--cadmin-green-l5:light-dark(#f1fce9, #162d06);--cadmin-green:light-dark(#458613, #5cb21a);--cadmin-indigo-d1:light-dark(#3347ff, #a8b1ff);--cadmin-indigo-d2:light-dark(#1a30ff, #bdc3ff);--cadmin-indigo-d3:light-dark(#001aff, #d1d6ff);--cadmin-indigo-d4:light-dark(#0017e5, #f0f1ff);--cadmin-indigo-l1:light-dark(#808cff, #5c6dff);--cadmin-indigo-l2:light-dark(#99a3ff, #384cff);--cadmin-indigo-l3:light-dark(#b2baff, #0019fa);--cadmin-indigo-l4:light-dark(#ccd1ff, #0013c2);--cadmin-indigo-l5:light-dark(#e5e8ff, #000a66);--cadmin-indigo:light-dark(#4d5fff, #8a95ff);--cadmin-orange-d1:light-dark(#b34400, #ff8a42);--cadmin-orange-d2:light-dark(#993b00, #ffa770);--cadmin-orange-d3:light-dark(#803100, #ffc099);--cadmin-orange-d4:light-dark(#662700, #ffe7d6);--cadmin-orange-l1:light-dark(#ff6200, #e55800);--cadmin-orange-l2:light-dark(#ff8133, #b84600);--cadmin-orange-l3:light-dark(#ffa166, #8f3700);--cadmin-orange-l4:light-dark(#ffc099, #6b2900);--cadmin-orange-l5:light-dark(#fff0e5, #3d1700);--cadmin-orange:light-dark(#cc4e00, #ff6e14);--cadmin-pink-d1:light-dark(#cc0074, #ff8acc);--cadmin-pink-d2:light-dark(#b30065, #ffb2de);--cadmin-pink-d3:light-dark(#990057, #ffd6ed);--cadmin-pink-d4:light-dark(#800048, #fff0f9);--cadmin-pink-l1:light-dark(#ff4db2, #ff33a7);--cadmin-pink-l2:light-dark(#ff80c8, #fa008e);--cadmin-pink-l3:light-dark(#ff99d3, #c2006d);--cadmin-pink-l4:light-dark(#ffb3de, #85004b);--cadmin-pink-l5:light-dark(#ffe5f4, #570031);--cadmin-pink:light-dark(#e50082, #ff5cb8);--cadmin-purple-d1:light-dark(#9f1aff, #d499ff);--cadmin-purple-d2:light-dark(#9500ff, #e1b8ff);--cadmin-purple-d3:light-dark(#8600e6, #ecd1ff);--cadmin-purple-d4:light-dark(#70c, #f5ebff);--cadmin-purple-l1:light-dark(#bf66ff, #b54dff);--cadmin-purple-l2:light-dark(#ca80ff, #9f1aff);--cadmin-purple-l3:light-dark(#d499ff, #8c00f0);--cadmin-purple-l4:light-dark(#dfb3ff, #6800b2);--cadmin-purple-l5:light-dark(#f2e5ff, #47007a);--cadmin-purple:light-dark(#a3f, #c87aff);--cadmin-red-d1:light-dark(#c00, #ff8f8f);--cadmin-red-d2:light-dark(#b30000, #ffb2b2);--cadmin-red-d3:light-dark(#900, #ffcccc);--cadmin-red-d4:light-dark(#800000, #ffe5e5);--cadmin-red-l1:light-dark(#ff4d4d, #ff2e2e);--cadmin-red-l2:light-dark(#f66, #f50000);--cadmin-red-l3:light-dark(#ff8080, #c70000);--cadmin-red-l4:light-dark(#f99, #8f0000);--cadmin-red-l5:light-dark(#ffe5e5, #420000);--cadmin-red:light-dark(#e60000, #ff6666);--cadmin-teal-d1:light-dark(#16695b, #4ad9c0);--cadmin-teal-d2:light-dark(#125449, #7ce4d2);--cadmin-teal-d3:light-dark(#0d3f37, #abede2);--cadmin-teal-d4:light-dark(#092a25, #ddf8f4);--cadmin-teal-l1:light-dark(#24a892, #22a08b);--cadmin-teal-l2:light-dark(#42d7be, #1b7e6e);--cadmin-teal-l3:light-dark(#6ce0cc, #156154);--cadmin-teal-l4:light-dark(#96e9db, #0e443b);--cadmin-teal-l5:light-dark(#eafbf8, #0a2e29);--cadmin-teal:light-dark(#1b7e6e, #28bda4);--cadmin-yellow-d1:light-dark(#e6a800, #ffcc42);--cadmin-yellow-d2:light-dark(#cc9600, #ffdc7a);--cadmin-yellow-d3:light-dark(#b38900, #ffeab2);--cadmin-yellow-d4:light-dark(#997000, #fff8e5);--cadmin-yellow-l1:light-dark(#ffc933, #d69c00);--cadmin-yellow-l2:light-dark(#ffd666, #b88600);--cadmin-yellow-l3:light-dark(#ffe499, #8a6500);--cadmin-yellow-l4:light-dark(#fff1cc, #664e00);--cadmin-yellow-l5:light-dark(#fff8e5, #473400);--cadmin-yellow:light-dark(#fb0, #ffc524);--cadmin-danger-d1:light-dark(#c31212, #f69d9d);--cadmin-danger-d2:light-dark(#ab1010, #fde2e2);--cadmin-danger-d3:light-dark(#ab1010, #fef1f1);--cadmin-danger-l1:light-dark(#f48989, #ec2d2d);--cadmin-danger-l2:light-dark(#feefef, #470606);--cadmin-danger-l3:light-dark(#feefef, #420606);--cadmin-danger:light-dark(#da1414, #f67474);--cadmin-dark-d1:light-dark(#1c1c24, #f7f8f9);--cadmin-dark-d2:light-dark(#111116, #ffffff);--cadmin-dark-l1:light-dark(#30313f, #e2e4ea);--cadmin-dark-l2:light-dark(#393a4a, #e2e4ea);--cadmin-dark:light-dark(#272833, #f1f2f5);--cadmin-info-d1:light-dark(#294f98, #9eb7e6);--cadmin-info-d2:light-dark(#234584, #dce4f5);--cadmin-info-d3:light-dark(#234584, #f3f6fc);--cadmin-info-l1:light-dark(#89a7e0, #4e7bd0);--cadmin-info-l2:light-dark(#eef2fa, #142648);--cadmin-info-l3:light-dark(#eef2fa, #0c172c);--cadmin-info:light-dark(#2e5aac, #7e9fdd);--cadmin-light-d1:light-dark(#e2e4ea, #3e3f51);--cadmin-light-d2:light-dark(#d3d6e0, #47485d);--cadmin-light-l1:light-dark(#f7f8f9, #262631);--cadmin-light-l2:light-dark(#fff, #111116);--cadmin-light:light-dark(#f1f2f5, #313240);--cadmin-primary-d1:light-dark(#0053f0, #7aa8ff);--cadmin-primary-d2:light-dark(#004ad7, #d6e4ff);--cadmin-primary-d3:light-dark(#004ad7, #f0f5ff);--cadmin-primary-l0:light-dark(#5791ff, #0f62ff);--cadmin-primary-l1:light-dark(#80acff, #004cdb);--cadmin-primary-l2:light-dark(#b3cdff, #003aa8);--cadmin-primary-l3:light-dark(#f0f5ff, #001a4d);--cadmin-primary:light-dark(#0b5fff, #6198ff);--cadmin-secondary-d1:light-dark(#393a4a, #a5a7bb);--cadmin-secondary-d2:light-dark(#30313f, #8b8da7);--cadmin-secondary-l0:light-dark(#9191a1, #9a9cb2);--cadmin-secondary-l1:light-dark(#a7a9bc, #7d809c);--cadmin-secondary-l2:light-dark(#cdced9, #696a7c);--cadmin-secondary-l3:light-dark(#e7e7ed, #4d4e5b);--cadmin-secondary:light-dark(#6b6c7e, #b3b3c6);--cadmin-success-d1:light-dark(#226a33, #59c974);--cadmin-success-d2:light-dark(#1c5629, #bae8c6);--cadmin-success-d3:light-dark(#1c5629, #d9f2df);--cadmin-success-l1:light-dark(#5aca75, #2a8340);--cadmin-success-l2:light-dark(#edf9f0, #13391b);--cadmin-success-l3:light-dark(#edf9f0, #102e16);--cadmin-success:light-dark(#287d3c, #3bb959);--cadmin-warning-d1:light-dark(#9f4500, #ff9a4d);--cadmin-warning-d2:light-dark(#863a00, #ffdfc7);--cadmin-warning-d3:light-dark(#863a00, #fff4ec);--cadmin-warning-l1:light-dark(#ff8f39, #d15b00);--cadmin-warning-l2:light-dark(#fff4ec, #4d2100);--cadmin-warning-l3:light-dark(#fff4ec, #331600);--cadmin-warning:light-dark(#b95000, #ff7a14);--cadmin-border-color:var(--cadmin-gray-200);--cadmin-box-shadow-lg:0 1rem 3rem hsl(from var(--cadmin-black) h s l / 0.175);--cadmin-box-shadow-sm:0 0.125rem 0.25rem hsl(from var(--cadmin-black) h s l / 0.075);--cadmin-box-shadow:0 0.5rem 1rem hsl(from var(--cadmin-black) h s l / 0.15);--cadmin-component-active-background-color:var(--cadmin-primary);--cadmin-component-active-bg:var(--cadmin-component-active-background-color);--cadmin-component-active-color:var(--cadmin-white);--cadmin-component-focus-box-shadow:0 0 0 0.125rem var(--cadmin-white), 0 0 0 0.25rem var(--cadmin-primary-l1);--cadmin-component-focus-inset-box-shadow:inset 0 0 0 0.125rem var(--cadmin-primary-l1), inset 0 0 0 0.25rem var(--cadmin-white);--cadmin-body-background-color:var(--cadmin-white);--cadmin-body-bg:var(--cadmin-body-background-color);--cadmin-body-color:var(--cadmin-dark-d1);--cadmin-link-color:var(--cadmin-primary);--cadmin-link-hover-color:var(--cadmin-primary-d2);--cadmin-text-muted:var(--cadmin-gray-500);--cadmin-blockquote-small-color:var(--cadmin-gray-600);--cadmin-hr-border-color:hsl(from var(--cadmin-black) h s l / 0.1);--cadmin-code-color:var(--cadmin-pink);--cadmin-focus-ring-animation-from-box-shadow:0 0 0 0.25rem var(--cadmin-white), 0 0 0 0.75rem var(--cadmin-primary-l2);--cadmin-focus-ring-animation-to-box-shadow:0 0 0 0.125rem var(--cadmin-white), 0 0 0 0.25rem var(--cadmin-primary-l0);--cadmin-btn-outline-secondary-border-color:light-dark(var(--cadmin-secondary-l2), var(--cadmin-secondary));--cadmin-btn-outline-secondary-hover-border-color:light-dark(transparent, var(--cadmin-secondary));--cadmin-btn-outline-secondary-hover-color:light-dark(var(--cadmin-gray-900), var(--cadmin-secondary));--cadmin-btn-outline-secondary-active-border-color:light-dark(var(--cadmin-secondary-l2), var(--cadmin-secondary));--cadmin-btn-outline-secondary-active-color:light-dark(var(--cadmin-gray-900), var(--cadmin-secondary));--cadmin-btn-outline-secondary-disabled-border-color:light-dark(var(--cadmin-secondary-l2), var(--cadmin-secondary));--cadmin-btn-outline-secondary-disabled-color:light-dark(var(--cadmin-secondary), var(--cadmin-secondary));--cadmin-modal-backdrop-background-color:light-dark(var(--cadmin-gray-800), var(--cadmin-gray-200));--cadmin-modal-backdrop-opacity:0.8}
+html:not(#__):not(#___)[data-color-scheme=light]:root .cadmin{color-scheme:light}
+html:not(#__):not(#___)[data-color-scheme=dark]:root .cadmin{color-scheme:dark;--cadmin-breadcrumb-divider-svg-icon:url('data:image/svg+xml;charset=utf8,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path class="lexicon-icon-outline" d="M375.2 239.2 173.3 37c-23.6-23-59.9 11.9-36 35.1l183 183.9-182.9 183.8c-24 23.5 12.5 58.2 36.1 35.2l201.7-202.1c10.2-10.1 9.3-24.4 0-33.7z" fill="%23cdced9"/></svg>');--cadmin-custom-checkbox-indicator-icon-checked:url('data:image/svg+xml;charset=utf8,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path class="lexicon-icon-outline" d="M220.9 377.2c-8 0-15.8-3.2-21.5-8.9l-91-91c-28.1-28.1 14.8-71 42.9-42.9l68.2 68.2 139.8-157.2c26.4-30 72 10.1 45.6 40.1L243.7 366.9c-5.5 6.3-13.4 10-21.8 10.3h-1z" fill="%23111116"/></svg>');--cadmin-custom-checkbox-indicator-icon-checked-readonly:url('data:image/svg+xml;charset=utf8,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path class="lexicon-icon-outline" d="M220.9 377.2c-8 0-15.8-3.2-21.5-8.9l-91-91c-28.1-28.1 14.8-71 42.9-42.9l68.2 68.2 139.8-157.2c26.4-30 72 10.1 45.6 40.1L243.7 366.9c-5.5 6.3-13.4 10-21.8 10.3h-1z" fill="%23525361"/></svg>');--cadmin-custom-checkbox-indicator-icon-indeterminate:url('data:image/svg+xml;charset=utf8,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path class="lexicon-icon-outline" d="M384 288H128c-42.7 0-42.7-64 0-64h256c42.7 0 42.7 64 0 64z" fill="%23111116"/></svg>');--cadmin-custom-checkbox-indicator-icon-indeterminate-readonly:url('data:image/svg+xml;charset=utf8,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path class="lexicon-icon-outline" d="M384 288H128c-42.7 0-42.7-64 0-64h256c42.7 0 42.7 64 0 64z" fill="%236b6c7e"/></svg>');--cadmin-custom-radio-indicator-icon-checked:url('data:image/svg+xml;charset=utf8,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><circle class="lexicon-icon-outline" cx="256" cy="256" r="256" fill="%23111116"/></svg>');--cadmin-input-select-icon:url('data:image/svg+xml,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path class="lexicon-icon-outline caret-double-l-top" d="M347.913 199.336l-81.538-85c-5.413-5.642-14.188-5.642-19.6 0l-81.538 85c-8.731 9.101-2.548 24.664 9.8 24.664h163.077c12.348 0 18.531-15.563 9.8-24.664z" fill="%23cdced9"></path><path class="lexicon-icon-outline caret-double-l-bottom" d="M165.236 312.664l81.538 85c5.412 5.642 14.188 5.642 19.6 0l81.538-85c8.731-9.101 2.548-24.664-9.8-24.664h-163.077c-12.347 0-18.531 15.563-9.8 24.664z" fill="%23cdced9"></path></svg>');--cadmin-input-select-icon-focus:url('data:image/svg+xml,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path class="lexicon-icon-outline caret-double-l-top" d="M347.913 199.336l-81.538-85c-5.413-5.642-14.188-5.642-19.6 0l-81.538 85c-8.731 9.101-2.548 24.664 9.8 24.664h163.077c12.348 0 18.531-15.563 9.8-24.664z" fill="%23cdced9"></path><path class="lexicon-icon-outline caret-double-l-bottom" d="M165.236 312.664l81.538 85c5.412 5.642 14.188 5.642 19.6 0l81.538-85c8.731-9.101 2.548-24.664-9.8-24.664h-163.077c-12.347 0-18.531 15.563-9.8 24.664z" fill="%23cdced9"></path></svg>');--cadmin-input-select-icon-disabled:url('data:image/svg+xml,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path class="lexicon-icon-outline caret-double-l-top" d="M347.913 199.336l-81.538-85c-5.413-5.642-14.188-5.642-19.6 0l-81.538 85c-8.731 9.101-2.548 24.664 9.8 24.664h163.077c12.348 0 18.531-15.563 9.8-24.664z" fill="%23a7a9bc"></path><path class="lexicon-icon-outline caret-double-l-bottom" d="M165.236 312.664l81.538 85c5.412 5.642 14.188 5.642 19.6 0l81.538-85c8.731-9.101 2.548-24.664-9.8-24.664h-163.077c-12.347 0-18.531 15.563-9.8 24.664z" fill="%23a7a9bc"></path></svg>');--cadmin-input-danger-select-icon:url('data:image/svg+xml,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path class="lexicon-icon-outline caret-double-l-top" d="M347.913 199.336l-81.538-85c-5.413-5.642-14.188-5.642-19.6 0l-81.538 85c-8.731 9.101-2.548 24.664 9.8 24.664h163.077c12.348 0 18.531-15.563 9.8-24.664z" fill="%23ec2d2d"></path><path class="lexicon-icon-outline caret-double-l-bottom" d="M165.236 312.664l81.538 85c5.412 5.642 14.188 5.642 19.6 0l81.538-85c8.731-9.101 2.548-24.664-9.8-24.664h-163.077c-12.347 0-18.531 15.563-9.8 24.664z" fill="%23ec2d2d"></path></svg>');--cadmin-input-success-select-icon:url('data:image/svg+xml,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path class="lexicon-icon-outline caret-double-l-top" d="M347.913 199.336l-81.538-85c-5.413-5.642-14.188-5.642-19.6 0l-81.538 85c-8.731 9.101-2.548 24.664 9.8 24.664h163.077c12.348 0 18.531-15.563 9.8-24.664z" fill="%232a8340"></path><path class="lexicon-icon-outline caret-double-l-bottom" d="M165.236 312.664l81.538 85c5.412 5.642 14.188 5.642 19.6 0l81.538-85c8.731-9.101 2.548-24.664-9.8-24.664h-163.077c-12.347 0-18.531 15.563-9.8 24.664z" fill="%232a8340"></path></svg>');--cadmin-input-warning-select-icon:url('data:image/svg+xml,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path class="lexicon-icon-outline caret-double-l-top" d="M347.913 199.336l-81.538-85c-5.413-5.642-14.188-5.642-19.6 0l-81.538 85c-8.731 9.101-2.548 24.664 9.8 24.664h163.077c12.348 0 18.531-15.563 9.8-24.664z" fill="%23d15b00"></path><path class="lexicon-icon-outline caret-double-l-bottom" d="M165.236 312.664l81.538 85c5.412 5.642 14.188 5.642 19.6 0l81.538-85c8.731-9.101 2.548-24.664-9.8-24.664h-163.077c-12.347 0-18.531 15.563-9.8 24.664z" fill="%23d15b00"></path></svg>');--cadmin-form-control-select-secondary-icon-focus:url('data:image/svg+xml,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path class="lexicon-icon-outline caret-double-l-top" d="M347.913 199.336l-81.538-85c-5.413-5.642-14.188-5.642-19.6 0l-81.538 85c-8.731 9.101-2.548 24.664 9.8 24.664h163.077c12.348 0 18.531-15.563 9.8-24.664z" fill="%23f7f8f9"></path><path class="lexicon-icon-outline caret-double-l-bottom" d="M165.236 312.664l81.538 85c5.412 5.642 14.188 5.642 19.6 0l81.538-85c8.731-9.101 2.548-24.664-9.8-24.664h-163.077c-12.347 0-18.531 15.563-9.8 24.664z" fill="%23f7f8f9"></path></svg>');--cadmin-form-control-select-secondary-icon-show:url('data:image/svg+xml,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path class="lexicon-icon-outline caret-double-l-top" d="M347.913 199.336l-81.538-85c-5.413-5.642-14.188-5.642-19.6 0l-81.538 85c-8.731 9.101-2.548 24.664 9.8 24.664h163.077c12.348 0 18.531-15.563 9.8-24.664z" fill="%23f7f8f9"></path><path class="lexicon-icon-outline caret-double-l-bottom" d="M165.236 312.664l81.538 85c5.412 5.642 14.188 5.642 19.6 0l81.538-85c8.731-9.101 2.548-24.664-9.8-24.664h-163.077c-12.347 0-18.531 15.563-9.8 24.664z" fill="%23f7f8f9"></path></svg>');--cadmin-multi-step-item-error-icon:url('data:image/svg+xml;charset=utf8,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path class="lexicon-icon-outline" d="M300.4 256 467 89.4c29.6-29.6-14.8-74.1-44.4-44.4L256 211.6 89.4 45C59.8 15.3 15.3 59.8 45 89.4L211.6 256 45 422.6c-29.7 29.7 14.7 74.1 44.4 44.4L256 300.4 422.6 467c29.7 29.7 74.1-14.7 44.4-44.4L300.4 256z" fill="%23111116"/></svg>');--cadmin-multi-step-icon-complete-icon:url('data:image/svg+xml;charset=utf8,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path class="lexicon-icon-outline" d="M192.9 429.5c-8.3 0-16.4-3.3-22.3-9.2L44.5 294.1C15 263.2 62.7 222 89.1 249.5L191.5 352l230-258.9c27.2-30.5 74.3 11.5 47.1 41.9L216.4 418.9c-5.8 6.5-14 10.3-22.6 10.6h-.9z" fill="%23111116"/></svg>');--cadmin-multi-step-dropdown-indicator-complete-icon:url('data:image/svg+xml;charset=utf8,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path class="lexicon-icon-outline" d="M192.9 429.5c-8.3 0-16.4-3.3-22.3-9.2L44.5 294.1C15 263.2 62.7 222 89.1 249.5L191.5 352l230-258.9c27.2-30.5 74.3 11.5 47.1 41.9L216.4 418.9c-5.8 6.5-14 10.3-22.6 10.6h-.9z" fill="%23f7f8f9"/></svg>')}
+html:not(#__):not(#___)[data-color-scheme=dark-high-contrast]:root .cadmin{color-scheme:dark;--cadmin-white:#111116;--cadmin-blue-d1:#a8cfff;--cadmin-blue-d2:#c2ddff;--cadmin-blue-d3:#d6e9ff;--cadmin-blue-d4:#f0f7ff;--cadmin-blue-l1:#006cf0;--cadmin-blue-l2:#005dc7;--cadmin-blue-l3:#004594;--cadmin-blue-l4:#002f66;--cadmin-blue-l5:#002147;--cadmin-blue:#94c4ff;--cadmin-cyan-d1:#94dbff;--cadmin-cyan-d2:#ade4ff;--cadmin-cyan-d3:#c7ecff;--cadmin-cyan-d4:#e5f6ff;--cadmin-cyan-l1:#0095e0;--cadmin-cyan-l2:#0073ad;--cadmin-cyan-l3:#005f8f;--cadmin-cyan-l4:#00476b;--cadmin-cyan-l5:#00334d;--cadmin-cyan:#75d1ff;--cadmin-green-d1:#92e651;--cadmin-green-d2:#a6ea70;--cadmin-green-d3:#cff4b3;--cadmin-green-d4:#f1fce9;--cadmin-green-l1:#57aa18;--cadmin-green-l2:#498f14;--cadmin-green-l3:#3a6f10;--cadmin-green-l4:#29500c;--cadmin-green-l5:#162d06;--cadmin-green:#79e029;--cadmin-indigo-d1:#d6daff;--cadmin-indigo-d2:#d6daff;--cadmin-indigo-d3:#d6daff;--cadmin-indigo-d4:#f0f1ff;--cadmin-indigo-l1:#051fff;--cadmin-indigo-l2:#0015d1;--cadmin-indigo-l3:#0012b2;--cadmin-indigo-l4:#000d85;--cadmin-indigo-l5:#000a66;--cadmin-indigo:#bdc3ff;--cadmin-orange-d1:#ffc39e;--cadmin-orange-d2:#ffd6bd;--cadmin-orange-d3:#ffe6d6;--cadmin-orange-d4:#fff6f0;--cadmin-orange-l1:#eb5a00;--cadmin-orange-l2:#c24a00;--cadmin-orange-l3:#a33f00;--cadmin-orange-l4:#803100;--cadmin-orange-l5:#3d1700;--cadmin-orange:#ffb385;--cadmin-pink-d1:#ffc7e7;--cadmin-pink-d2:#ffd6ed;--cadmin-pink-d3:#ffe5f4;--cadmin-pink-d4:#fff5fb;--cadmin-pink-l1:#f5008b;--cadmin-pink-l2:#c2006e;--cadmin-pink-l3:#940053;--cadmin-pink-l4:#610037;--cadmin-pink-l5:#3d0022;--cadmin-pink:#ffaddc;--cadmin-purple-d1:#ecd1ff;--cadmin-purple-d2:#ecd1ff;--cadmin-purple-d3:#ecd1ff;--cadmin-purple-d4:#f5ebff;--cadmin-purple-l1:#9b0fff;--cadmin-purple-l2:#7f00db;--cadmin-purple-l3:#6e00bd;--cadmin-purple-l4:#590099;--cadmin-purple-l5:#3c0066;--cadmin-purple:#e1b8ff;--cadmin-red-d1:#ffc7c7;--cadmin-red-d2:#ffd6d6;--cadmin-red-d3:#ffe0e0;--cadmin-red-d4:#fff5f5;--cadmin-red-l1:#f50000;--cadmin-red-l2:#c20000;--cadmin-red-l3:#990000;--cadmin-red-l4:#700000;--cadmin-red-l5:#420000;--cadmin-red:#ffadad;--cadmin-teal-d1:#96e9db;--cadmin-teal-d2:#b3efe5;--cadmin-teal-d3:#ccf4ed;--cadmin-teal-d4:#eafbf8;--cadmin-teal-l1:#28bea4;--cadmin-teal-l2:#1f9380;--cadmin-teal-l3:#197667;--cadmin-teal-l4:#12594e;--cadmin-teal-l5:#0d3b34;--cadmin-teal:#67dfca;--cadmin-yellow-d1:#ffcc42;--cadmin-yellow-d2:#ffdc7a;--cadmin-yellow-d3:#ffeab2;--cadmin-yellow-d4:#fff8e5;--cadmin-yellow-l1:#d69c00;--cadmin-yellow-l2:#b88600;--cadmin-yellow-l3:#8a6500;--cadmin-yellow-l4:#664e00;--cadmin-yellow-l5:#473400;--cadmin-yellow:#ffc524;--cadmin-danger-d1:#fac7c7;--cadmin-danger-d2:#fef1f1;--cadmin-danger-l1:#b61111;--cadmin-danger-l2:#420606;--cadmin-danger:#f8b0b0;--cadmin-dark-d1:#f7f8f9;--cadmin-dark-d2:#ffffff;--cadmin-dark-l1:#e2e4ea;--cadmin-dark-l2:#e2e4ea;--cadmin-dark:#f1f2f5;--cadmin-info-d1:#cad8f1;--cadmin-info-d2:#f3f6fc;--cadmin-info-l1:#254a8d;--cadmin-info-l2:#0c172c;--cadmin-info:#b6c9ec;--cadmin-light-d1:#30313f;--cadmin-light-d2:#30313f;--cadmin-light-l1:#111116;--cadmin-light:#272833;--cadmin-primary-d1:#c7daff;--cadmin-primary-d2:#f0f5ff;--cadmin-primary-l0:#003eb2;--cadmin-primary-l1:#00318f;--cadmin-primary-l2:#002366;--cadmin-primary-l3:#001a4d;--cadmin-primary:#b3cdff;--cadmin-secondary-l0:#d9d9e3;--cadmin-secondary-l1:#bcbdcc;--cadmin-secondary-l2:#a5a7bb;--cadmin-secondary-l3:#8b8da7;--cadmin-secondary:#f6f6f8;--cadmin-success-d1:#a2e1b2;--cadmin-success-d2:#d9f2df;--cadmin-success-l1:#26783a;--cadmin-success-l2:#102e16;--cadmin-success:#8cd99e;--cadmin-warning-d1:#ffcba3;--cadmin-warning-d2:#fff4ec;--cadmin-warning-l1:#b24d00;--cadmin-warning-l2:#331600;--cadmin-warning:#ffb780}
+html:not(#__):not(#___) .cadmin{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;animation:none;background-color:transparent;background-image:none;border-width:0px;box-shadow:none;box-sizing:border-box;color:var(--cadmin-gray-900);font-family:system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;font-size:16px;font-style:normal;font-variant:normal;font-weight:400;height:auto;letter-spacing:normal;line-height:1.5;margin:0px;max-height:none;max-width:none;min-height:0px;min-width:0px;padding:0px;text-align:left;text-decoration:none;text-decoration-color:currentcolor;text-indent:0px;text-shadow:none;text-transform:none;transform:none;transition:none;visibility:visible;white-space:normal;width:auto;word-break:normal;word-spacing:normal;overflow-wrap:normal;word-wrap:normal}
+html:not(#__):not(#___) .cadmin main{display:block}
+html:not(#__):not(#___) .cadmin p{margin-bottom:16px;margin-top:0}
+html:not(#__):not(#___) .cadmin abbr[title],html:not(#__):not(#___) .cadmin abbr[data-original-title]{cursor:help;text-decoration:underline;text-decoration:underline dotted;text-decoration-skip-ink:none}
+html:not(#__):not(#___) .cadmin address{font-style:normal;margin-bottom:16px}
+html:not(#__):not(#___) .cadmin ol,html:not(#__):not(#___) .cadmin ul,html:not(#__):not(#___) .cadmin dl{margin-bottom:16px;margin-top:0;padding-left:40px}
+html:not(#__):not(#___) .cadmin ol ol,html:not(#__):not(#___) .cadmin ul ul,html:not(#__):not(#___) .cadmin ol ul,html:not(#__):not(#___) .cadmin ul ol{margin-bottom:0}
+html:not(#__):not(#___) .cadmin dt{font-weight:700}
+html:not(#__):not(#___) .cadmin dd{margin-bottom:8px;margin-left:0}
+html:not(#__):not(#___) .cadmin blockquote{margin:0 0 16px}
+html:not(#__):not(#___) .cadmin b,html:not(#__):not(#___) .cadmin strong{font-weight:900}
+html:not(#__):not(#___) .cadmin sub,html:not(#__):not(#___) .cadmin sup{line-height:0;position:relative;vertical-align:baseline}
+html:not(#__):not(#___) .cadmin sub{bottom:-0.25em}
+html:not(#__):not(#___) .cadmin sup{top:-0.5em}
+html:not(#__):not(#___) .cadmin a{border-radius:1px;color:var(--cadmin-primary);cursor:pointer;text-decoration:none;text-underline-offset:0.23em;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out}
+html:not(#__):not(#___) .cadmin a:hover,html:not(#__):not(#___) .cadmin a.hover{color:var(--cadmin-primary-d2);text-decoration:underline}
+html:not(#__):not(#___) .cadmin a.focus,html:not(#__):not(#___) .cadmin a:focus-visible,html:not(#__):not(#___) .c-prefers-focus .cadmin a:focus{box-shadow:var(--cadmin-component-focus-box-shadow, 0 0 0 2px var(--cadmin-white), 0 0 0 4px var(--cadmin-primary-l0));outline:0}
+html:not(#__):not(#___) .cadmin pre,html:not(#__):not(#___) .cadmin code,html:not(#__):not(#___) .cadmin kbd,html:not(#__):not(#___) .cadmin samp{font-family:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+html:not(#__):not(#___) .cadmin pre{margin-bottom:16px;margin-top:0;overflow:auto}
+html:not(#__):not(#___) .cadmin figure{margin:0 0 16px}
+html:not(#__):not(#___) .cadmin img{vertical-align:middle}
+html:not(#__):not(#___) .cadmin svg{overflow:hidden;vertical-align:middle}
+html:not(#__):not(#___) .cadmin label{display:inline-block;margin-bottom:8px}
+html:not(#__):not(#___) .cadmin input,html:not(#__):not(#___) .cadmin button,html:not(#__):not(#___) .cadmin select,html:not(#__):not(#___) .cadmin optgroup,html:not(#__):not(#___) .cadmin textarea{font-family:inherit;font-size:inherit;line-height:inherit}
+html:not(#__):not(#___) .cadmin button,html:not(#__):not(#___) .cadmin input{overflow:visible}
+html:not(#__):not(#___) .cadmin select{word-wrap:normal}
+html:not(#__):not(#___) .cadmin button,html:not(#__):not(#___) .cadmin [type=button],html:not(#__):not(#___) .cadmin [type=reset],html:not(#__):not(#___) .cadmin [type=submit]{-webkit-appearance:button;cursor:pointer}
+html:not(#__):not(#___) .cadmin button::-moz-focus-inner,html:not(#__):not(#___) .cadmin [type=button]::-moz-focus-inner,html:not(#__):not(#___) .cadmin [type=reset]::-moz-focus-inner,html:not(#__):not(#___) .cadmin [type=submit]::-moz-focus-inner{border-style:none}
+html:not(#__):not(#___) .cadmin input[type=date],html:not(#__):not(#___) .cadmin input[type=time],html:not(#__):not(#___) .cadmin input[type=datetime-local],html:not(#__):not(#___) .cadmin input[type=month]{-webkit-appearance:listbox}
+html:not(#__):not(#___) .cadmin textarea{overflow:auto}
+html:not(#__):not(#___) .cadmin fieldset{border:0;margin:0;min-width:0;padding:0}
+html:not(#__):not(#___) .cadmin legend{color:inherit;display:block;font-size:24px;line-height:inherit;margin-bottom:8px;max-width:100%;padding:0;white-space:normal;width:100%}
+html:not(#__):not(#___) .cadmin progress{vertical-align:baseline}
+html:not(#__):not(#___) .cadmin [type=number]::-webkit-inner-spin-button,html:not(#__):not(#___) .cadmin [type=number]::-webkit-outer-spin-button{height:auto}
+html:not(#__):not(#___) .cadmin [type=search]{outline-offset:-2px;-webkit-appearance:none}
+html:not(#__):not(#___) .cadmin [type=search]::-webkit-search-decoration{-webkit-appearance:none}
+html:not(#__):not(#___) .cadmin ::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}
+html:not(#__):not(#___) .cadmin output{display:inline-block}
+html:not(#__):not(#___) .cadmin summary{cursor:pointer;display:list-item}
+html:not(#__):not(#___) .cadmin template{display:none}
+html:not(#__):not(#___) .cadmin [hidden]{display:none !important}
+html:not(#__):not(#___) .cadmin h1,html:not(#__):not(#___) .cadmin h2,html:not(#__):not(#___) .cadmin h3,html:not(#__):not(#___) .cadmin h4,html:not(#__):not(#___) .cadmin h5,html:not(#__):not(#___) .cadmin h6,html:not(#__):not(#___) .cadmin .h1,html:not(#__):not(#___) .cadmin .h2,html:not(#__):not(#___) .cadmin .h3,html:not(#__):not(#___) .cadmin .h4,html:not(#__):not(#___) .cadmin .h5,html:not(#__):not(#___) .cadmin .h6{font-weight:700;line-height:1.2;margin-bottom:calc(16px * 0.5);margin-top:0px}
+html:not(#__):not(#___) .cadmin h1,html:not(#__):not(#___) .cadmin .h1{font-size:26px}
+html:not(#__):not(#___) .cadmin h2,html:not(#__):not(#___) .cadmin .h2{font-size:22px}
+html:not(#__):not(#___) .cadmin h3,html:not(#__):not(#___) .cadmin .h3{font-size:19px}
+html:not(#__):not(#___) .cadmin h4,html:not(#__):not(#___) .cadmin .h4{font-size:16px}
+html:not(#__):not(#___) .cadmin h5,html:not(#__):not(#___) .cadmin .h5{font-size:14px}
+html:not(#__):not(#___) .cadmin h6,html:not(#__):not(#___) .cadmin .h6{font-size:13px}
+html:not(#__):not(#___) .cadmin hr{border-color:hsl(from var(--cadmin-black) h s l / 0.1);border-style:solid;border-width:1px 0 0 0;margin-bottom:16px;margin-top:16px}
+html:not(#__):not(#___) .cadmin small,html:not(#__):not(#___) .cadmin .small{font-size:80%;font-weight:400}
+html:not(#__):not(#___) .cadmin mark,html:not(#__):not(#___) .cadmin .mark{background-color:var(--cadmin-yellow-l3);display:inline;line-height:normal;position:relative;white-space:pre-wrap}
+html:not(#__):not(#___) .cadmin b{font-weight:600}
+html:not(#__):not(#___) .cadmin strong{font-weight:600}
+html:not(#__):not(#___) .cadmin code{color:var(--cadmin-red);font-size:87.5%;word-wrap:break-word}
+a>html:not(#__):not(#___) .cadmin code{color:inherit}
+html:not(#__):not(#___) .cadmin kbd{background-color:var(--cadmin-gray-900);border-radius:3px;box-shadow:inset 0 -1.6px 0 hsl(from var(--cadmin-black) h s l / 0.25);color:var(--cadmin-white);font-size:87.5%;padding:3.2px 6.4px}
+html:not(#__):not(#___) .cadmin kbd kbd{box-shadow:none;font-size:100%;font-weight:700;padding:0}
+html:not(#__):not(#___) .cadmin pre{color:var(--cadmin-gray-900);display:block;font-size:87.5%}
+html:not(#__):not(#___) .cadmin pre code{color:inherit;font-size:inherit;word-break:normal}
+html:not(#__):not(#___) .cadmin .lexicon-icon{display:inline-block;fill:currentColor;height:1em;margin-top:-3px;vertical-align:middle;width:1em}
+html:not(#__):not(#___) .cadmin .btn{background-color:transparent;border-color:transparent;border-radius:4px;border-style:solid;border-width:1px;color:var(--cadmin-dark-d1);cursor:pointer;display:inline-block;font-size:16px;font-weight:600;letter-spacing:inherit;line-height:1.5;padding-bottom:7px;padding-left:15px;padding-right:15px;padding-top:7px;text-align:center;text-transform:none;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;-ms-user-select:none;-moz-user-select:none;-webkit-user-select:none;user-select:none;vertical-align:middle}
+html:not(#__):not(#___) .cadmin .btn:hover{color:var(--cadmin-dark-d1);text-decoration:none}
+html:not(#__):not(#___) .cadmin .btn.focus,html:not(#__):not(#___) .cadmin .btn:focus-visible,html:not(#__):not(#___) .c-prefers-focus .cadmin .btn:focus{box-shadow:var(--cadmin-component-focus-box-shadow, 0 0 0 2px var(--cadmin-white), 0 0 0 4px var(--cadmin-primary-l0));outline:0}
+html:not(#__):not(#___) .cadmin .btn:disabled,html:not(#__):not(#___) .cadmin .btn.disabled{cursor:not-allowed;opacity:var(--cadmin-component-disabled-opacity, 0.4)}
+html:not(#__):not(#___) .cadmin .btn:disabled:focus-visible,html:not(#__):not(#___) .c-prefers-focus .cadmin .btn:disabled,html:not(#__):not(#___) .c-prefers-focus .cadmin .btn.disabled:focus,html:not(#__):not(#___) .cadmin .btn.disabled:focus-visible{box-shadow:none}
+html:not(#__):not(#___) .cadmin .btn:disabled:active,html:not(#__):not(#___) .cadmin .btn.disabled:active{pointer-events:none}
+html:not(#__):not(#___) .cadmin fieldset:disabled a.btn{cursor:not-allowed;opacity:var(--cadmin-component-disabled-opacity, 0.4)}
+html:not(#__):not(#___) .cadmin fieldset:disabled a.btn:focus{box-shadow:none}
+html:not(#__):not(#___) .cadmin fieldset:disabled a.btn:active{pointer-events:none}
+html:not(#__):not(#___) .cadmin .sidebar-sm .btn,html:not(#__):not(#___) .cadmin .form-group-sm .btn,html:not(#__):not(#___) .cadmin .btn-group-sm>.btn,html:not(#__):not(#___) .cadmin .btn-group-sm .btn-group>.btn,html:not(#__):not(#___) .cadmin .btn-sm{border-radius:3px;font-size:14px;line-height:1;padding-bottom:7px;padding-left:12px;padding-right:12px;padding-top:7px}
+html:not(#__):not(#___) .cadmin .sidebar-sm .btn .lexicon-icon,html:not(#__):not(#___) .cadmin .form-group-sm .btn .lexicon-icon,html:not(#__):not(#___) .cadmin .btn-group-sm>.btn .lexicon-icon,html:not(#__):not(#___) .cadmin .btn-group-sm .btn-group>.btn .lexicon-icon,html:not(#__):not(#___) .cadmin .btn-sm .lexicon-icon{font-size:16px}
+html:not(#__):not(#___) .cadmin .btn-monospaced{align-items:center;display:inline-flex;flex-direction:column;height:40px;justify-content:center;line-height:1;overflow:hidden;padding-bottom:0px;padding-left:0px;padding-right:0px;padding-top:0px;text-align:center;white-space:normal;width:40px;overflow-wrap:break-word;word-wrap:break-word}
+html:not(#__):not(#___) .cadmin .btn-monospaced .lexicon-icon{margin-top:0px}
+html:not(#__):not(#___) .cadmin .sidebar-sm .btn.btn-monospaced,html:not(#__):not(#___) .cadmin .btn-group-vertical>.btn-monospaced.btn-sm,html:not(#__):not(#___) .cadmin .btn-group-sm .btn-monospaced,html:not(#__):not(#___) .cadmin .btn-monospaced.btn-sm{font-size:14px;height:32px;width:32px}
+html:not(#__):not(#___) .cadmin .btn-primary{background-color:var(--cadmin-primary);border-color:transparent;color:var(--cadmin-white)}
+html:not(#__):not(#___) .cadmin .btn-primary:hover{background-color:var(--cadmin-primary-d1);border-color:transparent;color:var(--cadmin-white)}
+html:not(#__):not(#___) .cadmin .btn-primary.focus,html:not(#__):not(#___) .cadmin .btn-primary:focus-visible,html:not(#__):not(#___) .c-prefers-focus .cadmin .btn-primary:focus{background-color:var(--cadmin-primary-d1);border-color:transparent;color:var(--cadmin-white)}
+html:not(#__):not(#___) .cadmin .btn-primary:active{background-color:var(--cadmin-primary-d2);border-color:transparent;color:var(--cadmin-white)}
+html:not(#__):not(#___) .cadmin .btn-primary:disabled,html:not(#__):not(#___) .cadmin .btn-primary.disabled{background-color:var(--cadmin-primary);border-color:transparent;color:var(--cadmin-white)}
+html:not(#__):not(#___) .cadmin .btn-primary[aria-expanded=true],html:not(#__):not(#___) .cadmin .btn-primary.show{background-color:var(--cadmin-primary-d2);border-color:transparent;color:var(--cadmin-white)}
+html:not(#__):not(#___) .cadmin .btn-outline-ai{border-color:var(--cadmin-purple);color:var(--cadmin-purple)}
+html:not(#__):not(#___) .cadmin .btn-outline-ai:hover{background-color:hsl(from var(--cadmin-purple) h s l / 0.06);border-color:var(--cadmin-purple);color:var(--cadmin-purple-d1)}
+html:not(#__):not(#___) .cadmin .btn-outline-ai.focus,html:not(#__):not(#___) .cadmin .btn-outline-ai:focus-visible,html:not(#__):not(#___) .c-prefers-focus .cadmin .btn-outline-ai:focus{background-color:hsl(from var(--cadmin-purple) h s l / 0.06);color:var(--cadmin-purple-d1)}
+html:not(#__):not(#___) .cadmin .btn-outline-ai:active{background-color:hsl(from var(--cadmin-purple) h s l / 0.12);border-color:var(--cadmin-purple);color:var(--cadmin-purple-d1)}
+html:not(#__):not(#___) .cadmin .btn-outline-ai:disabled,html:not(#__):not(#___) .cadmin .btn-outline-ai.disabled{background-color:transparent;border-color:var(--cadmin-purple);color:var(--cadmin-purple)}
+html:not(#__):not(#___) .cadmin .btn-outline-ai[aria-expanded=true],html:not(#__):not(#___) .cadmin .btn-outline-ai.show{background-color:hsl(from var(--cadmin-purple) h s l / 0.12);border-color:var(--cadmin-purple);color:var(--cadmin-purple-d1)}
+html:not(#__):not(#___) .cadmin [type=checkbox]{cursor:pointer;height:14px;width:14px}
+html:not(#__):not(#___) .cadmin [type=checkbox]:disabled{cursor:not-allowed}
+html:not(#__):not(#___) .cadmin [type=radio]{cursor:pointer;height:15px;width:14px}
+html:not(#__):not(#___) .cadmin [type=radio]:disabled{cursor:not-allowed}
+html:not(#__):not(#___) .cadmin fieldset{word-wrap:break-word}
+html:not(#__):not(#___) .cadmin label{color:var(--cadmin-gray-900);font-size:14px;font-weight:600;margin-bottom:4px;max-width:100%;position:static;overflow-wrap:break-word;word-wrap:break-word}
+html:not(#__):not(#___) .cadmin label[for]{cursor:pointer}
+html:not(#__):not(#___) .cadmin label+.form-feedback-group{margin-bottom:12px}
+html:not(#__):not(#___) .cadmin label+.form-text{margin-bottom:4px;margin-top:0px}
+html:not(#__):not(#___) .cadmin fieldset[disabled] label,html:not(#__):not(#___) .cadmin label.disabled{color:var(--cadmin-gray-500);cursor:not-allowed;opacity:var(--cadmin-input-disabled-opacity, 1)}
+html:not(#__):not(#___) .cadmin fieldset[disabled] label .form-control{font-weight:normal;opacity:1}
+html:not(#__):not(#___) .cadmin .form-control{background-color:var(--cadmin-input-bg, var(--cadmin-gray-200));border-bottom-width:1px;border-color:var(--cadmin-input-border-color, var(--cadmin-gray-300));border-left-width:1px;border-radius:var(--cadmin-input-border-radius, 4px);border-right-width:1px;border-style:solid;border-top-width:1px;border-width:1px;box-shadow:[var(--cadmin-input-box-shadow)];color:var(--cadmin-input-color, var(--cadmin-gray-900));display:block;font-size:16px;font-weight:400;height:40px;letter-spacing:inherit;line-height:1.5;min-width:0px;padding-bottom:7px;padding-left:16px;padding-right:16px;padding-top:7px;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out;width:100%}
+html:not(#__):not(#___) .cadmin .form-control::placeholder{color:var(--cadmin-gray-600);opacity:1}
+html:not(#__):not(#___) .cadmin .form-control.focus,html:not(#__):not(#___) .cadmin .form-control:focus-visible,html:not(#__):not(#___) .c-prefers-focus .cadmin .form-control:focus{background-color:var(--cadmin-input-focus-bg, var(--cadmin-primary-l3));border-color:var(--cadmin-input-focus-border-color, hsl(from var(--cadmin-component-active-bg, var(--cadmin-primary)) h s calc(l + 22.9)));box-shadow:var(--cadmin-input-focus-box-shadow, var(--cadmin-component-focus-box-shadow, 0 0 0 2px var(--cadmin-white), 0 0 0 4px var(--cadmin-primary-l0)));color:var(--cadmin-input-focus-color, var(--cadmin-input-color, var(--cadmin-gray-900)));outline:0}
+html:not(#__):not(#___) .cadmin .form-control:focus-within:has(input:focus){background-color:var(--cadmin-input-focus-bg, var(--cadmin-primary-l3));border-color:var(--cadmin-input-focus-border-color, hsl(from var(--cadmin-component-active-bg, var(--cadmin-primary)) h s calc(l + 22.9)));box-shadow:var(--cadmin-input-focus-box-shadow, var(--cadmin-component-focus-box-shadow, 0 0 0 2px var(--cadmin-white), 0 0 0 4px var(--cadmin-primary-l0)));color:var(--cadmin-input-focus-color, var(--cadmin-input-color, var(--cadmin-gray-900)))}
+html:not(#__):not(#___) .cadmin .form-control:disabled,html:not(#__):not(#___) .cadmin .form-control.disabled{background-color:var(--cadmin-input-disabled-bg, var(--cadmin-input-bg, var(--cadmin-gray-200)));border-color:var(--cadmin-input-disabled-border-color, var(--cadmin-input-bg, var(--cadmin-gray-200)));color:var(--cadmin-input-disabled-color, var(--cadmin-gray-500));cursor:not-allowed;opacity:var(--cadmin-input-disabled-opacity, 1)}
+html:not(#__):not(#___) .cadmin .form-control:disabled::placeholder,html:not(#__):not(#___) .cadmin .form-control.disabled::placeholder{color:var(--cadmin-input-disabled-color, var(--cadmin-gray-500))}
+html:not(#__):not(#___) .cadmin .form-control:not([type=range]){-moz-appearance:none;-webkit-appearance:none;appearance:none}
+html:not(#__):not(#___) .cadmin .form-control::-ms-clear,html:not(#__):not(#___) .cadmin .form-control::-ms-reveal{display:none;height:0;width:0}
+html:not(#__):not(#___) .cadmin .form-control[contenteditable] p{margin-bottom:0}
+html:not(#__):not(#___) .cadmin fieldset[disabled] select.form-control[multiple],html:not(#__):not(#___) .cadmin fieldset[disabled] .form-control{background-color:var(--cadmin-input-disabled-bg, var(--cadmin-input-bg, var(--cadmin-gray-200)));border-color:var(--cadmin-input-disabled-border-color, var(--cadmin-input-bg, var(--cadmin-gray-200)));color:var(--cadmin-input-disabled-color, var(--cadmin-gray-500));cursor:not-allowed;opacity:var(--cadmin-input-disabled-opacity, 1)}
+html:not(#__):not(#___) .cadmin div.form-control{height:auto;min-height:40px}
+html:not(#__):not(#___) .cadmin .form-control-inset{background-color:transparent;border-width:0px;color:var(--cadmin-input-color, var(--cadmin-gray-900));flex-grow:1;margin-bottom:calc((40px - 1px - 1px - calc((40px - 1px - 1px - 24px - 5px - 5px) * 0.5) * 2 - calc(16px * 1.5)) * 0.5);margin-left:8px;margin-top:calc((40px - 1px - 1px - calc((40px - 1px - 1px - 24px - 5px - 5px) * 0.5) * 2 - calc(16px * 1.5)) * 0.5);min-height:calc(16px * 1.5);padding:0px;width:50px}
+html:not(#__):not(#___) .cadmin .form-control-inset.focus,html:not(#__):not(#___) .cadmin .form-control-inset:focus-visible,html:not(#__):not(#___) .c-prefers-focus .cadmin .form-control-inset:focus{outline:0}
+html:not(#__):not(#___) .cadmin .form-control-inset:disabled,html:not(#__):not(#___) .cadmin .form-control-inset.disabled{background-color:var(--cadmin-input-disabled-bg, var(--cadmin-input-bg, var(--cadmin-gray-200)));border-color:var(--cadmin-input-disabled-border-color, var(--cadmin-input-bg, var(--cadmin-gray-200)));color:var(--cadmin-input-disabled-color, var(--cadmin-gray-500));cursor:not-allowed;opacity:var(--cadmin-input-disabled-opacity, 1)}
+html:not(#__):not(#___) .cadmin .form-control-inset::-ms-clear,html:not(#__):not(#___) .cadmin .form-control-inset::-ms-reveal{display:none;height:0;width:0}
+html:not(#__):not(#___) .cadmin select.form-control{background-image:var(--cadmin-input-select-icon, url("data:image/svg+xml;charset=utf8,%3Csvg%20viewBox='0%200%20512%20512'%20xmlns='http://www.w3.org/2000/svg'%3E%3Cpath%20class='lexicon-icon-outline%20caret-double-l-top'%20d='m347.913%20199.336-81.538-85c-5.413-5.642-14.188-5.642-19.6%200l-81.538%2085c-8.731%209.101-2.548%2024.664%209.8%2024.664h163.077c12.348%200%2018.531-15.563%209.8-24.664z'%20fill='%236b6c7e'/%3E%3Cpath%20class='lexicon-icon-outline%20caret-double-l-bottom'%20d='m165.236%20312.664%2081.538%2085c5.412%205.642%2014.188%205.642%2019.6%200l81.538-85c8.731-9.101%202.548-24.664-9.8-24.664H175.035c-12.347%200-18.531%2015.563-9.8%2024.664z'%20fill='%236b6c7e'/%3E%3C/svg%3E"));background-position:right 0.5em center;background-repeat:no-repeat;background-size:1.5em 1.5em;cursor:pointer;padding-right:2em}
+html:not(#__):not(#___) .cadmin select.form-control.focus,html:not(#__):not(#___) .cadmin select.form-control:focus-visible,html:not(#__):not(#___) .c-prefers-focus .cadmin select.form-control:focus{background-image:var(--cadmin-input-select-icon-focus, url("data:image/svg+xml;charset=utf8,%3Csvg%20viewBox='0%200%20512%20512'%20xmlns='http://www.w3.org/2000/svg'%3E%3Cpath%20class='lexicon-icon-outline%20caret-double-l-top'%20d='m347.913%20199.336-81.538-85c-5.413-5.642-14.188-5.642-19.6%200l-81.538%2085c-8.731%209.101-2.548%2024.664%209.8%2024.664h163.077c12.348%200%2018.531-15.563%209.8-24.664z'%20fill='%236b6c7e'/%3E%3Cpath%20class='lexicon-icon-outline%20caret-double-l-bottom'%20d='m165.236%20312.664%2081.538%2085c5.412%205.642%2014.188%205.642%2019.6%200l81.538-85c8.731-9.101%202.548-24.664-9.8-24.664H175.035c-12.347%200-18.531%2015.563-9.8%2024.664z'%20fill='%236b6c7e'/%3E%3C/svg%3E"))}
+html:not(#__):not(#___) .cadmin select.form-control:disabled,html:not(#__):not(#___) .cadmin select.form-control.disabled{background-image:var(--cadmin-input-select-icon-disabled, url("data:image/svg+xml;charset=utf8,%3Csvg%20viewBox='0%200%20512%20512'%20xmlns='http://www.w3.org/2000/svg'%3E%3Cpath%20class='lexicon-icon-outline%20caret-double-l-top'%20d='m347.913%20199.336-81.538-85c-5.413-5.642-14.188-5.642-19.6%200l-81.538%2085c-8.731%209.101-2.548%2024.664%209.8%2024.664h163.077c12.348%200%2018.531-15.563%209.8-24.664z'%20fill='%23a7a9bc'/%3E%3Cpath%20class='lexicon-icon-outline%20caret-double-l-bottom'%20d='m165.236%20312.664%2081.538%2085c5.412%205.642%2014.188%205.642%2019.6%200l81.538-85c8.731-9.101%202.548-24.664-9.8-24.664H175.035c-12.347%200-18.531%2015.563-9.8%2024.664z'%20fill='%23a7a9bc'/%3E%3C/svg%3E"))}
+html:not(#__):not(#___) .cadmin select.form-control:disabled>option,html:not(#__):not(#___) .cadmin select.form-control.disabled>option{cursor:not-allowed}
+html:not(#__):not(#___) .cadmin select.form-control option{cursor:pointer}
+html:not(#__):not(#___) .cadmin select.form-control::-ms-expand{display:none}
+html:not(#__):not(#___) .cadmin select.form-control:-moz-focusring{color:rgba(0,0,0,0);text-shadow:0 0 0 var(--cadmin-input-color, var(--cadmin-gray-900))}
+html:not(#__):not(#___) .cadmin select.form-control:focus::-ms-value{background-color:rgba(0,0,0,0);color:inherit}
+html:not(#__):not(#___) .cadmin select.form-control[size]{background-image:none;height:auto;padding-left:8px;padding-right:8px;scrollbar-width:thin}
+html:not(#__):not(#___) .cadmin select.form-control[size].focus,html:not(#__):not(#___) .cadmin select.form-control[size]:focus-visible,html:not(#__):not(#___) .c-prefers-focus .cadmin select.form-control[size]:focus{background-image:none}
+html:not(#__):not(#___) .cadmin select.form-control[size].focus>option:checked,html:not(#__):not(#___) .cadmin select.form-control[size]:focus-visible>option:checked,html:not(#__):not(#___) .c-prefers-focus .cadmin select.form-control[size]:focus>option:checked{background-image:linear-gradient(#ffa700, #ffa700);filter:invert(100%)}
+html:not(#__):not(#___) .cadmin select.form-control[size]:disabled>option:hover,html:not(#__):not(#___) .cadmin select.form-control[size].disabled>option:hover{background-image:none}
+html:not(#__):not(#___) .cadmin select.form-control[size] option{padding:7px 8px}
+html:not(#__):not(#___) .cadmin select.form-control[size] option:checked{background-image:linear-gradient(var(--cadmin-gray-300), var(--cadmin-gray-300))}
+html:not(#__):not(#___) .cadmin select.form-control[multiple]{background-image:none;height:auto;padding-left:8px;padding-right:8px;scrollbar-width:thin}
+html:not(#__):not(#___) .cadmin select.form-control[multiple].focus,html:not(#__):not(#___) .cadmin select.form-control[multiple]:focus-visible,html:not(#__):not(#___) .c-prefers-focus .cadmin select.form-control[multiple]:focus{background-image:none}
+html:not(#__):not(#___) .cadmin select.form-control[multiple].focus>option:checked,html:not(#__):not(#___) .cadmin select.form-control[multiple]:focus-visible>option:checked,html:not(#__):not(#___) .c-prefers-focus .cadmin select.form-control[multiple]:focus>option:checked{background-image:linear-gradient(#ffa700, #ffa700);filter:invert(100%)}
+html:not(#__):not(#___) .cadmin select.form-control[multiple]:disabled>option:hover,html:not(#__):not(#___) .cadmin select.form-control[multiple].disabled>option:hover{background-image:none}
+html:not(#__):not(#___) .cadmin select.form-control[multiple] option{padding:7px 8px}
+html:not(#__):not(#___) .cadmin select.form-control[multiple] option:checked{background-image:linear-gradient(var(--cadmin-gray-300), var(--cadmin-gray-300))}
+html:not(#__):not(#___) .cadmin textarea.form-control,html:not(#__):not(#___) .cadmin textarea.form-control-plaintext,html:not(#__):not(#___) .cadmin .form-control.form-control-textarea{height:100px;resize:vertical}
+html:not(#__):not(#___) .cadmin .form-control[type=range]{background-color:rgba(0,0,0,0);border-color:rgba(0,0,0,0);padding:0}
+html:not(#__):not(#___) .cadmin .form-control[type=range]:focus{box-shadow:none}
+html:not(#__):not(#___) .cadmin .form-control[type=range]:focus::-webkit-slider-thumb{box-shadow:var(--cadmin-input-focus-box-shadow, var(--cadmin-component-focus-box-shadow, 0 0 0 2px var(--cadmin-white), 0 0 0 4px var(--cadmin-primary-l0)))}
+html:not(#__):not(#___) .cadmin .form-control[type=range]::-webkit-slider-thumb{border-radius:100px;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out}
+html:not(#__):not(#___) .cadmin .form-control[readonly]{background-color:var(--cadmin-input-readonly-bg, var(--cadmin-white));border-color:var(--cadmin-input-readonly-border-color, var(--cadmin-input-border-color, var(--cadmin-gray-300)));color:var(--cadmin-input-readonly-color);opacity:1}
+html:not(#__):not(#___) .cadmin .form-control[readonly].focus,html:not(#__):not(#___) .cadmin .form-control[readonly]:focus-visible,html:not(#__):not(#___) .c-prefers-focus .cadmin .form-control[readonly]:focus{border-color:var(--cadmin-input-focus-border-color, hsl(from var(--cadmin-component-active-bg, var(--cadmin-primary)) h s calc(l + 22.9)));box-shadow:none}
+html:not(#__):not(#___) .cadmin .form-feedback-group{width:100%;overflow-wrap:break-word;word-wrap:break-word}
+html:not(#__):not(#___) .cadmin .form-feedback-indicator{margin-left:0px;margin-right:0px}
+html:not(#__):not(#___) .cadmin .form-feedback-indicator:first-child{margin-left:0px}
+html:not(#__):not(#___) .cadmin .form-text{color:var(--cadmin-gray-600);display:block;font-size:14px;font-weight:600;margin-top:4px;overflow-wrap:break-word;word-wrap:break-word}
+html:not(#__):not(#___) .cadmin .input-group>.form-control,html:not(#__):not(#___) .cadmin .input-group>.form-control-plaintext{flex:1 1 0%;margin-bottom:0;min-width:0;position:relative}
+html:not(#__):not(#___) .cadmin .input-group>.form-control+.form-control,html:not(#__):not(#___) .cadmin .input-group>.form-control-plaintext+.form-control{margin-left:calc(1px*-1)}
+html:not(#__):not(#___) .cadmin .input-group>.form-control:focus{z-index:3}
+html:not(#__):not(#___) .cadmin .input-group>.form-control:not(:last-child){border-bottom-right-radius:0;border-top-right-radius:0}
+html:not(#__):not(#___) .cadmin .input-group>.form-control:not(:first-child){border-bottom-left-radius:0;border-top-left-radius:0}
+html:not(#__):not(#___) .cadmin .input-group{align-items:stretch;display:flex;flex-wrap:wrap;position:relative;width:100%;align-items:stretch;display:flex;flex-wrap:wrap;position:relative;width:100%}
+html:not(#__):not(#___) .cadmin .input-group-item{display:flex;flex-grow:1;flex-wrap:wrap;margin-left:8px;width:1%;overflow-wrap:break-word;word-wrap:break-word}
+html:not(#__):not(#___) .cadmin .input-group-item:first-child{margin-left:0px}
+html:not(#__):not(#___) .cadmin .input-group-item>.btn{align-self:flex-start}
+html:not(#__):not(#___) .cadmin .input-group-item-shrink{flex-grow:0;width:auto}
+html:not(#__):not(#___) .cadmin .input-group-ai .input-group-item-shrink{padding-top:0.25rem}
+html:not(#__):not(#___) .cadmin .input-group-ai .form-control{padding:0 0 0 16px}
+html:not(#__):not(#___) .cadmin .input-group-ai .form-control:focus-within:has(.form-control-inset:focus){border-color:var(--cadmin-purple-l2);box-shadow:0 0 10px hsl(from var(--cadmin-purple) h s l / 0.15)}
+html:not(#__):not(#___) .cadmin .input-group-ai[data-ai-state=focused] .form-control{border-color:var(--cadmin-purple-l2);box-shadow:0 0 10px hsl(from var(--cadmin-purple) h s l / 0.15)}
+html:not(#__):not(#___) .cadmin .input-group-ai[data-ai-state=working] .form-control{background-color:var(--cadmin-purple-l5);border-color:var(--cadmin-purple-l1);box-shadow:0 0 10px hsl(from var(--cadmin-purple) h s l / 0.15);color:var(--cadmin-purple-d2)}
+html:not(#__):not(#___) .cadmin .input-group-ai[data-ai-state=result] .form-control,html:not(#__):not(#___) .cadmin .input-group-ai[data-ai-state=result-readonly] .form-control{background-color:var(--cadmin-gray-100);border-color:var(--cadmin-purple-l1);box-shadow:none;color:var(--cadmin-purple)}
+html:not(#__):not(#___) .cadmin .input-group-ai .form-control-inset{color:inherit;height:2.375rem;margin:0;min-height:0;padding:7px 16px 7px 0;resize:none;width:100%}
+html:not(#__):not(#___) .cadmin .input-group-ai .form-control-inset[aria-hidden=true]::placeholder{background-image:linear-gradient(to right, var(--cadmin-primary), var(--cadmin-purple-d2));border-radius:var(--cadmin-input-border-radius, 4px);color:transparent;opacity:0.25}
+html:not(#__):not(#___) .cadmin .input-group-ai .autofit-row{margin-left:-0.25rem;margin-right:-0.25rem}
+html:not(#__):not(#___) .cadmin .input-group-ai .autofit-row .autofit-col{padding:0.75rem 0.25rem}
+html:not(#__):not(#___) .cadmin .input-group-ai .autofit-row .autofit-col-expand{padding-bottom:0;padding-top:0}
+html:not(#__):not(#___) .cadmin .input-group-ai .autofit-row .lexicon-icon{margin-top:0}
+@keyframes progress-bar-stripes{from{background-position:8px 0}to{background-position:0 0}}
+html:not(#__):not(#___) .cadmin table{border-collapse:collapse}
+html:not(#__):not(#___) .cadmin th{height:20px;text-align:left}
+html:not(#__):not(#___) .cadmin caption{color:var(--cadmin-gray-900);padding:8px 16px;text-align:left}
+html:not(#__):not(#___) .cadmin .autofit-row{display:flex;flex-wrap:nowrap;width:100%}
+ulhtml:not(#__):not(#___) html:not(#__):not(#___) .cadmin .autofit-row,html:not(#__):not(#___) ulhtml:not(#__):not(#___) .cadmin .autofit-row{list-style:none;padding-left:0}
+html:not(#__):not(#___) .cadmin .autofit-col,html:not(#__):not(#___) .cadmin .tbar-item{display:flex;flex-direction:column;flex-shrink:0;min-height:0;position:relative}
+html:not(#__):not(#___) .cadmin .autofit-col-expand,html:not(#__):not(#___) .cadmin .tbar-item-expand{flex-grow:1;flex-shrink:1;min-width:50px;word-wrap:break-word}
+html:not(#__):not(#___) .cadmin .rounded-pill{border-radius:800px !important}
+@keyframes cadmin-loading-animation-circle{100%{transform:rotate(360deg)}}
+@keyframes cadmin-loading-animation-squares-box-1{0%{left:0;opacity:.4;top:0;transform:scale(1)}25%{left:calc(100% - 1em);opacity:.4;top:0;transform:scale(1)}50%{left:calc(100% - 1.5em);opacity:1;top:calc(100% - 1.5em);transform:scale(2)}75%{left:.5em;opacity:1;top:calc(100% - 1.5em);transform:scale(2)}}
+@keyframes cadmin-loading-animation-squares-box-2{0%{left:calc(100% - 1.5em);opacity:1;top:calc(100% - 1.5em);transform:scale(2)}25%{left:.5em;opacity:1;top:calc(100% - 1.5em);transform:scale(2)}50%{left:0;opacity:.4;top:0;transform:scale(1)}75%{left:calc(100% - 1em);opacity:.4;top:0;transform:scale(1)}}
+@keyframes clay-cadmin-focus-ring{0%,50%{box-shadow:0 0 0 4px var(--cadmin-white),0 0 0 12px var(--cadmin-primary-l2)}100%{box-shadow:0 0 0 2px var(--cadmin-white),0 0 0 4px var(--cadmin-primary-l0)}}
+/* ── This page ─────────────────────────────────────────────────────────── */
+
+	.es-page { display: flex; flex-direction: column; gap: var(--spacing-8);
+		margin: 0 auto; max-width: 1240px; padding: var(--spacing-6) var(--spacing-7) var(--spacing-9); }
+
+	.es-intro { display: flex; flex-direction: column; gap: var(--spacing-4); max-width: 760px; }
+	.es-title { margin: 0; font-size: var(--font-size-2xl); font-weight: var(--font-weight-bold);
+		color: var(--color-dark); letter-spacing: -.01em; }
+	.es-lede { margin: 0; font-size: var(--font-size-lg); line-height: 1.6;
+		color: var(--color-dark); opacity: .7; }
+	.es-notice { margin-top: var(--spacing-2); }
+
+	.es-section { display: flex; flex-direction: column; gap: var(--spacing-4); }
+	.es-section-title { margin: 0; font-size: var(--font-size-sm); font-weight: var(--font-weight-bold);
+		text-transform: uppercase; letter-spacing: .06em; color: var(--color-secondary); }
+	.es-section-note { margin: 0 0 var(--spacing-2); max-width: 760px;
+		font-size: var(--font-size-sm); line-height: 1.6; color: var(--color-dark); opacity: .6; }
+
+	.es-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+		gap: var(--spacing-7); }
+	.es-demo { display: flex; flex-direction: column; gap: var(--spacing-2); min-width: 0; }
+	.es-demo__head { display: flex; align-items: baseline; gap: var(--spacing-3);
+		padding: 0 var(--spacing-2); }
+	.es-demo__head h2 { margin: 0; font-size: var(--font-size-base); font-weight: var(--font-weight-bold);
+		letter-spacing: .04em; color: var(--color-dark); }
+	.es-demo__caption { margin: 0 var(--spacing-2) var(--spacing-3); font-size: var(--font-size-sm);
+		line-height: 1.55; color: var(--color-dark); opacity: .6; }
+
+	.es-stage { border: 1px solid var(--color-secondary-l3); border-radius: var(--rounded-lg);
+		overflow: hidden; display: grid; grid-template-columns: 1fr; }
+	.es-stage--wide { grid-template-columns: 1fr 1fr; }
+	@media (max-width: 900px) { .es-stage--wide { grid-template-columns: 1fr; } }
+
+	.es-half { padding: var(--spacing-6); display: flex; flex-direction: column;
+		gap: var(--spacing-4); min-width: 0; }
+	.es-half--light { background: #fff; }
+	.es-half--dark { background: #1b1b23; }
+	.es-half__lbl { font-size: var(--font-size-xs); font-weight: var(--font-weight-bold);
+		text-transform: uppercase; letter-spacing: .08em; color: #6b6c7e; }
+	.es-half--dark .es-half__lbl { color: #a7a9bc; }
+
+
+	.es-foot { margin: 0; font-size: var(--font-size-sm); color: var(--color-dark); opacity: .45; }
+
+	#probe { display: none; }
+	#probe.show { display: block; }
+
+	@media (max-width: 767px) {
+		.es-page { padding: var(--spacing-5) var(--spacing-5) var(--spacing-8); }
+		.es-grid { grid-template-columns: 1fr; }
+	}
+
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display: none">
+<symbol id="check" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M192.9,429.5c-8.3,0-16.4-3.3-22.3-9.2L44.5,294.1C15,263.2,62.7,222,89.1,249.5L191.5,352l230-258.9 c27.2-30.5,74.3,11.5,47.1,41.9L216.4,418.9c-5.8,6.5-14,10.3-22.6,10.6C193.5,429.5,193.2,429.5,192.9,429.5z" />
+</symbol>
+<symbol id="reload" viewBox="0 0 512 512">	<path class="lexicon-icon-outline reload-arrow-down" d="M472.065 460.954l-80.854 2.365c67.538-47.63 108.976-125.482 108.976-208.888 0-97.148-53.904-184.701-140.685-228.505-11.483-5.768-25.463-1.169-31.231 10.286-5.795 11.483-1.197 25.463 10.286 31.257 71.020 35.856 115.142 107.487 115.142 186.987 0 68.947-34.659 133.269-90.981 172.129l-2.074-70.702c-0.372-12.838-11.19-23.23-23.921-22.566-12.838 0.372-22.938 11.084-22.566 23.921l3.854 131.462v0.027c0 0.027 0 0.027 0 0.027l0.027 0.478c0.372 12.599 10.685 22.566 23.23 22.566 0.239 0 0.478 0 0.691 0 0.904-0.027 1.647-0.452 2.525-0.585l128.964-3.774c12.838-0.372 22.938-11.084 22.566-23.921s-11.269-23.23-23.948-22.566z"></path>
+	<path class="lexicon-icon-outline reload-arrow-up" d="M194.017 23.27c0-0.027 0-0.027 0-0.053v-0.478c-0.372-12.838-11.111-22.938-23.922-22.566-0.904 0.027-1.648 0.452-2.525 0.585l-128.99 3.774c-12.838 0.372-22.938 11.084-22.566 23.922 0.372 12.599 10.685 22.566 23.23 22.566 0.239 0 0.452 0 0.691 0l80.855-2.365c-67.538 47.63-108.976 125.508-108.976 208.889 0 97.149 53.903 184.701 140.685 228.505 3.349 1.702 6.937 2.498 10.446 2.498 8.506 0 16.692-4.678 20.785-12.785 5.794-11.483 1.196-25.463-10.286-31.231-71.020-35.856-115.142-107.488-115.142-186.987 0-68.947 34.66-133.269 90.981-172.129l2.073 70.701c0.372 12.599 10.685 22.566 23.23 22.566 0.239 0 0.478 0 0.691 0 12.838-0.372 22.938-11.083 22.566-23.922l-3.854-131.462 0.027-0.027z"></path>
+</symbol>
+<symbol id="stars" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M352 96a19.518 19.518 0 0 0-19.138 15.689l-16.678 83.392a32 32 0 0 1-25.103 25.103l-83.392 16.678a19.518 19.518 0 0 0 0 38.276l83.392 16.678a32 32 0 0 1 25.103 25.103l16.678 83.392a19.518 19.518 0 0 0 38.276 0l16.678-83.392a32 32 0 0 1 25.103-25.103l83.392-16.678a19.518 19.518 0 0 0 0-38.276l-83.392-16.678a32 32 0 0 1-25.103-25.103l-16.678-83.392A19.518 19.518 0 0 0 352 96ZM96 0c-9.233 0-17.112 6.675-18.63 15.782l-5.04 30.243A32 32 0 0 1 46.024 72.33l-30.243 5.04C6.675 78.889 0 86.768 0 96s6.675 17.113 15.782 18.63l30.243 5.041a32 32 0 0 1 26.304 26.304l5.04 30.243C78.889 185.325 86.768 192 96 192s17.113-6.675 18.63-15.782l5.041-30.243a32.001 32.001 0 0 1 26.304-26.304l30.243-5.041C185.325 113.112 192 105.233 192 96c0-9.233-6.675-17.112-15.782-18.63l-30.243-5.04a32 32 0 0 1-26.304-26.305l-5.041-30.243C113.113 6.675 105.233 0 96 0Zm44.119 399.522c-3.877 15.511-13.422 24.804-28.597 28.597-20.185 5.047-20.185 34.715 0 39.762 15.175 3.793 24.72 13.086 28.597 28.597 5.047 20.185 34.715 20.185 39.762 0 3.793-15.175 13.086-24.72 28.597-28.597 20.185-5.047 20.185-34.715 0-39.762-15.175-3.793-24.72-13.086-28.597-28.597-5.047-20.185-34.715-20.185-39.762 0Z" />
+</symbol>
+<symbol id="warning-full" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M506.3,409.3l-214-353.7c-16.8-30.6-55.8-32.6-72.6,0L5.7,409.3C-8,436.5,5,480,42,480h428C506,480,522.5,436.5,506.3,409.3z M224,392c0-42.5,64-42,64,0C288,433.5,224,434.5,224,392z M288,288c0,42.5-64,40.5-64,0c0-20.4,0-83.6,0-104c0-43,64-43.5,64,0C288,204.4,288,267.6,288,288z"></path>
+</symbol>
+</svg>
+
+
+<div class="control-menu">
+	<div class="control-menu__left">
+		<span class="control-menu__title">Input Text AI Variant</span>
+	</div>
+</div>
+
+<div id="probe"></div>
+
+<main class="es-page">
+
+	<div class="es-intro">
+		<h1 class="es-title">Input Text AI Variant</h1>
+		<p class="es-lede">
+			The five AI states of the text input, side by side in light and dark. Everything
+			here is painted by the real Lexicon stylesheet taken out of DXP 7.4.13-u152, so
+			the colours are the ones the product renders, not a mock-up.
+		</p>
+		<div class="alert alert--warning alert--toast es-notice">
+			<div class="alert__content">
+				<svg class="lexicon-icon"><use href="#warning-full"></use></svg>
+				<p class="alert__text">
+					<strong>Only Default and Focused can be reached in the product today.</strong>
+					Working waits on the AI service being connected, and neither Result state is
+					triggered from anywhere yet. This page is the only place all five can be seen
+					together, which is why it exists.
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<section class="es-section">
+		<h2 class="es-section-title">The five states</h2>
+		<div class="es-grid">
+		<div class="es-demo">
+			<div class="es-demo__head"><h2>DEFAULT</h2></div>
+			<p class="es-demo__caption">At rest, before anything happens. Nothing signals AI yet.</p>
+			<div class="es-stage">
+				<div class="es-half es-half--light">
+					<span class="es-half__lbl">Light</span>
+					<div class="cadmin" style="color-scheme: light"><div class="input-group input-group-ai"><div class="input-group-item"><div class="form-control"><div class="autofit-row"><div class="autofit-col autofit-col-expand"><textarea class="form-control-inset" rows="1" placeholder="Ask me anything..."></textarea></div></div></div></div><div class="input-group-item input-group-item-shrink"><button class="btn btn-primary btn-monospaced btn-sm" aria-label="Accept" type="button" disabled><svg class="lexicon-icon"><use href="#check"></use></svg></button></div></div></div>
+				</div>
+				<div class="es-half es-half--dark">
+					<span class="es-half__lbl">Dark</span>
+					<div class="cadmin" style="color-scheme: dark"><div class="input-group input-group-ai"><div class="input-group-item"><div class="form-control"><div class="autofit-row"><div class="autofit-col autofit-col-expand"><textarea class="form-control-inset" rows="1" placeholder="Ask me anything..."></textarea></div></div></div></div><div class="input-group-item input-group-item-shrink"><button class="btn btn-primary btn-monospaced btn-sm" aria-label="Accept" type="button" disabled><svg class="lexicon-icon"><use href="#check"></use></svg></button></div></div></div>
+				</div>
+			</div>
+		</div>
+		<div class="es-demo">
+			<div class="es-demo__head"><h2>FOCUSED</h2></div>
+			<p class="es-demo__caption">The field is ready for input. A soft purple edge and glow, no change of fill or text.</p>
+			<div class="es-stage">
+				<div class="es-half es-half--light">
+					<span class="es-half__lbl">Light</span>
+					<div class="cadmin" style="color-scheme: light"><div class="input-group input-group-ai" data-ai-state="focused"><div class="input-group-item"><div class="form-control"><div class="autofit-row"><div class="autofit-col autofit-col-expand"><textarea class="form-control-inset" rows="1">Draft a launch summary</textarea></div></div></div></div><div class="input-group-item input-group-item-shrink"><button class="btn btn-primary btn-monospaced btn-sm" aria-label="Accept" type="button"><svg class="lexicon-icon"><use href="#check"></use></svg></button></div></div></div>
+				</div>
+				<div class="es-half es-half--dark">
+					<span class="es-half__lbl">Dark</span>
+					<div class="cadmin" style="color-scheme: dark"><div class="input-group input-group-ai" data-ai-state="focused"><div class="input-group-item"><div class="form-control"><div class="autofit-row"><div class="autofit-col autofit-col-expand"><textarea class="form-control-inset" rows="1">Draft a launch summary</textarea></div></div></div></div><div class="input-group-item input-group-item-shrink"><button class="btn btn-primary btn-monospaced btn-sm" aria-label="Accept" type="button"><svg class="lexicon-icon"><use href="#check"></use></svg></button></div></div></div>
+				</div>
+			</div>
+		</div>
+		<div class="es-demo">
+			<div class="es-demo__head"><h2>WORKING</h2></div>
+			<p class="es-demo__caption">Generating. The field fills with the lightest purple, goes read-only, and the confirm button steps aside so there is nothing to press.</p>
+			<div class="es-stage">
+				<div class="es-half es-half--light">
+					<span class="es-half__lbl">Light</span>
+					<div class="cadmin" style="color-scheme: light"><div class="input-group input-group-ai" data-ai-state="working"><div class="input-group-item"><div class="form-control"><div class="autofit-row"><div class="autofit-col"><svg class="lexicon-icon"><use href="#stars"></use></svg></div><div class="autofit-col autofit-col-expand"><textarea class="form-control-inset" rows="1" readonly>Working on it...</textarea></div></div></div></div></div></div>
+				</div>
+				<div class="es-half es-half--dark">
+					<span class="es-half__lbl">Dark</span>
+					<div class="cadmin" style="color-scheme: dark"><div class="input-group input-group-ai" data-ai-state="working"><div class="input-group-item"><div class="form-control"><div class="autofit-row"><div class="autofit-col"><svg class="lexicon-icon"><use href="#stars"></use></svg></div><div class="autofit-col autofit-col-expand"><textarea class="form-control-inset" rows="1" readonly>Working on it...</textarea></div></div></div></div></div></div>
+				</div>
+			</div>
+		</div>
+		<div class="es-demo">
+			<div class="es-demo__head"><h2>RESULT</h2></div>
+			<p class="es-demo__caption">A suggestion has come back. The value turns purple, a Suggestion hint appears underneath, and you can accept it or ask for another.</p>
+			<div class="es-stage">
+				<div class="es-half es-half--light">
+					<span class="es-half__lbl">Light</span>
+					<div class="cadmin" style="color-scheme: light"><div class="input-group input-group-ai" data-ai-state="result"><div class="input-group-item"><div class="form-control"><div class="autofit-row"><div class="autofit-col autofit-col-expand"><textarea class="form-control-inset" rows="1">Q3 launch recap for the EMEA newsletter</textarea></div></div></div></div><div class="input-group-item input-group-item-shrink"><button class="btn btn-primary btn-monospaced btn-sm" aria-label="Accept" type="button"><svg class="lexicon-icon"><use href="#check"></use></svg></button></div><div class="input-group-item input-group-item-shrink"><button class="btn btn-outline-ai btn-monospaced rounded-pill btn-sm" aria-label="Try again" type="button"><svg class="lexicon-icon"><use href="#reload"></use></svg></button></div></div><div class="form-feedback-group"><div class="form-text"><span class="form-feedback-indicator"><svg class="lexicon-icon"><use href="#stars"></use></svg></span>Suggestion</div></div></div>
+				</div>
+				<div class="es-half es-half--dark">
+					<span class="es-half__lbl">Dark</span>
+					<div class="cadmin" style="color-scheme: dark"><div class="input-group input-group-ai" data-ai-state="result"><div class="input-group-item"><div class="form-control"><div class="autofit-row"><div class="autofit-col autofit-col-expand"><textarea class="form-control-inset" rows="1">Q3 launch recap for the EMEA newsletter</textarea></div></div></div></div><div class="input-group-item input-group-item-shrink"><button class="btn btn-primary btn-monospaced btn-sm" aria-label="Accept" type="button"><svg class="lexicon-icon"><use href="#check"></use></svg></button></div><div class="input-group-item input-group-item-shrink"><button class="btn btn-outline-ai btn-monospaced rounded-pill btn-sm" aria-label="Try again" type="button"><svg class="lexicon-icon"><use href="#reload"></use></svg></button></div></div><div class="form-feedback-group"><div class="form-text"><span class="form-feedback-indicator"><svg class="lexicon-icon"><use href="#stars"></use></svg></span>Suggestion</div></div></div>
+				</div>
+			</div>
+		</div>
+		<div class="es-demo">
+			<div class="es-demo__head"><h2>RESULT · READ ONLY</h2></div>
+			<p class="es-demo__caption">The same suggestion shown passively, for places where it is information rather than a choice.</p>
+			<div class="es-stage">
+				<div class="es-half es-half--light">
+					<span class="es-half__lbl">Light</span>
+					<div class="cadmin" style="color-scheme: light"><div class="input-group input-group-ai" data-ai-state="result-readonly"><div class="input-group-item"><div class="form-control"><div class="autofit-row"><div class="autofit-col autofit-col-expand"><textarea class="form-control-inset" rows="1" readonly>Q3 launch recap for the EMEA newsletter</textarea></div></div></div></div><div class="input-group-item input-group-item-shrink"><button class="btn btn-primary btn-monospaced btn-sm" aria-label="Accept" type="button"><svg class="lexicon-icon"><use href="#check"></use></svg></button></div></div><div class="form-feedback-group"><div class="form-text"><span class="form-feedback-indicator"><svg class="lexicon-icon"><use href="#stars"></use></svg></span>Suggestion</div></div></div>
+				</div>
+				<div class="es-half es-half--dark">
+					<span class="es-half__lbl">Dark</span>
+					<div class="cadmin" style="color-scheme: dark"><div class="input-group input-group-ai" data-ai-state="result-readonly"><div class="input-group-item"><div class="form-control"><div class="autofit-row"><div class="autofit-col autofit-col-expand"><textarea class="form-control-inset" rows="1" readonly>Q3 launch recap for the EMEA newsletter</textarea></div></div></div></div><div class="input-group-item input-group-item-shrink"><button class="btn btn-primary btn-monospaced btn-sm" aria-label="Accept" type="button"><svg class="lexicon-icon"><use href="#check"></use></svg></button></div></div><div class="form-feedback-group"><div class="form-text"><span class="form-feedback-indicator"><svg class="lexicon-icon"><use href="#stars"></use></svg></span>Suggestion</div></div></div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</section>
+
+	<p class="es-foot">
+		LPD-95953 · Input Text AI variant · reviewed on DXP 7.4.13-u152
+	</p>
+
+</main>
+
+
+<script>
+	// The dark column runs through light-dark(). Without it the page would quietly show
+	// fallback values and the light/dark comparison would be a lie.
+	var missing = [];
+
+	if (!CSS.supports('color', 'light-dark(#fff, #000)')) {
+		missing.push('light-dark()');
+	}
+
+	if (!CSS.supports('color', 'hsl(from #aa33ff h s l / 0.15)')) {
+		missing.push('relative colors, used by the AI glow');
+	}
+
+	if (!CSS.supports('selector(:has(*))')) {
+		missing.push(':has()');
+	}
+
+	if (missing.length) {
+		var probe = document.getElementById('probe');
+
+		probe.className = 'alert alert--danger alert--toast show';
+		probe.innerHTML = '<div class="alert__content"><p class="alert__text">' +
+			'<strong>This browser is missing ' + missing.join(', ') + '.</strong> ' +
+			'The colours below fall back to other values and the light/dark comparison ' +
+			'cannot be trusted. Open this in an up-to-date Chrome, Edge or Safari.' +
+			'</p></div>';
+	}
+</script>
+
+
+</body>
+</html>
