@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Style Books dark mode from DIEGOALO</title>
+  <meta name="description" content="Prototype of the Liferay DXP Style Book editor with a Light/Dark switch in the sidebar, so dark mode token values can be edited and previewed next to the light ones.">
+  <link rel="canonical" href="https://diegoalo.github.io/liferay-tests/style-books-dark-mode.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="DIEGOALO">
+  <meta property="og:title" content="Style Books dark mode from DIEGOALO">
+  <meta property="og:description" content="Prototype of the Liferay DXP Style Book editor with a Light/Dark switch in the sidebar, so dark mode token values can be edited and previewed next to the light ones.">
+  <meta property="og:url" content="https://diegoalo.github.io/liferay-tests/style-books-dark-mode.html">
+  <meta property="og:image" content="https://diegoalo.com/assets/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@_diegoalo">
+  <meta name="twitter:image" content="https://diegoalo.com/assets/og-image.jpg">
+
+  <!-- This prototype deliberately opts OUT of the kit's skin switcher.
+       What it reproduces is the DXP admin chrome (`cadmin`), which is light
+       in the product regardless of what the visitor's site looks like — and
+       that is the whole point of the proposal below: flipping the mode you
+       are editing must NOT reskin the editor. Reading `vanilla-skin` here
+       would drag the chrome into dark as soon as another prototype had set
+       that key, which is exactly the confusion we are trying to avoid. -->
+  <script>(function(){try{
+    var r=document.documentElement;
+    ['light-hc','dark','dark-hc'].forEach(function(c){r.classList.remove(c);});
+    r.classList.add('light');
+  }catch(e){}})()</script>
+
+  <style>
+/* ── tokens.css ─────────────────────────────── */
+/* ============================================================
+   Lexicon base tokens — vanilla
+   Copy of tokens.css trimmed to colors, spacing, typography,
+   radius and shadow. Light mode only — no theming layer.
+   ============================================================ */
+
+:root {
+
+  /* ── Color: Primary ── */
+  --color-primary-d2: #004AD7;
+  --color-primary-d1: #0053F0;
+  --color-primary:    #0B5FFF;
+  --color-primary-l0: #5791FF;
+  --color-primary-l1: #80ACFF;
+  --color-primary-l2: #B3CDFF;
+  --color-primary-l3: #F0F5FF;
+
+  /* ── Color: Secondary ── */
+  --color-secondary:    #6B6C7E;
+  --color-secondary-l0: #9393A4;
+  --color-secondary-l1: #A7A9BC;
+  --color-secondary-l2: #CDCED9;
+  --color-secondary-l3: #E7E7ED;
+
+  /* ── Color: Dark / Light ── */
+  --color-dark-d2: #111116;
+  --color-dark-d1: #1C1C24;
+  --color-dark:    #272833;
+  --color-dark-l1: #30313F;
+  --color-dark-l2: #393A4A;
+  --color-light-d2: #D3D6E0;
+  --color-light-d1: #E2E4EA;
+  --color-light:    #F1F2F5;
+  --color-light-l1: #F7F8F9;
+  --color-white:    #FFFFFF;
+
+  /* Scrim — dim layer behind overlays (mobile drawer, dialogs). Kept as a
+     stable dark tint in every skin (dark counterpart in tokens-dark.css), so
+     it never inverts the way --color-dark does. */
+  --color-scrim: rgba(57, 58, 74, 0.5);
+
+  /* ── Color: Success ── */
+  --color-success-d2: #1C5629;
+  --color-success-d1: #226A33;
+  --color-success:    #287D3C;
+  --color-success-l1: #5ACA75;
+  --color-success-l2: #EDF9F0;
+
+  /* ── Color: Info ── */
+  --color-info-d2: #234584;
+  --color-info-d1: #294F98;
+  --color-info:    #2E5AAC;
+  --color-info-l1: #89A7E0;
+  --color-info-l2: #EEF2FA;
+
+  /* ── Color: Warning ── */
+  --color-warning-d2: #863A00;
+  --color-warning-d1: #9F4500;
+  --color-warning:    #B95000;
+  --color-warning-l1: #FF8F39;
+  --color-warning-l2: #FFF4EC;
+
+  /* ── Color: Danger ── */
+  --color-danger-d2: #AB1010;
+  --color-danger-d1: #C31212;
+  --color-danger:    #DA1414;
+  --color-danger-l1: #F48989;
+  --color-danger-l2: #FEEFEF;
+
+  /* ── Spacing ── */
+  --spacing-1:   2px;
+  --spacing-2:   4px;
+  --spacing-2-5: 6px;
+  --spacing-3:   8px;
+  --spacing-4:   12px;
+  --spacing-5:   16px;
+  --spacing-6:   20px;
+  --spacing-7:   24px;
+  --spacing-8:   32px;
+  --spacing-9:   40px;
+  --spacing-10: 48px;
+
+  /* ── Border radius ── */
+  --rounded-sm:    2px;
+  --rounded-md:    4px;
+  --rounded-lg:    8px;
+  --rounded-xl:    16px;
+  --rounded-full:  9999px;
+
+  /* ── Typography ── */
+  --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-size-xs:   10px;
+  --font-size-sm:   12px;
+  --font-size-base: 14px;
+  --font-size-md:   16px;
+  --font-size-lg:   18px;
+  --font-size-xl:   20px;
+  --font-size-2xl:  28px;
+  --font-size-3xl:  32px;
+  --font-weight-normal: 300;
+  --font-weight-semi:   400;
+  --font-weight-bold:   600;
+  --line-height-base:   1.5;
+
+  /* ── Shadow ── */
+  --shadow-sm:         0 1px 2px rgba(39, 40, 51, 0.10);
+  --shadow-card:       0 2px 4px rgba(39, 40, 51, 0.12);
+  --shadow-md:         0 2px 8px rgba(39, 40, 51, 0.14);
+  --shadow-dropdown:   0 4px 8px rgba(39, 40, 51, 0.12);
+  --shadow-lg:         0 4px 16px rgba(39, 40, 51, 0.18);
+  --shadow-alert:      0 8px 16px rgba(39, 40, 51, 0.20);
+  /* Scroll shadows — a soft edge cast by sticky chrome (header / footer) over
+     scrolling content, shown only while content is clipped past that edge. */
+  --shadow-scroll-top:    0 4px 24px rgba(0, 0, 0, 0.08);
+  --shadow-scroll-bottom: 0 -4px 24px rgba(0, 0, 0, 0.08);
+
+  /* ── Focus ring ── */
+  --focus-ring: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-primary-l0);
+
+  /* ── Chart colors ── */
+  --blue-d4: #004799;
+  --blue-d3: #0053B3;
+  --blue-d2: #005FCC;
+  --blue-d1: #006BE6;
+  --blue:    #006EFF;
+  --blue-l1: #338FFF;
+  --blue-l2: #66ABFF;
+  --blue-l3: #97C5FF;
+  --blue-l4: #CCE3FF;
+  --blue-l5: #E5F1FF;
+
+  --orange-d4: #662700;
+  --orange-d3: #803100;
+  --orange-d2: #993B00;
+  --orange-d1: #B34400;
+  --orange:    #CC4E00;
+  --orange-l1: #FF6200;
+  --orange-l2: #FF8133;
+  --orange-l3: #FFA166;
+  --orange-l4: #FFC099;
+  --orange-l5: #FFF0E5;
+
+  --red-d4: #800000;
+  --red-d3: #990000;
+  --red-d2: #B30000;
+  --red-d1: #CC0000;
+  --red:    #E50000;
+  --red-l1: #FF4D4D;
+  --red-l2: #FF6666;
+  --red-l3: #FF8080;
+  --red-l4: #FF9999;
+  --red-l5: #FFE5E5;
+
+  --teal-d4: #092A25;
+  --teal-d3: #0D3F37;
+  --teal-d2: #125449;
+  --teal-d1: #16695B;
+  --teal:    #1B7E6E;
+  --teal-l1: #24A892;
+  --teal-l2: #42D7BE;
+  --teal-l3: #6CE0CC;
+  --teal-l4: #96E9DB;
+  --teal-l5: #EAFBF8;
+
+  --pink-d4: #800048;
+  --pink-d3: #990057;
+  --pink-d2: #B30065;
+  --pink-d1: #CC0074;
+  --pink:    #E50082;
+  --pink-l1: #FF4DB2;
+  --pink-l2: #FF80C8;
+  --pink-l3: #FF99D3;
+  --pink-l4: #FFB2DE;
+  --pink-l5: #FFE5F4;
+
+  --green-d4: #162D06;
+  --green-d3: #22430A;
+  --green-d2: #2E590D;
+  --green-d1: #397010;
+  --green:    #458613;
+  --green-l1: #53A117;
+  --green-l2: #67C91D;
+  --green-l3: #81E236;
+  --green-l4: #9DE963;
+  --green-l5: #F1FCE9;
+
+  --purple-d4: #7700CC;
+  --purple-d3: #8600E6;
+  --purple-d2: #9500FF;
+  --purple-d1: #9F1AFF;
+  --purple:    #AA33FF;
+  --purple-l1: #BF66FF;
+  --purple-l2: #CA80FF;
+  --purple-l3: #D499FF;
+  --purple-l4: #DFB3FF;
+  --purple-l5: #F2E5FF;
+
+  --yellow-d4: #997000;
+  --yellow-d3: #B38900;
+  --yellow-d2: #CC9600;
+  --yellow-d1: #E6A800;
+  --yellow:    #FFBB00;
+  --yellow-l1: #FFC933;
+  --yellow-l2: #FFD666;
+  --yellow-l3: #FFE499;
+  --yellow-l4: #FFF1CC;
+  --yellow-l5: #FFF8E5;
+
+  --cyan-d4: #00334D;
+  --cyan-d3: #004466;
+  --cyan-d2: #005580;
+  --cyan-d1: #006699;
+  --cyan:    #0077B3;
+  --cyan-l1: #0099E6;
+  --cyan-l2: #33BBFF;
+  --cyan-l3: #66CCFF;
+  --cyan-l4: #99DDFF;
+  --cyan-l5: #E5F6FF;
+
+  --indigo-d4: #0017E5;
+  --indigo-d3: #001AFF;
+  --indigo-d2: #1A30FF;
+  --indigo-d1: #3347FF;
+  --indigo:    #4D5FFF;
+  --indigo-l1: #808CFF;
+  --indigo-l2: #99A3FF;
+  --indigo-l3: #B2BAFF;
+  --indigo-l4: #CCD1FF;
+  --indigo-l5: #E5E8FF;
+}
+
+/* Sensible defaults for the document */
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+
+body {
+  margin: 0;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--color-dark);
+  background: var(--color-white);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.25;
+  margin: 0;
+}
+
+p { margin: 0; }
+
+a { color: var(--color-primary); }
+a:hover { color: var(--color-primary-d1); }
+
+/* ============================================================
+   SKELETON tokens — loading-state shapes and shimmer sweep.
+   Shape and surface resolve from the semantic scale (they flip
+   per skin automatically); the shimmer gradient needs raw RGB
+   components, overridden for dark skins in tokens-dark.css.
+   ============================================================ */
+:root {
+  --skeleton-shape: var(--color-secondary-l3);
+  --skeleton-surface: var(--color-light-l1);
+  --skeleton-shimmer-rgb: 247, 248, 249;  /* light-l1 */
+  --skeleton-shimmer-alpha: 0.6;
+}
+
+/* ============================================================
+   CHART tokens — categorical series, sequential buckets and
+   plot structure.
+   Categorical series alias the base chart hues (--yellow, --blue,
+   …) in a fixed order chosen for maximum adjacent contrast and
+   accessibility; the base hues already carry per-skin overrides,
+   so charts reskin for free. (Never point a series at a -l2/-l3
+   tint — those collapse to near-white in the HC skins.) The
+   sequential buckets alias the --blue scale, and the structural
+   tokens alias the semantic scale so grid / track / halo / axis /
+   land flip per skin automatically.
+   ============================================================ */
+:root {
+  /* Categorical series — bar (stacked), pie, multi-series line.
+     Ordered for maximum adjacent contrast + accessibility; alias
+     the base chart hues so each series reskins per skin. */
+  --chart-1:  var(--yellow);
+  --chart-2:  var(--blue);
+  --chart-3:  var(--orange);
+  --chart-4:  var(--teal);
+  --chart-5:  var(--pink);
+  --chart-6:  var(--cyan);
+  --chart-7:  var(--red);
+  --chart-8:  var(--purple);
+  --chart-9:  var(--green);
+  --chart-10: var(--indigo);
+
+  /* Sequential buckets — single hue, less → more (map, heat) */
+  --chart-seq-1: var(--blue-l4);
+  --chart-seq-2: var(--blue-l2);
+  --chart-seq-3: var(--blue);
+
+  /* Plot structure — flip per skin through the semantic scale */
+  --chart-track:     var(--color-light-d1);   /* bar track / gridlines (#E2E4EA) */
+  --chart-grid:      var(--color-light-d1);   /* axis gridlines */
+  --chart-halo:      var(--color-white);      /* marker + segment separators */
+  --chart-axis:      var(--color-secondary);  /* axis + tick labels */
+  --chart-land:      var(--color-light);      /* map land fill (#F1F2F5) */
+  --chart-land-line: var(--color-light-d1);   /* map land borders (#E2E4EA) */
+}
+</style>
+  <style>
+/* ── components.css (only the rules this page uses) ── */
+.lexicon-icon {
+  display: inline-block;
+  width: 16px;   /* default size */
+  height: 16px;
+  fill: currentColor;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+.lexicon-icon-sm { width: 12px; height: 12px; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-3);
+  height: 40px;
+  padding: 0 var(--spacing-5);
+  border-radius: var(--rounded-md);
+  border: 1px solid transparent;
+  background: transparent;
+  font-family: inherit;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  color: var(--color-dark);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color 0.1s ease,
+    border-color 0.1s ease,
+    color 0.1s ease,
+    box-shadow 0.1s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.btn:focus-visible {
+  outline: 0;
+  box-shadow: var(--focus-ring);
+}
+.btn:disabled, .btn[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.btn--primary {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+.btn--primary:hover { background: var(--color-primary-d1); }
+.btn--primary:active { background: var(--color-primary-d2); }
+.btn--secondary {
+  background: var(--color-white);
+  border-color: var(--color-secondary-l0);
+  color: var(--color-secondary);
+}
+.btn--secondary:hover { background: var(--color-light-l1); }
+.btn--secondary:active { background: var(--color-light); }
+.btn--borderless {
+  background: transparent;
+  color: var(--color-secondary);
+}
+.btn--borderless:hover { background: var(--color-light); }
+.btn--borderless:active { background: var(--color-light-d1); }
+.btn--sm { height: 32px; padding: 0 var(--spacing-4); font-size: var(--font-size-sm); }
+.btn--icon { width: 40px; min-width: 40px; padding: 0; flex-shrink: 0; }
+.btn--icon.btn--sm { width: 32px; min-width: 32px; }
+.tooltip {
+  position: relative;
+  display: inline-block;
+  max-width: 240px;
+  padding: var(--spacing-4);
+  border-radius: var(--rounded-md);
+  background: var(--color-dark-d2);
+  color: var(--color-white);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-base);
+}
+.tooltip::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 4px solid transparent;
+}
+.tooltip::after {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-top-color: var(--color-dark-d2);
+}
+.tooltip--top::after {
+  top: auto;
+  bottom: 100%;
+  border-top-color: transparent;
+  border-bottom-color: var(--color-dark-d2);
+}
+.tooltip--align-end::after { left: auto; right: 12px; transform: none; }
+.btn-group {
+  display: inline-flex;
+  align-items: stretch;
+}
+.btn-group > .btn { border-radius: 0; position: relative; }
+.btn-group > .btn:first-child {
+  border-top-left-radius: var(--rounded-md);
+  border-bottom-left-radius: var(--rounded-md);
+}
+.btn-group > .btn:last-child {
+  border-top-right-radius: var(--rounded-md);
+  border-bottom-right-radius: var(--rounded-md);
+}
+.btn-group > .btn + .btn { margin-left: -1px; }
+.btn-group > .btn:hover, .btn-group > .btn:focus-visible { z-index: 1; }
+.btn-group > .btn--secondary.is-active {
+  background: var(--color-light);
+  z-index: 1;
+}
+.dropdown {
+  list-style: none;
+  margin: 0;
+  padding: var(--spacing-3) 0;
+  background: var(--color-white);
+  border: 1px solid var(--color-secondary-l3);
+  border-radius: var(--rounded-md);
+  /* Figma: Shadow/Dropdown — y=4, blur=8, opacity=12% */
+  box-shadow: var(--shadow-dropdown);
+  font-family: var(--font-family-base);
+  min-width: 240px;
+}
+.dropdown__item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  width: 100%;
+  /* Figma: pt=5px pb=6px px=16px — nearest token is spacing-2-5 (6px) */
+  padding: var(--spacing-2-5) var(--spacing-5);
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  /* Figma: 14/Regular = weight 400 = --font-weight-semi in this token scale */
+  font-weight: var(--font-weight-semi);
+  color: var(--color-secondary);
+  background: var(--color-white);
+  border: 0;
+  text-align: left;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: var(--line-height-base);
+}
+.dropdown__item:hover { background: var(--color-light-l1); color: var(--color-dark); }
+.dropdown__item:disabled { color: var(--color-secondary-l1); cursor: not-allowed; background: var(--color-white); }
+.dropdown__item.is-active { color: var(--color-secondary); }
+.control-menu {
+  align-items: center;
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-light-d2);
+  display: flex;
+  gap: var(--spacing-5);
+  padding: calc(var(--spacing-2) + var(--spacing-2-5)) var(--spacing-5);
+  width: 100%;
+}
+.control-menu__left {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  gap: var(--spacing-5);
+  min-width: 0;
+}
+.control-menu__btns {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--spacing-5);
+}
+.control-menu__btn {
+  align-items: center;
+  background: transparent;
+  border: none;
+  border-radius: var(--rounded-md);
+  color: var(--color-secondary);
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  padding: var(--spacing-3);
+}
+.control-menu__btn:hover { background: var(--color-light); }
+.control-menu__title {
+  color: var(--color-dark);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.control-menu__right {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--spacing-5);
+}
+@media (max-width: 767px) {
+  .control-menu {
+    padding: var(--spacing-2-5) var(--spacing-4);
+  }
+}
+</style>
+
+  <style>
+    /* ══════════════════════════════════════════════════════════════
+       LPD-85951 — "Allow users to configure dark mode via Style Books"
+
+       Chrome traced from the shipping editor (7.4.13-u152) in
+       com.liferay.style.book.web:
+         js/style-book-editor/Toolbar.js  → Preview label + two selects; on the
+                                            right an Undo/Redo ClayButton.Group,
+                                            the `time` history button, help, Publish
+         js/style-book-editor/Sidebar.js  → definition block, category select,
+                                            one collapsable ClayPanel per token set
+         css/main.scss                    → 320px sidebar, 64px toolbar
+         layout/color_picker/*.scss       → swatch + # + hex + restore action
+
+       The preview reproduces the Search page of a Liferay DXP Site, rendered
+       from the Style Book variables the sidebar writes onto it.
+
+       The only thing here that the product does NOT have is the mode switch
+       at the top of the sidebar — the same moon/sun control used in
+       prototypes/modern-sidebar.html, scoping every row below it.
+       ══════════════════════════════════════════════════════════════ */
+
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: var(--color-white);
+    }
+
+    /* ── Editor shell ──────────────────────────────────────────────
+       main.scss does this with flex-wrap plus an explicit
+       `calc(100vh - control-menu - 64px)`. A nested column + row lands in
+       the same place without the magic number. */
+    .sb-editor { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+    .sb-body   { display: flex; flex: 1; min-height: 0; }
+
+    /* Default avatar — orange disc, as an account with no portrait renders. */
+    .sb-avatar {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: var(--rounded-full);
+      background: var(--orange-l1);
+      color: var(--color-white);
+      flex-shrink: 0;
+    }
+
+    /* ── Toolbar (64px, `.style-book-editor__toolbar`) ───────────── */
+    .sb-toolbar {
+      flex-shrink: 0;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-4);
+      padding: 0 var(--spacing-5);
+      background: var(--color-white);
+      /* main.scss: 1px solid secondary-l2 at 50% opacity */
+      border-bottom: 1px solid var(--color-secondary-l3);
+    }
+    .sb-toolbar__label {
+      font-size: var(--font-size-base);
+      color: var(--color-dark);
+    }
+    .sb-toolbar__end { margin-left: auto; display: flex; align-items: center; gap: var(--spacing-4); }
+
+    /* `.form-control-select` — the native select look Clay gives these two.
+       Rendered as a button so the control stays keyboard-driveable without
+       an OS menu getting in the way of the demo. */
+    .sb-select {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-4);
+      height: 36px;
+      padding: 0 var(--spacing-4);
+      background: var(--color-white);
+      border: 1px solid var(--color-secondary-l2);
+      border-radius: var(--rounded-md);
+      font-family: var(--font-family-base);
+      font-size: var(--font-size-base);
+      color: var(--color-dark);
+      cursor: pointer;
+    }
+    .sb-select:hover { border-color: var(--color-secondary-l0); }
+    .sb-select > .lexicon-icon { margin-left: auto; color: var(--color-secondary); flex-shrink: 0; }
+    .sb-select__text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .sb-select--type { width: 116px; }
+    /* $previewSelectorWidth — the layout selector is the one that ellipsises */
+    .sb-select--preview { width: 168px; }
+    .sb-select--block { width: 100%; }
+
+    /* ── Preview ────────────────────────────────────────────────── */
+    .sb-preview {
+      flex: 1;
+      min-width: 0;
+      overflow-y: auto;
+      /* Painted entirely from the Style Book variables the sidebar writes
+         onto this element — the same thing UpdateStyle() does in Sidebar.js. */
+      background: var(--white);
+      transition: background-color 160ms ease;
+    }
+
+    /* ── Sidebar (320px, `.style-book-editor__sidebar`) ──────────── */
+    .sb-sidebar {
+      flex: 0 0 320px;
+      width: 320px;
+      background: var(--color-white);
+      border-left: 1px solid var(--color-secondary-l3);
+      overflow-y: auto;
+      padding: var(--spacing-5);
+    }
+
+    /* ── ✦ THE PROPOSAL ✦ Mode switch ────────────────────────────
+       Same control as the Control Panel header in modern-sidebar.html:
+       a borderless icon button swapping moon ↔ sun. It does not reskin the
+       admin chrome — it selects which set of values every row below is bound
+       to, and repaints the preview. You are editing the site, not the editor. */
+    .sb-mode {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-3);
+      padding-bottom: var(--spacing-3);
+      margin-bottom: var(--spacing-4);
+      border-bottom: 1px solid var(--color-secondary-l3);
+    }
+    .sb-mode__info { display: flex; flex-direction: column; min-width: 0; }
+    .sb-mode__label {
+      font-size: var(--font-size-sm);
+      color: var(--color-dark);
+      opacity: 0.65;
+    }
+    .sb-mode__value {
+      font-size: var(--font-size-base);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-dark);
+    }
+    .sb-mode .cp-tip { margin-left: auto; }
+
+    /* Tooltip wrapper, lifted from modern-sidebar.html. Hover or keyboard
+       focus only — a plain :focus-within would pin it after a mouse click.
+
+       The toggle sits against the sidebar's right edge, so a centred bubble
+       would overflow. Right-aligning it means the arrow has to move too:
+       `tooltip--align-end` parks it 12px from the bubble's right edge, i.e.
+       16px in once you count its 8px width — exactly the centre of the 32px
+       button when the bubble's right edge is flush with the button's. */
+    .cp-tip { position: relative; display: inline-flex; }
+    .cp-tip__bubble {
+      position: absolute;
+      top: calc(100% + var(--spacing-2));
+      right: 0;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 120ms ease;
+      z-index: 20;
+    }
+    .cp-tip:hover .cp-tip__bubble,
+    .cp-tip:has(:focus-visible) .cp-tip__bubble { opacity: 1; }
+
+    /* ── Token definition block ──────────────────────────────────
+       Sidebar.js renders this as plain text (`<div className="mb-3 p-2">`)
+       whenever the theme is the only definition — no hover affordance. */
+    .sb-definition { padding: var(--spacing-2); margin-bottom: var(--spacing-4); }
+    .sb-definition__label {
+      margin: 0 0 var(--spacing-1);
+      font-size: var(--font-size-base);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-dark);
+    }
+    .sb-definition__name {
+      margin: 0;
+      font-size: var(--font-size-base);
+      color: var(--color-dark);
+    }
+
+    .sb-category { position: relative; margin-bottom: var(--spacing-5); }
+    .sb-category .dropdown {
+      position: absolute;
+      top: calc(100% + var(--spacing-2));
+      left: 0; right: 0;
+      z-index: 15;
+    }
+    .sb-category:not(.is-open) .dropdown { display: none; }
+
+    /* ── Token set panels (collapsable ClayPanel, unstyled) ───────
+       Uppercase small caps, rule underneath, chevron pinned right. */
+    .sb-panel__header {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-2);
+      width: 100%;
+      padding: var(--spacing-4) 0;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid var(--color-secondary-l3);
+      cursor: pointer;
+      font-family: var(--font-family-base);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-bold);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--color-dark);
+      text-align: left;
+    }
+    .sb-panel__header .lexicon-icon { margin-left: auto; color: var(--color-secondary); flex-shrink: 0; }
+    .sb-panel__body { padding: var(--spacing-5) 0 var(--spacing-2); }
+    .sb-panel:not(.is-open) .sb-panel__body { display: none; }
+
+    /* ── Token row — `.layout__color-picker` ─────────────────────
+       One bordered box: splotch, "#", value, and the restore action. Every
+       row here holds a raw hex, i.e. the `.custom` variant, which is why the
+       action button stays visible instead of appearing only on hover. */
+    .sb-token { margin-bottom: var(--spacing-5); }
+    .sb-token__label {
+      display: block;
+      /* main.scss pins sidebar `.form-group-sm label` to 12px */
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-dark);
+      margin-bottom: var(--spacing-3);
+    }
+    .sb-token__field {
+      display: flex;
+      align-items: center;
+      height: 36px;
+      border: 1px solid var(--color-secondary-l3);
+      border-radius: var(--rounded-md);
+      background: var(--color-light);
+      overflow: hidden;
+    }
+    .sb-token__field:hover,
+    .sb-token__field:focus-within { border-color: var(--color-secondary-l0); }
+
+    .sb-token__swatch {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      margin: 0 var(--spacing-3);
+      padding: 0;
+      border: 1px solid var(--color-secondary-l2);
+      border-radius: var(--rounded-sm);
+      cursor: pointer;
+      /* The colour itself is Style Book data, so it is set inline from JS. */
+    }
+    .sb-token__hash {
+      flex-shrink: 0;
+      color: var(--color-dark);
+      opacity: 0.5;
+      font-size: var(--font-size-base);
+      margin-right: var(--spacing-3);
+    }
+    .sb-token__hex {
+      flex: 1;
+      min-width: 0;
+      height: 100%;
+      border: 0;
+      background: transparent;
+      font-family: var(--font-family-base);
+      font-size: var(--font-size-base);
+      color: var(--color-dark);
+      text-transform: uppercase;
+      padding: 0;
+    }
+    .sb-token__hex:focus { outline: 0; }
+
+    .sb-token__action {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      margin-right: var(--spacing-1);
+      padding: 0;
+      background: transparent;
+      border: 0;
+      border-radius: var(--rounded-md);
+      color: var(--color-secondary);
+      cursor: pointer;
+    }
+    .sb-token__action:hover { background: color-mix(in srgb, var(--color-dark) 6%, transparent); }
+
+    /* Inherited: the token has no dark value of its own and falls through to
+       the light one. Muted value plus a link glyph in place of the reset. */
+    .sb-token.is-inherited .sb-token__field { background: transparent; }
+    .sb-token.is-inherited .sb-token__hex,
+    .sb-token.is-inherited .sb-token__hash { opacity: 0.5; }
+    .sb-token.is-inherited .sb-token__action { color: var(--color-primary); }
+
+    /* Row tooltips open upward (default placement — arrow under the body),
+       right-aligned with the arrow moved to match. These strings are long,
+       so they must wrap: at 320px the sidebar only has 288px of content
+       width, and a nowrap bubble would be clipped by its own overflow. */
+    .sb-token__tip { position: relative; display: inline-flex; }
+    .sb-token__tip .tooltip {
+      position: absolute;
+      bottom: calc(100% + var(--spacing-2));
+      right: 0;
+      width: max-content;
+      max-width: 240px;
+      text-align: left;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 120ms ease;
+      z-index: 20;
+    }
+    .sb-token__tip:hover .tooltip,
+    .sb-token__tip:has(:focus-visible) .tooltip { opacity: 1; }
+
+    /* ── Narrow viewports ────────────────────────────────────────
+       The product keeps the sidebar at a fixed 320px and simply lets the
+       page overflow. That is fine behind a login on a desktop, but this
+       file also gets opened from a phone, and at ~800px the preview would
+       be squeezed to 290px with Publish cut off the right edge. So below
+       900px the two panes stack and the toolbar scrolls on its own. */
+    @media (max-width: 900px) {
+      /* Stacking only works if the document itself scrolls: the desktop
+         layout pins body to 100vh with overflow hidden and lets each pane
+         scroll on its own, which would leave the sidebar unreachable here. */
+      html, body { height: auto; overflow: visible; }
+      .sb-editor { min-height: 0; }
+      .sb-body { flex-direction: column; }
+      .sb-preview { flex: 0 0 auto; overflow-y: visible; min-height: 60vh; }
+      .sb-sidebar {
+        flex: 0 0 auto;
+        width: 100%;
+        border-left: 0;
+        border-top: 1px solid var(--color-secondary-l3);
+        overflow-y: visible;
+      }
+      .sb-toolbar { overflow-x: auto; }
+      .sb-toolbar__end { padding-left: var(--spacing-4); }
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       PREVIEW — Search page of a Liferay DXP Site.
+
+       Every colour resolves from the Style Book variables the sidebar writes
+       onto .sb-preview, using the theme's real CSS variable mappings
+       (--white, --gray-100/300/600/900, --brand-color-*, --info, --info-l2).
+       ══════════════════════════════════════════════════════════════ */
+    .pv { font-family: var(--font-family-base); color: var(--gray-900); }
+
+    .pv__container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-8);
+    }
+    .pv__rule { height: 1px; background: var(--gray-300); border: 0; margin: 0; }
+
+    /* Site banner — logo, search bar fragment, user avatar */
+    .pv__banner {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--spacing-8);
+      padding: var(--spacing-8) 0;
+    }
+    .pv__site {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-5);
+      flex: 1;
+      min-width: 0;
+    }
+    .pv__site-name {
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--gray-900);
+    }
+    /* Liferay mark — two-tone disc built from the brand tokens, so it
+       reskins with the Style Book instead of sitting on a fixed hex. */
+    .pv__mark {
+      position: relative;
+      width: 40px; height: 40px;
+      border-radius: var(--rounded-full);
+      background: var(--brand-color-1);
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .pv__mark::after {
+      content: '';
+      position: absolute;
+      inset: 0 50% 0 0;
+      background: var(--brand-color-4);
+    }
+
+    .pv__searchbar { width: 320px; flex-shrink: 0; }
+    .pv__heading {
+      margin: 0 0 var(--spacing-5);
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--gray-900);
+    }
+
+    .pv__search { position: relative; display: flex; align-items: center; }
+    .pv__search input {
+      width: 100%;
+      height: 40px;
+      padding: 0 var(--spacing-9) 0 var(--spacing-5);
+      border: 1px solid var(--gray-300);
+      border-radius: var(--rounded-md);
+      background: var(--gray-100);
+      font-family: inherit;
+      font-size: var(--font-size-md);
+      color: var(--gray-900);
+    }
+    .pv__search input::placeholder { color: var(--gray-600); }
+    .pv__search input:focus { outline: 0; border-color: var(--primary); }
+    .pv__search-submit {
+      position: absolute;
+      right: var(--spacing-4);
+      display: inline-flex;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      color: var(--gray-600);
+      cursor: pointer;
+    }
+
+    .pv__user {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px; height: 40px;
+      border-radius: var(--rounded-full);
+      border: 1px solid var(--gray-300);
+      background: var(--white);
+      color: var(--orange-l1);
+      flex-shrink: 0;
+      margin-top: var(--spacing-9);
+    }
+
+    /* Menu Display fragment */
+    .pv__menu { padding: var(--spacing-8) 0; }
+    .pv__menu-title {
+      margin: 0 0 var(--spacing-5);
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--gray-900);
+      /* The fragment truncates its own title, as in the live page. */
+      max-width: 180px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .pv__menu-item {
+      margin: 0;
+      padding-left: var(--spacing-5);
+      font-size: var(--font-size-md);
+      color: var(--gray-600);
+    }
+
+    /* Portlet grid. Search Bar and Suggestions run full width; from Site
+       Facet down the page splits into two columns, which is how the layout
+       rows of the Search page fall. */
+    .pv__grid {
+      display: grid;
+      grid-template-columns: 35fr 65fr;
+      column-gap: var(--spacing-8);
+      padding: var(--spacing-8) 0 var(--spacing-10);
+    }
+    .pv__portlet { grid-column: 1; padding-bottom: var(--spacing-8); }
+    .pv__portlet--full  { grid-column: 1 / -1; }
+    .pv__portlet--right { grid-column: 2; }
+    .pv__portlet-title {
+      margin: 0 0 var(--spacing-5);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-bold);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gray-600);
+    }
+    .pv__portlet-reset {
+      display: inline-flex;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      margin-top: var(--spacing-4);
+      color: var(--gray-600);
+      cursor: pointer;
+    }
+
+    .pv__alert {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-4);
+      padding: var(--spacing-4) var(--spacing-5);
+      border: 1px solid var(--info);
+      border-radius: var(--rounded-md);
+      background: var(--info-l2);
+      color: var(--info);
+      font-size: var(--font-size-md);
+    }
+    .pv__alert .lexicon-icon { flex-shrink: 0; }
+
+    /* The preview column gives up 320px to the sidebar, so the banner folds
+       earlier here than the same page would at full browser width. */
+    @media (max-width: 1000px) {
+      .pv__banner { flex-wrap: wrap; }
+      .pv__searchbar { width: 100%; }
+      .pv__user { margin-top: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="angle-down" viewBox="0 0 16 16">	<path class="lexicon-icon-outline" d="m8.52 12.769 6.247-6.383c.711-.747-.367-1.894-1.084-1.139L8 11.033 2.321 5.251c-.726-.76-1.798.395-1.088 1.14l6.245 6.378c.312.322.754.294 1.041 0Z" />
+</symbol><symbol id="angle-left" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M136.8,272.8l201.7,202.1c23.5,23.1,60-11.6,36.1-35.2L191.7,256l183-183.9c23.9-23.2-12.5-58.1-36-35.1L136.8,239.2C127.5,248.5,126.6,262.8,136.8,272.8z" />
+</symbol><symbol id="angle-right" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M375.2,239.2L173.3,37c-23.6-23-59.9,11.9-36,35.1l183,183.9L137.4,439.8c-24,23.5,12.5,58.2,36.1,35.2l201.7-202.1C385.4,262.8,384.5,248.5,375.2,239.2z" />
+</symbol><symbol id="caret-double-l" viewBox="0 0 512 512">	<path class="lexicon-icon-outline caret-double-l-top" d="M347.913 199.336l-81.538-85c-5.413-5.642-14.188-5.642-19.6 0l-81.538 85c-8.731 9.101-2.548 24.664 9.8 24.664h163.077c12.348 0 18.531-15.563 9.8-24.664z"></path>
+	<path class="lexicon-icon-outline caret-double-l-bottom" d="M165.236 312.664l81.538 85c5.412 5.642 14.188 5.642 19.6 0l81.538-85c8.731-9.101 2.548-24.664-9.8-24.664h-163.077c-12.347 0-18.531 15.563-9.8 24.664z"></path>
+</symbol><symbol id="grid" viewBox="0 0 512 512">	<path class="lexicon-icon-outline grid-square-3" d="M495.965 0.018h-95.993c-8.813 0-15.981 7.168-15.981 16.017v95.993c0 8.85 7.168 16.017 16.017 16.017h95.993c8.849 0 16.017-7.168 16.017-16.017v-95.993c-0.037-8.85-7.204-16.017-16.054-16.017z"></path>
+	<path class="lexicon-icon-outline grid-square-4" d="M112.028 192.005h-95.993c-8.85 0-16.017 7.167-16.017 16.017v95.993c0 8.849 7.168 16.017 16.017 16.017h95.993c8.85 0 15.981-7.168 15.981-16.017v-95.993c0-8.85-7.168-16.017-15.981-16.017z"></path>
+	<path class="lexicon-icon-outline grid-square-5" d="M303.978 192.005h-95.993c-8.85 0-16.017 7.167-16.017 16.017v95.993c0 8.849 7.167 16.017 16.017 16.017h95.993c8.849 0 16.017-7.168 16.017-16.017v-95.993c0-8.85-7.168-16.017-16.017-16.017z"></path>
+	<path class="lexicon-icon-outline grid-square-6" d="M495.965 192.005h-95.993c-8.849 0-16.017 7.167-16.017 16.017v95.993c0 8.849 7.168 16.017 16.017 16.017h95.993c8.849 0 16.017-7.168 16.017-16.017v-95.993c0-8.85-7.168-16.017-16.017-16.017z"></path>
+	<path class="lexicon-icon-outline grid-square-7" d="M112.028 383.991h-95.993c-8.85 0-16.017 7.168-16.017 16.017v95.993c0 8.813 7.168 15.981 16.017 15.981h95.993c8.85 0 15.981-7.168 15.981-16.017v-95.993c0-8.813-7.168-15.981-15.981-15.981z"></path>
+	<path class="lexicon-icon-outline grid-square-8" d="M303.978 383.991h-95.993c-8.85 0-16.017 7.168-16.017 16.017v95.993c0 8.849 7.167 16.017 16.017 16.017h95.993c8.849 0 16.017-7.168 16.017-16.017v-95.993c0-8.849-7.168-16.017-16.017-16.017z"></path>
+	<path class="lexicon-icon-outline grid-square-9" d="M495.965 383.991h-95.993c-8.849 0-16.017 7.168-16.017 16.017v95.993c0 8.849 7.168 16.017 16.017 16.017h95.993c8.849-0.037 16.017-7.204 16.017-16.054v-95.993c0-8.813-7.168-15.981-16.017-15.981z"></path>
+	<path class="lexicon-icon-outline grid-square-1" d="M112.028 0.018h-95.993c-8.85 0-16.017 7.168-16.017 16.017v95.993c0 8.814 7.168 15.981 16.017 15.981h95.993c8.85 0 15.981-7.168 15.981-16.017v-95.956c0-8.85-7.168-16.017-15.981-16.017z"></path>
+	<path class="lexicon-icon-outline grid-square-2" d="M303.978 0.018h-95.993c-8.85 0-16.017 7.168-16.017 16.017v95.993c0 8.85 7.167 16.017 16.017 16.017h95.993c8.849 0 16.017-7.168 16.017-16.017v-95.993c0-8.85-7.168-16.017-16.017-16.017z"></path>
+</symbol><symbol id="info-circle" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M437,75C388.7,26.6,324.4,0,256,0C187.6,0,123.3,26.6,75,75C26.6,123.3,0,187.6,0,256c0,68.4,26.6,132.7,75,181c48.4,48.4,112.6,75,181,75c68.4,0,132.7-26.6,181-75c48.4-48.4,75-112.6,75-181C512,187.6,485.4,123.3,437,75z M288,384c0,17.7-14.3,32-32,32c-17.7,0-32-14.3-32-32V224c0-17.7,14.3-32,32-32c17.7,0,32,14.3,32,32V384z M256,160c-17.7,0-32-14.3-32-32c0-17.7,14.3-32,32-32s32,14.3,32,32C288,145.7,273.7,160,256,160z"></path>
+</symbol><symbol id="link" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M216.2,295.8c-23.4-23.4,11.6-58.3,35-35c18.1,18.1,47.5,18.1,65.6,0l122.5-122.5c43.4-43.4-22.2-109.1-65.6-65.6L273.1,173.3c-23.4,23.4-58.3-11.6-35-35L338.7,37.8C429-52.5,564.5,83,474.2,173.3L351.7,295.7C310.4,337.1,249.7,329.4,216.2,295.8z M295.8,216.2c23.4,23.4-11.6,58.3-35,35c-18.1-18.1-47.5-18.1-65.6,0L72.8,373.6c-43.4,43.4,22.2,109.1,65.6,65.6l100.5-100.5c23.4-23.4,58.3,11.6,35,35L173.3,474.2C83,564.5-52.5,429,37.8,338.7l122.5-122.5C201.6,174.9,262.3,182.6,295.8,216.2z" />
+</symbol><symbol id="moon" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M186.5,81.4c0-25.4,3.8-49.8,10.7-72.9C84.3,34.3,0,135.2,0,256c0,140.3,113.7,254,254,254c114.9,0,212-76.3,243.3-181.1c-18.3,4.2-37.3,6.5-56.8,6.5C300.3,335.4,186.5,221.6,186.5,81.4L186.5,81.4z"></path>
+</symbol><symbol id="product-menu-closed" viewBox="0 0 512 512">	<path class="lexicon-icon-outline lx-product-menu-closed-left" d="M0,31C0,13.9,13.9,0,31,0c17.2,0,31.1,13.9,31,31v450c0,17.1-13.9,31-31,31S0,498.1,0,481V31z" />
+	<path class="lexicon-icon-outline lx-product-menu-closed-right" d="M464,512H144c-26.5,0-48-21.5-48-48V48c0-26.4,21.5-48,48-48h320c26.5,0,48,21.5,48,48v416C512,490.4,490.4,512,464,512z M160,448h288V64H160V448z" />
+</symbol><symbol id="question-circle" viewBox="0 0 512 512">	<path class="lexicon-icon-body" d="M491.4,155.8C478.5,125.3,460,98,436.5,74.5s-50.9-41.9-81.4-54.8C323.6,6.3,290-0.5,255.5-0.5s-68.1,6.8-99.7,20.1C125.3,32.5,98,51,74.5,74.5s-41.9,50.9-54.8,81.4C6.3,187.4-0.5,221-0.5,255.5s6.8,68.1,20.1,99.7C32.5,385.7,51,413,74.5,436.5s50.9,41.9,81.4,54.8c31.6,13.4,65.1,20.1,99.7,20.1s68.1-6.8,99.7-20.1c30.5-12.9,57.9-31.3,81.4-54.8s41.9-50.9,54.8-81.4c13.4-31.6,20.1-65.1,20.1-99.7S504.7,187.4,491.4,155.8L491.4,155.8z" fill="none"></path>
+	<path class="lexicon-icon-outline question-circle-border" d="M491.4,155.8C478.5,125.3,460,98,436.5,74.5s-50.9-41.9-81.4-54.8C323.6,6.3,290-0.5,255.5-0.5s-68.1,6.8-99.7,20.1C125.3,32.5,98,51,74.5,74.5s-41.9,50.9-54.8,81.4C6.3,187.4-0.5,221-0.5,255.5s6.8,68.1,20.1,99.7C32.5,385.7,51,413,74.5,436.5s50.9,41.9,81.4,54.8c31.6,13.4,65.1,20.1,99.7,20.1s68.1-6.8,99.7-20.1c30.5-12.9,57.9-31.3,81.4-54.8s41.9-50.9,54.8-81.4c13.4-31.6,20.1-65.1,20.1-99.7S504.7,187.4,491.4,155.8L491.4,155.8z M255.5,447.5c-106,0-192-86-192-192s86-192,192-192s192,86,192,192S361.5,447.5,255.5,447.5z"></path>
+	<path class="lexicon-icon-outline question-circle-hook" d="M236,287.9c-0.4-1.9-0.7-3.8-0.9-5.7s-0.3-3.9-0.3-6c0-7.6,1.7-14.9,5.2-21.9s9.3-13.5,17.6-19.6l13.8-10.3c8.2-6.1,12.4-13.6,12.4-22.6c0-3.2-0.6-6.4-1.7-9.6s-2.9-5.9-5.3-8.3s-5.4-4.3-9.1-5.7s-7.9-2.2-12.7-2.2c-5.2,0-9.6,1-13.2,2.9s-6.7,4.3-9.1,7.3c-2.4,3-4.2,6.4-5.3,10.3s-1.7,7.9-1.7,11.9c0,3.8,0.4,6.9,1.1,9.1l-36.3-1.4c-0.6-2.1-1-4.2-1.1-6.4c-0.2-2.2-0.3-4.3-0.3-6.4c0-7.6,1.4-15.1,4.3-22.4s7.1-13.8,12.7-19.5c5.6-5.6,12.4-10.2,20.6-13.6s17.6-5.2,28.4-5.2c11.1,0,20.9,1.6,29.4,4.9c8.4,3.2,15.5,7.5,21.3,12.7c5.7,5.2,10.1,11.3,13,18.2s4.3,13.9,4.3,21.2c0,11.4-2.6,21.2-7.8,29.3s-12.1,15.2-20.7,21.3l-11.8,8.3c-5,3.6-8.8,7.7-11.5,12.2c-2.7,4.5-4,9.7-4,15.6v1.7L236,287.9L236,287.9z"></path>
+	<path class="lexicon-icon-outline question-circle-dot" d="M229.4,329.4c0-6.3,2.2-11.7,6.6-16.2c4.4-4.5,9.8-6.7,16.1-6.7s11.8,2.2,16.3,6.7s6.8,9.9,6.8,16.2s-2.3,11.6-6.8,16c-4.5,4.4-9.9,6.6-16.3,6.6s-11.7-2.2-16.1-6.6S229.4,335.7,229.4,329.4L229.4,329.4z"></path>
+</symbol><symbol id="redo" viewBox="0 0 16 16">	<path class="lexicon-icon-outline" d="M14.633 4.057 10.883.365a1.266 1.266 0 0 0-1.77 0 1.22 1.22 0 0 0 0 1.742l1.61 1.585H6.25C2.805 3.692 0 6.453 0 9.846 0 13.238 2.805 16 6.25 16c.691 0 1.25-.55 1.25-1.231s-.559-1.231-1.25-1.231c-2.066 0-3.75-1.658-3.75-3.692 0-2.035 1.684-3.693 3.75-3.693h4.492L9.125 7.746a1.22 1.22 0 0 0 0 1.742 1.259 1.259 0 0 0 1.766 0l3.742-3.692a1.215 1.215 0 0 0 0-1.739Z" />
+</symbol><symbol id="restore" viewBox="0 0 512 512">	<path class="lexicon-icon-outline restore-hands" d="M180.7,347.3c3.1,3.1,7.2,4.7,11.3,4.7s8.2-1.6,11.3-4.7l48-48c6.3,3,13.3,4.7,20.7,4.7c26.5,0,48-21.5,48-48c0-20.9-13.4-38.7-32-45.3V112c0-8.8-7.2-16-16-16s-16,7.2-16,16v98.7c-18.6,6.6-32,24.4-32,45.3c0,7.4,1.7,14.4,4.7,20.7l-48,48C174.4,330.9,174.4,341.1,180.7,347.3z"></path>
+	<path class="lexicon-icon-outline restore-border" d="M256,0C179.5,0,110.9,33.5,64,86.7V64c0-17.6-14.4-32-32-32h0C14.4,32,0,46.4,0,64v96l0,0c0,9.9,4.6,18.8,11.7,24.7c5.5,4.6,12.6,7.3,20.3,7.3l0,0h96c17.6,0,32-14.4,32-32s-14.4-32-32-32h-15.1c35.2-39.3,86.2-64,143.1-64c106,0,192,86,192,192s-86,192-192,192c-95.1,0-174.1-69.2-189.3-160H2c15.7,126.3,123.5,224,254,224c141.4,0,256-114.6,256-256S397.4,0,256,0z"></path>
+</symbol><symbol id="search" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M499.2,455.5L377.7,333.4c146-241.1-148.1-435.8-318.2-274c-165.1,185.9,41.6,460.6,273.4,319l121.5,118.8C489.5,535.8,534.4,490.8,499.2,455.5z M206.2,63.6c191.9,0,198.1,289,0,289C13.3,352.6,18.8,63.6,206.2,63.6z" />
+</symbol><symbol id="sun" viewBox="0 0 512 512">	<circle class="lexicon-icon-body sun-core-bg" cx="256" cy="256" fill="none" r="128"></circle>
+	<path class="lexicon-icon-outline sun-core-border" d="M256,128c-70.7,0-128,57.3-128,128s57.3,128,128,128s128-57.3,128-128S326.7,128,256,128z M301.3,301.3C289.2,313.3,273.1,320,256,320s-33.2-6.7-45.3-18.7C198.7,289.2,192,273.1,192,256s6.7-33.2,18.7-45.3c12.1-12.1,28.2-18.7,45.3-18.7s33.2,6.7,45.3,18.7S320,238.9,320,256S313.3,289.2,301.3,301.3z"></path>
+	<path class="lexicon-icon-outline sun-ray-3" d="M480,224h-32c-17.7,0-32,14.3-32,32l0,0c0,17.7,14.3,32,32,32h32c17.7,0,32-14.3,32-32l0,0C512,238.3,497.7,224,480,224z"></path>
+	<path class="lexicon-icon-outline sun-ray-7" d="M96,256L96,256c0-17.7-14.3-32-32-32H32c-17.7,0-32,14.3-32,32l0,0c0,17.7,14.3,32,32,32h32C81.7,288,96,273.7,96,256z"></path>
+	<path class="lexicon-icon-outline sun-ray-5" d="M256,416L256,416c-17.7,0-32,14.3-32,32v32c0,17.7,14.3,32,32,32l0,0c17.7,0,32-14.3,32-32v-32C288,430.3,273.7,416,256,416z"></path>
+	<path class="lexicon-icon-outline sun-ray-1" d="M256,96L256,96c17.7,0,32-14.3,32-32V32c0-17.7-14.3-32-32-32l0,0c-17.7,0-32,14.3-32,32v32C224,81.7,238.3,96,256,96z"></path>
+	<path class="lexicon-icon-outline sun-ray-4" d="M414.4,369.1c-12.5-12.5-32.8-12.5-45.3,0l0,0c-12.5,12.5-12.5,32.8,0,45.3l22.6,22.6c12.5,12.5,32.8,12.5,45.3,0l0,0c12.5-12.5,12.5-32.8,0-45.3L414.4,369.1z"></path>
+	<path class="lexicon-icon-outline sun-ray-8" d="M97.6,142.9c12.5,12.5,32.8,12.5,45.3,0l0,0c12.5-12.5,12.5-32.8,0-45.3L120.2,75C107.7,62.5,87.5,62.5,75,75l0,0c-12.5,12.5-12.5,32.8,0,45.3L97.6,142.9z"></path>
+	<path class="lexicon-icon-outline sun-ray-6" d="M142.9,369.1c-12.5-12.5-32.8-12.5-45.3,0L75,391.8c-12.5,12.5-12.5,32.8,0,45.3l0,0c12.5,12.5,32.8,12.5,45.3,0l22.6-22.6C155.4,401.9,155.4,381.6,142.9,369.1L142.9,369.1z"></path>
+	<path class="lexicon-icon-outline sun-ray-2" d="M369.1,142.9c12.5,12.5,32.8,12.5,45.3,0l22.6-22.6c12.5-12.5,12.5-32.8,0-45.3l0,0c-12.5-12.5-32.8-12.5-45.3,0l-22.6,22.6C356.6,110.1,356.6,130.4,369.1,142.9L369.1,142.9z"></path>
+</symbol><symbol id="time" viewBox="0 0 512 512">	<path class="lexicon-icon-body" d="M437,75C388.7,26.6,324.4,0,256,0S123.3,26.6,75,75C26.6,123.3,0,187.6,0,256s26.6,132.7,75,181c48.4,48.4,112.6,75,181,75s132.7-26.6,181-75c48.4-48.4,75-112.6,75-181S485.4,123.3,437,75z" fill="none"></path>
+	<path class="lexicon-icon-outline lx-time-border" d="M437,75C388.7,26.6,324.4,0,256,0S123.3,26.6,75,75C26.6,123.3,0,187.6,0,256s26.6,132.7,75,181c48.4,48.4,112.6,75,181,75s132.7-26.6,181-75c48.4-48.4,75-112.6,75-181S485.4,123.3,437,75z M256,448c-105.9,0-192-86.1-192-192S150.1,64,256,64s192,86.1,192,192S361.9,448,256,448z"></path>
+	<path class="lexicon-icon-outline lx-time-hands" d="M180.7,347.3c3.1,3.1,7.2,4.7,11.3,4.7s8.2-1.6,11.3-4.7l48-48c6.3,3,13.3,4.7,20.7,4.7c26.5,0,48-21.5,48-48c0-20.9-13.4-38.7-32-45.3V112c0-8.8-7.2-16-16-16s-16,7.2-16,16v98.7c-18.6,6.6-32,24.4-32,45.3c0,7.4,1.7,14.4,4.7,20.7l-48,48C174.4,330.9,174.4,341.1,180.7,347.3z"></path>
+</symbol><symbol id="undo" viewBox="0 0 16 16">	<path class="lexicon-icon-outline" d="M1.365 4.058 5.115.366a1.266 1.266 0 0 1 1.77 0 1.22 1.22 0 0 1 0 1.742l-1.61 1.584h4.473c3.446 0 6.25 2.762 6.25 6.154 0 3.393-2.804 6.154-6.25 6.154a1.24 1.24 0 0 1-1.25-1.23 1.24 1.24 0 0 1 1.25-1.231c2.067 0 3.75-1.658 3.75-3.693 0-2.034-1.683-3.692-3.75-3.692H5.256l1.617 1.592a1.22 1.22 0 0 1 0 1.743 1.259 1.259 0 0 1-1.765 0L1.365 5.796a1.215 1.215 0 0 1 0-1.738Z" />
+</symbol><symbol id="user" viewBox="0 0 512 512">	<circle class="lexicon-icon-outline user-head" cx="256" cy="126.1" r="96"></circle>
+	<path class="lexicon-icon-outline user-body" d="M448,398.1c0,112-384,112-384,0C64,200.1,448,202.1,448,398.1z"></path>
+</symbol></svg>
+
+<!-- ─── Control Menu ─────────────────────────────────────────────── -->
+<div class="control-menu">
+  <div class="control-menu__left">
+    <div class="control-menu__btns">
+      <button class="control-menu__btn" type="button" aria-label="Toggle product menu">
+        <svg class="lexicon-icon"><use href="#product-menu-closed"></use></svg>
+      </button>
+      <button class="control-menu__btn" type="button" aria-label="Go back">
+        <svg class="lexicon-icon"><use href="#angle-left"></use></svg>
+      </button>
+    </div>
+    <span class="control-menu__title">Style Books</span>
+  </div>
+  <div class="control-menu__right">
+    <button class="control-menu__btn" type="button" aria-label="Applications">
+      <svg class="lexicon-icon"><use href="#grid"></use></svg>
+    </button>
+    <span class="sb-avatar" aria-hidden="true">
+      <svg class="lexicon-icon"><use href="#user"></use></svg>
+    </span>
+  </div>
+</div>
+
+<div class="sb-editor">
+
+  <!-- ─── Toolbar ──────────────────────────────────────────────── -->
+  <div class="sb-toolbar">
+    <span class="sb-toolbar__label">Preview</span>
+
+    <button class="sb-select sb-select--type" type="button">
+      <span class="sb-select__text">Pages</span>
+      <svg class="lexicon-icon lexicon-icon-sm"><use href="#caret-double-l"></use></svg>
+    </button>
+
+    <button class="sb-select sb-select--preview" type="button">
+      <span class="sb-select__text">Search</span>
+      <svg class="lexicon-icon lexicon-icon-sm"><use href="#caret-double-l"></use></svg>
+    </button>
+
+    <div class="sb-toolbar__end">
+      <!-- Undo.js renders these as one ClayButton.Group, disabled while the
+           history is empty — the state a freshly opened editor is in. -->
+      <div class="btn-group">
+        <button class="btn btn--secondary btn--sm btn--icon" type="button" aria-label="Undo" disabled>
+          <svg class="lexicon-icon"><use href="#undo"></use></svg>
+        </button>
+        <button class="btn btn--secondary btn--sm btn--icon" type="button" aria-label="Redo" disabled>
+          <svg class="lexicon-icon"><use href="#redo"></use></svg>
+        </button>
+      </div>
+
+      <button class="btn btn--secondary btn--sm btn--icon" type="button" aria-label="History" disabled>
+        <svg class="lexicon-icon"><use href="#time"></use></svg>
+      </button>
+
+      <button class="btn btn--borderless btn--sm btn--icon" type="button" aria-label="Help">
+        <svg class="lexicon-icon"><use href="#question-circle"></use></svg>
+      </button>
+
+      <button class="btn btn--primary btn--sm" type="button">Publish</button>
+    </div>
+  </div>
+
+  <div class="sb-body">
+
+    <!-- ─── Preview ────────────────────────────────────────────── -->
+    <div class="sb-preview" id="sb-preview">
+      <div class="pv">
+
+        <div class="pv__container">
+          <div class="pv__banner">
+            <div class="pv__site">
+              <span class="pv__mark" aria-hidden="true"></span>
+              <span class="pv__site-name">Liferay DXP Site</span>
+            </div>
+
+            <div class="pv__searchbar">
+              <h2 class="pv__heading">Search Bar</h2>
+              <div class="pv__search">
+                <input type="search" placeholder="Search..." aria-label="Search">
+                <button class="pv__search-submit" type="button" aria-label="Submit search">
+                  <svg class="lexicon-icon"><use href="#search"></use></svg>
+                </button>
+              </div>
+            </div>
+
+            <span class="pv__user" aria-hidden="true">
+              <svg class="lexicon-icon"><use href="#user"></use></svg>
+            </span>
+          </div>
+        </div>
+
+        <hr class="pv__rule">
+
+        <div class="pv__container">
+          <div class="pv__menu">
+            <h2 class="pv__menu-title">Menu Display</h2>
+            <p class="pv__menu-item">Home</p>
+          </div>
+        </div>
+
+        <hr class="pv__rule">
+
+        <div class="pv__container">
+          <div class="pv__grid">
+
+            <section class="pv__portlet pv__portlet--full" style="grid-row: 1">
+              <h3 class="pv__portlet-title">Search Bar</h3>
+              <div class="pv__search">
+                <input type="search" placeholder="Search..." aria-label="Search the site">
+                <button class="pv__search-submit" type="button" aria-label="Submit search">
+                  <svg class="lexicon-icon"><use href="#search"></use></svg>
+                </button>
+              </div>
+              <button class="pv__portlet-reset" type="button" aria-label="Reset Search Bar">
+                <svg class="lexicon-icon"><use href="#restore"></use></svg>
+              </button>
+            </section>
+
+            <section class="pv__portlet pv__portlet--full" style="grid-row: 2">
+              <h3 class="pv__portlet-title">Suggestions</h3>
+              <button class="pv__portlet-reset" type="button" aria-label="Reset Suggestions">
+                <svg class="lexicon-icon"><use href="#restore"></use></svg>
+              </button>
+            </section>
+
+            <section class="pv__portlet" style="grid-row: 3">
+              <h3 class="pv__portlet-title">Site Facet</h3>
+            </section>
+
+            <section class="pv__portlet" style="grid-row: 4">
+              <h3 class="pv__portlet-title">Type Facet</h3>
+            </section>
+
+            <section class="pv__portlet" style="grid-row: 5">
+              <h3 class="pv__portlet-title">Tag Facet</h3>
+            </section>
+
+            <section class="pv__portlet" style="grid-row: 6">
+              <h3 class="pv__portlet-title">Category Facet</h3>
+            </section>
+
+            <section class="pv__portlet" style="grid-row: 7">
+              <h3 class="pv__portlet-title">Folder Facet</h3>
+            </section>
+
+            <section class="pv__portlet" style="grid-row: 8">
+              <h3 class="pv__portlet-title">User Facet</h3>
+            </section>
+
+            <section class="pv__portlet pv__portlet--right" style="grid-row: 3">
+              <h3 class="pv__portlet-title">Search Results</h3>
+            </section>
+
+            <section class="pv__portlet pv__portlet--right" style="grid-row: 4">
+              <h3 class="pv__portlet-title">Search Options</h3>
+              <div class="pv__alert">
+                <svg class="lexicon-icon"><use href="#info-circle"></use></svg>
+                <span><strong>Info:</strong> Configure additional search options in this page.</span>
+              </div>
+            </section>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── Sidebar ────────────────────────────────────────────── -->
+    <aside class="sb-sidebar">
+
+      <!-- ✦ The proposal: mode switch, scoping everything below it ✦ -->
+      <div class="sb-mode">
+        <span class="sb-mode__info">
+          <span class="sb-mode__label">Editing values for</span>
+          <span class="sb-mode__value" id="sb-mode-value">Light mode</span>
+        </span>
+
+        <span class="cp-tip">
+          <button class="btn btn--borderless btn--sm btn--icon" id="sb-mode-toggle" type="button"
+                  aria-label="Edit dark mode values" aria-pressed="false">
+            <svg class="lexicon-icon" id="sb-mode-icon"><use href="#moon"></use></svg>
+          </button>
+          <span class="tooltip tooltip--top tooltip--align-end cp-tip__bubble" id="sb-mode-tip" role="tooltip">Edit dark mode values</span>
+        </span>
+      </div>
+
+      <div class="sb-definition">
+        <p class="sb-definition__label">Frontend Token Definition Provided By</p>
+        <p class="sb-definition__name">CMS Theme</p>
+      </div>
+
+      <div class="sb-category" id="sb-category">
+        <button class="sb-select sb-select--block" type="button" id="sb-category-trigger"
+                aria-haspopup="listbox" aria-expanded="false">
+          <span class="sb-select__text">Color System</span>
+          <svg class="lexicon-icon lexicon-icon-sm"><use href="#caret-double-l"></use></svg>
+        </button>
+        <ul class="dropdown" role="listbox" aria-labelledby="sb-category-trigger">
+          <li><button type="button" class="dropdown__item is-active" role="option" aria-selected="true">Color System</button></li>
+          <li><button type="button" class="dropdown__item" role="option">Spacing</button></li>
+          <li><button type="button" class="dropdown__item" role="option">General</button></li>
+          <li><button type="button" class="dropdown__item" role="option">Typography</button></li>
+          <li><button type="button" class="dropdown__item" role="option">Buttons</button></li>
+        </ul>
+      </div>
+
+      <!-- Token set panels render from the model below, so both modes stay
+           bound to a single source of truth. -->
+      <div id="sb-panels"></div>
+
+    </aside>
+
+  </div>
+</div>
+
+<script>
+/* ════════════════════════════════════════════════════════════════
+   Token model.
+
+   Set order, token names, CSS variable mappings and light values are the
+   real ones from the theme's WEB-INF/frontend-token-definition.json
+   (category `colorSystem`; sets `brandColors`, `grays`, `themeColors`).
+   `label` is the humanised form the sidebar shows, since the raw name goes
+   through Liferay.Language.get().
+
+   `dark: null` means the token has no dark value of its own and falls
+   through to the light one — the "Inherited" state in the UI.
+   ════════════════════════════════════════════════════════════════ */
+var SETS = [
+  {
+    label: 'Brand Colors',
+    open: true,
+    tokens: [
+      {css: 'brand-color-1', label: 'Brand Color 1', light: '#0B5FFF', dark: '#6198FF'},
+      {css: 'brand-color-2', label: 'Brand Color 2', light: '#6B6C7E', dark: '#B3B3C6'},
+      {css: 'brand-color-3', label: 'Brand Color 3', light: '#2E5AAC', dark: null},
+      {css: 'brand-color-4', label: 'Brand Color 4', light: '#30313F', dark: '#E2E4EA'}
+    ]
+  },
+  {
+    /* Worth raising on the ticket: the gray scale is named by lightness, so
+       in dark mode `Gray 900` resolves to near-white. The names survive the
+       inversion but stop describing it. */
+    label: 'Grays',
+    open: false,
+    tokens: [
+      {css: 'white',    label: 'White',    light: '#FFFFFF', dark: '#1B1B23'},
+      {css: 'gray-100', label: 'Gray 100', light: '#F7F8F9', dark: '#262631'},
+      {css: 'gray-300', label: 'Gray 300', light: '#E7E7ED', dark: '#4D4E5B'},
+      {css: 'gray-600', label: 'Gray 600', light: '#6B6C7E', dark: '#B3B3C6'},
+      {css: 'gray-900', label: 'Gray 900', light: '#272833', dark: '#F1F2F5'}
+    ]
+  },
+  {
+    label: 'Theme Colors',
+    open: false,
+    tokens: [
+      {css: 'primary',    label: 'Primary',    light: '#0B5FFF', dark: '#6198FF'},
+      {css: 'primary-d1', label: 'Primary D1', light: '#0053F0', dark: '#7AA8FF'},
+      {css: 'secondary',  label: 'Secondary',  light: '#6B6C7E', dark: '#B3B3C6'},
+      {css: 'info',       label: 'Info',       light: '#2E5AAC', dark: null},
+      {css: 'info-l2',    label: 'Info L2',    light: '#EEF2FA', dark: null},
+      {css: 'success',    label: 'Success',    light: '#287D3C', dark: null},
+      {css: 'warning',    label: 'Warning',    light: '#B95000', dark: null},
+      {css: 'danger',     label: 'Danger',     light: '#DA1414', dark: '#F67474'}
+    ]
+  }
+];
+
+(function () {
+  var STORAGE_KEY = 'style-book-mode';
+
+  var preview  = document.getElementById('sb-preview');
+  var panelsEl = document.getElementById('sb-panels');
+  var toggle   = document.getElementById('sb-mode-toggle');
+  var icon     = document.getElementById('sb-mode-icon');
+  var tip      = document.getElementById('sb-mode-tip');
+  var modeName = document.getElementById('sb-mode-value');
+
+  var mode = 'light';
+  try { mode = localStorage.getItem(STORAGE_KEY) === 'dark' ? 'dark' : 'light'; } catch (e) {}
+
+  /* What a token actually renders as in the active mode: an inherited dark
+     token resolves to its light value, which is the whole problem. */
+  function resolved(token) {
+    if (mode === 'dark') { return token.dark !== null ? token.dark : token.light; }
+
+    return token.light;
+  }
+
+  function isInherited(token) { return mode === 'dark' && token.dark === null; }
+
+  /* Mirrors UpdateStyle() in Sidebar.js: write every token onto the element
+     as `--<cssVariableMapping>` and let the preview repaint itself. */
+  function paintPreview() {
+    SETS.forEach(function (set) {
+      set.tokens.forEach(function (token) {
+        preview.style.setProperty('--' + token.css, resolved(token));
+      });
+    });
+  }
+
+  function renderRow(token) {
+    var row = document.createElement('div');
+    row.className = 'sb-token' + (isInherited(token) ? ' is-inherited' : '');
+
+    var value = resolved(token);
+    var id = 'tok-' + token.css;
+
+    var label = document.createElement('label');
+    label.className = 'sb-token__label';
+    label.setAttribute('for', id);
+    label.textContent = token.label;
+
+    var field = document.createElement('div');
+    field.className = 'sb-token__field';
+
+    var swatch = document.createElement('button');
+    swatch.type = 'button';
+    swatch.className = 'sb-token__swatch';
+    swatch.style.background = value;
+    swatch.setAttribute('aria-label', 'Pick a colour for ' + token.label);
+
+    var hash = document.createElement('span');
+    hash.className = 'sb-token__hash';
+    hash.setAttribute('aria-hidden', 'true');
+    hash.textContent = '#';
+
+    var hex = document.createElement('input');
+    hex.type = 'text';
+    hex.className = 'sb-token__hex';
+    hex.id = id;
+    hex.value = value.replace('#', '');
+
+    field.appendChild(swatch);
+    field.appendChild(hash);
+    field.appendChild(hex);
+
+    /* Trailing action. Light mode keeps the product's restore button; dark
+       mode adds the inherited state:
+         inherited  → #link,    press to start overriding
+         overridden → #restore, press to fall back to the light value  */
+    var inherited = isInherited(token);
+    var text = mode !== 'dark'
+      ? 'Reset to the default value'
+      : inherited
+        ? 'Inherited from light — click to set a dark value'
+        : 'Reset to the light value';
+
+    var tipWrap = document.createElement('span');
+    tipWrap.className = 'sb-token__tip';
+
+    var action = document.createElement('button');
+    action.type = 'button';
+    action.className = 'sb-token__action';
+    action.setAttribute('aria-label', text);
+    action.innerHTML = '<svg class="lexicon-icon lexicon-icon-sm"><use href="#' +
+      (inherited ? 'link' : 'restore') + '"></use></svg>';
+
+    var bubble = document.createElement('span');
+    bubble.className = 'tooltip tooltip--align-end';
+    bubble.setAttribute('role', 'tooltip');
+    bubble.textContent = text;
+
+    if (mode === 'dark') {
+      action.addEventListener('click', function () {
+        token.dark = token.dark === null ? token.light : null;
+        render();
+      });
+    }
+
+    tipWrap.appendChild(action);
+    tipWrap.appendChild(bubble);
+    field.appendChild(tipWrap);
+
+    function commit(next) {
+      if (!/^[0-9a-fA-F]{6}$/.test(next)) { render(); return; }
+      if (mode === 'dark') { token.dark = '#' + next; } else { token.light = '#' + next; }
+      render();
+    }
+
+    hex.addEventListener('change', function () { commit(hex.value.trim().replace('#', '')); });
+    hex.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter') { commit(hex.value.trim().replace('#', '')); }
+    });
+
+    /* The product opens a Clay colour picker here; a native input is enough
+       to prove the value flows straight through to the preview. */
+    swatch.addEventListener('click', function () {
+      var picker = document.createElement('input');
+      picker.type = 'color';
+      picker.value = value;
+      picker.style.position = 'fixed';
+      picker.style.opacity = '0';
+      picker.style.pointerEvents = 'none';
+      document.body.appendChild(picker);
+      picker.addEventListener('input', function () {
+        swatch.style.background = picker.value;
+        hex.value = picker.value.replace('#', '').toUpperCase();
+        preview.style.setProperty('--' + token.css, picker.value);
+      });
+      picker.addEventListener('change', function () {
+        commit(picker.value.replace('#', '').toUpperCase());
+        picker.remove();
+      });
+      picker.click();
+    });
+
+    row.appendChild(label);
+    row.appendChild(field);
+
+    return row;
+  }
+
+  function renderPanels() {
+    panelsEl.textContent = '';
+
+    SETS.forEach(function (set, index) {
+      var panel = document.createElement('div');
+      panel.className = 'sb-panel' + (set.open ? ' is-open' : '');
+
+      var header = document.createElement('button');
+      header.type = 'button';
+      header.className = 'sb-panel__header';
+      header.setAttribute('aria-expanded', String(set.open));
+      header.innerHTML = set.label +
+        '<svg class="lexicon-icon lexicon-icon-sm"><use href="#' +
+        (set.open ? 'angle-down' : 'angle-right') + '"></use></svg>';
+
+      var body = document.createElement('div');
+      body.className = 'sb-panel__body';
+      set.tokens.forEach(function (token) { body.appendChild(renderRow(token)); });
+
+      header.addEventListener('click', function () {
+        SETS[index].open = !SETS[index].open;
+        renderPanels();
+      });
+
+      panel.appendChild(header);
+      panel.appendChild(body);
+      panelsEl.appendChild(panel);
+    });
+  }
+
+  function renderMode() {
+    var isDark = mode === 'dark';
+
+    icon.querySelector('use').setAttribute('href', isDark ? '#sun' : '#moon');
+    modeName.textContent = isDark ? 'Dark mode' : 'Light mode';
+
+    var text = isDark ? 'Edit light mode values' : 'Edit dark mode values';
+    toggle.setAttribute('aria-label', text);
+    toggle.setAttribute('aria-pressed', String(isDark));
+    tip.textContent = text;
+  }
+
+  function render() {
+    renderMode();
+    renderPanels();
+    paintPreview();
+  }
+
+  toggle.addEventListener('click', function () {
+    mode = mode === 'dark' ? 'light' : 'dark';
+    try { localStorage.setItem(STORAGE_KEY, mode); } catch (e) {}
+    render();
+  });
+
+  render();
+})();
+
+/* Category select — open / close, outside click, Escape. */
+(function () {
+  var wrap = document.getElementById('sb-category');
+  var trigger = document.getElementById('sb-category-trigger');
+  var text = trigger.querySelector('.sb-select__text');
+
+  function close() {
+    wrap.classList.remove('is-open');
+    trigger.setAttribute('aria-expanded', 'false');
+  }
+
+  trigger.addEventListener('click', function (event) {
+    event.stopPropagation();
+    var open = wrap.classList.toggle('is-open');
+    trigger.setAttribute('aria-expanded', String(open));
+  });
+
+  wrap.querySelectorAll('.dropdown__item').forEach(function (item) {
+    item.addEventListener('click', function () {
+      wrap.querySelectorAll('.dropdown__item').forEach(function (other) {
+        other.classList.remove('is-active');
+        other.removeAttribute('aria-selected');
+      });
+      item.classList.add('is-active');
+      item.setAttribute('aria-selected', 'true');
+      text.textContent = item.textContent.trim();
+      close();
+    });
+  });
+
+  document.addEventListener('click', close);
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') { close(); }
+  });
+})();
+</script>
+
+</body>
+</html>
