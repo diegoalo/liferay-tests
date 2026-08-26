@@ -1,0 +1,2927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Launches — preview top bar (LPD-97290)</title>
+  <meta name="description" content="Prototipo del framework de Launches de Liferay: añadir assets a un launch, previsualizarlo con la Site Preview Top Bar, y publicar. Construido con Lexicon Vanilla.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDMyIDMyIj4KICA8cGF0aCBmaWxsPSIjMDA2RUZGIiBkPSJNMCAwaDMydjMySDB6Ii8+CiAgPGcgY2xpcC1wYXRoPSJ1cmwoI2EpIj4KICAgIDxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xNS45MzYgMTUuMTIzYS44NzUuODc1IDAgMCAwLS44NzUuODc0djEwLjEzMmEuODc1Ljg3NSAwIDAgMCAxLjc1IDBWMTUuOTk0YS44NzQuODc0IDAgMCAwLS44NzUtLjg3MU0xMi45NiAyMi4yNmEuODcuODcgMCAwIDAtLjg3Ni44NTl2MS43MjNjMCAuNDc0LjM5My44NTguODc1Ljg1OGEuODcuODcgMCAwIDAgLjg3Ni0uODU4di0xLjcyM2EuODY3Ljg2NyAwIDAgMC0uODc2LS44NThtOS4wNTgtMS40MjlhLjg3Ljg3IDAgMCAwLS44NzUuODY1djEuMzIzYzAgLjIzLjA5LjQ0OC4yNTYuNjExYS44OC44OCAwIDAgMCAuNjIuMjUzLjg3Ljg3IDAgMCAwIC44NzQtLjg2NHYtMS4zMjNhLjg2Ny44NjcgMCAwIDAtLjg3NS0uODY1bS0yLjk3Ny0yLjg1NmEuODc1Ljg3NSAwIDAgMC0uODc1Ljg3NHY1Ljk3OWEuODc3Ljg3NyAwIDAgMCAxLjQ5NS42MTguODcuODcgMCAwIDAgLjI1Ni0uNjE4VjE4Ljg1YS44Ny44NyAwIDAgMC0uODc1LS44NzQiLz4KICAgIDxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xOC4xOTcgMTYuMDM1YzAgLjQ4LjM4Ny44NzEuODYuODcxLjQ3MiAwIC44NTktLjM5Ljg1OS0uODY4di0xLjQ3YzAtLjUwOS0uMzY4LTEuMTUyLS44MDUtMS40MDVsLTIuMzEyLTEuMzQ4Yy0uMjE4LS4xMjgtLjUxMi0uMTktLjgwMi0uMTktLjI5NCAwLS41ODUuMDY1LS44MDIuMTlsLTIuMzEyIDEuMzQ4Yy0uNDM1LjI1My0uODA1LjktLjgwNSAxLjQwNnY1LjcyNWMwIC40OC4zODYuODcxLjg2Ljg3MS40NzIgMCAuODU4LS4zOS44NTgtLjg3VjE1LjI0YzAtLjM0LjIzLS43NC41Mi0uOTEzbDEuMTU3LS42NzVjLjI5NC0uMTczLjc1LS4xNzMgMS4wNDQgMGwxLjE1Ny42NzJjLjI5LjE3LjUyLjU3LjUyLjkxM3YuNzk3em0tNC4wNDMtOC42OTdjMS4wMTItLjU5IDIuNjY0LS41OSAzLjY3NiAwbC42MDQuMzUycS4xNzQuMDg3LjM2Ny4wODZhLjg2Ljg2IDAgMCAwIC44NTYtLjg2NC44Ny44NyAwIDAgMC0uNDI4LS43NWwtLjAzMi0uMDE5LTEuMDg5LS42MzRDMTcuNTQ5IDUuMTggMTYuNzk1IDUgMTUuOTkgNXMtMS41NTUuMTgtMi4xMTcuNTA2TDguMTE4IDguODU5Yy0uNTYzLjMyNi0xLjA5My44OTMtMS40OTUgMS41OTgtLjQwMy43MDEtLjYyMyAxLjQ0Ny0uNjIzIDIuMXYxLjE5NWMuMDEzLjQ0NS4zOS43OS44NTYuNzlzLjg0My0uMzQ1Ljg1Ni0uNzl2LS41MjJjMC0xLjE3OC44MjQtMi42MiAxLjgzNi0zLjIwOXptMTEuMjIgMy4xMzhjLS40MDYtLjcwNS0uOTM2LTEuMjc1LTEuNTAxLTEuNjAxbC0yLjI2OC0xLjMyYS44Ni44NiAwIDAgMC0uMzc3LS4wOS44NjcuODY3IDAgMCAwLS44NjIuODcyYzAgLjMwNC4xNTMuNTgzLjQxMi43NDNsMS42NTQuOTY0YzEuMDIuNTkyIDEuODQ3IDIuMDM2IDEuODQ3IDMuMjIxVjE3LjdjMCAuNDc4LjM4Ni44NjguODU5Ljg2OGEuODYzLjg2MyAwIDAgMCAuODYtLjg2OHYtNS4xMWMuMDAyLS42NTctLjIyMi0xLjQwNi0uNjI0LTIuMTE0TTYuODc1IDE1Ljc3YS44NzQuODc0IDAgMCAwLS44NzUuODY3djMuMDFhLjg3Ljg3IDAgMCAwIC44NzUuODY1Ljg3Ljg3IDAgMCAwIC44NzUtLjg2NHYtMy4wMWEuODc0Ljg3NCAwIDAgMC0uODc1LS44NjkiLz4KICAgIDxwYXRoIGZpbGw9IiNmZmYiIGQ9Im0yMS4yMjUgMTAuODczLTMuNTY3LTIuMDk3Yy0uNDQxLS4yNi0xLjAzMi0uNC0xLjY2OC0uNHMtMS4yMjYuMTQzLTEuNjY3LjRsLS44MTQuNDc3YS44Ny44NyAwIDAgMC0uMzkuNzNjMCAuNDguMzgzLjg2OC44NTMuODY4YS44Ni44NiAwIDAgMCAuMzg2LS4wOTNsLjY4LS40Yy4yNjItLjE1NC42MS0uMjMxLjk1Ni0uMjMxLjM0NSAwIC42OTMuMDc3Ljk1NS4yM2wzLjI5OSAxLjkzOGMuNTI3LjMwNy45NTIgMS4wNjMuOTUyIDEuNjc4djQuODljMCAuNDc3LjM4Ljg2OC44NS44NjguMzE5IDAgLjYxLS4xODMuNzU2LS40NzRhLjkuOSAwIDAgMCAuMDkzLS4zOTR2LTUuMDQ3YzAtLjUxOS0uMTc2LTEuMTE0LS40OTItMS42NzUtLjMyMy0uNTU3LS43NDEtMS4wMDgtMS4xODItMS4yNjhtLTguODE1LjU4M2EuODYuODYgMCAwIDAtLjg0Ni0uODc0LjguOCAwIDAgMC0uMzg3LjA5NmwtLjQxMi4yNDNjLS40MzcuMjYtLjg1My43MTQtMS4xNjkgMS4yNzgtLjMxNi41NjMtLjQ4OCAxLjE2LS40ODggMS42ODF2OS4yNjFjMCAuMjM0LjA5LjQ1NS4yNDkuNjE4LjE2LjE2NC4zNy4yNTMuNTk0LjI1My40NjYgMCAuODQzLS4zOS44NDMtLjg3VjE0LjA0YzAtLjYxOC40MjUtMS4zNzcuOTQ5LTEuNjg3YTkgOSAwIDAgMCAuMjk3LS4xNzdjLjIzLS4xNi4zNy0uNDI5LjM3LS43MiIvPgogIDwvZz4KICA8ZGVmcz4KICAgIDxjbGlwUGF0aCBpZD0iYSI+CiAgICAgIDxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik02IDVoMjB2MjJINnoiLz4KICAgIDwvY2xpcFBhdGg+CiAgPC9kZWZzPgo8L3N2Zz4K"><!-- decorative: blue #006EFF -->
+<script>(function(){
+  var S=['light','light-hc','dark','dark-hc'];
+  function apply(){try{
+    var r=document.documentElement;
+    var s=localStorage.getItem('vanilla-skin')||'light';
+    S.forEach(function(c){r.classList.remove(c);});
+    r.classList.add(S.indexOf(s)>-1?s:'light');
+  }catch(e){}}
+  apply();
+  window.addEventListener('pageshow',apply);
+})()</script>
+<style>
+/* ── tokens.css ── */
+/* ============================================================
+   Lexicon base tokens — vanilla
+   Copy of tokens.css trimmed to colors, spacing, typography,
+   radius and shadow. Light mode only — no theming layer.
+   ============================================================ */
+
+:root {
+
+  /* ── Color: Primary ── */
+  --color-primary-d2: #004AD7;
+  --color-primary-d1: #0053F0;
+  --color-primary:    #0B5FFF;
+  --color-primary-l0: #5791FF;
+  --color-primary-l1: #80ACFF;
+  --color-primary-l2: #B3CDFF;
+  --color-primary-l3: #F0F5FF;
+
+  /* ── Color: Secondary ── */
+  --color-secondary:    #6B6C7E;
+  --color-secondary-l0: #9393A4;
+  --color-secondary-l1: #A7A9BC;
+  --color-secondary-l2: #CDCED9;
+  --color-secondary-l3: #E7E7ED;
+
+  /* ── Color: Dark / Light ── */
+  --color-dark-d2: #111116;
+  --color-dark-d1: #1C1C24;
+  --color-dark:    #272833;
+  --color-dark-l1: #30313F;
+  --color-dark-l2: #393A4A;
+  --color-light-d2: #D3D6E0;
+  --color-light-d1: #E2E4EA;
+  --color-light:    #F1F2F5;
+  --color-light-l1: #F7F8F9;
+  --color-white:    #FFFFFF;
+
+  /* Scrim — dim layer behind overlays (mobile drawer, dialogs). Kept as a
+     stable dark tint in every skin (dark counterpart in tokens-dark.css), so
+     it never inverts the way --color-dark does. */
+  --color-scrim: rgba(57, 58, 74, 0.5);
+
+  /* ── Color: Success ── */
+  --color-success-d2: #1C5629;
+  --color-success-d1: #226A33;
+  --color-success:    #287D3C;
+  --color-success-l1: #5ACA75;
+  --color-success-l2: #EDF9F0;
+
+  /* ── Color: Info ── */
+  --color-info-d2: #234584;
+  --color-info-d1: #294F98;
+  --color-info:    #2E5AAC;
+  --color-info-l1: #89A7E0;
+  --color-info-l2: #EEF2FA;
+
+  /* ── Color: Warning ── */
+  --color-warning-d2: #863A00;
+  --color-warning-d1: #9F4500;
+  --color-warning:    #B95000;
+  --color-warning-l1: #FF8F39;
+  --color-warning-l2: #FFF4EC;
+
+  /* ── Color: Danger ── */
+  --color-danger-d2: #AB1010;
+  --color-danger-d1: #C31212;
+  --color-danger:    #DA1414;
+  --color-danger-l1: #F48989;
+  --color-danger-l2: #FEEFEF;
+
+  /* ── Spacing ── */
+  --spacing-1:   2px;
+  --spacing-2:   4px;
+  --spacing-2-5: 6px;
+  --spacing-3:   8px;
+  --spacing-4:   12px;
+  --spacing-5:   16px;
+  --spacing-6:   20px;
+  --spacing-7:   24px;
+  --spacing-8:   32px;
+  --spacing-9:   40px;
+  --spacing-10: 48px;
+
+  /* ── Border radius ── */
+  --rounded-sm:    2px;
+  --rounded-md:    4px;
+  --rounded-lg:    8px;
+  --rounded-xl:    16px;
+  --rounded-full:  9999px;
+
+  /* ── Typography ── */
+  --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-size-xs:   10px;
+  --font-size-sm:   12px;
+  --font-size-base: 14px;
+  --font-size-md:   16px;
+  --font-size-lg:   18px;
+  --font-size-xl:   20px;
+  --font-size-2xl:  28px;
+  --font-size-3xl:  32px;
+  --font-weight-normal: 300;
+  --font-weight-semi:   400;
+  --font-weight-bold:   600;
+  --line-height-base:   1.5;
+
+  /* ── Shadow ── */
+  --shadow-sm:         0 1px 2px rgba(39, 40, 51, 0.10);
+  --shadow-card:       0 2px 4px rgba(39, 40, 51, 0.12);
+  --shadow-md:         0 2px 8px rgba(39, 40, 51, 0.14);
+  --shadow-dropdown:   0 4px 8px rgba(39, 40, 51, 0.12);
+  --shadow-lg:         0 4px 16px rgba(39, 40, 51, 0.18);
+  --shadow-alert:      0 8px 16px rgba(39, 40, 51, 0.20);
+  /* Scroll shadows — a soft edge cast by sticky chrome (header / footer) over
+     scrolling content, shown only while content is clipped past that edge. */
+  --shadow-scroll-top:    0 4px 24px rgba(0, 0, 0, 0.08);
+  --shadow-scroll-bottom: 0 -4px 24px rgba(0, 0, 0, 0.08);
+
+  /* ── Focus ring ── */
+  --focus-ring: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-primary-l0);
+
+  /* ── Chart colors ── */
+  --blue-d4: #004799;
+  --blue-d3: #0053B3;
+  --blue-d2: #005FCC;
+  --blue-d1: #006BE6;
+  --blue:    #006EFF;
+  --blue-l1: #338FFF;
+  --blue-l2: #66ABFF;
+  --blue-l3: #97C5FF;
+  --blue-l4: #CCE3FF;
+  --blue-l5: #E5F1FF;
+
+  --orange-d4: #662700;
+  --orange-d3: #803100;
+  --orange-d2: #993B00;
+  --orange-d1: #B34400;
+  --orange:    #CC4E00;
+  --orange-l1: #FF6200;
+  --orange-l2: #FF8133;
+  --orange-l3: #FFA166;
+  --orange-l4: #FFC099;
+  --orange-l5: #FFF0E5;
+
+  --red-d4: #800000;
+  --red-d3: #990000;
+  --red-d2: #B30000;
+  --red-d1: #CC0000;
+  --red:    #E50000;
+  --red-l1: #FF4D4D;
+  --red-l2: #FF6666;
+  --red-l3: #FF8080;
+  --red-l4: #FF9999;
+  --red-l5: #FFE5E5;
+
+  --teal-d4: #092A25;
+  --teal-d3: #0D3F37;
+  --teal-d2: #125449;
+  --teal-d1: #16695B;
+  --teal:    #1B7E6E;
+  --teal-l1: #24A892;
+  --teal-l2: #42D7BE;
+  --teal-l3: #6CE0CC;
+  --teal-l4: #96E9DB;
+  --teal-l5: #EAFBF8;
+
+  --pink-d4: #800048;
+  --pink-d3: #990057;
+  --pink-d2: #B30065;
+  --pink-d1: #CC0074;
+  --pink:    #E50082;
+  --pink-l1: #FF4DB2;
+  --pink-l2: #FF80C8;
+  --pink-l3: #FF99D3;
+  --pink-l4: #FFB2DE;
+  --pink-l5: #FFE5F4;
+
+  --green-d4: #162D06;
+  --green-d3: #22430A;
+  --green-d2: #2E590D;
+  --green-d1: #397010;
+  --green:    #458613;
+  --green-l1: #53A117;
+  --green-l2: #67C91D;
+  --green-l3: #81E236;
+  --green-l4: #9DE963;
+  --green-l5: #F1FCE9;
+
+  --purple-d4: #7700CC;
+  --purple-d3: #8600E6;
+  --purple-d2: #9500FF;
+  --purple-d1: #9F1AFF;
+  --purple:    #AA33FF;
+  --purple-l1: #BF66FF;
+  --purple-l2: #CA80FF;
+  --purple-l3: #D499FF;
+  --purple-l4: #DFB3FF;
+  --purple-l5: #F2E5FF;
+
+  --yellow-d4: #997000;
+  --yellow-d3: #B38900;
+  --yellow-d2: #CC9600;
+  --yellow-d1: #E6A800;
+  --yellow:    #FFBB00;
+  --yellow-l1: #FFC933;
+  --yellow-l2: #FFD666;
+  --yellow-l3: #FFE499;
+  --yellow-l4: #FFF1CC;
+  --yellow-l5: #FFF8E5;
+
+  --cyan-d4: #00334D;
+  --cyan-d3: #004466;
+  --cyan-d2: #005580;
+  --cyan-d1: #006699;
+  --cyan:    #0077B3;
+  --cyan-l1: #0099E6;
+  --cyan-l2: #33BBFF;
+  --cyan-l3: #66CCFF;
+  --cyan-l4: #99DDFF;
+  --cyan-l5: #E5F6FF;
+
+  --indigo-d4: #0017E5;
+  --indigo-d3: #001AFF;
+  --indigo-d2: #1A30FF;
+  --indigo-d1: #3347FF;
+  --indigo:    #4D5FFF;
+  --indigo-l1: #808CFF;
+  --indigo-l2: #99A3FF;
+  --indigo-l3: #B2BAFF;
+  --indigo-l4: #CCD1FF;
+  --indigo-l5: #E5E8FF;
+}
+
+/* Sensible defaults for the document */
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+
+body {
+  margin: 0;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--color-dark);
+  background: var(--color-white);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.25;
+  margin: 0;
+}
+
+p { margin: 0; }
+
+a { color: var(--color-primary); }
+a:hover { color: var(--color-primary-d1); }
+
+/* ============================================================
+   SKELETON tokens — loading-state shapes and shimmer sweep.
+   Shape and surface resolve from the semantic scale (they flip
+   per skin automatically); the shimmer gradient needs raw RGB
+   components, overridden for dark skins in tokens-dark.css.
+   ============================================================ */
+:root {
+  --skeleton-shape: var(--color-secondary-l3);
+  --skeleton-surface: var(--color-light-l1);
+  --skeleton-shimmer-rgb: 247, 248, 249;  /* light-l1 */
+  --skeleton-shimmer-alpha: 0.6;
+}
+
+/* ============================================================
+   CHART tokens — categorical series, sequential buckets and
+   plot structure.
+   Categorical series alias the base chart hues (--yellow, --blue,
+   …) in a fixed order chosen for maximum adjacent contrast and
+   accessibility; the base hues already carry per-skin overrides,
+   so charts reskin for free. (Never point a series at a -l2/-l3
+   tint — those collapse to near-white in the HC skins.) The
+   sequential buckets alias the --blue scale, and the structural
+   tokens alias the semantic scale so grid / track / halo / axis /
+   land flip per skin automatically.
+   ============================================================ */
+:root {
+  /* Categorical series — bar (stacked), pie, multi-series line.
+     Ordered for maximum adjacent contrast + accessibility; alias
+     the base chart hues so each series reskins per skin. */
+  --chart-1:  var(--yellow);
+  --chart-2:  var(--blue);
+  --chart-3:  var(--orange);
+  --chart-4:  var(--teal);
+  --chart-5:  var(--pink);
+  --chart-6:  var(--cyan);
+  --chart-7:  var(--red);
+  --chart-8:  var(--purple);
+  --chart-9:  var(--green);
+  --chart-10: var(--indigo);
+
+  /* Sequential buckets — single hue, less → more (map, heat) */
+  --chart-seq-1: var(--blue-l4);
+  --chart-seq-2: var(--blue-l2);
+  --chart-seq-3: var(--blue);
+
+  /* Plot structure — flip per skin through the semantic scale */
+  --chart-track:     var(--color-light-d1);   /* bar track / gridlines (#E2E4EA) */
+  --chart-grid:      var(--color-light-d1);   /* axis gridlines */
+  --chart-halo:      var(--color-white);      /* marker + segment separators */
+  --chart-axis:      var(--color-secondary);  /* axis + tick labels */
+  --chart-land:      var(--color-light);      /* map land fill (#F1F2F5) */
+  --chart-land-line: var(--color-light-d1);   /* map land borders (#E2E4EA) */
+}
+
+/* ── Site Preview Bar (LPD-97290) ────────────────────────────
+   The bar is a primary-filled surface, so it follows the same convention as
+   .btn--primary: background var(--color-primary), foreground var(--color-white).
+   Both flip per skin, so the bar stays legible without a single literal.
+
+   Controls on the bar are stock kit components (.btn--translucent for the
+   picker and the icon buttons, .btn--secondary for Exit), so the only thing
+   the bar needs of its own is the rule it draws between clusters. That is an
+   alpha of the foreground, which cannot be expressed as a token reference, so
+   each skin carries its own counterpart in tokens-dark.css and
+   tokens-high-contrast.css. */
+:root {
+  --preview-bar-rule: rgba(255, 255, 255, 0.32);   /* divider between clusters */
+}
+
+</style>
+<style>
+/* ── tokens-high-contrast.css ── */
+/* ============================================================
+   LEXICON DESIGN TOKENS — Light High Contrast
+   Auto-generated from "Light High Contrast.tokens.json"
+   Usage: add class="light-hc" to <html> or use @media (prefers-contrast: more)
+   ============================================================ */
+
+.light-hc, [data-theme="light-hc"] {
+  --color-primary-d2: #001133;
+  --color-primary-d1: #002161;
+  --color-primary: #002875;
+  --color-primary-l0: #0058FF;
+  --color-primary-l1: #387DFF;
+  --color-primary-l2: #70A0FF;
+  --color-primary-l3: #F5F8FF;
+  --color-secondary: #28282F;
+  --color-secondary-l0: #42424D;
+  --color-secondary-l1: #6C6F8E;
+  --color-secondary-l2: #CDCDDA;
+  --color-secondary-l3: #F0F0F4;
+  --color-dark-d2: #09090C;
+  --color-dark-d1: #14141A;
+  --color-dark: #1F1F28;
+  --color-dark-l1: #2E2F3D;
+  --color-dark-l2: #505168;
+  --color-light-d2: #D5D8E1;
+  --color-light-d1: #E1E3EA;
+  --color-light: #EDEEF2;
+  --color-light-l1: #F9FAFB;
+  --color-white: #FFFFFF;
+  --color-success-d2: #071309;
+  --color-success-d1: #0E2A14;
+  --color-success: #154220;
+  --color-success-l1: #319B4B;
+  --color-success-l2: #F0FAF3;
+  --color-info-d2: #0B1528;
+  --color-info-d1: #182E58;
+  --color-info: #213F78;
+  --color-info-l1: #3364C2;
+  --color-info-l2: #EFF3FA;
+  --color-warning-d2: #1A0B00;
+  --color-warning-d1: #381800;
+  --color-warning: #662C00;
+  --color-warning-l1: #FA6D00;
+  --color-warning-l2: #FFF6F0;
+  --color-danger-d2: #180202;
+  --color-danger-d1: #340404;
+  --color-danger: #5E0808;
+  --color-danger-l1: #E01515;
+  --color-danger-l2: #FEF1F1;
+  --blue-d4: #004799;
+  --blue-d3: #004799;
+  --blue-d2: #004799;
+  --blue-d1: #004799;
+  --blue: #006EFF;
+  --blue-l1: #E5F1FF;
+  --blue-l2: #E5F1FF;
+  --blue-l3: #E5F1FF;
+  --blue-l4: #E5F1FF;
+  --blue-l5: #E5F1FF;
+  --orange-d4: #662700;
+  --orange-d3: #662700;
+  --orange-d2: #662700;
+  --orange-d1: #662700;
+  --orange: #993B00;
+  --orange-l1: #FFF0E5;
+  --orange-l2: #FFF0E5;
+  --orange-l3: #FFF0E5;
+  --orange-l4: #FFF0E5;
+  --orange-l5: #FFF0E5;
+  --red-d4: #800000;
+  --red-d3: #800000;
+  --red-d2: #800000;
+  --red-d1: #800000;
+  --red: #B30000;
+  --red-l1: #FFE5E5;
+  --red-l2: #FFE5E5;
+  --red-l3: #FFE5E5;
+  --red-l4: #FFE5E5;
+  --red-l5: #FFE5E5;
+  --teal-d4: #092A25;
+  --teal-d3: #092A25;
+  --teal-d2: #092A25;
+  --teal-d1: #092A25;
+  --teal: #125449;
+  --teal-l1: #EAFBF8;
+  --teal-l2: #EAFBF8;
+  --teal-l3: #EAFBF8;
+  --teal-l4: #EAFBF8;
+  --teal-l5: #EAFBF8;
+  --pink-d4: #800048;
+  --pink-d3: #800048;
+  --pink-d2: #800048;
+  --pink-d1: #800048;
+  --pink: #990057;
+  --pink-l1: #FFE5F4;
+  --pink-l2: #FFE5F4;
+  --pink-l3: #FFE5F4;
+  --pink-l4: #FFE5F4;
+  --pink-l5: #FFE5F4;
+  --green-d4: #162D06;
+  --green-d3: #162D06;
+  --green-d2: #162D06;
+  --green-d1: #162D06;
+  --green: #2E590D;
+  --green-l1: #F1FCE9;
+  --green-l2: #F1FCE9;
+  --green-l3: #F1FCE9;
+  --green-l4: #F1FCE9;
+  --green-l5: #F1FCE9;
+  --purple-d4: #7700CC;
+  --purple-d3: #7700CC;
+  --purple-d2: #7700CC;
+  --purple-d1: #7700CC;
+  --purple: #8600E6;
+  --purple-l1: #F2E5FF;
+  --purple-l2: #F2E5FF;
+  --purple-l3: #F2E5FF;
+  --purple-l4: #F2E5FF;
+  --purple-l5: #F2E5FF;
+  --yellow-d4: #997000;
+  --yellow-d3: #997000;
+  --yellow-d2: #997000;
+  --yellow-d1: #997000;
+  --yellow: #FFBB00;
+  --yellow-l1: #FFF8E5;
+  --yellow-l2: #FFF8E5;
+  --yellow-l3: #FFF8E5;
+  --yellow-l4: #FFF8E5;
+  --yellow-l5: #FFF8E5;
+  --cyan-d4: #00334D;
+  --cyan-d3: #00334D;
+  --cyan-d2: #00334D;
+  --cyan-d1: #00334D;
+  --cyan: #005580;
+  --cyan-l1: #E5F6FF;
+  --cyan-l2: #E5F6FF;
+  --cyan-l3: #E5F6FF;
+  --cyan-l4: #E5F6FF;
+  --cyan-l5: #E5F6FF;
+  --indigo-d4: #0017E5;
+  --indigo-d3: #0017E5;
+  --indigo-d2: #0017E5;
+  --indigo-d1: #0017E5;
+  --indigo: #1A30FF;
+  --indigo-l1: #E5E8FF;
+  --indigo-l2: #E5E8FF;
+  --indigo-l3: #E5E8FF;
+  --indigo-l4: #E5E8FF;
+  --indigo-l5: #E5E8FF;
+}
+
+/* Auto-apply high contrast when OS preference is set */
+@media (prefers-contrast: more) {
+  :root {
+  --color-primary-d2: #001133;
+    --color-primary-d1: #002161;
+    --color-primary: #002875;
+    --color-primary-l0: #0058FF;
+    --color-primary-l1: #387DFF;
+    --color-primary-l2: #70A0FF;
+    --color-primary-l3: #F5F8FF;
+    --color-secondary: #28282F;
+    --color-secondary-l0: #42424D;
+    --color-secondary-l1: #6C6F8E;
+    --color-secondary-l2: #CDCDDA;
+    --color-secondary-l3: #F0F0F4;
+    --color-dark-d2: #09090C;
+    --color-dark-d1: #14141A;
+    --color-dark: #1F1F28;
+    --color-dark-l1: #2E2F3D;
+    --color-dark-l2: #505168;
+    --color-light-d2: #D5D8E1;
+    --color-light-d1: #E1E3EA;
+    --color-light: #EDEEF2;
+    --color-light-l1: #F9FAFB;
+    --color-white: #FFFFFF;
+    --color-success-d2: #071309;
+    --color-success-d1: #0E2A14;
+    --color-success: #154220;
+    --color-success-l1: #319B4B;
+    --color-success-l2: #F0FAF3;
+    --color-info-d2: #0B1528;
+    --color-info-d1: #182E58;
+    --color-info: #213F78;
+    --color-info-l1: #3364C2;
+    --color-info-l2: #EFF3FA;
+    --color-warning-d2: #1A0B00;
+    --color-warning-d1: #381800;
+    --color-warning: #662C00;
+    --color-warning-l1: #FA6D00;
+    --color-warning-l2: #FFF6F0;
+    --color-danger-d2: #180202;
+    --color-danger-d1: #340404;
+    --color-danger: #5E0808;
+    --color-danger-l1: #E01515;
+    --color-danger-l2: #FEF1F1;
+    --blue-d4: #004799;
+    --blue-d3: #004799;
+    --blue-d2: #004799;
+    --blue-d1: #004799;
+    --blue: #006EFF;
+    --blue-l1: #E5F1FF;
+    --blue-l2: #E5F1FF;
+    --blue-l3: #E5F1FF;
+    --blue-l4: #E5F1FF;
+    --blue-l5: #E5F1FF;
+    --orange-d4: #662700;
+    --orange-d3: #662700;
+    --orange-d2: #662700;
+    --orange-d1: #662700;
+    --orange: #993B00;
+    --orange-l1: #FFF0E5;
+    --orange-l2: #FFF0E5;
+    --orange-l3: #FFF0E5;
+    --orange-l4: #FFF0E5;
+    --orange-l5: #FFF0E5;
+    --red-d4: #800000;
+    --red-d3: #800000;
+    --red-d2: #800000;
+    --red-d1: #800000;
+    --red: #B30000;
+    --red-l1: #FFE5E5;
+    --red-l2: #FFE5E5;
+    --red-l3: #FFE5E5;
+    --red-l4: #FFE5E5;
+    --red-l5: #FFE5E5;
+    --teal-d4: #092A25;
+    --teal-d3: #092A25;
+    --teal-d2: #092A25;
+    --teal-d1: #092A25;
+    --teal: #125449;
+    --teal-l1: #EAFBF8;
+    --teal-l2: #EAFBF8;
+    --teal-l3: #EAFBF8;
+    --teal-l4: #EAFBF8;
+    --teal-l5: #EAFBF8;
+    --pink-d4: #800048;
+    --pink-d3: #800048;
+    --pink-d2: #800048;
+    --pink-d1: #800048;
+    --pink: #990057;
+    --pink-l1: #FFE5F4;
+    --pink-l2: #FFE5F4;
+    --pink-l3: #FFE5F4;
+    --pink-l4: #FFE5F4;
+    --pink-l5: #FFE5F4;
+    --green-d4: #162D06;
+    --green-d3: #162D06;
+    --green-d2: #162D06;
+    --green-d1: #162D06;
+    --green: #2E590D;
+    --green-l1: #F1FCE9;
+    --green-l2: #F1FCE9;
+    --green-l3: #F1FCE9;
+    --green-l4: #F1FCE9;
+    --green-l5: #F1FCE9;
+    --purple-d4: #7700CC;
+    --purple-d3: #7700CC;
+    --purple-d2: #7700CC;
+    --purple-d1: #7700CC;
+    --purple: #8600E6;
+    --purple-l1: #F2E5FF;
+    --purple-l2: #F2E5FF;
+    --purple-l3: #F2E5FF;
+    --purple-l4: #F2E5FF;
+    --purple-l5: #F2E5FF;
+    --yellow-d4: #997000;
+    --yellow-d3: #997000;
+    --yellow-d2: #997000;
+    --yellow-d1: #997000;
+    --yellow: #FFBB00;
+    --yellow-l1: #FFF8E5;
+    --yellow-l2: #FFF8E5;
+    --yellow-l3: #FFF8E5;
+    --yellow-l4: #FFF8E5;
+    --yellow-l5: #FFF8E5;
+    --cyan-d4: #00334D;
+    --cyan-d3: #00334D;
+    --cyan-d2: #00334D;
+    --cyan-d1: #00334D;
+    --cyan: #005580;
+    --cyan-l1: #E5F6FF;
+    --cyan-l2: #E5F6FF;
+    --cyan-l3: #E5F6FF;
+    --cyan-l4: #E5F6FF;
+    --cyan-l5: #E5F6FF;
+    --indigo-d4: #0017E5;
+    --indigo-d3: #0017E5;
+    --indigo-d2: #0017E5;
+    --indigo-d1: #0017E5;
+    --indigo: #1A30FF;
+    --indigo-l1: #E5E8FF;
+    --indigo-l2: #E5E8FF;
+    --indigo-l3: #E5E8FF;
+    --indigo-l4: #E5E8FF;
+    --indigo-l5: #E5E8FF;
+  }
+}
+
+/* ── Site Preview Bar — high-contrast counterpart ────────────
+   Light HC keeps a white foreground (primary is a deep blue) but needs the
+   divider pushed harder to stay visible. */
+.light-hc, [data-theme="light-hc"] {
+  --preview-bar-rule: rgba(255, 255, 255, 0.60);
+}
+
+@media (prefers-contrast: more) {
+  :root:not(.light):not([data-theme="light"]):not(.dark):not([data-theme="dark"]):not(.dark-hc):not([data-theme="dark-hc"]) {
+    --preview-bar-rule: rgba(255, 255, 255, 0.60);
+  }
+}
+
+</style>
+<style>
+/* ── tokens-dark.css ── */
+/* ============================================================
+   LEXICON DESIGN TOKENS — Dark Themes
+   Dark Mode + Dark High Contrast
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   Dark Mode
+   Activate: <html data-theme="dark"> or <html class="dark">
+---------------------------------------------------------- */
+.dark, [data-theme="dark"] {
+
+  /* Focus ring — inner dark + outer primary-l0 (inverted for dark bg) */
+  --focus-ring: 0 0 0 2px var(--color-dark, #1C1C24), 0 0 0 4px var(--color-primary-l0, #7AA8FF);
+
+  /* Primary */
+  --color-primary-d3: #D6E4FF;
+  --color-primary-d2: #D6E4FF;
+  --color-primary-d1: #7AA8FF;
+  --color-primary: #6198FF;
+  --color-primary-l0: #0F62FF;
+  --color-primary-l1: #004CDB;
+  --color-primary-l2: #003AA8;
+  --color-primary-l3: #001A4D;
+
+  /* Secondary */
+  --color-secondary: #B3B3C6;
+  --color-secondary-l0: #9A9CB2;
+  --color-secondary-l1: #7D809C;
+  --color-secondary-l2: #696A7C;
+  --color-secondary-l3: #4D4E5B;
+
+  /* Dark */
+  --color-dark-d2: #FFFFFF;
+  --color-dark-d1: #F7F8F9;
+  --color-dark: #F1F2F5;
+  --color-dark-l1: #E2E4EA;
+  --color-dark-l2: #E2E4EA;
+
+  /* Light */
+  --color-light-d2: #47485D;
+  --color-light-d1: #3E3F51;
+  --color-light: #313240;
+  --color-light-l1: #262631;
+  --color-white: #1B1B23;
+
+  /* Success */
+  --color-success-d2: #BAE8C6;
+  --color-success-d1: #59C974;
+  --color-success: #3BB959;
+  --color-success-l1: #2A8340;
+  --color-success-l2: #13391B;
+
+  /* Info */
+  --color-info-d2: #DCE4F5;
+  --color-info-d1: #9EB7E6;
+  --color-info: #7E9FDD;
+  --color-info-l1: #4E7BD0;
+  --color-info-l2: #142648;
+
+  /* Warning */
+  --color-warning-d2: #FFDFC7;
+  --color-warning-d1: #FF9A4D;
+  --color-warning: #FF7A14;
+  --color-warning-l1: #D15B00;
+  --color-warning-l2: #4D2100;
+
+  /* Danger */
+  --color-danger-d2: #FDE2E2;
+  --color-danger-d1: #F69D9D;
+  --color-danger: #F67474;
+  --color-danger-l1: #EC2D2D;
+  --color-danger-l2: #470606;
+
+  /* Charts */
+  --blue: #429AFF;
+  --blue-d4: #E5F1FF;
+  --blue-d3: #B8D8FF;
+  --blue-d2: #94C4FF;
+  --blue-d1: #70B1FF;
+  --blue-l1: #2487FF;
+  --blue-l2: #006BE6;
+  --blue-l3: #0056B8;
+  --blue-l4: #004799;
+  --blue-l5: #002147;
+  --orange: #FF6E14;
+  --orange-d4: #FFE7D6;
+  --orange-d3: #FFC099;
+  --orange-d2: #FFA770;
+  --orange-d1: #FF8A42;
+  --orange-l1: #E55800;
+  --orange-l2: #B84600;
+  --orange-l3: #8F3700;
+  --orange-l4: #6B2900;
+  --orange-l5: #3D1700;
+  --red: #FF6666;
+  --red-d4: #FFE5E5;
+  --red-d3: #FFCCCC;
+  --red-d2: #FFB2B2;
+  --red-d1: #FF8F8F;
+  --red-l1: #FF2E2E;
+  --red-l2: #F50000;
+  --red-l3: #C70000;
+  --red-l4: #8F0000;
+  --red-l5: #420000;
+  --teal: #28BDA4;
+  --teal-d4: #DDF8F4;
+  --teal-d3: #ABEDE2;
+  --teal-d2: #7CE4D2;
+  --teal-d1: #4AD9C0;
+  --teal-l1: #22A08B;
+  --teal-l2: #1B7E6E;
+  --teal-l3: #156154;
+  --teal-l4: #0E443B;
+  --teal-l5: #0A2E29;
+  --pink: #FF5CB8;
+  --pink-d4: #FFF0F9;
+  --pink-d3: #FFD6ED;
+  --pink-d2: #FFB2DE;
+  --pink-d1: #FF8ACC;
+  --pink-l1: #FF33A7;
+  --pink-l2: #FA008E;
+  --pink-l3: #C2006D;
+  --pink-l4: #85004B;
+  --pink-l5: #570031;
+  --green: #5CB21A;
+  --green-d4: #DDF8C9;
+  --green-d3: #BCF094;
+  --green-d2: #9AE85F;
+  --green-d1: #79E029;
+  --green-l1: #4A8F14;
+  --green-l2: #397010;
+  --green-l3: #2C550C;
+  --green-l4: #22430A;
+  --green-l5: #162D06;
+  --purple: #C87AFF;
+  --purple-d4: #F5EBFF;
+  --purple-d3: #ECD1FF;
+  --purple-d2: #E1B8FF;
+  --purple-d1: #D499FF;
+  --purple-l1: #B54DFF;
+  --purple-l2: #9F1AFF;
+  --purple-l3: #8C00F0;
+  --purple-l4: #6800B2;
+  --purple-l5: #47007A;
+  --yellow: #FFC524;
+  --yellow-d4: #FFF8E5;
+  --yellow-d3: #FFEAB2;
+  --yellow-d2: #FFDC7A;
+  --yellow-d1: #FFCC42;
+  --yellow-l1: #D69C00;
+  --yellow-l2: #B88600;
+  --yellow-l3: #8A6500;
+  --yellow-l4: #664E00;
+  --yellow-l5: #473400;
+  --cyan: #05ACFF;
+  --cyan-d4: #D1EFFF;
+  --cyan-d3: #99DDFF;
+  --cyan-d2: #70CFFF;
+  --cyan-d1: #38BDFF;
+  --cyan-l1: #0095E0;
+  --cyan-l2: #007EBD;
+  --cyan-l3: #006699;
+  --cyan-l4: #004E75;
+  --cyan-l5: #00334D;
+  --indigo: #8A95FF;
+  --indigo-d4: #F0F1FF;
+  --indigo-d3: #D1D6FF;
+  --indigo-d2: #BDC3FF;
+  --indigo-d1: #A8B1FF;
+  --indigo-l1: #5C6DFF;
+  --indigo-l2: #384CFF;
+  --indigo-l3: #0019FA;
+  --indigo-l4: #0013C2;
+  --indigo-l5: #000A66;
+}
+
+/* ----------------------------------------------------------
+   Dark High Contrast
+   Activate: <html data-theme="dark-hc"> or <html class="dark-hc">
+---------------------------------------------------------- */
+.dark-hc, [data-theme="dark-hc"] {
+
+  /* Focus ring */
+  --focus-ring: 0 0 0 2px var(--color-dark, #1C1C24), 0 0 0 4px var(--color-primary-l0, #C7DAFF);
+
+  /* Primary */
+  --color-primary-d3: #F0F5FF;
+  --color-primary-d2: #D6E4FF;
+  --color-primary-d1: #C7DAFF;
+  --color-primary: #B3CDFF;
+  --color-primary-l0: #003EB2;
+  --color-primary-l1: #00318F;
+  --color-primary-l2: #002366;
+  --color-primary-l3: #001A4D;
+
+  /* Secondary */
+  --color-secondary: #F6F6F8;
+  --color-secondary-l0: #D9D9E3;
+  --color-secondary-l1: #BCBDCC;
+  --color-secondary-l2: #A5A7BB;
+  --color-secondary-l3: #8B8DA7;
+
+  /* Dark */
+  --color-dark-d2: #FFFFFF;
+  --color-dark-d1: #F7F8F9;
+  --color-dark: #F1F2F5;
+  --color-dark-l1: #E2E4EA;
+  --color-dark-l2: #E2E4EA;
+
+  /* Light */
+  --color-light-d2: #30313F;
+  --color-light-d1: #30313F;
+  --color-light: #272833;
+  --color-light-l1: #111116;
+  --color-white: #111116;
+
+  /* Success */
+  --color-success-d2: #C9EED2;
+  --color-success-d1: #A2E1B2;
+  --color-success: #8CD99E;
+  --color-success-l1: #26783A;
+  --color-success-l2: #1A5127;
+
+  /* Info */
+  --color-info-d2: #DFE7F7;
+  --color-info-d1: #CAD8F1;
+  --color-info: #B6C9EC;
+  --color-info-l1: #254A8D;
+  --color-info-l2: #1F3D75;
+
+  /* Warning */
+  --color-warning-d2: #FFD9BD;
+  --color-warning-d1: #FFCBA3;
+  --color-warning: #FFB780;
+  --color-warning-l1: #B24D00;
+  --color-warning-l2: #863A00;
+
+  /* Danger */
+  --color-danger-d2: #FDDEDE;
+  --color-danger-d1: #FAC7C7;
+  --color-danger: #F8B0B0;
+  --color-danger-l1: #B61111;
+  --color-danger-l2: #750B0B;
+
+  /* Charts */
+  --blue: #94C4FF;
+  --blue-d4: #F0F7FF;
+  --blue-d3: #D6E9FF;
+  --blue-d2: #C2DDFF;
+  --blue-d1: #A8CFFF;
+  --blue-l1: #006CF0;
+  --blue-l2: #005DC7;
+  --blue-l3: #004594;
+  --blue-l4: #002F66;
+  --blue-l5: #002147;
+  --orange: #FFB385;
+  --orange-d4: #FFF6F0;
+  --orange-d3: #FFE6D6;
+  --orange-d2: #FFD6BD;
+  --orange-d1: #FFC39E;
+  --orange-l1: #EB5A00;
+  --orange-l2: #C24A00;
+  --orange-l3: #A33F00;
+  --orange-l4: #803100;
+  --orange-l5: #3D1700;
+  --red: #FFADAD;
+  --red-d4: #FFF5F5;
+  --red-d3: #FFE0E0;
+  --red-d2: #FFD6D6;
+  --red-d1: #FFC7C7;
+  --red-l1: #F50000;
+  --red-l2: #C20000;
+  --red-l3: #990000;
+  --red-l4: #700000;
+  --red-l5: #420000;
+  --teal: #67DFCA;
+  --teal-d4: #EAFBF8;
+  --teal-d3: #CCF4ED;
+  --teal-d2: #B3EFE5;
+  --teal-d1: #96E9DB;
+  --teal-l1: #28BEA4;
+  --teal-l2: #1F9380;
+  --teal-l3: #197667;
+  --teal-l4: #12594E;
+  --teal-l5: #0D3B34;
+  --pink: #FFADDC;
+  --pink-d4: #FFF5FB;
+  --pink-d3: #FFE5F4;
+  --pink-d2: #FFD6ED;
+  --pink-d1: #FFC7E7;
+  --pink-l1: #F5008B;
+  --pink-l2: #C2006E;
+  --pink-l3: #940053;
+  --pink-l4: #610037;
+  --pink-l5: #3D0022;
+  --green: #79E029;
+  --green-d4: #F1FCE9;
+  --green-d3: #CFF4B3;
+  --green-d2: #A6EA70;
+  --green-d1: #92E651;
+  --green-l1: #57AA18;
+  --green-l2: #498F14;
+  --green-l3: #3A6F10;
+  --green-l4: #29500C;
+  --green-l5: #162D06;
+  --purple: #E1B8FF;
+  --purple-d4: #F5EBFF;
+  --purple-d3: #ECD1FF;
+  --purple-d2: #ECD1FF;
+  --purple-d1: #ECD1FF;
+  --purple-l1: #9B0FFF;
+  --purple-l2: #7F00DB;
+  --purple-l3: #6E00BD;
+  --purple-l4: #590099;
+  --purple-l5: #3C0066;
+  --yellow: #FFC524;
+  --yellow-d4: #FFF8E5;
+  --yellow-d3: #FFEAB2;
+  --yellow-d2: #FFDC7A;
+  --yellow-d1: #FFCC42;
+  --yellow-l1: #D69C00;
+  --yellow-l2: #B88600;
+  --yellow-l3: #8A6500;
+  --yellow-l4: #664E00;
+  --yellow-l5: #473400;
+  --cyan: #75D1FF;
+  --cyan-d4: #E5F6FF;
+  --cyan-d3: #C7ECFF;
+  --cyan-d2: #ADE4FF;
+  --cyan-d1: #94DBFF;
+  --cyan-l1: #0095E0;
+  --cyan-l2: #0073AD;
+  --cyan-l3: #005F8F;
+  --cyan-l4: #00476B;
+  --cyan-l5: #00334D;
+  --indigo: #BDC3FF;
+  --indigo-d4: #F0F1FF;
+  --indigo-d3: #D6DAFF;
+  --indigo-d2: #D6DAFF;
+  --indigo-d1: #D6DAFF;
+  --indigo-l1: #051FFF;
+  --indigo-l2: #0015D1;
+  --indigo-l3: #0012B2;
+  --indigo-l4: #000D85;
+  --indigo-l5: #000A66;
+}
+
+/* Auto dark (OS preference) — only when no explicit theme class is set */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not([data-theme="light"]):not(.light-hc):not([data-theme="light-hc"]):not(.dark):not([data-theme="dark"]):not(.dark-hc):not([data-theme="dark-hc"]) {
+
+    /* Primary */
+    --color-primary-d3: #D6E4FF;
+    --color-primary-d2: #D6E4FF;
+    --color-primary-d1: #7AA8FF;
+    --color-primary: #6198FF;
+    --color-primary-l0: #0F62FF;
+    --color-primary-l1: #004CDB;
+    --color-primary-l2: #003AA8;
+    --color-primary-l3: #001A4D;
+
+    /* Secondary */
+    --color-secondary: #B3B3C6;
+    --color-secondary-l0: #9A9CB2;
+    --color-secondary-l1: #7D809C;
+    --color-secondary-l2: #696A7C;
+    --color-secondary-l3: #4D4E5B;
+
+    /* Dark */
+    --color-dark-d2: #FFFFFF;
+    --color-dark-d1: #F7F8F9;
+    --color-dark: #F1F2F5;
+    --color-dark-l1: #E2E4EA;
+    --color-dark-l2: #E2E4EA;
+
+    /* Light */
+    --color-light-d2: #47485D;
+    --color-light-d1: #3E3F51;
+    --color-light: #313240;
+    --color-light-l1: #262631;
+    --color-white: #1B1B23;
+
+    /* Success */
+    --color-success-d2: #BAE8C6;
+    --color-success-d1: #59C974;
+    --color-success: #3BB959;
+    --color-success-l1: #2A8340;
+    --color-success-l2: #13391B;
+
+    /* Info */
+    --color-info-d2: #DCE4F5;
+    --color-info-d1: #9EB7E6;
+    --color-info: #7E9FDD;
+    --color-info-l1: #4E7BD0;
+    --color-info-l2: #142648;
+
+    /* Warning */
+    --color-warning-d2: #FFDFC7;
+    --color-warning-d1: #FF9A4D;
+    --color-warning: #FF7A14;
+    --color-warning-l1: #D15B00;
+    --color-warning-l2: #4D2100;
+
+    /* Danger */
+    --color-danger-d2: #FDE2E2;
+    --color-danger-d1: #F69D9D;
+    --color-danger: #F67474;
+    --color-danger-l1: #EC2D2D;
+    --color-danger-l2: #470606;
+
+    /* Charts */
+    --blue: #429AFF;
+    --blue-d4: #E5F1FF;
+    --blue-d3: #B8D8FF;
+    --blue-d2: #94C4FF;
+    --blue-d1: #70B1FF;
+    --blue-l1: #2487FF;
+    --blue-l2: #006BE6;
+    --blue-l3: #0056B8;
+    --blue-l4: #004799;
+    --blue-l5: #002147;
+    --orange: #FF6E14;
+    --orange-d4: #FFE7D6;
+    --orange-d3: #FFC099;
+    --orange-d2: #FFA770;
+    --orange-d1: #FF8A42;
+    --orange-l1: #E55800;
+    --orange-l2: #B84600;
+    --orange-l3: #8F3700;
+    --orange-l4: #6B2900;
+    --orange-l5: #3D1700;
+    --red: #FF6666;
+    --red-d4: #FFE5E5;
+    --red-d3: #FFCCCC;
+    --red-d2: #FFB2B2;
+    --red-d1: #FF8F8F;
+    --red-l1: #FF2E2E;
+    --red-l2: #F50000;
+    --red-l3: #C70000;
+    --red-l4: #8F0000;
+    --red-l5: #420000;
+    --teal: #28BDA4;
+    --teal-d4: #DDF8F4;
+    --teal-d3: #ABEDE2;
+    --teal-d2: #7CE4D2;
+    --teal-d1: #4AD9C0;
+    --teal-l1: #22A08B;
+    --teal-l2: #1B7E6E;
+    --teal-l3: #156154;
+    --teal-l4: #0E443B;
+    --teal-l5: #0A2E29;
+    --pink: #FF5CB8;
+    --pink-d4: #FFF0F9;
+    --pink-d3: #FFD6ED;
+    --pink-d2: #FFB2DE;
+    --pink-d1: #FF8ACC;
+    --pink-l1: #FF33A7;
+    --pink-l2: #FA008E;
+    --pink-l3: #C2006D;
+    --pink-l4: #85004B;
+    --pink-l5: #570031;
+    --green: #5CB21A;
+    --green-d4: #DDF8C9;
+    --green-d3: #BCF094;
+    --green-d2: #9AE85F;
+    --green-d1: #79E029;
+    --green-l1: #4A8F14;
+    --green-l2: #397010;
+    --green-l3: #2C550C;
+    --green-l4: #22430A;
+    --green-l5: #162D06;
+    --purple: #C87AFF;
+    --purple-d4: #F5EBFF;
+    --purple-d3: #ECD1FF;
+    --purple-d2: #E1B8FF;
+    --purple-d1: #D499FF;
+    --purple-l1: #B54DFF;
+    --purple-l2: #9F1AFF;
+    --purple-l3: #8C00F0;
+    --purple-l4: #6800B2;
+    --purple-l5: #47007A;
+    --yellow: #FFC524;
+    --yellow-d4: #FFF8E5;
+    --yellow-d3: #FFEAB2;
+    --yellow-d2: #FFDC7A;
+    --yellow-d1: #FFCC42;
+    --yellow-l1: #D69C00;
+    --yellow-l2: #B88600;
+    --yellow-l3: #8A6500;
+    --yellow-l4: #664E00;
+    --yellow-l5: #473400;
+    --cyan: #05ACFF;
+    --cyan-d4: #D1EFFF;
+    --cyan-d3: #99DDFF;
+    --cyan-d2: #70CFFF;
+    --cyan-d1: #38BDFF;
+    --cyan-l1: #0095E0;
+    --cyan-l2: #007EBD;
+    --cyan-l3: #006699;
+    --cyan-l4: #004E75;
+    --cyan-l5: #00334D;
+    --indigo: #8A95FF;
+    --indigo-d4: #F0F1FF;
+    --indigo-d3: #D1D6FF;
+    --indigo-d2: #BDC3FF;
+    --indigo-d1: #A8B1FF;
+    --indigo-l1: #5C6DFF;
+    --indigo-l2: #384CFF;
+    --indigo-l3: #0019FA;
+    --indigo-l4: #0013C2;
+    --indigo-l5: #000A66;
+  }
+}
+
+/* ── Skeleton shimmer — dark counterparts ──────────────────── */
+.dark, [data-theme="dark"],
+.dark-hc, [data-theme="dark-hc"] {
+  --skeleton-shimmer-rgb: 99, 102, 130;   /* secondary-l1 (light scale) */
+  --skeleton-shimmer-alpha: 0.35;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not([data-theme="light"]):not(.light-hc):not([data-theme="light-hc"]):not(.dark):not([data-theme="dark"]):not(.dark-hc):not([data-theme="dark-hc"]) {
+    --skeleton-shimmer-rgb: 99, 102, 130;
+    --skeleton-shimmer-alpha: 0.35;
+  }
+}
+
+/* ── Scrim — dark counterpart ───────────────────────────────
+   The light scrim (#393A4A tint) reads too soft over dark surfaces, so dim
+   with black instead. */
+.dark, [data-theme="dark"],
+.dark-hc, [data-theme="dark-hc"] {
+  --color-scrim: rgba(0, 0, 0, 0.6);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not([data-theme="light"]):not(.light-hc):not([data-theme="light-hc"]):not(.dark):not([data-theme="dark"]):not(.dark-hc):not([data-theme="dark-hc"]) {
+    --color-scrim: rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* ── Site Preview Bar — dark counterparts ────────────────────
+   In dark and dark-hc the primary fill becomes a *light* blue and the bar's
+   foreground (--color-white) becomes near-black, so the divider has to be an
+   alpha of black rather than of white. */
+.dark, [data-theme="dark"],
+.dark-hc, [data-theme="dark-hc"] {
+  --preview-bar-rule: rgba(17, 17, 22, 0.28);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not([data-theme="light"]):not(.light-hc):not([data-theme="light-hc"]):not(.dark):not([data-theme="dark"]):not(.dark-hc):not([data-theme="dark-hc"]) {
+    --preview-bar-rule: rgba(17, 17, 22, 0.28);
+  }
+}
+
+</style>
+<style>
+/* ── components.css (solo las reglas que usa la página) ── */
+.lexicon-icon {
+  display: inline-block;
+  width: 16px;   /* default size */
+  height: 16px;
+  fill: currentColor;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-3);
+  height: 40px;
+  padding: 0 var(--spacing-5);
+  border-radius: var(--rounded-lg);
+  border: 1px solid transparent;
+  background: transparent;
+  font-family: inherit;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  color: var(--color-dark);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color 0.1s ease,
+    border-color 0.1s ease,
+    color 0.1s ease,
+    box-shadow 0.1s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.btn:focus-visible {
+  outline: 0;
+  box-shadow: var(--focus-ring);
+}
+.btn:disabled, .btn[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.btn--primary {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+.btn--primary:hover { background: var(--color-primary-d1); }
+.btn--primary:active { background: var(--color-primary-d2); }
+.btn--secondary {
+  background: var(--color-white);
+  border-color: var(--color-secondary-l0);
+  color: var(--color-secondary);
+}
+.btn--secondary:hover { background: var(--color-light-l1); }
+.btn--secondary:active { background: var(--color-light); }
+.btn--borderless {
+  background: transparent;
+  color: var(--color-secondary);
+}
+.btn--borderless:hover { background: var(--color-light); }
+.btn--borderless:active { background: var(--color-light-d1); }
+.btn--primary.btn--info { background: var(--color-info); }
+.btn--primary.btn--info:hover { background: var(--color-info-d1); }
+.btn--primary.btn--success { background: var(--color-success); }
+.btn--primary.btn--success:hover { background: var(--color-success-d1); }
+.btn--primary.btn--warning { background: var(--color-warning); }
+.btn--primary.btn--warning:hover { background: var(--color-warning-d1); }
+.btn--secondary.btn--info { color: var(--color-info);    border-color: var(--color-info);    }
+.btn--secondary.btn--info:hover { background: var(--color-info-l2);    }
+.btn--secondary.btn--success { color: var(--color-success); border-color: var(--color-success); }
+.btn--secondary.btn--success:hover { background: var(--color-success-l2); }
+.btn--secondary.btn--warning { color: var(--color-warning); border-color: var(--color-warning); }
+.btn--secondary.btn--warning:hover { background: var(--color-warning-l2); }
+.alert--info    .btn--secondary:hover { background: var(--color-info);    border-color: var(--color-info);    color: var(--color-white); }
+.alert--success .btn--secondary:hover { background: var(--color-success); border-color: var(--color-success); color: var(--color-white); }
+.alert--warning .btn--secondary:hover { background: var(--color-warning); border-color: var(--color-warning); color: var(--color-dark); }
+.btn--borderless.btn--info { color: var(--color-info);    }
+.btn--borderless.btn--info:hover { background: var(--color-info-l2);    }
+.btn--borderless.btn--success { color: var(--color-success); }
+.btn--borderless.btn--success:hover { background: var(--color-success-l2); }
+.btn--borderless.btn--warning { color: var(--color-warning); }
+.btn--borderless.btn--warning:hover { background: var(--color-warning-l2); }
+.btn--sm { height: 32px; padding: 0 var(--spacing-4); font-size: var(--font-size-base); font-weight: 600; }
+.btn--icon { width: 40px; min-width: 40px; padding: 0; flex-shrink: 0; }
+.btn--icon.btn--sm { width: 32px; min-width: 32px; }
+.alert {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--spacing-5);          /* 16 between sections */
+  padding: var(--spacing-5);      /* 16 inside container */
+  border: 1px solid;
+  border-radius: var(--rounded-md);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+}
+.alert--toast {
+  box-shadow: var(--shadow-alert);
+}
+.alert__content {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-3);          /* 8 between icon and text */
+  padding: var(--spacing-2-5) 0 var(--spacing-2); /* 6px top, 4px bottom */
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.alert__content .lexicon-icon { margin-top: var(--spacing-1); flex-shrink: 0; }
+.alert__text {
+  margin: 0;
+  min-width: 0;
+  color: inherit;                 /* inherits validation color from .alert--{x} */
+}
+.alert__text strong {
+  font-weight: var(--font-weight-bold);
+}
+.alert__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-5);          /* 16 between buttons */
+  flex: 0 0 auto;
+}
+.alert__close { color: inherit; flex: 0 0 auto; }
+.alert--info { background: var(--color-info-l2);    border-color: var(--color-info-l1);    color: var(--color-info);    }
+.alert--success { background: var(--color-success-l2); border-color: var(--color-success-l1); color: var(--color-success); }
+.alert--warning { background: var(--color-warning-l2); border-color: var(--color-warning-l1); color: var(--color-warning); }
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  height: 24px;
+  padding: 0 var(--spacing-3);
+  border: 1px solid var(--color-secondary-l2);
+  border-radius: var(--rounded-sm);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  line-height: 18px;
+  white-space: nowrap;
+  background: var(--color-white);
+  color: var(--color-secondary);
+}
+.label--sm {
+  height: 16px;
+  padding: 0 var(--spacing-2);
+  gap: var(--spacing-1);
+  font-size: var(--font-size-xs);
+  line-height: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+.label--info { color: var(--color-info);      border-color: var(--color-info-l1);      }
+.label--success { color: var(--color-success);   border-color: var(--color-success-l1);   }
+.sticker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--rounded-lg);
+  overflow: hidden;
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-bold);
+  font-size: 12px;
+  line-height: 1;
+  background: var(--color-secondary-l3);
+  color: var(--color-secondary);
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+.sticker > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.sticker--md { width: 32px; height: 32px; font-size: 14px; }
+.sticker--lg { width: 40px; height: 40px; font-size: 18px; }
+.sticker--circle { border-radius: var(--rounded-full); }
+.sticker--outline {
+  background: var(--color-secondary-l3);
+  color: var(--color-secondary);
+  border: 1px solid var(--color-secondary);
+}
+.sticker--outline.sticker--primary { background: var(--color-primary-l3); color: var(--color-primary); border-color: var(--color-primary); }
+.sticker--icon {
+  background: var(--color-white);
+  border: 1px solid var(--color-light-d2);
+  color: var(--color-secondary);
+}
+.sticker--icon .lexicon-icon { width: 50%; height: 50%; }
+.input {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  font-family: var(--font-family-base);
+}
+.input__label {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-dark);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+.input__field {
+  display: block;
+  width: 100%;
+  height: 40px;
+  padding: 0 var(--spacing-5);
+  border: 1px solid var(--color-secondary-l3);
+  border-radius: var(--rounded-md);
+  background: var(--color-light);
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  color: var(--color-dark);
+  -webkit-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  transition: background 0.1s ease, border-color 0.1s ease, box-shadow 0.1s ease;
+}
+.input__field::placeholder { color: var(--color-dark); opacity: 0.55; }
+.input__field:focus-visible {
+  outline: 0;
+  background: var(--color-primary-l3);
+  border-color: var(--color-primary-l1);
+  box-shadow: var(--focus-ring);
+}
+.input__field:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.input__field--textarea {
+  height: auto;
+  min-height: 64px;
+  padding: var(--spacing-3) var(--spacing-4);
+  resize: vertical;
+}
+.search {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+.search__submit {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  border-radius: var(--rounded-sm);
+  color: var(--color-secondary);
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.search__submit:hover { color: var(--color-dark); }
+.search__submit { right: var(--spacing-3); }
+.section {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-5);
+  padding: var(--spacing-2-5) 0;
+  border-bottom: 1px solid var(--color-secondary-l2);
+  font-family: var(--font-family-base);
+  text-decoration: none;
+  color: var(--color-secondary);
+}
+.section__title {
+  flex: 1 0 0;
+  min-width: 0;
+  margin: 0;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  line-height: 1.5;
+}
+.section .lexicon-icon { color: var(--color-secondary); flex-shrink: 0; }
+.sheet {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-10);
+  padding: var(--spacing-7);
+  background: var(--color-white);
+  border: 1px solid var(--color-secondary-l3);
+  border-radius: var(--rounded-md);
+  font-family: var(--font-family-base);
+}
+.sheet-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-7);
+}
+.sheet-title {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.25;
+  color: var(--color-dark);
+}
+.sheet-text {
+  margin: 0;
+  font-size: var(--font-size-md);
+  line-height: 1.5;
+  color: var(--color-dark);
+}
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--color-secondary-l3);
+  border-radius: var(--rounded-md);
+  background: var(--color-white);
+  font-family: var(--font-family-base);
+  overflow: hidden;
+}
+.list--flush {
+  border-radius: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+}
+.list__row {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-5);
+  padding: var(--spacing-5);
+  border-bottom: 1px solid var(--color-secondary-l3);
+}
+.list__row:last-child { border-bottom: 0; }
+.list__row.is-active { background: var(--color-primary-l3); }
+.list__sticker {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-white);
+  border-radius: var(--rounded-md);
+  color: var(--color-secondary);
+}
+.list__content {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  padding-top: var(--spacing-2);
+}
+.list__title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-dark);
+  text-decoration: underline;
+}
+.list__title:hover { color: var(--color-primary); }
+.list__subtitle {
+  display: block;
+  font-size: var(--font-size-base);
+  color: var(--color-secondary);
+}
+.list__labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+  margin-top: var(--spacing-2);
+}
+.list__actions {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  margin-left: auto;
+}
+.dropdown {
+  list-style: none;
+  margin: 0;
+  padding: var(--spacing-3) 0;
+  background: var(--color-white);
+  border: 1px solid var(--color-secondary-l3);
+  border-radius: var(--rounded-md);
+  /* Figma: Shadow/Dropdown — y=4, blur=8, opacity=12% */
+  box-shadow: var(--shadow-dropdown);
+  font-family: var(--font-family-base);
+  min-width: 240px;
+}
+.dropdown__item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  width: 100%;
+  /* Figma: pt=5px pb=6px px=16px — nearest token is spacing-2-5 (6px) */
+  padding: var(--spacing-2-5) var(--spacing-5);
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  /* Figma: 14/Regular = weight 400 = --font-weight-semi in this token scale */
+  font-weight: var(--font-weight-semi);
+  color: var(--color-secondary);
+  background: var(--color-white);
+  border: 0;
+  text-align: left;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: var(--line-height-base);
+}
+.dropdown__item:hover { background: var(--color-light-l1); color: var(--color-dark); }
+.dropdown__item:disabled { color: var(--color-secondary-l1); cursor: not-allowed; background: var(--color-white); }
+.dropdown__item.is-active { color: var(--color-secondary); }
+.dropdown__item-icon { flex-shrink: 0; color: var(--color-secondary); }
+.dropdown__item-text { flex: 1 1 auto; min-width: 0; }
+.dropdown .alert {
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  padding: var(--spacing-3) var(--spacing-5);
+  margin-bottom: 0;
+}
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(57, 58, 74, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-7);
+  z-index: 1000;
+}
+.modal {
+  background: var(--color-white);
+  border-radius: var(--rounded-md);
+  box-shadow: var(--shadow-lg);
+  font-family: var(--font-family-base);
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - var(--spacing-9));
+  overflow: hidden;
+}
+.modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  padding: var(--spacing-5) var(--spacing-7);
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-secondary-l3);
+  flex-shrink: 0;
+}
+.modal__title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-dark);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.modal__close { flex-shrink: 0; }
+.modal__body {
+  padding: var(--spacing-7);
+  overflow-y: auto;
+  flex: 1 1 auto;
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  color: var(--color-dark);
+}
+.modal__footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--spacing-5);
+  padding: var(--spacing-5) var(--spacing-7);
+  border-top: 1px solid var(--color-secondary-l3);
+  flex-shrink: 0;
+}
+.modal__footer > .btn--borderless:first-child { margin-right: auto; }
+.modal--warning .modal__header { background: var(--color-warning-l2); border-bottom-color: var(--color-warning-l1); }
+.modal--warning .modal__title { color: var(--color-warning); }
+.modal--warning .modal__close { color: var(--color-warning); }
+.picker {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  position: relative;
+  min-width: 109px;
+}
+.picker__trigger {
+  justify-content: space-between;
+  width: 100%;
+}
+.picker__trigger-text { flex: 1 1 auto; min-width: 0; text-align: left; }
+.picker__trigger > .lexicon-icon { color: var(--color-secondary); flex-shrink: 0; }
+.picker .dropdown__item.is-active {
+  background: var(--color-primary-l3);
+  color: var(--color-dark);
+}
+.picker .dropdown__item.is-active .dropdown__item-icon { color: var(--color-dark); }
+.picker .dropdown__item { gap: var(--spacing-2); }
+.picker .dropdown__item:not(.is-active) .dropdown__item-icon { opacity: 0; }
+.tree {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family-base);
+  color: var(--color-secondary);
+}
+.tree ul {
+  list-style: none;
+  margin: 0;
+  padding-left: var(--spacing-7);
+}
+.tree__row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--rounded-md);
+  cursor: pointer;
+  font-size: var(--font-size-base);
+}
+.tree__row:hover { background: var(--color-light); color: var(--color-dark); }
+.tree__row.is-active { background: var(--color-primary-l3); color: var(--color-dark); }
+.management-toolbar {
+  background: var(--color-white);
+  /* No border in default state — Figma default is borderless */
+  width: 100%;
+}
+.management-toolbar__bar {
+  align-items: center;
+  display: flex;
+  gap: var(--spacing-5);                       /* 16px */
+  padding: var(--spacing-4) var(--spacing-7);  /* 12px 24px */
+}
+.management-toolbar__spacer { flex: 1; }
+@media (max-width: 767px) {
+  .management-toolbar__bar {
+    gap: var(--spacing-2);                     /* 4px */
+    padding: var(--spacing-3) var(--spacing-4); /* 8px 12px */
+  }
+}
+.control-menu {
+  align-items: center;
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-light-d2);
+  display: flex;
+  gap: var(--spacing-5);
+  padding: calc(var(--spacing-2) + var(--spacing-2-5)) var(--spacing-5);
+  width: 100%;
+}
+.control-menu__left {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  gap: var(--spacing-5);
+  min-width: 0;
+}
+.control-menu__btns {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--spacing-5);
+}
+.control-menu__btn {
+  align-items: center;
+  background: transparent;
+  border: none;
+  border-radius: var(--rounded-md);
+  color: var(--color-secondary);
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  padding: var(--spacing-3);
+}
+.control-menu__btn:hover { background: var(--color-light); }
+.control-menu__title {
+  color: var(--color-dark);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.control-menu__right {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--spacing-5);
+}
+.control-menu__avatar {
+  border-radius: var(--rounded-full);
+  flex-shrink: 0;
+  height: 36px;
+  overflow: hidden;
+  width: 36px;
+}
+.control-menu__avatar > img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+@media (max-width: 767px) {
+  .control-menu {
+    padding: var(--spacing-2-5) var(--spacing-4);
+  }
+}
+.control-panel {
+  background: var(--color-light-l1);
+  border-right: 1px solid var(--color-secondary-l2);
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+}
+.control-panel__header {
+  align-items: center;
+  display: flex;
+  gap: var(--spacing-3);
+  padding: var(--spacing-7) var(--spacing-5);
+}
+.control-panel__sticker {
+  align-items: center;
+  background: var(--color-white);
+  border-radius: var(--rounded-md);
+  display: flex;
+  flex-shrink: 0;
+  height: var(--spacing-9);
+  justify-content: center;
+  padding: var(--spacing-3);
+  width: var(--spacing-9);
+}
+.control-panel__title {
+  color: var(--color-dark);
+  flex: 1;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.control-panel__body {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: var(--spacing-7);
+}
+.control-panel__groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.control-panel__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+.control-panel__group-header {
+  align-items: center;
+  appearance: none;
+  background: none;
+  border: 0;
+  color: var(--color-dark);
+  cursor: pointer;
+  display: flex;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  height: var(--spacing-9);
+  justify-content: space-between;
+  letter-spacing: 0.06em;
+  padding: var(--spacing-3) var(--spacing-5);
+  text-transform: uppercase;
+  width: 100%;
+}
+.control-panel__item {
+  align-items: center;
+  appearance: none;
+  background: none;
+  border: 0;
+  border-left: var(--spacing-2-5) solid transparent;
+  color: var(--color-dark);
+  cursor: pointer;
+  display: flex;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semi);
+  gap: var(--spacing-3);
+  height: var(--spacing-9);
+  padding: var(--spacing-3) var(--spacing-5) var(--spacing-3)
+           calc(var(--spacing-5) - var(--spacing-2-5));
+  text-align: left;
+  text-decoration: none;
+  width: 100%;
+}
+.control-panel__item:hover { background: var(--color-light); }
+.control-panel__item.is-active {
+  background: var(--color-primary-l3);
+  border-left-color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+}
+.control-panel__item-icon {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  height: var(--spacing-7);
+  justify-content: center;
+  width: var(--spacing-7);
+}
+.preview-bar {
+  align-items: center;
+  background: var(--color-primary);
+  color: var(--color-white);
+  display: flex;
+  gap: var(--spacing-4);
+  min-height: 48px;
+  padding: var(--spacing-3) var(--spacing-6);
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+.preview-bar__signal {
+  align-items: center;
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: var(--spacing-4);
+}
+.preview-bar .label {
+  background: var(--color-primary-d2);
+  border-color: var(--color-primary-d2);
+  color: var(--color-light);
+  /* .label--sm uppercases by default. Here the casing is authored: the mode
+     badge is written PREVIEW, the chips naming a control are written Launch
+     and Version. Let the text decide instead of transforming it. */
+  text-transform: none;
+  /* Figma sets these chips at 12px Semibold. The kit's .label--sm is 10px
+     (--font-size-xs), which is a step too small to read on the bar. */
+  font-size: var(--font-size-sm);
+}
+.preview-bar__signal-text { white-space: nowrap; }
+.preview-bar__divider {
+  background: var(--color-white);
+  flex-shrink: 0;
+  height: var(--spacing-6);
+  width: 1px;
+}
+.preview-bar .dropdown__item { align-items: flex-start; }
+.preview-bar .dropdown__item-text { white-space: normal; }
+.preview-bar__option-meta {
+  color: var(--color-secondary);
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  margin-top: var(--spacing-1);
+}
+.preview-bar .picker { position: relative; }
+.preview-bar .picker:not(.is-open) .dropdown { display: none; }
+.preview-bar .btn--secondary {
+  background: transparent;
+  border-color: var(--color-light-l1);
+  color: var(--color-white);
+}
+.preview-bar .btn--secondary:hover, .preview-bar .btn--secondary:active {
+  background: var(--preview-bar-rule);
+  border-color: var(--color-white);
+  color: var(--color-white);
+}
+.preview-bar .btn--borderless, .preview-bar .btn--borderless > .lexicon-icon, .preview-bar .picker__trigger > .lexicon-icon { color: inherit; }
+.preview-bar .btn--borderless:hover, .preview-bar .btn--borderless:active { background: var(--preview-bar-rule); color: inherit; }
+.preview-bar__ctl {
+  align-items: center;
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: var(--spacing-4);
+}
+.preview-bar__meta {
+  align-items: center;
+  display: flex;
+  font-size: var(--font-size-sm);
+  gap: var(--spacing-2);
+  min-width: 0;
+  white-space: nowrap;
+}
+.preview-bar__spacer { flex: 1; }
+.preview-bar__inline-actions {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--spacing-2);
+}
+.preview-bar__overflow { display: none; flex-shrink: 0; }
+.preview-bar__overflow .dropdown {
+  min-width: 220px;
+  position: absolute;
+  right: 0;
+  top: calc(100% + var(--spacing-2));
+  z-index: 200;
+}
+.preview-bar-shell {
+  container: preview-bar / inline-size;
+}
+@media (max-width: 1023px) {
+  .preview-bar__meta { display: none; }
+}
+@media (max-width: 767px) {
+  .preview-bar { gap: var(--spacing-3); padding: var(--spacing-3) var(--spacing-5); }
+  .preview-bar__signal-text { display: none; }
+  .preview-bar__divider { display: none; }
+  .preview-bar__inline-actions { display: none; }
+  .preview-bar__overflow { display: block; }
+  .preview-bar__exit-text { display: none; }
+  .preview-bar__ctl--secondary { display: none; }
+}
+</style>
+<style>
+  /* ════════════════════════════════════════════════════════════
+     Layout only. Every control on this page is a stock kit component —
+     .control-menu, .control-panel, .management-toolbar, .table, .list,
+     .modal, .picker, .dropdown, .btn, .label, .sticker, .alert — and every
+     icon comes from icons.svg. Nothing here restyles a component.
+     ════════════════════════════════════════════════════════════ */
+  *, *::before, *::after { box-sizing: border-box; }
+
+  /* The kit carries this too, but a packager that trims components.css by
+     class name drops it — it is an attribute selector, not a class. Without
+     it .modal-overlay and .ov (both display:flex) beat the hidden attribute
+     and every modal renders open on load. Declared here so it survives. */
+  [hidden] { display: none !important; }
+
+  html, body { margin: 0; height: 100%; }
+  body {
+    display: flex; flex-direction: column;
+    background: var(--color-light);
+    color: var(--color-dark);
+    font-family: var(--font-family-base);
+    overflow: hidden;
+  }
+
+  .app__body { flex: 1; min-height: 0; display: flex; }
+  .app__panel { flex: none; }
+  .app__main { flex: 1; min-width: 0; display: flex; flex-direction: column; overflow: hidden; }
+
+  .screen { display: none; flex: 1; min-height: 0; flex-direction: column; overflow: hidden; }
+  .screen.is-on { display: flex; }
+  .screen__body { flex: 1; min-height: 0; overflow-y: auto; padding: var(--spacing-7); }
+  .screen__body--flush { padding: 0; }
+
+  .stack { display: flex; flex-direction: column; gap: var(--spacing-6); }
+  .row-between { display: flex; align-items: center; gap: var(--spacing-5); }
+  .row-between > .grow { flex: 1; min-width: 0; }
+
+  /* Pickers used across the page — kit .picker needs its menu anchored */
+  .picker { position: relative; }
+  .picker .dropdown {
+    position: absolute; top: calc(100% + var(--spacing-2)); left: 0;
+    z-index: 300; min-width: 220px; max-height: 320px; overflow-y: auto;
+  }
+  .picker .dropdown.dropdown--right { left: auto; right: 0; }
+  .picker:not(.is-open) .dropdown { display: none; }
+
+  .toast-container {
+    position: fixed; bottom: var(--spacing-6); left: 50%; transform: translateX(-50%);
+    z-index: 1200; display: flex; flex-direction: column; gap: var(--spacing-3);
+    pointer-events: none;
+  }
+  .toast-container .alert { pointer-events: all; flex-wrap: nowrap; }
+  .toast-container .alert__actions, .toast-container .alert__close { flex: none; }
+
+  /* ── Narrow widths ──
+     The product menu is an overlay sidebar in DXP, so below 900px it stops
+     taking a column and floats over the content instead — otherwise a fixed
+     320px panel leaves nothing for the screen beside it. The toolbars wrap
+     rather than pushing their actions off the right edge. */
+  @media (max-width: 900px) {
+    .app__body { position: relative; }
+    .app__panel {
+      position: absolute;
+      top: 0; bottom: 0; left: 0;
+      z-index: 40;
+      box-shadow: var(--shadow-lg);
+      max-width: 88vw;
+    }
+    .management-toolbar__bar { flex-wrap: wrap; row-gap: var(--spacing-3); }
+    .screen__body { padding: var(--spacing-5); }
+  }
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="angle-down" viewBox="0 0 16 16">	<path class="lexicon-icon-outline" d="m8.52 12.769 6.247-6.383c.711-.747-.367-1.894-1.084-1.139L8 11.033 2.321 5.251c-.726-.76-1.798.395-1.088 1.14l6.245 6.378c.312.322.754.294 1.041 0Z" />
+</symbol><symbol id="bars" viewBox="0 0 16 16">	<path class="lexicon-icon-outline" d="M15 3H1a1 1 0 0 1 0-2h14a1 1 0 0 1 0 2Zm0 6H1a1 1 0 0 1 0-2h14a1 1 0 0 1 0 2ZM1 15h14a1 1 0 0 0 0-2H1a1 1 0 0 0 0 2Z" />
+</symbol><symbol id="caret-double-l" viewBox="0 0 512 512">	<path class="lexicon-icon-outline caret-double-l-top" d="M347.913 199.336l-81.538-85c-5.413-5.642-14.188-5.642-19.6 0l-81.538 85c-8.731 9.101-2.548 24.664 9.8 24.664h163.077c12.348 0 18.531-15.563 9.8-24.664z"></path>
+	<path class="lexicon-icon-outline caret-double-l-bottom" d="M165.236 312.664l81.538 85c5.412 5.642 14.188 5.642 19.6 0l81.538-85c8.731-9.101 2.548-24.664-9.8-24.664h-163.077c-12.347 0-18.531 15.563-9.8 24.664z"></path>
+</symbol><symbol id="check" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M192.9,429.5c-8.3,0-16.4-3.3-22.3-9.2L44.5,294.1C15,263.2,62.7,222,89.1,249.5L191.5,352l230-258.9 c27.2-30.5,74.3,11.5,47.1,41.9L216.4,418.9c-5.8,6.5-14,10.3-22.6,10.6C193.5,429.5,193.2,429.5,192.9,429.5z" />
+</symbol><symbol id="check-circle-full" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M471.2,117.7L280.3,340.8c-5.9,6.8-14.6,11.2-24.3,11.2c-8.8,0-16.8-3.6-22.6-9.4l-96-96.1 c-29.1-28.9,16.1-74.2,45.2-45.3l71.6,71.7L423.7,74.8c2.2-2.5,4.7-3.9,7.1-5.5C385,26.5,323.7,0,256,0C114.6,0,0,114.6,0,256 s114.6,256,256,256s256-114.6,256-256C512,205,496.9,157.6,471.2,117.7z" />
+</symbol><symbol id="drop" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M448,312.4c0-73.6-115.2-227.2-166.4-291.2c-16-16-32-16-48,0C220.8,34,64,216.4,64,312.4C73.6,562,435.2,571.6,448,312.4z M256,91.6c67.2,86.4,105.6,150.4,121.6,192C227.2,274,262.4,357.2,128,312.4l0,0C128,280.4,166.4,203.6,256,91.6z"></path>
+</symbol><symbol id="ellipsis-v" viewBox="0 0 512 512">	<path class="lexicon-icon-outline ellipsis-v-dot-2" d="M319 255.5c0 35.346-28.654 64-64 64s-64-28.654-64-64c0-35.346 28.654-64 64-64s64 28.654 64 64z"></path>
+	<path class="lexicon-icon-outline ellipsis-v-dot-3" d="M319 448c0 35.346-28.654 64-64 64s-64-28.654-64-64c0-35.346 28.654-64 64-64s64 28.654 64 64z"></path>
+	<path class="lexicon-icon-outline ellipsis-v-dot-1" d="M319 64c0 35.346-28.654 64-64 64s-64-28.654-64-64c0-35.346 28.654-64 64-64s64 28.654 64 64z"></path>
+</symbol><symbol id="grid" viewBox="0 0 512 512">	<path class="lexicon-icon-outline grid-square-3" d="M495.965 0.018h-95.993c-8.813 0-15.981 7.168-15.981 16.017v95.993c0 8.85 7.168 16.017 16.017 16.017h95.993c8.849 0 16.017-7.168 16.017-16.017v-95.993c-0.037-8.85-7.204-16.017-16.054-16.017z"></path>
+	<path class="lexicon-icon-outline grid-square-4" d="M112.028 192.005h-95.993c-8.85 0-16.017 7.167-16.017 16.017v95.993c0 8.849 7.168 16.017 16.017 16.017h95.993c8.85 0 15.981-7.168 15.981-16.017v-95.993c0-8.85-7.168-16.017-15.981-16.017z"></path>
+	<path class="lexicon-icon-outline grid-square-5" d="M303.978 192.005h-95.993c-8.85 0-16.017 7.167-16.017 16.017v95.993c0 8.849 7.167 16.017 16.017 16.017h95.993c8.849 0 16.017-7.168 16.017-16.017v-95.993c0-8.85-7.168-16.017-16.017-16.017z"></path>
+	<path class="lexicon-icon-outline grid-square-6" d="M495.965 192.005h-95.993c-8.849 0-16.017 7.167-16.017 16.017v95.993c0 8.849 7.168 16.017 16.017 16.017h95.993c8.849 0 16.017-7.168 16.017-16.017v-95.993c0-8.85-7.168-16.017-16.017-16.017z"></path>
+	<path class="lexicon-icon-outline grid-square-7" d="M112.028 383.991h-95.993c-8.85 0-16.017 7.168-16.017 16.017v95.993c0 8.813 7.168 15.981 16.017 15.981h95.993c8.85 0 15.981-7.168 15.981-16.017v-95.993c0-8.813-7.168-15.981-15.981-15.981z"></path>
+	<path class="lexicon-icon-outline grid-square-8" d="M303.978 383.991h-95.993c-8.85 0-16.017 7.168-16.017 16.017v95.993c0 8.849 7.167 16.017 16.017 16.017h95.993c8.849 0 16.017-7.168 16.017-16.017v-95.993c0-8.849-7.168-16.017-16.017-16.017z"></path>
+	<path class="lexicon-icon-outline grid-square-9" d="M495.965 383.991h-95.993c-8.849 0-16.017 7.168-16.017 16.017v95.993c0 8.849 7.168 16.017 16.017 16.017h95.993c8.849-0.037 16.017-7.204 16.017-16.054v-95.993c0-8.813-7.168-15.981-16.017-15.981z"></path>
+	<path class="lexicon-icon-outline grid-square-1" d="M112.028 0.018h-95.993c-8.85 0-16.017 7.168-16.017 16.017v95.993c0 8.814 7.168 15.981 16.017 15.981h95.993c8.85 0 15.981-7.168 15.981-16.017v-95.956c0-8.85-7.168-16.017-15.981-16.017z"></path>
+	<path class="lexicon-icon-outline grid-square-2" d="M303.978 0.018h-95.993c-8.85 0-16.017 7.168-16.017 16.017v95.993c0 8.85 7.167 16.017 16.017 16.017h95.993c8.849 0 16.017-7.168 16.017-16.017v-95.993c0-8.85-7.168-16.017-16.017-16.017z"></path>
+</symbol><symbol id="info-circle" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M437,75C388.7,26.6,324.4,0,256,0C187.6,0,123.3,26.6,75,75C26.6,123.3,0,187.6,0,256c0,68.4,26.6,132.7,75,181c48.4,48.4,112.6,75,181,75c68.4,0,132.7-26.6,181-75c48.4-48.4,75-112.6,75-181C512,187.6,485.4,123.3,437,75z M288,384c0,17.7-14.3,32-32,32c-17.7,0-32-14.3-32-32V224c0-17.7,14.3-32,32-32c17.7,0,32,14.3,32,32V384z M256,160c-17.7,0-32-14.3-32-32c0-17.7,14.3-32,32-32s32,14.3,32,32C288,145.7,273.7,160,256,160z"></path>
+</symbol><symbol id="page" viewBox="0 0 16 16">	<path class="lexicon-icon-outline" clip-rule="evenodd" d="M13.88.884a3 3 0 0 0-2.123-.88H1.982A1.983 1.983 0 0 0 0 1.988V14.02c0 1.095.888 1.983 1.982 1.983h11.88c1.094 0 2.138-.888 2.138-1.983V4.25a3 3 0 0 0-.877-2.12L13.879.883ZM14 13.94a.258.258 0 0 1-.137.062H2V2.007h8V5.01a1 1 0 0 0 1 1h3v7.929Z" fill-rule="evenodd" />
+</symbol><symbol id="plus" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M479.82 224.002h-192.41v-191.91c0-17.6-14.4-32-32-32v0c-17.6 0-32 14.4-32 32v191.91h-191.41c-17.6 0-32 14.4-32 32v0c0 17.6 14.4 32 32 32h191.41v191.91c0 17.6 14.4 32 32 32v0c17.6 0 32-14.4 32-32v-191.909h192.41c17.6 0 32-14.4 32-32v0c0-17.6-14.4-32-32-32z"></path>
+</symbol><symbol id="reload" viewBox="0 0 512 512">	<path class="lexicon-icon-outline reload-arrow-down" d="M472.065 460.954l-80.854 2.365c67.538-47.63 108.976-125.482 108.976-208.888 0-97.148-53.904-184.701-140.685-228.505-11.483-5.768-25.463-1.169-31.231 10.286-5.795 11.483-1.197 25.463 10.286 31.257 71.020 35.856 115.142 107.487 115.142 186.987 0 68.947-34.659 133.269-90.981 172.129l-2.074-70.702c-0.372-12.838-11.19-23.23-23.921-22.566-12.838 0.372-22.938 11.084-22.566 23.921l3.854 131.462v0.027c0 0.027 0 0.027 0 0.027l0.027 0.478c0.372 12.599 10.685 22.566 23.23 22.566 0.239 0 0.478 0 0.691 0 0.904-0.027 1.647-0.452 2.525-0.585l128.964-3.774c12.838-0.372 22.938-11.084 22.566-23.921s-11.269-23.23-23.948-22.566z"></path>
+	<path class="lexicon-icon-outline reload-arrow-up" d="M194.017 23.27c0-0.027 0-0.027 0-0.053v-0.478c-0.372-12.838-11.111-22.938-23.922-22.566-0.904 0.027-1.648 0.452-2.525 0.585l-128.99 3.774c-12.838 0.372-22.938 11.084-22.566 23.922 0.372 12.599 10.685 22.566 23.23 22.566 0.239 0 0.452 0 0.691 0l80.855-2.365c-67.538 47.63-108.976 125.508-108.976 208.889 0 97.149 53.903 184.701 140.685 228.505 3.349 1.702 6.937 2.498 10.446 2.498 8.506 0 16.692-4.678 20.785-12.785 5.794-11.483 1.196-25.463-10.286-31.231-71.020-35.856-115.142-107.488-115.142-186.987 0-68.947 34.66-133.269 90.981-172.129l2.073 70.701c0.372 12.599 10.685 22.566 23.23 22.566 0.239 0 0.478 0 0.691 0 12.838-0.372 22.938-11.083 22.566-23.922l-3.854-131.462 0.027-0.027z"></path>
+</symbol><symbol id="rocket" viewBox="0 0 16 16">	<path class="lexicon-icon-outline" d="M4.142 10.275c.218.218.225.583.09.86-.134.28-.218.592-.09.72.129.129.44.045.72-.09.278-.135.643-.127.861.09l.395.396-.462.23a3.019 3.019 0 0 1-2.304.165 3.019 3.019 0 0 1 .164-2.304l.231-.462.395.395Zm.775-4.364c-.6 1.095-.992 2.137-1.149 3.047a.226.226 0 0 1-.09.02H.222a.224.224 0 0 1-.158-.382L2.748 5.91h2.17Zm5.169 7.338-2.684 2.684a.224.224 0 0 1-.382-.158v-3.543c.914-.154 1.963-.548 3.066-1.152v2.169Z" />
+	<path class="lexicon-icon-outline" clip-rule="evenodd" d="M14.257 6.048a9.224 9.224 0 0 1-1.42 1.856c-2.013 2.012-4.236 3.313-5.892 3.593L4.5 9.053c.28-1.656 1.58-3.879 3.593-5.891A9.225 9.225 0 0 1 9.95 1.74a4.456 4.456 0 0 0 1.306 3.003 4.455 4.455 0 0 0 3.001 1.305Zm-4.582.275a1.118 1.118 0 1 0-1.58 1.581 1.118 1.118 0 0 0 1.58-1.58Z" fill-rule="evenodd" />
+	<path class="lexicon-icon-outline" d="M15.998 0s-.059 2.644-1.32 5.258a3.679 3.679 0 0 1-2.869-1.069 3.68 3.68 0 0 1-1.07-2.87C13.353.06 16 0 16 0Z" />
+</symbol><symbol id="search" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M499.2,455.5L377.7,333.4c146-241.1-148.1-435.8-318.2-274c-165.1,185.9,41.6,460.6,273.4,319l121.5,118.8C489.5,535.8,534.4,490.8,499.2,455.5z M206.2,63.6c191.9,0,198.1,289,0,289C13.3,352.6,18.8,63.6,206.2,63.6z" />
+</symbol><symbol id="share" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M326.2,323.3l-107.6-53.8c2.7-5.9,2.4-19.9,0-27.1l107.6-53.8c77.2,69.3,185.8,13,185.8-78.9C512,49.2,462.8,0,402.3,0S287,51.3,293.4,123.3l-107.6,53.8C113.3,108,0,161.7,0,256c0,100.3,118.3,143.7,185.8,78.9l107.6,53.8C285,460.7,341.8,512,402.3,512S512,462.8,512,402.3C512,314.3,406.3,252,326.2,323.3z M438.9,109.7c0,49-73.1,47.6-73.1,0C365.7,60.3,438.9,62,438.9,109.7z M73.1,256c0-49,73.1-49,73.1,0C146.3,303.3,73.1,305,73.1,256z M365.7,402.3c0-48.6,73.1-49,73.1,0C438.9,451,365.7,449.7,365.7,402.3z"></path>
+</symbol><symbol id="shortcut" viewBox="0 0 512 512">	<path class="lexicon-icon-outline lx-shortcut-border" d="M480,320c-17.6729,0-32,14.3271-32,32v96H64V64h96c17.6729,0,32-14.3271,32-32S177.6729,0,160,0H64C28.7104,0,0,28.7104,0,64v384c0,35.29,28.7104,64,64,64h384c35.29,0,64-28.71,64-64v-96C512,334.3271,497.6729,320,480,320z"></path>
+	<path class="lexicon-icon-outline lx-shortcut-arrow" d="M480,0H320c-17.6729,0-32,14.3267-32,32s14.3271,32,32,32h82.7456L265.373,201.3726c-12.4971,12.4971-12.4971,32.7578,0,45.2549C271.6211,252.876,279.8105,256,288,256s16.3789-3.124,22.627-9.3726L448,109.2544V192c0,17.6733,14.3271,32,32,32s32-14.3267,32-32V32C512,14.3267,497.6729,0,480,0z"></path>
+</symbol><symbol id="times" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M300.4,256L467,89.4c29.6-29.6-14.8-74.1-44.4-44.4L256,211.6L89.4,45C59.8,15.3,15.3,59.8,45,89.4L211.6,256L45,422.6 c-29.7,29.7,14.7,74.1,44.4,44.4L256,300.4L422.6,467c29.7,29.7,74.1-14.7,44.4-44.4L300.4,256z" />
+</symbol><symbol id="undo" viewBox="0 0 16 16">	<path class="lexicon-icon-outline" d="M1.365 4.058 5.115.366a1.266 1.266 0 0 1 1.77 0 1.22 1.22 0 0 1 0 1.742l-1.61 1.584h4.473c3.446 0 6.25 2.762 6.25 6.154 0 3.393-2.804 6.154-6.25 6.154a1.24 1.24 0 0 1-1.25-1.23 1.24 1.24 0 0 1 1.25-1.231c2.067 0 3.75-1.658 3.75-3.693 0-2.034-1.683-3.692-3.75-3.692H5.256l1.617 1.592a1.22 1.22 0 0 1 0 1.743 1.259 1.259 0 0 1-1.765 0L1.365 5.796a1.215 1.215 0 0 1 0-1.738Z" />
+</symbol><symbol id="view" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M5.1,273.3c127.1,192,374.7,188.6,501.6-0.1c7-10.4,7-24.5,0.1-34.9C378.6,45.8,132.4,51.3,5.3,238.5C-1.7,248.8-1.8,262.8,5.1,273.3z M63.7,255.8c120.8-137.8,266.3-139.6,384.5,0C330,393.5,183.9,391.7,63.7,255.8z M283.9,164.4c-91.6-26-160.9,74.5-102.8,151.5c57.4,75.2,195.5,24.2,166.5-87.9C301.4,304.3,208.7,209.5,283.9,164.4z" />
+</symbol><symbol id="warning-full" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M506.3,409.3l-214-353.7c-16.8-30.6-55.8-32.6-72.6,0L5.7,409.3C-8,436.5,5,480,42,480h428C506,480,522.5,436.5,506.3,409.3z M224,392c0-42.5,64-42,64,0C288,433.5,224,434.5,224,392z M288,288c0,42.5-64,40.5-64,0c0-20.4,0-83.6,0-104c0-43,64-43.5,64,0C288,204.4,288,267.6,288,288z"></path>
+</symbol><symbol id="web-content" viewBox="0 0 512 512">	<path class="lexicon-icon-outline web-content-border" d="M0,64v384c0,35.3,28.7,64,64,64h384c35.3,0,64-28.7,64-64V64c0-35.3-28.7-64-64-64H64C28.7,0,0,28.7,0,64z M448,448H64V64h384V448z"></path>
+	<path class="lexicon-icon-outline web-content-text-1" d="M144,320h224c22,0,21-32,0-32H144C123,288,123,320,144,320z"></path>
+	<path class="lexicon-icon-outline web-content-text-2" d="M144,384h160c22,0,20-32,0-32H144C123,352,122,384,144,384z"></path>
+	<circle class="lexicon-icon-outline web-content-circle" cx="320" cy="160" r="64"></circle>
+	<polygon class="lexicon-icon-outline web-content-triangle" points="128,224 192,96 256,224 "></polygon>
+</symbol></svg>
+
+<!-- ══════════ APP SHELL — .control-menu + .control-panel ══════════ -->
+<header class="control-menu">
+  <div class="control-menu__left">
+    <div class="control-menu__btns">
+      <button class="control-menu__btn" aria-label="Product menu" onclick="togglePanel()">
+        <svg class="lexicon-icon"><use href="#bars"></use></svg>
+      </button>
+    </div>
+    <h1 class="control-menu__title" id="cmTitle">Launches</h1>
+  </div>
+  <div class="control-menu__right">
+    <div class="picker" id="skinPicker">
+      <button type="button" class="btn btn--borderless btn--sm picker__trigger" id="skinTrigger"
+              aria-haspopup="listbox" aria-expanded="false" title="Skin">
+        <span class="picker__trigger-text" id="skinText">Light</span>
+        <svg class="lexicon-icon"><use href="#caret-double-l"></use></svg>
+      </button>
+      <ul class="dropdown dropdown--right" role="listbox" aria-labelledby="skinTrigger" id="skinMenu"></ul>
+    </div>
+    <button class="control-menu__btn" aria-label="Applications">
+      <svg class="lexicon-icon"><use href="#grid"></use></svg>
+    </button>
+    <span class="control-menu__avatar">
+      <span class="sticker sticker--lg sticker--circle sticker--outline sticker--primary">DA</span>
+    </span>
+  </div>
+</header>
+
+<div class="app__body">
+
+  <!-- Product menu — stock .control-panel -->
+  <aside class="control-panel app__panel" id="appPanel">
+    <div class="control-panel__header">
+      <span class="control-panel__sticker">
+        <svg class="lexicon-icon"><use href="#rocket"></use></svg>
+      </span>
+      <h2 class="control-panel__title">Arctic Outfitters</h2>
+      <button class="btn btn--borderless btn--sm btn--icon" aria-label="Close product menu" onclick="togglePanel()">
+        <svg class="lexicon-icon"><use href="#times"></use></svg>
+      </button>
+    </div>
+    <div class="control-panel__body">
+      <div class="control-panel__groups">
+
+        <div class="control-panel__group">
+          <button class="control-panel__group-header" aria-expanded="true">Publishing
+            <svg class="lexicon-icon"><use href="#angle-down"></use></svg>
+          </button>
+          <button class="control-panel__item is-active" data-screen="s-launch" onclick="go('s-launch')">
+            <span class="control-panel__item-icon"><svg class="lexicon-icon"><use href="#rocket"></use></svg></span>
+            Launches
+          </button>
+          <button class="control-panel__item" data-screen="s-page" onclick="go('s-page')">
+            <span class="control-panel__item-icon"><svg class="lexicon-icon"><use href="#page"></use></svg></span>
+            Pages
+          </button>
+        </div>
+
+        <div class="control-panel__group">
+          <button class="control-panel__group-header" aria-expanded="true">Content
+            <svg class="lexicon-icon"><use href="#angle-down"></use></svg>
+          </button>
+          <button class="control-panel__item" data-screen="s-cms" onclick="go('s-cms')">
+            <span class="control-panel__item-icon"><svg class="lexicon-icon"><use href="#web-content"></use></svg></span>
+            Web Content
+          </button>
+          <button class="control-panel__item" data-screen="s-fragment" onclick="go('s-fragment')">
+            <span class="control-panel__item-icon"><svg class="lexicon-icon"><use href="#drop"></use></svg></span>
+            Fragments
+          </button>
+          <button class="control-panel__item" data-screen="s-nav" onclick="go('s-nav')">
+            <span class="control-panel__item-icon"><svg class="lexicon-icon"><use href="#bars"></use></svg></span>
+            Navigation Menus
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </aside>
+
+  <main class="app__main">
+
+    <!-- ══════ LAUNCH DETAIL ══════ -->
+    <section class="screen is-on" id="s-launch">
+      <div class="management-toolbar">
+        <div class="management-toolbar__bar">
+          <span class="label label--sm label--info">Scheduled</span>
+          <strong style="font-size: var(--font-size-md);">Christmas Campaign</strong>
+          <span style="color: var(--color-secondary); font-size: var(--font-size-sm);">1 Dec 2026 · 00:00 UTC</span>
+          <span style="flex:1"></span>
+          <button class="btn btn--borderless btn--sm" onclick="openModal('mdlRevert')">
+            <svg class="lexicon-icon"><use href="#undo"></use></svg> Schedule revert…
+          </button>
+          <button class="btn btn--secondary btn--sm"
+                  aria-label="Preview this Launch (opens in a new tab)" onclick="openPreview('launch')">
+            Preview this Launch
+            <svg class="lexicon-icon"><use href="#shortcut"></use></svg>
+          </button>
+          <button class="btn btn--primary btn--sm" onclick="openChecks()">
+            <svg class="lexicon-icon"><use href="#rocket"></use></svg> Publish
+          </button>
+        </div>
+      </div>
+
+      <div class="screen__body">
+        <div class="stack" style="max-width: 1080px;">
+
+          <div class="alert alert--info">
+            <div class="alert__content">
+              <svg class="lexicon-icon"><use href="#info-circle"></use></svg>
+              <p class="alert__text">Four assets are in this launch. Previewing the launch renders the
+                site with all four substituted at once — that is what a launch preview is for.</p>
+            </div>
+          </div>
+
+          <header class="section"><h2 class="section__title">Assets in this launch</h2></header>
+
+          <ul class="list">
+            <li class="list__row">
+              <span class="list__sticker"><span class="sticker sticker--md sticker--icon"><svg class="lexicon-icon"><use href="#page"></use></svg></span></span>
+              <div class="list__content">
+                <a href="#" class="list__title" onclick="go('s-page');return false;">Home</a>
+                <span class="list__subtitle">Content page · Draft v2</span>
+              </div>
+              <span class="list__actions">
+                <button class="btn btn--borderless btn--sm btn--icon" aria-label="Actions"><svg class="lexicon-icon"><use href="#ellipsis-v"></use></svg></button>
+              </span>
+            </li>
+            <li class="list__row">
+              <span class="list__sticker"><span class="sticker sticker--md sticker--icon"><svg class="lexicon-icon"><use href="#web-content"></use></svg></span></span>
+              <div class="list__content">
+                <a href="#" class="list__title" onclick="go('s-cms');return false;">Holiday Gift Guide</a>
+                <span class="list__subtitle">Web content · Draft v4</span>
+              </div>
+              <span class="list__actions">
+                <button class="btn btn--borderless btn--sm btn--icon" aria-label="Actions"><svg class="lexicon-icon"><use href="#ellipsis-v"></use></svg></button>
+              </span>
+            </li>
+            <li class="list__row">
+              <span class="list__sticker"><span class="sticker sticker--md sticker--icon"><svg class="lexicon-icon"><use href="#drop"></use></svg></span></span>
+              <div class="list__content">
+                <a href="#" class="list__title" onclick="go('s-fragment');return false;">Promo Ribbon</a>
+                <span class="list__subtitle">Fragment · Draft v1</span>
+              </div>
+              <span class="list__actions">
+                <button class="btn btn--borderless btn--sm btn--icon" aria-label="Actions"><svg class="lexicon-icon"><use href="#ellipsis-v"></use></svg></button>
+              </span>
+            </li>
+            <li class="list__row">
+              <span class="list__sticker"><span class="sticker sticker--md sticker--icon"><svg class="lexicon-icon"><use href="#bars"></use></svg></span></span>
+              <div class="list__content">
+                <a href="#" class="list__title" onclick="go('s-nav');return false;">Main Menu</a>
+                <span class="list__subtitle">Navigation menu · Draft v3</span>
+              </div>
+              <span class="list__actions">
+                <button class="btn btn--borderless btn--sm btn--icon" aria-label="Actions"><svg class="lexicon-icon"><use href="#ellipsis-v"></use></svg></button>
+              </span>
+            </li>
+          </ul>
+
+          <div>
+            <button class="btn btn--secondary btn--sm" onclick="openModal('mdlAdd')">
+              <svg class="lexicon-icon"><use href="#plus"></use></svg> Add asset to launch
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════ WEB CONTENT ══════
+         The add-to-launch order is the same on every editor screen: the asset
+         is added to a launch first, and only then can the launch be previewed.
+         "Preview in Site" carries the #shortcut glyph after its label and the
+         "(opens in a new tab)" aria-label suffix — the one and only treatment
+         for a control that leaves the current tab. -->
+    <section class="screen" id="s-cms">
+      <div class="management-toolbar">
+        <div class="management-toolbar__bar">
+          <span class="sticker sticker--md sticker--icon"><svg class="lexicon-icon"><use href="#web-content"></use></svg></span>
+          <strong style="font-size: var(--font-size-md);">Holiday Gift Guide</strong>
+          <span class="label label--sm">Draft v4</span>
+          <span class="label label--sm label--success" data-launch-label>In Christmas Campaign</span>
+          <span class="management-toolbar__spacer"></span>
+          <button class="btn btn--borderless btn--sm btn--icon" aria-label="Actions"><svg class="lexicon-icon"><use href="#ellipsis-v"></use></svg></button>
+          <button class="btn btn--secondary btn--sm"
+                  aria-label="Preview in Site (opens in a new tab)" onclick="openPreview('cms')">
+            Preview in Site
+            <svg class="lexicon-icon"><use href="#shortcut"></use></svg>
+          </button>
+          <button class="btn btn--primary btn--sm">Save</button>
+        </div>
+      </div>
+      <div class="screen__body">
+        <div class="sheet" style="max-width: 780px;">
+          <header class="sheet-header">
+            <h2 class="sheet-title">Content</h2>
+            <p class="sheet-text">The draft version below is what a preview renders in place of the published one.</p>
+          </header>
+          <div class="input">
+            <label class="input__label" for="cmsTitle">Title</label>
+            <input class="input__field" id="cmsTitle" value="Holiday Gift Guide">
+          </div>
+          <div class="input">
+            <label class="input__label" for="cmsBody">Body</label>
+            <textarea class="input__field input__field--textarea" id="cmsBody" rows="5">Top picks under $50 — curated for Christmas. Free gift wrap on every order until Dec 24.</textarea>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════ PAGE ══════ -->
+    <section class="screen" id="s-page">
+      <div class="management-toolbar">
+        <div class="management-toolbar__bar">
+          <span class="sticker sticker--md sticker--icon"><svg class="lexicon-icon"><use href="#page"></use></svg></span>
+          <strong style="font-size: var(--font-size-md);">Home</strong>
+          <span class="label label--sm">Draft v2</span>
+          <span class="label label--sm label--success" data-launch-label>In Christmas Campaign</span>
+          <span class="management-toolbar__spacer"></span>
+          <button class="btn btn--borderless btn--sm btn--icon" aria-label="Actions"><svg class="lexicon-icon"><use href="#ellipsis-v"></use></svg></button>
+          <button class="btn btn--secondary btn--sm"
+                  aria-label="Preview in Site (opens in a new tab)" onclick="openPreview('page')">
+            Preview in Site
+            <svg class="lexicon-icon"><use href="#shortcut"></use></svg>
+          </button>
+          <button class="btn btn--primary btn--sm">Save</button>
+        </div>
+      </div>
+      <div class="screen__body">
+        <div class="stack" style="max-width: 900px;">
+          <header class="section"><h2 class="section__title">Fragments on this page</h2></header>
+          <ul class="list">
+            <li class="list__row"><div class="list__content"><span class="list__title">Hero</span><span class="list__subtitle">Published</span></div></li>
+            <li class="list__row"><div class="list__content"><span class="list__title">Promo Ribbon</span><span class="list__subtitle">Draft v1 · in this launch</span></div>
+              <span class="list__labels"><span class="label label--sm label--info">Draft</span></span></li>
+            <li class="list__row"><div class="list__content"><span class="list__title">Featured products</span><span class="list__subtitle">Published</span></div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════ FRAGMENT ══════
+         Starts NOT in a launch, so it demonstrates the order: Add to launch
+         first, and only then does Preview launch become available. -->
+    <section class="screen" id="s-fragment">
+      <div class="management-toolbar">
+        <div class="management-toolbar__bar">
+          <span class="sticker sticker--md sticker--icon"><svg class="lexicon-icon"><use href="#drop"></use></svg></span>
+          <strong style="font-size: var(--font-size-md);">Promo Ribbon</strong>
+          <span class="label label--sm">Draft v1</span>
+          <span class="label label--sm" id="frLaunchLabel">Not in a launch</span>
+          <span class="management-toolbar__spacer"></span>
+          <button class="btn btn--primary btn--sm" id="frAddBtn" onclick="addToLaunch()">
+            <svg class="lexicon-icon"><use href="#rocket"></use></svg> Add to launch
+          </button>
+          <button class="btn btn--secondary btn--sm" id="frPreviewBtn" disabled
+                  aria-label="Preview in Site (opens in a new tab)" onclick="openPreview('fragment')">
+            Preview in Site
+            <svg class="lexicon-icon"><use href="#shortcut"></use></svg>
+          </button>
+        </div>
+      </div>
+      <div class="screen__body">
+        <div class="stack" style="max-width: 780px;">
+          <div class="alert alert--warning">
+            <div class="alert__content">
+              <svg class="lexicon-icon"><use href="#warning-full"></use></svg>
+              <p class="alert__text"><strong>Order is fixed.</strong> Preview stays disabled until this
+                fragment belongs to a launch — there is nothing coherent to preview otherwise.</p>
+            </div>
+          </div>
+          <div class="sheet">
+            <header class="sheet-header"><h2 class="sheet-title">Ribbon text</h2></header>
+            <div class="input">
+              <input class="input__field" value="🎄 Holiday Special — 30% off all courses until December 31">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════ NAVIGATION MENU ══════ -->
+    <section class="screen" id="s-nav">
+      <div class="management-toolbar">
+        <div class="management-toolbar__bar">
+          <span class="sticker sticker--md sticker--icon"><svg class="lexicon-icon"><use href="#bars"></use></svg></span>
+          <strong style="font-size: var(--font-size-md);">Main Menu</strong>
+          <span class="label label--sm">Draft v3</span>
+          <span class="label label--sm label--success" data-launch-label>In Christmas Campaign</span>
+          <span class="management-toolbar__spacer"></span>
+          <button class="btn btn--secondary btn--sm"
+                  aria-label="Preview in Site (opens in a new tab)" onclick="openPreview('nav')">
+            Preview in Site
+            <svg class="lexicon-icon"><use href="#shortcut"></use></svg>
+          </button>
+          <button class="btn btn--primary btn--sm">Save</button>
+        </div>
+      </div>
+      <div class="screen__body">
+        <div class="stack" style="max-width: 640px;">
+          <header class="section"><h2 class="section__title">Menu items</h2></header>
+          <ul role="tree" class="tree">
+            <li><div class="tree__row"><svg class="lexicon-icon"><use href="#page"></use></svg><span>Home</span></div></li>
+            <li><div class="tree__row"><svg class="lexicon-icon"><use href="#page"></use></svg><span>Shop</span></div></li>
+            <li><div class="tree__row"><svg class="lexicon-icon"><use href="#page"></use></svg><span>Stories</span></div></li>
+            <li><div class="tree__row"><svg class="lexicon-icon"><use href="#page"></use></svg><span>Christmas</span>
+              <span class="label label--sm label--info" style="margin-left:auto">Draft only</span></div></li>
+            <li><div class="tree__row"><svg class="lexicon-icon"><use href="#page"></use></svg><span>About</span></div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+  </main>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     PREVIEW OVERLAY — the product only. No simulated browser chrome:
+     the preview genuinely opens in a new tab, so the real browser draws
+     that part.
+     The bar is the design from Figma (STOR preview topbar refinement,
+     node 2005:99): primary fill, an eye + a .label chip for the signal,
+     then one .preview-bar__ctl per control — a .label.label--sm chip that
+     names it followed by a .picker whose trigger is a borderless button —
+     then the Site read-out, and Share + Exit as ghost buttons — transparent
+     with a near-white hairline, so they never outshout the picker.
+
+     Collapse ladder, matching the Figma variants:
+       Laptop 1024 — the Site read-out goes (supporting, not identity)
+       Tablet  834 — still whole; chips stay, because a picker without its
+                     chip stops naming itself
+       Mobile  390 — the word Preview and the divider go; Version, Share and
+                     reload fold into ⋮; Exit drops to its icon
+     ════════════════════════════════════════════════════════════════ -->
+<div class="ov" id="ov" hidden>
+  <div class="preview-bar-shell">
+  <div class="preview-bar" id="previewBar">
+
+    <span class="preview-bar__signal">
+      <svg class="lexicon-icon"><use href="#view"></use></svg>
+      <span class="label label--sm preview-bar__signal-text">PREVIEW</span>
+    </span>
+
+    <span class="preview-bar__divider"></span>
+
+    <span class="preview-bar__ctl">
+      <span class="label label--sm">Launch</span>
+      <span class="picker" id="pLaunch">
+        <button type="button" class="btn btn--borderless btn--sm picker__trigger"
+                aria-haspopup="listbox" aria-expanded="false" onclick="toggleMenu(event,'pLaunch')">
+          <span class="picker__trigger-text" id="ovLaunchTxt">Christmas Campaign</span>
+          <svg class="lexicon-icon"><use href="#caret-double-l"></use></svg>
+        </button>
+        <ul class="dropdown" role="listbox" id="ovLaunchMenu"></ul>
+      </span>
+    </span>
+
+    <span class="preview-bar__ctl preview-bar__ctl--secondary">
+      <span class="label label--sm">Version</span>
+      <span class="picker" id="pVersion">
+        <button type="button" class="btn btn--borderless btn--sm picker__trigger"
+                aria-haspopup="listbox" aria-expanded="false" onclick="toggleMenu(event,'pVersion')">
+          <span class="picker__trigger-text" id="ovVerTxt">Draft v4</span>
+          <svg class="lexicon-icon"><use href="#caret-double-l"></use></svg>
+        </button>
+        <ul class="dropdown" role="listbox" id="ovVerMenu"></ul>
+      </span>
+    </span>
+
+    <span class="preview-bar__meta">Site: <strong id="ovSite">Arctic Outfitters</strong></span>
+
+    <span class="preview-bar__spacer"></span>
+
+    <span class="preview-bar__inline-actions">
+      <button class="btn btn--borderless btn--sm btn--icon" aria-label="Reload preview" onclick="reloadPreview()">
+        <svg class="lexicon-icon"><use href="#reload"></use></svg>
+      </button>
+      <button class="btn btn--secondary btn--sm" onclick="sharePreview()">
+        <svg class="lexicon-icon"><use href="#share"></use></svg> Share
+      </button>
+    </span>
+
+    <span class="picker preview-bar__overflow" id="pOverflow">
+      <button type="button" class="btn btn--borderless btn--sm btn--icon" aria-label="More preview actions"
+              aria-haspopup="menu" aria-expanded="false" onclick="toggleMenu(event,'pOverflow')">
+        <svg class="lexicon-icon"><use href="#ellipsis-v"></use></svg>
+      </button>
+      <ul class="dropdown dropdown--right" id="ovOverflowMenu"></ul>
+    </span>
+
+    <button class="btn btn--secondary btn--sm" onclick="exitPreview()" aria-label="Exit preview">
+      <svg class="lexicon-icon"><use href="#times"></use></svg>
+      <span class="preview-bar__exit-text">Exit</span>
+    </button>
+
+  </div>
+  </div>
+
+  <!-- The previewed site. Deliberately NOT Lexicon: it belongs to the
+       customer, so it keeps its own colours when the kit skin flips. -->
+  <div class="ov__site">
+    <div class="site">
+      <div class="site__ribbon" id="ovRibbon">Free returns on every order</div>
+      <header class="site__hd">
+        <span class="site__logo"><span class="site__dot"></span> Arctic Outfitters</span>
+        <nav class="site__nav">
+          <a>Home</a><a>Shop</a><a>Stories</a>
+          <a id="ovNavX" hidden>Christmas</a>
+          <a>About</a>
+        </nav>
+      </header>
+      <section class="site__hero">
+        <h1 id="ovH1">Welcome to Arctic Outfitters</h1>
+        <p id="ovP">Gear and layers for every winter out there.</p>
+        <button class="site__cta">Shop the season</button>
+      </section>
+      <section class="site__grid">
+        <article class="site__card"><div class="site__thumb"></div><b id="ovCard1">Down Parka</b><span>$249</span></article>
+        <article class="site__card"><div class="site__thumb"></div><b id="ovCard2">Merino Base Layer</b><span>$89</span></article>
+        <article class="site__card"><div class="site__thumb"></div><b id="ovCard3">Trail Gloves</b><span>$45</span></article>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MODALS — stock .modal-overlay + .modal ══════════ -->
+<div class="modal-overlay" id="mdlAdd" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mdlAddT">
+    <div class="modal__header">
+      <h2 class="modal__title" id="mdlAddT">Add asset to launch</h2>
+      <button class="btn btn--borderless btn--sm btn--icon modal__close" aria-label="Close" onclick="closeModal('mdlAdd')">
+        <svg class="lexicon-icon"><use href="#times"></use></svg>
+      </button>
+    </div>
+    <div class="modal__body">
+      <div class="input">
+        <label class="input__label">Asset</label>
+        <div class="search">
+          <input class="input__field" placeholder="Search content, pages, fragments…">
+          <button class="search__submit" aria-label="Search"><svg class="lexicon-icon"><use href="#search"></use></svg></button>
+        </div>
+      </div>
+      <ul class="list" style="margin-top: var(--spacing-5);">
+        <li class="list__row"><div class="list__content"><span class="list__title">Winter Sale Banner</span><span class="list__subtitle">Web content · Draft v2</span></div>
+          <span class="list__actions"><button class="btn btn--secondary btn--sm">Add</button></span></li>
+        <li class="list__row"><div class="list__content"><span class="list__title">Gift Finder</span><span class="list__subtitle">Page · Draft v1</span></div>
+          <span class="list__actions"><button class="btn btn--secondary btn--sm">Add</button></span></li>
+      </ul>
+    </div>
+    <div class="modal__footer">
+      <button class="btn btn--secondary" onclick="closeModal('mdlAdd')">Cancel</button>
+      <button class="btn btn--primary" onclick="closeModal('mdlAdd');showToast('success','Asset added to Christmas Campaign.')">Add selected</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="mdlChecks" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mdlChecksT">
+    <div class="modal__header">
+      <h2 class="modal__title" id="mdlChecksT">Publish Christmas Campaign</h2>
+      <button class="btn btn--borderless btn--sm btn--icon modal__close" aria-label="Close" onclick="closeModal('mdlChecks')">
+        <svg class="lexicon-icon"><use href="#times"></use></svg>
+      </button>
+    </div>
+    <div class="modal__body">
+      <ul class="list list--flush">
+        <li class="list__row"><span class="list__sticker"><svg class="lexicon-icon" style="color: var(--color-success)"><use href="#check-circle-full"></use></svg></span>
+          <div class="list__content"><span class="list__title">4 assets ready</span><span class="list__subtitle">All drafts are approved</span></div></li>
+        <li class="list__row"><span class="list__sticker"><svg class="lexicon-icon" style="color: var(--color-success)"><use href="#check-circle-full"></use></svg></span>
+          <div class="list__content"><span class="list__title">No conflicting launches</span><span class="list__subtitle">Nothing else touches these assets</span></div></li>
+        <li class="list__row"><span class="list__sticker"><svg class="lexicon-icon" style="color: var(--color-warning)"><use href="#warning-full"></use></svg></span>
+          <div class="list__content"><span class="list__title">Preview not opened yet</span><span class="list__subtitle">Reviewing the launch in the site is recommended before publishing</span></div>
+          <span class="list__actions"><button class="btn btn--secondary btn--sm" aria-label="Preview this Launch (opens in a new tab)" onclick="closeModal('mdlChecks');openPreview('launch')">Preview <svg class="lexicon-icon"><use href="#shortcut"></use></svg></button></span></li>
+      </ul>
+    </div>
+    <div class="modal__footer">
+      <button class="btn btn--secondary" onclick="closeModal('mdlChecks')">Cancel</button>
+      <button class="btn btn--primary" onclick="closeModal('mdlChecks');showToast('success','Christmas Campaign published.')">Publish now</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="mdlRevert" hidden>
+  <div class="modal modal--warning" role="dialog" aria-modal="true" aria-labelledby="mdlRevertT">
+    <div class="modal__header">
+      <h2 class="modal__title" id="mdlRevertT">Schedule revert</h2>
+      <button class="btn btn--borderless btn--sm btn--icon modal__close" aria-label="Close" onclick="closeModal('mdlRevert')">
+        <svg class="lexicon-icon"><use href="#times"></use></svg>
+      </button>
+    </div>
+    <div class="modal__body">
+      <p style="margin:0 0 var(--spacing-5); color: var(--color-secondary);">
+        Roll the site back to its pre-launch state at a set date and time.
+      </p>
+      <div class="input">
+        <label class="input__label" for="revDate">Revert at</label>
+        <input class="input__field" id="revDate" value="2 Jan 2027 · 00:00 UTC">
+      </div>
+    </div>
+    <div class="modal__footer">
+      <button class="btn btn--secondary" onclick="closeModal('mdlRevert')">Cancel</button>
+      <button class="btn btn--primary btn--warning" onclick="closeModal('mdlRevert');showToast('info','Revert scheduled for 2 Jan 2027.')">Schedule revert</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- Safelist. Every class here is applied only from script — .is-open is
+     toggled on the pickers, and the toast tones come out of the TOAST map —
+     so a packager that trims CSS by what it can see in the markup drops
+     their rules. Spelling them out in the map is not enough: the trimmer
+     reads markup, not string literals. Measured, not assumed: without this
+     line, `.picker:not(.is-open) .dropdown` goes and every dropdown renders
+     open, and the toasts lose their tones. -->
+<span hidden class="is-open alert--toast alert--info alert--success alert--warning btn--info btn--success btn--warning"></span>
+
+<style>
+  /* ── Preview overlay (harness) ── */
+  .ov {
+    position: fixed; inset: 0; z-index: 1000;
+    display: flex; flex-direction: column;
+    background: var(--color-light);
+  }
+  .ov__site { flex: 1; min-height: 0; overflow-y: auto; background: #fff; }
+
+  /* ── The previewed customer site ──
+     Deliberately outside the design system, with its own literals: it is the
+     customer's site, so it must NOT reskin when the kit skin flips. */
+  .site { max-width: 1080px; margin: 0 auto; font-family: 'Helvetica Neue', Arial, sans-serif; color: #1a1b22; }
+  .site__ribbon { background: #14504a; color: #fff; text-align: center; padding: 9px 24px; font-size: 13px; font-weight: 600; }
+  .site__hd { display: flex; align-items: center; gap: 32px; padding: 20px 32px; border-bottom: 1px solid #e6e6ea; }
+  .site__logo { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; }
+  .site__dot { width: 22px; height: 22px; border-radius: 50%; background: #14504a; }
+  .site__nav { display: flex; gap: 22px; margin-left: auto; font-size: 14px; }
+  .site__nav a { color: #4a4a5a; text-decoration: none; cursor: pointer; }
+  .site__hero { padding: 64px 32px; background: #f2efe9; }
+  .site__hero h1 { margin: 0 0 12px; font-size: 40px; line-height: 1.1; }
+  .site__hero p { margin: 0 0 24px; font-size: 18px; color: #4a4a5a; }
+  .site__cta { border: 0; background: #14504a; color: #fff; padding: 13px 22px; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; }
+  .site__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; padding: 40px 32px 80px; }
+  .site__card { display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
+  .site__thumb { height: 160px; background: #ddd7cc; margin-bottom: 6px; }
+  @media (max-width: 700px) { .site__grid { grid-template-columns: 1fr; } .site__hero h1 { font-size: 28px; } }
+</style>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   Preview contexts. The Launch picker is the source of truth: whatever
+   it reads is what the site below renders.
+   ═══════════════════════════════════════════════════════════════ */
+var LAUNCHES = {
+  none: { name: 'None — live site', live: true },
+  xmas: { name: 'Christmas Campaign', meta: 'Scheduled 1 Dec 2026' },
+  ny:   { name: "New Year's Kickoff", meta: 'Scheduled 6 Jan 2027' }
+};
+var VERSIONS = ['Draft v4', 'Draft v3', 'Approved v2'];
+
+var CONTENT = {
+  none: { ribbon: 'Free returns on every order', nav: false,
+          h: 'Welcome to Arctic Outfitters', p: 'Gear and layers for every winter out there.',
+          c: ['Down Parka', 'Merino Base Layer', 'Trail Gloves'] },
+  xmas: { ribbon: '🎄 Holiday Special — 30% off everything until December 31', nav: true,
+          h: 'The gift of warmth.', p: 'Give someone you love the best gift — a winter that finally fits.',
+          c: ['🎄 Gift Parka Bundle', 'Merino Gift Set', 'Trail Gloves'] },
+  ny:   { ribbon: '🎊 New Year — free shipping on every order', nav: false,
+          h: 'New year, new trails.', p: 'Start January outside. Our winter range is restocked.',
+          c: ['Summit Parka', 'Merino Base Layer', 'Ice Grips'] }
+};
+
+var S = { launch: 'xmas', version: 'Draft v4', screen: 's-launch' };
+
+/* ── Menus — one routine for every .picker on the page ── */
+function closeMenus() {
+  Array.prototype.forEach.call(document.querySelectorAll('.picker.is-open'), function (p) {
+    p.classList.remove('is-open');
+    var t = p.querySelector('[aria-expanded]');
+    if (t) t.setAttribute('aria-expanded', 'false');
+  });
+}
+function toggleMenu(e, id) {
+  e.stopPropagation();
+  var p = document.getElementById(id);
+  var open = !p.classList.contains('is-open');
+  closeMenus();
+  p.classList.toggle('is-open', open);
+  var t = p.querySelector('[aria-expanded]');
+  if (t) t.setAttribute('aria-expanded', String(open));
+}
+document.addEventListener('click', closeMenus);
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeMenus(); closeAllModals(); } });
+
+function fillMenu(menuId, options, current, onPick) {
+  var menu = document.getElementById(menuId);
+  menu.innerHTML = '';
+  options.forEach(function (o) {
+    var active = o.value === current;
+    var li = document.createElement('li');
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'dropdown__item' + (active ? ' is-active' : '');
+    b.setAttribute('role', 'option');
+    b.setAttribute('aria-selected', String(active));
+    b.innerHTML = '<svg class="lexicon-icon dropdown__item-icon"><use href="#check"></use></svg>' +
+      '<span class="dropdown__item-text">' + o.label +
+        (o.meta ? '<span class="preview-bar__option-meta">' + o.meta + '</span>' : '') +
+      '</span>';
+    b.addEventListener('click', function () { closeMenus(); onPick(o.value); });
+    li.appendChild(b);
+    menu.appendChild(li);
+  });
+}
+
+/* ── Screens ── */
+function go(id) {
+  S.screen = id;
+  Array.prototype.forEach.call(document.querySelectorAll('.screen'), function (s) {
+    s.classList.toggle('is-on', s.id === id);
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('.control-panel__item'), function (b) {
+    b.classList.toggle('is-active', b.getAttribute('data-screen') === id);
+  });
+  var titles = { 's-launch': 'Launches', 's-cms': 'Web Content', 's-page': 'Pages', 's-fragment': 'Fragments', 's-nav': 'Navigation Menus' };
+  document.getElementById('cmTitle').textContent = titles[id] || 'Launches';
+}
+function togglePanel() {
+  var p = document.getElementById('appPanel');
+  p.hidden = !p.hidden;
+}
+
+/* ── The fragment screen proves the add-to-launch order ── */
+function addToLaunch() {
+  var l = document.getElementById('frLaunchLabel');
+  l.textContent = 'In Christmas Campaign';
+  l.className = 'label label--sm label--success';
+  var a = document.getElementById('frAddBtn');
+  a.disabled = true; a.classList.replace('btn--primary', 'btn--secondary');
+  var p = document.getElementById('frPreviewBtn');
+  p.disabled = false; p.classList.replace('btn--secondary', 'btn--primary');
+  showToast('success', 'Promo Ribbon added to Christmas Campaign.');
+}
+
+/* ── Preview ── */
+function openPreview(from) {
+  document.getElementById('ov').hidden = false;
+  if (from === 'launch') S.launch = 'xmas';
+  renderPreview();
+  showToast('info', 'Preview opened in a new tab.');
+}
+function exitPreview() {
+  document.getElementById('ov').hidden = true;
+  showToast('info', 'You exited preview. That tab now shows the <strong>live</strong> site.',
+    'Back to preview', function () { document.getElementById('ov').hidden = false; renderPreview(); });
+}
+function reloadPreview() { renderPreview(); showToast('success', 'Preview reloaded with the latest saved versions.'); }
+function sharePreview() { showToast('info', 'Share link copied. Post-beta this becomes a signed URL for reviewers without an account.'); }
+
+function renderPreview() {
+  var L = LAUNCHES[S.launch];
+  document.getElementById('ovLaunchTxt').textContent = L.name;
+  document.getElementById('ovVerTxt').textContent = S.version;
+
+  fillMenu('ovLaunchMenu', Object.keys(LAUNCHES).map(function (k) {
+    return { value: k, label: LAUNCHES[k].name, meta: LAUNCHES[k].meta || (LAUNCHES[k].live ? 'Leaves preview' : '') };
+  }), S.launch, function (v) {
+    if (LAUNCHES[v].live) { exitPreview(); return; }
+    S.launch = v; renderPreview();
+  });
+
+  fillMenu('ovVerMenu', VERSIONS.map(function (v) { return { value: v, label: v }; }), S.version,
+    function (v) { S.version = v; renderPreview(); });
+
+  fillMenu('ovOverflowMenu', [
+    { value: 'version', label: 'Version', meta: S.version },
+    { value: 'reload',  label: 'Reload preview' },
+    { value: 'share',   label: 'Share' }
+  ], null, function (v) {
+    if (v === 'reload') reloadPreview();
+    else if (v === 'share') sharePreview();
+    else document.getElementById('pVersion').classList.add('is-open');
+  });
+
+  var c = CONTENT[S.launch] || CONTENT.none;
+  document.getElementById('ovRibbon').textContent = c.ribbon;
+  document.getElementById('ovNavX').hidden = !c.nav;
+  document.getElementById('ovH1').textContent = c.h;
+  document.getElementById('ovP').textContent = c.p;
+  document.getElementById('ovCard1').textContent = c.c[0];
+  document.getElementById('ovCard2').textContent = c.c[1];
+  document.getElementById('ovCard3').textContent = c.c[2];
+}
+
+/* ── Modals ── */
+function openModal(id) { closeMenus(); document.getElementById(id).hidden = false; }
+function closeModal(id) { document.getElementById(id).hidden = true; }
+function closeAllModals() { Array.prototype.forEach.call(document.querySelectorAll('.modal-overlay'), function (m) { m.hidden = true; }); }
+function openChecks() { openModal('mdlChecks'); }
+Array.prototype.forEach.call(document.querySelectorAll('.modal-overlay'), function (m) {
+  m.addEventListener('click', function (e) { if (e.target === m) m.hidden = true; });
+});
+
+/* ── Toasts — stock .alert--toast ── */
+var TOAST = {
+  info:    { icon: 'info-circle',       alert: 'alert alert--toast alert--info',    btn: 'btn btn--secondary btn--info btn--sm' },
+  success: { icon: 'check-circle-full', alert: 'alert alert--toast alert--success', btn: 'btn btn--secondary btn--success btn--sm' },
+  warning: { icon: 'warning-full',      alert: 'alert alert--toast alert--warning', btn: 'btn btn--secondary btn--warning btn--sm' }
+};
+function showToast(type, msg, actionLabel, actionFn) {
+  var t = TOAST[type] || TOAST.info;
+  var el = document.createElement('div');
+  el.className = t.alert;
+  el.innerHTML =
+    '<div class="alert__content"><svg class="lexicon-icon"><use href="#' + t.icon + '"></use></svg>' +
+    '<p class="alert__text">' + msg + '</p></div>' +
+    (actionLabel ? '<div class="alert__actions"><button class="' + t.btn + '" data-act>' + actionLabel + '</button></div>' : '') +
+    '<button class="btn btn--borderless btn--sm btn--icon alert__close" aria-label="Close"><svg class="lexicon-icon"><use href="#times"></use></svg></button>';
+  document.getElementById('toastContainer').appendChild(el);
+  if (actionFn) el.querySelector('[data-act]').addEventListener('click', function () { el.remove(); actionFn(); });
+  el.querySelector('.alert__close').addEventListener('click', function () { el.remove(); });
+  setTimeout(function () { if (el.parentNode) el.remove(); }, 6000);
+}
+
+/* ── Skin picker (harness) ── */
+var SKINS = [
+  { value: 'light', label: 'Light' }, { value: 'light-hc', label: 'Light high contrast' },
+  { value: 'dark', label: 'Dark' }, { value: 'dark-hc', label: 'Dark high contrast' }
+];
+var storedSkin = 'light';
+try { storedSkin = localStorage.getItem('vanilla-skin') || 'light'; } catch (e) {}
+function buildSkin(v) {
+  document.getElementById('skinText').textContent =
+    (SKINS.filter(function (s) { return s.value === v; })[0] || SKINS[0]).label;
+  fillMenu('skinMenu', SKINS, v, function (nv) {
+    var r = document.documentElement;
+    SKINS.forEach(function (s) { r.classList.remove(s.value); });
+    r.classList.add(nv);
+    try { localStorage.setItem('vanilla-skin', nv); } catch (e) {}
+    buildSkin(nv);
+  });
+}
+document.getElementById('skinTrigger').addEventListener('click', function (e) { toggleMenu(e, 'skinPicker'); });
+buildSkin(storedSkin);
+
+/* On a phone the overlay menu would cover the screen it is meant to
+   navigate, so it starts closed and the hamburger opens it. */
+if (window.matchMedia('(max-width: 900px)').matches) {
+  document.getElementById('appPanel').hidden = true;
+}
+
+renderPreview();
+go('s-launch');
+</script>
+</body>
+</html>
