@@ -276,6 +276,14 @@ a:hover { color: var(--color-primary-d1); }
   --skeleton-shimmer-alpha: 0.6;
 }
 
+
+/* ----------------------------------------------------------
+   Site Preview Top Bar — divider and button hovers
+   A white alpha over the primary ground; not expressible as a
+   token reference, so each skin carries its own counterpart.
+---------------------------------------------------------- */
+:root { --preview-bar-rule: rgba(255, 255, 255, 0.32); }
+
 </style>
 <style>
 /* ── components.css (solo las reglas que usa la página) ── */
@@ -1034,12 +1042,10 @@ a:hover { color: var(--color-primary-d1); }
   width: var(--spacing-7);
 }
 .preview-bar {
-  --preview-bar-rule: rgba(255, 255, 255, 0.32);
   align-items: center;
   background: var(--color-primary);
   color: var(--color-white);
   display: flex;
-  font-family: var(--font-family-base);
   gap: var(--spacing-4);
   min-height: 48px;
   padding: var(--spacing-3) var(--spacing-6);
@@ -1048,45 +1054,72 @@ a:hover { color: var(--color-primary-d1); }
   width: 100%;
   z-index: 100;
 }
-.preview-bar-shell {
-  container: preview-bar / inline-size;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
 .preview-bar__signal {
   align-items: center;
   display: inline-flex;
   flex-shrink: 0;
   gap: var(--spacing-4);
 }
-.preview-bar__signal-text { white-space: nowrap; }
 .preview-bar .label {
   background: var(--color-primary-d2);
   border-color: var(--color-primary-d2);
   color: var(--color-light);
-  font-size: var(--font-size-sm);
+  /* .label--sm uppercases by default. Here the casing is authored: the mode
+     badge is written PREVIEW, the chips naming a control are written Content
+     and Version. Let the text decide instead of transforming it. */
   text-transform: none;
+  /* Figma sets these chips at 12px Semibold. The kit's .label--sm is 10px
+     (--font-size-xs), which is a step too small to read on the bar. */
+  font-size: var(--font-size-sm);
 }
+.preview-bar__signal-text { white-space: nowrap; }
 .preview-bar__divider {
   background: var(--color-white);
   flex-shrink: 0;
   height: var(--spacing-6);
   width: 1px;
 }
+.preview-bar .dropdown__item { align-items: flex-start; }
+.preview-bar .dropdown__item-text { white-space: normal; }
+.preview-bar__option-meta {
+  color: var(--color-secondary);
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  margin-top: var(--spacing-1);
+}
+.preview-bar .picker { position: relative; }
+.preview-bar .picker .dropdown {
+  left: 0;
+  max-height: 320px;
+  min-width: 220px;
+  overflow-y: auto;
+  position: absolute;
+  top: calc(100% + var(--spacing-2));
+  z-index: 300;
+}
+.preview-bar .picker .dropdown.dropdown--right { left: auto; right: 0; }
+.preview-bar .picker:not(.is-open) .dropdown { display: none; }
+.preview-bar .btn--secondary {
+  background: transparent;
+  border-color: var(--color-light-l1);
+  color: var(--color-white);
+}
+.preview-bar .btn--secondary:hover, .preview-bar .btn--secondary:active {
+  /* The fallback is the light value. The skin declarations above win
+     wherever they survive; a packaging step that prunes :root rules from
+     this file leaves the light page correct instead of unstyled. */
+  background: var(--preview-bar-rule, rgba(255, 255, 255, 0.32));
+  border-color: var(--color-white);
+  color: var(--color-white);
+}
+.preview-bar .btn--borderless, .preview-bar .btn--borderless > .lexicon-icon, .preview-bar .picker__trigger > .lexicon-icon { color: inherit; }
+.preview-bar .btn--borderless:hover, .preview-bar .btn--borderless:active { background: var(--preview-bar-rule, rgba(255, 255, 255, 0.32)); color: inherit; }
 .preview-bar__ctl {
   align-items: center;
   display: inline-flex;
   flex-shrink: 0;
   gap: var(--spacing-4);
-}
-.preview-bar__ctl--identity { flex-shrink: 1; min-width: 0; }
-.preview-bar__name {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semi);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 .preview-bar__meta {
   align-items: center;
@@ -1103,35 +1136,26 @@ a:hover { color: var(--color-primary-d1); }
   flex-shrink: 0;
   gap: var(--spacing-2);
 }
-.preview-bar .btn--secondary {
-  background: transparent;
-  border-color: var(--color-light-l1);
-  color: var(--color-white);
-}
-.preview-bar .btn--secondary:hover, .preview-bar .btn--secondary:active {
-  background: var(--preview-bar-rule);
-  border-color: var(--color-white);
-  color: var(--color-white);
-}
-.preview-bar .btn--borderless, .preview-bar .btn--borderless > .lexicon-icon, .preview-bar .picker__trigger > .lexicon-icon { color: inherit; }
-.preview-bar .btn--borderless:hover, .preview-bar .btn--borderless:active { background: var(--preview-bar-rule); color: inherit; }
-.preview-bar .picker { min-width: 0; position: relative; }
-.preview-bar .picker .dropdown {
-  left: 0;
-  min-width: 240px;
+.preview-bar__overflow { display: none; flex-shrink: 0; }
+.preview-bar__overflow .dropdown {
+  min-width: 220px;
   position: absolute;
+  right: 0;
   top: calc(100% + var(--spacing-2));
   z-index: 200;
 }
-.preview-bar .picker:not(.is-open) .dropdown { display: none; }
-.preview-bar .dropdown__item { align-items: flex-start; }
-.preview-bar .dropdown__item-text { white-space: normal; }
-.preview-bar__option-meta {
-  color: var(--color-secondary);
-  display: block;
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-normal);
-  margin-top: var(--spacing-1);
+.preview-bar-shell {
+  container: preview-bar / inline-size;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.preview-bar__ctl { min-width: 0; }
+.preview-bar__ctl:has(.picker) { flex-shrink: 1; }
+.preview-bar .picker__trigger-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 @media (max-width: 1023px) {
   .preview-bar__meta { display: none; }
@@ -1141,10 +1165,9 @@ a:hover { color: var(--color-primary-d1); }
   .preview-bar__signal-text { display: none; }
   .preview-bar__divider { display: none; }
   .preview-bar__inline-actions { display: none; }
+  .preview-bar__overflow { display: block; }
   .preview-bar__exit-text { display: none; }
-  .preview-bar__ctl > .label { display: none; }
-  .preview-bar__ctl--identity { flex: 1 1 auto; }
-  .preview-bar__spacer { display: none; }
+  .preview-bar__ctl--secondary { display: none; }
 }
 </style>
 
@@ -1353,9 +1376,7 @@ a:hover { color: var(--color-primary-d1); }
 	<path class="lexicon-icon-outline caret-double-l-bottom" d="M165.236 312.664l81.538 85c5.412 5.642 14.188 5.642 19.6 0l81.538-85c8.731-9.101 2.548-24.664-9.8-24.664h-163.077c-12.347 0-18.531 15.563-9.8 24.664z"></path>
 </symbol><symbol id="change" viewBox="0 0 512 512">	<path class="lexicon-icon-outline change-top" d="M32,256L32,256c17.6,0,32-14.4,32-32v-96h342.6l-17.1,17.1c-12.4,12.4-12.4,32.8,0,45.3l0,0c12.4,12.4,32.8,12.4,45.3,0l67.9-67.9l0,0c12.4-12.4,12.4-32.8,0-45.3l0,0L434.8,9.3c-12.4-12.4-32.8-12.4-45.3,0l0,0c-12.4,12.4-12.4,32.8,0,45.3l9.4,9.4H32h0C14.4,64,0,78.4,0,96v0v128C0,241.6,14.4,256,32,256z"></path>
 	<path class="lexicon-icon-outline change-bottom" d="M480,256L480,256c-17.6,0-32,14.4-32,32v96H105.4l17.1-17.1c12.4-12.4,12.4-32.8,0-45.3l0,0c-12.4-12.4-32.8-12.4-45.3,0L9.3,389.5l0,0c-12.4,12.4-12.4,32.8,0,45.3l0,0l67.9,67.9c12.4,12.4,32.8,12.4,45.3,0l0,0c12.4-12.4,12.4-32.8,0-45.3l-9.4-9.4H480h0c17.6,0,32-14.4,32-32v0V288C512,270.4,497.6,256,480,256z"></path>
-</symbol><symbol id="check-small" viewBox="0 0 512 512">
-
-	<path class="lexicon-icon-outline" d="M220.9,377.2c-8,0-15.8-3.2-21.5-8.9l-91-91c-28.1-28.1,14.8-71,42.9-42.9l68.2,68.2l139.8-157.2c26.4-30,72,10.1,45.6,40.1 L243.7,366.9c-5.5,6.3-13.4,10-21.8,10.3C221.5,377.2,221.2,377.2,220.9,377.2z" />
+</symbol><symbol id="check" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M192.9,429.5c-8.3,0-16.4-3.3-22.3-9.2L44.5,294.1C15,263.2,62.7,222,89.1,249.5L191.5,352l230-258.9 c27.2-30.5,74.3,11.5,47.1,41.9L216.4,418.9c-5.8,6.5-14,10.3-22.6,10.6C193.5,429.5,193.2,429.5,192.9,429.5z" />
 </symbol><symbol id="cog" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M451.1,280.9c2.3-15.5-0.5-39.3-1.9-50.1l48.5-32.2c13.4-9.3,17.6-27.1,9.9-41.4l-35.7-63c-7.9-14.7-25.7-20.8-41-14.2l-51.2,23.5c-12.9-10.4-34.3-21.9-49.9-28l-6.7-47.9C320.9,11.8,307.3,0,291.3,0l-70,0c-16.1,0-29.6,11.9-31.8,27.7l-6.5,46.9c-18.5,7.7-36.9,19.1-50.3,29.1L82.7,79.5c-14.7-5.8-30.4-4.5-38.4,9.2l-39.8,61c-7.9,13.4-4.9,30.5,7,40.6l50.3,40.2c-1.6,11.7-3,35.2-0.6,50.9l-47.4,32.6c-13.5,9.5-17.6,27.7-9.5,42l38.9,64.5c8.2,14.3,26,20.1,41.1,13.4l48.4-25.7c13.2,10.2,34.5,23.2,50.2,29.3l5.7,46.2c1.9,16.1,15.5,28.2,31.8,28.3l72.1,0.2c16.3,0,30-12.1,31.9-28.2l5.3-46.9c18.7-7.5,37.2-17.4,50.4-27.8l52.7,21.7c15.4,7.2,33.8,1.2,41.9-13.7l33.6-60.1c7.6-14.1,3.7-31.6-9.3-41L451.1,280.9z M256.4,343.4c-103.7,0-110.4-160,0-160C365.1,183.4,360.1,343.4,256.4,343.4z M504.1,318.2 M83.7,75.1" />
 </symbol><symbol id="community" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M0,256.6c0,337.1,512,344.1,512,0C512-85.5,0-85.5,0,256.6z M60.6,363.1c7.3-61.8,67.3-106.5,109.3-106.9C296.2,255.1,307,403.8,305,474.8C199.3,505.3,90,429.4,60.6,363.1z M128,176c0-63.7,95.8-63.9,95.8,0C223.8,241.3,128,239.3,128,176z M404,261.4c32.7-50.7-8.3-101.4-52.4-101c-57,0.6-82.8,66.9-47.1,102.2c-10.9,1.9-18.7,7.7-19,7.4c-22.4-25-54.7-35.6-54.5-35.8c52.6-46.2,19.2-137.8-55.1-138.3c-66.4-0.5-110.6,81.1-54,139.4c-63,26.3-81.3,83.5-81.8,81C4.7,149.3,134.3,31.9,256,31.9c123.5,0,258.3,112.6,211.3,299.2C445.9,284.8,417.3,267.4,404,261.4z"></path>
 </symbol><symbol id="document-text" viewBox="0 0 16 16">	<path class="lexicon-icon-outline" clip-rule="evenodd" d="M10.25.002H3.5c-.83 0-1.5.671-1.5 1.5v13c0 .83.67 1.5 1.5 1.5h9c.83 0 1.5-.67 1.5-1.5V3.752L10.25.002Zm1.75 7.5a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1 0-1h7a.5.5 0 0 1 .5.5Zm-.5 1.5h-7a.5.5 0 0 0 0 1h7a.5.5 0 1 0 0-1Zm-7 2h3a.5.5 0 0 1 0 1h-3a.5.5 0 1 1 0-1Z" fill-rule="evenodd" />
@@ -1390,6 +1411,7 @@ a:hover { color: var(--color-primary-d1); }
 </symbol><symbol id="reload" viewBox="0 0 512 512">	<path class="lexicon-icon-outline reload-arrow-down" d="M472.065 460.954l-80.854 2.365c67.538-47.63 108.976-125.482 108.976-208.888 0-97.148-53.904-184.701-140.685-228.505-11.483-5.768-25.463-1.169-31.231 10.286-5.795 11.483-1.197 25.463 10.286 31.257 71.020 35.856 115.142 107.487 115.142 186.987 0 68.947-34.659 133.269-90.981 172.129l-2.074-70.702c-0.372-12.838-11.19-23.23-23.921-22.566-12.838 0.372-22.938 11.084-22.566 23.921l3.854 131.462v0.027c0 0.027 0 0.027 0 0.027l0.027 0.478c0.372 12.599 10.685 22.566 23.23 22.566 0.239 0 0.478 0 0.691 0 0.904-0.027 1.647-0.452 2.525-0.585l128.964-3.774c12.838-0.372 22.938-11.084 22.566-23.921s-11.269-23.23-23.948-22.566z"></path>
 	<path class="lexicon-icon-outline reload-arrow-up" d="M194.017 23.27c0-0.027 0-0.027 0-0.053v-0.478c-0.372-12.838-11.111-22.938-23.922-22.566-0.904 0.027-1.648 0.452-2.525 0.585l-128.99 3.774c-12.838 0.372-22.938 11.084-22.566 23.922 0.372 12.599 10.685 22.566 23.23 22.566 0.239 0 0.452 0 0.691 0l80.855-2.365c-67.538 47.63-108.976 125.508-108.976 208.889 0 97.149 53.903 184.701 140.685 228.505 3.349 1.702 6.937 2.498 10.446 2.498 8.506 0 16.692-4.678 20.785-12.785 5.794-11.483 1.196-25.463-10.286-31.231-71.020-35.856-115.142-107.488-115.142-186.987 0-68.947 34.66-133.269 90.981-172.129l2.073 70.701c0.372 12.599 10.685 22.566 23.23 22.566 0.239 0 0.478 0 0.691 0 12.838-0.372 22.938-11.083 22.566-23.922l-3.854-131.462 0.027-0.027z"></path>
 </symbol><symbol id="search" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M499.2,455.5L377.7,333.4c146-241.1-148.1-435.8-318.2-274c-165.1,185.9,41.6,460.6,273.4,319l121.5,118.8C489.5,535.8,534.4,490.8,499.2,455.5z M206.2,63.6c191.9,0,198.1,289,0,289C13.3,352.6,18.8,63.6,206.2,63.6z" />
+</symbol><symbol id="share" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M326.2,323.3l-107.6-53.8c2.7-5.9,2.4-19.9,0-27.1l107.6-53.8c77.2,69.3,185.8,13,185.8-78.9C512,49.2,462.8,0,402.3,0S287,51.3,293.4,123.3l-107.6,53.8C113.3,108,0,161.7,0,256c0,100.3,118.3,143.7,185.8,78.9l107.6,53.8C285,460.7,341.8,512,402.3,512S512,462.8,512,402.3C512,314.3,406.3,252,326.2,323.3z M438.9,109.7c0,49-73.1,47.6-73.1,0C365.7,60.3,438.9,62,438.9,109.7z M73.1,256c0-49,73.1-49,73.1,0C146.3,303.3,73.1,305,73.1,256z M365.7,402.3c0-48.6,73.1-49,73.1,0C438.9,451,365.7,449.7,365.7,402.3z"></path>
 </symbol><symbol id="shortcut" viewBox="0 0 512 512">	<path class="lexicon-icon-outline lx-shortcut-border" d="M480,320c-17.6729,0-32,14.3271-32,32v96H64V64h96c17.6729,0,32-14.3271,32-32S177.6729,0,160,0H64C28.7104,0,0,28.7104,0,64v384c0,35.29,28.7104,64,64,64h384c35.29,0,64-28.71,64-64v-96C512,334.3271,497.6729,320,480,320z"></path>
 	<path class="lexicon-icon-outline lx-shortcut-arrow" d="M480,0H320c-17.6729,0-32,14.3267-32,32s14.3271,32,32,32h82.7456L265.373,201.3726c-12.4971,12.4971-12.4971,32.7578,0,45.2549C271.6211,252.876,279.8105,256,288,256s16.3789-3.124,22.627-9.3726L448,109.2544V192c0,17.6733,14.3271,32,32,32s32-14.3267,32-32V32C512,14.3267,497.6729,0,480,0z"></path>
 </symbol><symbol id="sites" viewBox="0 0 512 512">	<path class="lexicon-icon-body lx-sites-bg" d="M437,75C388.7,26.6,324.4,0,256,0C187.6,0,123.3,26.6,75,75C26.6,123.3,0,187.6,0,256c0,68.4,26.6,132.7,75,181c48.4,48.4,112.6,75,181,75c68.4,0,132.7-26.6,181-75c48.4-48.4,75-112.6,75-181C512,187.6,485.4,123.3,437,75z" fill="none"></path>
@@ -1420,9 +1442,8 @@ a:hover { color: var(--color-primary-d1); }
 <!-- ════════════════════════════════════════════════════════════════
      LPD-97285 · Trigger preview from a Web Content Article
      LPD-97290 · Show a preview mode indicator (Site Preview Top Bar)
-     Lexicon Vanilla only: every class, icon and token comes from the
-     kit. The one addition is .preview-bar, ported from the Launches
-     preview prototype and narrowed to a single entry.
+     Lexicon Vanilla only. The bar is .preview-bar, copied from the
+     Launches preview prototype with the data swapped for this ticket.
      ════════════════════════════════════════════════════════════════ -->
 
 <section class="screen is-on" id="s-editor">
@@ -1730,12 +1751,13 @@ a:hover { color: var(--color-primary-d1); }
 
 <!-- ═══════════════════════════════════════════════════════════════
      SITE PREVIEW TOP BAR — LPD-97290
-     Same bar as the Launches preview prototype, narrowed to a single
-     entry: where that one picks a Launch, this one names the article
-     and lets you swap which unapproved version you are looking at.
+     Structure copied from the Launches preview prototype. Only the
+     data differs: where that one picks a Launch, this one picks the
+     content entry being previewed. The "Live site" option is the same
+     escape hatch the original puts at the bottom of its Launch menu.
      ═══════════════════════════════════════════════════════════════ -->
 <div class="preview-bar-shell">
-  <div class="preview-bar">
+  <div class="preview-bar" id="previewBar">
 
     <span class="preview-bar__signal">
       <svg class="lexicon-icon"><use href="#view"></use></svg>
@@ -1744,57 +1766,49 @@ a:hover { color: var(--color-primary-d1); }
 
     <span class="preview-bar__divider"></span>
 
-    <span class="preview-bar__ctl preview-bar__ctl--identity">
+    <span class="preview-bar__ctl">
       <span class="label label--sm">Content</span>
-      <span class="preview-bar__name">Q3 Product Launch — What’s New in Liferay DXP</span>
+      <span class="picker" id="pContent">
+        <button type="button" class="btn btn--borderless btn--sm picker__trigger"
+                aria-haspopup="listbox" aria-expanded="false" data-picker="pContent">
+          <span class="picker__trigger-text" id="ovContentTxt">Q3 Product Launch</span>
+          <svg class="lexicon-icon"><use href="#caret-double-l"></use></svg>
+        </button>
+        <ul class="dropdown" role="listbox" id="ovContentMenu"></ul>
+      </span>
     </span>
 
-    <span class="preview-bar__ctl">
+    <span class="preview-bar__ctl preview-bar__ctl--secondary">
       <span class="label label--sm">Version</span>
       <span class="picker" id="pVersion">
         <button type="button" class="btn btn--borderless btn--sm picker__trigger"
                 aria-haspopup="listbox" aria-expanded="false" data-picker="pVersion">
-          <span class="picker__trigger-text">Draft v1.4</span>
+          <span class="picker__trigger-text" id="ovVerTxt">Draft v1.4</span>
           <svg class="lexicon-icon"><use href="#caret-double-l"></use></svg>
         </button>
-        <ul class="dropdown" role="listbox" aria-label="Version">
-          <li><button class="dropdown__item is-active" role="option" aria-selected="true">
-            <svg class="lexicon-icon dropdown__item-icon"><use href="#check-small"></use></svg>
-            <span class="dropdown__item-text">Draft v1.4
-              <span class="preview-bar__option-meta">Last saved today, 11:42 — never published</span>
-            </span>
-          </button></li>
-          <li><button class="dropdown__item" role="option">
-            <svg class="lexicon-icon dropdown__item-icon"><use href="#check-small"></use></svg>
-            <span class="dropdown__item-text">Pending v1.35
-              <span class="preview-bar__option-meta">Awaiting approval since 24 Aug</span>
-            </span>
-          </button></li>
-          <li class="dropdown__divider" role="separator"></li>
-          <li><button class="dropdown__item" role="option">
-            <svg class="lexicon-icon dropdown__item-icon"><use href="#check-small"></use></svg>
-            <span class="dropdown__item-text">v1.3 (Published)
-              <span class="preview-bar__option-meta">What visitors see right now</span>
-            </span>
-          </button></li>
-        </ul>
+        <ul class="dropdown" role="listbox" id="ovVerMenu"></ul>
       </span>
     </span>
 
-    <span class="preview-bar__meta">Site: <strong>Nimbus Airlines</strong></span>
+    <span class="preview-bar__meta">Site: <strong id="ovSite">Nimbus Airlines</strong></span>
 
     <span class="preview-bar__spacer"></span>
 
-    <!-- One action only. The preview opens in its own tab, so the editor
-         is never behind this page: there is nothing to go "back" to, and
-         the browser's own tab is the way back. Reload is here because the
-         draft keeps changing in that other tab while this one is open.
-         With a single icon button there is no overflow to fold into, so
-         at ≤767 it simply goes — phones reload by pulling down. -->
     <span class="preview-bar__inline-actions">
-      <button class="btn btn--borderless btn--sm btn--icon" type="button" aria-label="Reload preview">
+      <button class="btn btn--borderless btn--sm btn--icon" type="button" aria-label="Reload preview" id="reload-preview">
         <svg class="lexicon-icon"><use href="#reload"></use></svg>
       </button>
+      <button class="btn btn--secondary btn--sm" type="button" id="share-preview">
+        <svg class="lexicon-icon"><use href="#share"></use></svg> Share
+      </button>
+    </span>
+
+    <span class="picker preview-bar__overflow" id="pOverflow">
+      <button type="button" class="btn btn--borderless btn--sm btn--icon"
+              aria-label="More preview actions" aria-haspopup="menu" aria-expanded="false" data-picker="pOverflow">
+        <svg class="lexicon-icon"><use href="#ellipsis-v"></use></svg>
+      </button>
+      <ul class="dropdown dropdown--right" id="ovOverflowMenu"></ul>
     </span>
 
     <button class="btn btn--secondary btn--sm" type="button" id="exit-preview" aria-label="Exit preview">
@@ -1994,15 +2008,81 @@ a:hover { color: var(--color-primary-d1); }
 
 <script>
 
+  /* Menu machinery copied from the Launches prototype: one fillMenu that
+     builds every dropdown, one toggle that keeps a single menu open. */
   (function () {
-    var pickers = Array.prototype.slice.call(document.querySelectorAll('.preview-bar .picker'));
+    var S = { content: 'article', version: 'Draft v1.4' };
 
-    function closeAll(except) {
-      pickers.forEach(function (p) {
+    var CONTENT = {
+      article: { label: 'Q3 Product Launch — What\u2019s New in Liferay DXP', meta: 'Web content \u00b7 unapproved version' },
+      live:    { label: 'Live site', meta: 'Leaves preview', live: true }
+    };
+    var VERSIONS = ['Draft v1.4', 'Pending v1.35', 'v1.3 (Published)'];
+
+    function closeMenus(except) {
+      Array.prototype.forEach.call(document.querySelectorAll('.preview-bar .picker'), function (p) {
         if (p === except) return;
         p.classList.remove('is-open');
         var t = p.querySelector('[data-picker]');
         if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+
+    function fillMenu(menuId, options, current, onPick) {
+      var menu = document.getElementById(menuId);
+      menu.innerHTML = '';
+      options.forEach(function (o) {
+        var active = o.value === current;
+        var li = document.createElement('li');
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'dropdown__item' + (active ? ' is-active' : '');
+        b.setAttribute('role', 'option');
+        b.setAttribute('aria-selected', String(active));
+        b.innerHTML = '<svg class="lexicon-icon dropdown__item-icon"><use href="#check"></use></svg>' +
+          '<span class="dropdown__item-text">' + o.label +
+            (o.meta ? '<span class="preview-bar__option-meta">' + o.meta + '</span>' : '') +
+          '</span>';
+        b.addEventListener('click', function () { closeMenus(); onPick(o.value); });
+        li.appendChild(b);
+        menu.appendChild(li);
+      });
+    }
+
+    function exitPreview() {
+      window.close();
+      setTimeout(function () {
+        if (location.hash) history.replaceState(null, '', location.pathname);
+        var ed = document.getElementById('s-editor');
+        if (!ed) { location.href = 'preview-in-site-editor.html'; return; }
+        document.querySelectorAll('.screen').forEach(function (s) { s.classList.toggle('is-on', s.id === 's-editor'); });
+        document.querySelectorAll('.screen-switch .btn').forEach(function (b) {
+          b.classList.toggle('is-active', b.getAttribute('data-go') === 's-editor');
+        });
+        window.scrollTo(0, 0);
+      }, 200);
+    }
+
+    function render() {
+      document.getElementById('ovContentTxt').textContent = CONTENT[S.content].label;
+      document.getElementById('ovVerTxt').textContent = S.version;
+
+      fillMenu('ovContentMenu', Object.keys(CONTENT).map(function (k) {
+        return { value: k, label: CONTENT[k].label, meta: CONTENT[k].meta };
+      }), S.content, function (v) {
+        if (CONTENT[v].live) { exitPreview(); return; }
+        S.content = v; render();
+      });
+
+      fillMenu('ovVerMenu', VERSIONS.map(function (v) { return { value: v, label: v }; }), S.version,
+        function (v) { S.version = v; render(); });
+
+      fillMenu('ovOverflowMenu', [
+        { value: 'version', label: 'Version', meta: S.version },
+        { value: 'reload',  label: 'Reload preview' },
+        { value: 'share',   label: 'Share' }
+      ], null, function (v) {
+        if (v === 'version') document.getElementById('pVersion').classList.add('is-open');
       });
     }
 
@@ -2011,29 +2091,18 @@ a:hover { color: var(--color-primary-d1); }
         e.stopPropagation();
         var picker = document.getElementById(trigger.getAttribute('data-picker'));
         var open = !picker.classList.contains('is-open');
-        closeAll(picker);
+        closeMenus(picker);
         picker.classList.toggle('is-open', open);
         trigger.setAttribute('aria-expanded', String(open));
       });
     });
 
-    // Selecting a version updates the trigger and the check mark
-    document.querySelectorAll('#pVersion .dropdown__item').forEach(function (item) {
-      item.addEventListener('click', function () {
-        document.querySelectorAll('#pVersion .dropdown__item').forEach(function (i) {
-          i.classList.remove('is-active');
-          i.removeAttribute('aria-selected');
-        });
-        item.classList.add('is-active');
-        item.setAttribute('aria-selected', 'true');
-        document.querySelector('#pVersion .picker__trigger-text').textContent =
-          item.querySelector('.dropdown__item-text').childNodes[0].textContent.trim();
-        closeAll(null);
-      });
-    });
+    document.getElementById('exit-preview').addEventListener('click', exitPreview);
 
-    document.addEventListener('click', function () { closeAll(null); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(null); });
+    document.addEventListener('click', function () { closeMenus(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenus(); });
+
+    render();
   })();
 
 </script>
@@ -2058,18 +2127,6 @@ a:hover { color: var(--color-primary-d1); }
     var open = document.getElementById('open-preview-tab');
     if (open) open.addEventListener('click', function () {
       window.open(location.pathname + '#preview', '_blank');
-    });
-
-    // Exit — closes the preview tab. If this tab was opened by hand
-    // rather than by the button, the browser refuses to close it, so
-    // fall back to showing the editor.
-    var exit = document.getElementById('exit-preview');
-    if (exit) exit.addEventListener('click', function () {
-      window.close();
-      setTimeout(function () {
-        if (location.hash) history.replaceState(null, '', location.pathname);
-        go('s-editor');
-      }, 200);
     });
 
     if (location.hash === '#preview') go('s-preview');
