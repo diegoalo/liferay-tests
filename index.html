@@ -20,6 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400&family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js-anim')</script>
 <style>
   :root{
     /* tokens de Figma (coleccion DIEGOALO) */
@@ -35,6 +36,7 @@
     --w:min(100vw,1440px);
     --u:calc(var(--w) / 1280);
     --ease:cubic-bezier(.22,1,.36,1);
+    --ease-page:cubic-bezier(.16,1,.3,1);   /* mas suave al aterrizar */
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{background:var(--bg)}
@@ -44,6 +46,10 @@
   .art{font-size:0;line-height:0}
   .art svg{display:block;width:100%;height:auto}
   html.safari svg g[filter]{filter:none !important}
+  /* el grano es un filtro SVG: en Chrome se re-rasteriza cada vez que el elemento
+     se mueve (el tigre va dentro de una columna sticky, y el del cursor sigue al
+     raton). Promocionarlos a capa propia hace que se cachee el resultado. */
+  .hh-tiger,.f-creature,.cursor-tag .ic{transform:translateZ(0)}
 
   /* subrayado fosforito: bloque que barre de izquierda a derecha e invierte el texto */
   .u-line{--hl:var(--saffron);position:relative;display:inline-block;
@@ -53,7 +59,7 @@
   .u-line::after{content:attr(data-text);position:absolute;inset:0;
     padding-inline:.06em;background:var(--hl);color:var(--bg);
     text-decoration:inherit;pointer-events:none;
-    clip-path:inset(0 100% 0 0);transition:clip-path .35s var(--ease)}
+    clip-path:inset(0 100% 0 0);transition:clip-path .26s var(--ease)}
   @media (hover:hover) and (pointer:fine){
     .u-line:hover::after,a:hover .u-line::after{clip-path:inset(0 0 0 0)}
   }
@@ -185,11 +191,12 @@
   @media (pointer:fine){
     html,body,a,button,[data-cursor],
     .back-link,.pe-more,.pe-check,.gal-close{cursor:none}
-    .cursor{display:block;position:fixed;left:-100px;top:-100px;width:min(4vw,54px);height:min(4vw,54px);
+    .cursor{display:block;position:fixed;left:0;top:0;width:min(4vw,54px);height:min(4vw,54px);
       border-radius:50%;background:var(--accent);mix-blend-mode:difference;pointer-events:none;z-index:10000;
-      transform:translate(-50%,-50%)}
+      transform:translate3d(-200px,-200px,0) translate(-50%,-50%);will-change:transform}
     body.over-tag .cursor{display:none}
-    .cursor-tag{position:fixed;left:-300px;top:0;pointer-events:none;z-index:10001}
+    .cursor-tag{position:fixed;left:0;top:0;pointer-events:none;z-index:10001;
+      transform:translate3d(-400px,0,0);will-change:transform}
     .cursor-tag .ic{position:absolute;left:0;top:0;width:min(4.5vw,72px);transform:translate(-30%,-24%)}
     .cursor-tag .ic svg{display:block;width:100%;height:auto}
     .cursor-tag .tag{position:absolute;left:min(2vw,34px);top:min(2.8vw,46px);
@@ -201,12 +208,28 @@
     body.over-tag .cursor-tag{display:block}
   }
 
-  /* ---------- cortina de transición ---------- */
-  .wipe{position:fixed;top:0;left:0;width:100%;height:100%;background:#f41519;
-    transform:translateX(-101%);z-index:99999;pointer-events:none}
-  .wipe.anim{transition:transform .45s cubic-bezier(.7,0,.3,1)}
-  .wipe.cover{transform:translateX(0)}
-  .wipe.reveal{transform:translateX(101%)}
+  /* ---------- transicion entre paginas ----------
+     Los selectores van explicitos (no `[data-rise]` puesto por JS): si el
+     atributo lo añade un script al final del body, entre el primer pintado y
+     ese momento la pagina se ve entera, desaparece y entonces anima — que es
+     justo el salto que se veia al cargar.
+     Transiciones y no keyframes, para poder interrumpir la entrada a mitad. */
+  @media (prefers-reduced-motion: no-preference){
+    html.js-anim .proj-side-head,html.js-anim .proj-vtitle,html.js-anim .pentry,html.js-anim .site-footer{
+      opacity:0;transform:translateY(calc(var(--u) * 32));
+      transition:opacity .6s var(--ease-page), transform .6s var(--ease-page);
+      transition-delay:calc(var(--i,0) * 70ms)}
+    html.js-anim.is-in .proj-side-head,html.js-anim.is-in .proj-vtitle,html.js-anim.is-in .pentry,html.js-anim.is-in .site-footer{opacity:1;transform:none}
+    html.js-anim.is-out .proj-side-head,html.js-anim.is-out .proj-vtitle,html.js-anim.is-out .pentry,html.js-anim.is-out .site-footer{
+      opacity:0;transform:translateY(calc(var(--u) * 16));
+      transition-duration:.32s;transition-delay:calc(var(--i,0) * 20ms)}
+  }
+  /* movimiento reducido: se mantiene la opacidad, se quita el desplazamiento */
+  @media (prefers-reduced-motion: reduce){
+    html.js-anim .proj-side-head,html.js-anim .proj-vtitle,html.js-anim .pentry,html.js-anim .site-footer{opacity:0;transition:opacity .2s ease}
+    html.js-anim.is-in .proj-side-head,html.js-anim.is-in .proj-vtitle,html.js-anim.is-in .pentry,html.js-anim.is-in .site-footer{opacity:1}
+    html.js-anim.is-out .proj-side-head,html.js-anim.is-out .proj-vtitle,html.js-anim.is-out .pentry,html.js-anim.is-out .site-footer{opacity:0}
+  }
 
   /* pantallas muy anchas: el lienzo crece con el viewport (sin salto en 1600)
      para comerse parte del margen, hasta congelarse de nuevo en 2000 */
@@ -356,37 +379,34 @@
 <script>
 /* la columna de entradas baja o sube para que el primer titulo quede alineado con el tigre */
 (function(){
-  var name=document.querySelector('.proj-name'),
-      entries=document.querySelector('.proj-entries'),
-      first=entries&&entries.querySelector('.pe-title');
-  if(!name||!entries||!first) return;
+  var entries=document.querySelector('.proj-entries'),
+      first=entries&&entries.querySelector('.pe-title'),
+      tiger=document.querySelector('.back-tiger svg'),
+      side=document.querySelector('.proj-side');
+  if(!entries||!first||!tiger) return;
+  /* base de la primera linea, aunque el titulo ocupe varias */
   function baseline(el){
     var s=document.createElement('span');
     s.style.cssText='display:inline-block;width:0;height:0';
-    el.insertBefore(s, el.firstChild);   /* primera linea, aunque el titulo ocupe varias */
+    el.insertBefore(s,el.firstChild);
     var y=s.getBoundingClientRect().bottom;
     el.removeChild(s);
     return y;
   }
-  var tiger=document.querySelector('.back-tiger svg'),
-      side=document.querySelector('.proj-side');
   function align(){
     entries.style.marginTop='';
     if(window.matchMedia('(max-width:700px)').matches) return;
     /* el lateral es sticky: con la pagina ya desplazada (el navegador recupera
        el scroll al recargar) el tigre se mediria pegado arriba y la diferencia
        se sumaria al margen. Se mide en su sitio natural y se restaura. */
-    var prev=side ? side.style.position : '';
+    var prev=side?side.style.position:'';
     if(side) side.style.position='static';
     var current=parseFloat(getComputedStyle(entries).marginTop)||0;
     /* el tigre arranca a la altura de las letras altas de la primera linea
-       del primer titulo (0.7em por encima de su base); sin tigre, la base del
-       nombre del proyecto se alinea con la del titulo */
-    var target=tiger ? tiger.getBoundingClientRect().top
-                     : baseline(name);
-    var ref=tiger ? baseline(first) - parseFloat(getComputedStyle(first).fontSize)*0.7
-                  : baseline(first);
-    entries.style.marginTop=(current+(target-ref))+'px';
+       del primer titulo (0.7em por encima de su base). "work" no se toca: se
+       queda pegado bajo el nombre, en su sitio natural. */
+    var ref=baseline(first)-parseFloat(getComputedStyle(first).fontSize)*0.7;
+    entries.style.marginTop=(current+(tiger.getBoundingClientRect().top-ref))+'px';
     if(side) side.style.position=prev;
   }
   align();
@@ -430,9 +450,17 @@
   var cur=document.querySelector('.cursor'), tag=document.querySelector('.cursor-tag');
   if(!tag) return;
   var tagText=tag.querySelector('.tag');
+  /* el cursor seguia al raton con left/top (propiedades de layout: recalculo en
+     cada mousemove). Ahora va por transform y con un solo pintado por frame. */
+  var mx=0,my=0,pending=false;
+  function draw(){
+    pending=false;
+    if(cur) cur.style.transform='translate3d('+mx+'px,'+my+'px,0) translate(-50%,-50%)';
+    tag.style.transform='translate3d('+mx+'px,'+my+'px,0)';
+  }
   window.addEventListener('mousemove',function(e){
-    if(cur){cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';}
-    tag.style.left=e.clientX+'px';tag.style.top=e.clientY+'px';
+    mx=e.clientX; my=e.clientY;
+    if(!pending){ pending=true; requestAnimationFrame(draw); }
   },{passive:true});
   document.addEventListener('mouseover',function(e){
     var el=e.target.closest?e.target.closest('[data-cursor]'):null;
@@ -466,30 +494,50 @@
     });
   });
 })();
-/* cortina de transición entre páginas */
+
+/* transicion entre paginas: los bloques suben escalonados al entrar y caen al salir */
 (function(){
-  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var w=document.createElement('div'); w.className='wipe'; document.body.appendChild(w);
-  var stored=null;
-  try{stored=sessionStorage.getItem('wipeColor');sessionStorage.removeItem('wipeColor');}catch(e){}
-  if(stored&&!reduce){
-    w.style.background=stored; w.classList.add('cover');
-    requestAnimationFrame(function(){requestAnimationFrame(function(){
-      w.classList.add('anim','reveal'); w.classList.remove('cover');
-    });});
+  var root=document.documentElement,
+      reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+      blocks=[].slice.call(document.querySelectorAll('.proj-side-head, .proj-vtitle, .pentry, .site-footer'));
+  blocks.forEach(function(el,i){ el.style.setProperty('--i', Math.min(i,8)); });
+  var last=Math.min(Math.max(blocks.length-1,0),8),
+      inMs =reduce?200:600+last*70,
+      outMs=reduce?200:320+last*20;
+  /* Las alineaciones se calculan midiendo en pantalla, y con la fuente todavia
+     sin cargar dan otro valor. Si se anima antes, los bloques se recolocan a
+     medio camino y se ve un salto. Asi que: esperar a la fuente -> realinear
+     -> y solo entonces arrancar la entrada, con todo aun invisible. */
+  function start(){
+    void document.body.offsetHeight;   /* fuerza el calculo del estado inicial */
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){ root.classList.add('is-in'); });
+    });
+  }
+  var started=false;
+  function go(){
+    if(started) return;
+    started=true;
+    window.dispatchEvent(new Event('resize'));   /* realinea ya con la fuente buena */
+    start();
+  }
+  if(document.fonts&&document.fonts.ready){
+    document.fonts.ready.then(go);
+    setTimeout(go,700);          /* red de seguridad si la fuente tarda demasiado */
+  }else{
+    go();
   }
   document.querySelectorAll('a[data-wipe]').forEach(function(a){
     a.addEventListener('click',function(e){
-      if(reduce) return;
+      if(e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey) return;
       e.preventDefault();
-      var color=a.getAttribute('data-wipe');
-      w.style.background=color;
-      try{sessionStorage.setItem('wipeColor',color);}catch(err){}
-      w.classList.remove('reveal'); w.classList.add('anim','cover');
-      setTimeout(function(){location.href=a.href;},480);
+      root.classList.remove('is-in'); root.classList.add('is-out');
+      setTimeout(function(){ location.href=a.href; }, outMs);
     });
   });
-  window.addEventListener('pageshow',function(ev){if(ev.persisted){w.className='wipe';}});
+  window.addEventListener('pageshow',function(ev){
+    if(ev.persisted){ root.classList.remove('is-out'); root.classList.add('is-in'); }
+  });
 })();
 </script>
 </body>
