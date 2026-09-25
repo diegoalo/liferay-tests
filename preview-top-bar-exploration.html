@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preview Top Bar Exploration from DIEGOALO</title>
+<meta name="description" content="Color weight, signal icon and label options for the Site Preview Top Bar in Liferay DXP, built from stock Lexicon components and compared side by side.">
+<link rel="icon" type="image/png" href="https://diegoalo.com/assets/favicon.png">
+<link rel="canonical" href="https://diegoalo.github.io/liferay-tests/preview-top-bar-exploration.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DIEGOALO">
+<meta property="og:title" content="Preview Top Bar Exploration">
+<meta property="og:description" content="Color weight, signal icon and label options for the Site Preview Top Bar in Liferay DXP, built from stock Lexicon components and compared side by side.">
+<meta property="og:url" content="https://diegoalo.github.io/liferay-tests/preview-top-bar-exploration.html">
+<meta property="og:image" content="https://diegoalo.com/assets/og-image.jpg">
+<meta property="og:image:width" content="2400">
+<meta property="og:image:height" content="1260">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@_diegoalo">
+<meta name="twitter:image" content="https://diegoalo.com/assets/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── tokens.css ── */
+/* ============================================================
+   Lexicon base tokens — vanilla
+   Copy of tokens.css trimmed to colors, spacing, typography,
+   radius and shadow. Light mode only — no theming layer.
+   ============================================================ */
+
+:root {
+
+  /* ── Color: Primary ── */
+  --color-primary-d2: #004AD7;
+  --color-primary-d1: #0053F0;
+  --color-primary:    #0B5FFF;
+  --color-primary-l0: #5791FF;
+  --color-primary-l1: #80ACFF;
+  --color-primary-l2: #B3CDFF;
+  --color-primary-l3: #F0F5FF;
+
+  /* ── Color: Secondary ── */
+  --color-secondary:    #6B6C7E;
+  --color-secondary-l0: #9393A4;
+  --color-secondary-l1: #A7A9BC;
+  --color-secondary-l2: #CDCED9;
+  --color-secondary-l3: #E7E7ED;
+
+  /* ── Color: Dark / Light ── */
+  --color-dark-d2: #111116;
+  --color-dark-d1: #1C1C24;
+  --color-dark:    #272833;
+  --color-dark-l1: #30313F;
+  --color-dark-l2: #393A4A;
+  --color-light-d2: #D3D6E0;
+  --color-light-d1: #E2E4EA;
+  --color-light:    #F1F2F5;
+  --color-light-l1: #F7F8F9;
+  --color-white:    #FFFFFF;
+
+  /* Scrim — dim layer behind overlays (mobile drawer, dialogs). Kept as a
+     stable dark tint in every skin (dark counterpart in tokens-dark.css), so
+     it never inverts the way --color-dark does. */
+  --color-scrim: rgba(57, 58, 74, 0.5);
+
+  /* ── Color: Success ── */
+  --color-success-d2: #1C5629;
+  --color-success-d1: #226A33;
+  --color-success:    #287D3C;
+  --color-success-l1: #5ACA75;
+  --color-success-l2: #EDF9F0;
+
+  /* ── Color: Info ── */
+  --color-info-d2: #234584;
+  --color-info-d1: #294F98;
+  --color-info:    #2E5AAC;
+  --color-info-l1: #89A7E0;
+  --color-info-l2: #EEF2FA;
+
+  /* ── Color: Warning ── */
+  --color-warning-d2: #863A00;
+  --color-warning-d1: #9F4500;
+  --color-warning:    #B95000;
+  --color-warning-l1: #FF8F39;
+  --color-warning-l2: #FFF4EC;
+
+  /* ── Color: Danger ── */
+  --color-danger-d2: #AB1010;
+  --color-danger-d1: #C31212;
+  --color-danger:    #DA1414;
+  --color-danger-l1: #F48989;
+  --color-danger-l2: #FEEFEF;
+
+  /* ── Spacing ── */
+  --spacing-1:   2px;
+  --spacing-2:   4px;
+  --spacing-2-5: 6px;
+  --spacing-3:   8px;
+  --spacing-4:   12px;
+  --spacing-5:   16px;
+  --spacing-6:   20px;
+  --spacing-7:   24px;
+  --spacing-8:   32px;
+  --spacing-9:   40px;
+  --spacing-10: 48px;
+
+  /* ── Border radius ── */
+  --rounded-sm:    2px;
+  --rounded-md:    4px;
+  --rounded-lg:    8px;
+  --rounded-xl:    16px;
+  --rounded-full:  9999px;
+
+  /* ── Typography ── */
+  --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-size-xs:   10px;
+  --font-size-sm:   12px;
+  --font-size-base: 14px;
+  --font-size-md:   16px;
+  --font-size-lg:   18px;
+  --font-size-xl:   20px;
+  --font-size-2xl:  28px;
+  --font-size-3xl:  32px;
+  --font-weight-normal: 300;
+  --font-weight-semi:   400;
+  --font-weight-bold:   600;
+  --line-height-base:   1.5;
+
+  /* ── Shadow ── */
+  --shadow-sm:         0 1px 2px rgba(39, 40, 51, 0.10);
+  --shadow-card:       0 2px 4px rgba(39, 40, 51, 0.12);
+  --shadow-md:         0 2px 8px rgba(39, 40, 51, 0.14);
+  --shadow-dropdown:   0 4px 8px rgba(39, 40, 51, 0.12);
+  --shadow-lg:         0 4px 16px rgba(39, 40, 51, 0.18);
+  --shadow-alert:      0 8px 16px rgba(39, 40, 51, 0.20);
+  /* Scroll shadows — a soft edge cast by sticky chrome (header / footer) over
+     scrolling content, shown only while content is clipped past that edge. */
+  --shadow-scroll-top:    0 4px 24px rgba(0, 0, 0, 0.08);
+  --shadow-scroll-bottom: 0 -4px 24px rgba(0, 0, 0, 0.08);
+
+  /* ── Focus ring ── */
+  --focus-ring: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-primary-l0);
+
+  /* ── Chart colors ── */
+  --blue-d4: #004799;
+  --blue-d3: #0053B3;
+  --blue-d2: #005FCC;
+  --blue-d1: #006BE6;
+  --blue:    #006EFF;
+  --blue-l1: #338FFF;
+  --blue-l2: #66ABFF;
+  --blue-l3: #97C5FF;
+  --blue-l4: #CCE3FF;
+  --blue-l5: #E5F1FF;
+
+  --orange-d4: #662700;
+  --orange-d3: #803100;
+  --orange-d2: #993B00;
+  --orange-d1: #B34400;
+  --orange:    #CC4E00;
+  --orange-l1: #FF6200;
+  --orange-l2: #FF8133;
+  --orange-l3: #FFA166;
+  --orange-l4: #FFC099;
+  --orange-l5: #FFF0E5;
+
+  --red-d4: #800000;
+  --red-d3: #990000;
+  --red-d2: #B30000;
+  --red-d1: #CC0000;
+  --red:    #E50000;
+  --red-l1: #FF4D4D;
+  --red-l2: #FF6666;
+  --red-l3: #FF8080;
+  --red-l4: #FF9999;
+  --red-l5: #FFE5E5;
+
+  --teal-d4: #092A25;
+  --teal-d3: #0D3F37;
+  --teal-d2: #125449;
+  --teal-d1: #16695B;
+  --teal:    #1B7E6E;
+  --teal-l1: #24A892;
+  --teal-l2: #42D7BE;
+  --teal-l3: #6CE0CC;
+  --teal-l4: #96E9DB;
+  --teal-l5: #EAFBF8;
+
+  --pink-d4: #800048;
+  --pink-d3: #990057;
+  --pink-d2: #B30065;
+  --pink-d1: #CC0074;
+  --pink:    #E50082;
+  --pink-l1: #FF4DB2;
+  --pink-l2: #FF80C8;
+  --pink-l3: #FF99D3;
+  --pink-l4: #FFB2DE;
+  --pink-l5: #FFE5F4;
+
+  --green-d4: #162D06;
+  --green-d3: #22430A;
+  --green-d2: #2E590D;
+  --green-d1: #397010;
+  --green:    #458613;
+  --green-l1: #53A117;
+  --green-l2: #67C91D;
+  --green-l3: #81E236;
+  --green-l4: #9DE963;
+  --green-l5: #F1FCE9;
+
+  --purple-d4: #7700CC;
+  --purple-d3: #8600E6;
+  --purple-d2: #9500FF;
+  --purple-d1: #9F1AFF;
+  --purple:    #AA33FF;
+  --purple-l1: #BF66FF;
+  --purple-l2: #CA80FF;
+  --purple-l3: #D499FF;
+  --purple-l4: #DFB3FF;
+  --purple-l5: #F2E5FF;
+
+  --yellow-d4: #997000;
+  --yellow-d3: #B38900;
+  --yellow-d2: #CC9600;
+  --yellow-d1: #E6A800;
+  --yellow:    #FFBB00;
+  --yellow-l1: #FFC933;
+  --yellow-l2: #FFD666;
+  --yellow-l3: #FFE499;
+  --yellow-l4: #FFF1CC;
+  --yellow-l5: #FFF8E5;
+
+  --cyan-d4: #00334D;
+  --cyan-d3: #004466;
+  --cyan-d2: #005580;
+  --cyan-d1: #006699;
+  --cyan:    #0077B3;
+  --cyan-l1: #0099E6;
+  --cyan-l2: #33BBFF;
+  --cyan-l3: #66CCFF;
+  --cyan-l4: #99DDFF;
+  --cyan-l5: #E5F6FF;
+
+  --indigo-d4: #0017E5;
+  --indigo-d3: #001AFF;
+  --indigo-d2: #1A30FF;
+  --indigo-d1: #3347FF;
+  --indigo:    #4D5FFF;
+  --indigo-l1: #808CFF;
+  --indigo-l2: #99A3FF;
+  --indigo-l3: #B2BAFF;
+  --indigo-l4: #CCD1FF;
+  --indigo-l5: #E5E8FF;
+}
+
+/* Sensible defaults for the document */
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+
+body {
+  margin: 0;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--color-dark);
+  background: var(--color-white);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.25;
+  margin: 0;
+}
+
+p { margin: 0; }
+
+a { color: var(--color-primary); }
+a:hover { color: var(--color-primary-d1); }
+
+/* ============================================================
+   SKELETON tokens — loading-state shapes and shimmer sweep.
+   Shape and surface resolve from the semantic scale (they flip
+   per skin automatically); the shimmer gradient needs raw RGB
+   components, overridden for dark skins in tokens-dark.css.
+   ============================================================ */
+:root {
+  --skeleton-shape: var(--color-secondary-l3);
+  --skeleton-surface: var(--color-light-l1);
+  --skeleton-shimmer-rgb: 247, 248, 249;  /* light-l1 */
+  --skeleton-shimmer-alpha: 0.6;
+}
+
+/* ============================================================
+   CHART tokens — categorical series, sequential buckets and
+   plot structure.
+   Categorical series alias the base chart hues (--yellow, --blue,
+   …) in a fixed order chosen for maximum adjacent contrast and
+   accessibility; the base hues already carry per-skin overrides,
+   so charts reskin for free. (Never point a series at a -l2/-l3
+   tint — those collapse to near-white in the HC skins.) The
+   sequential buckets alias the --blue scale, and the structural
+   tokens alias the semantic scale so grid / track / halo / axis /
+   land flip per skin automatically.
+   ============================================================ */
+:root {
+  /* Categorical series — bar (stacked), pie, multi-series line.
+     Ordered for maximum adjacent contrast + accessibility; alias
+     the base chart hues so each series reskins per skin. */
+  --chart-1:  var(--yellow);
+  --chart-2:  var(--blue);
+  --chart-3:  var(--orange);
+  --chart-4:  var(--teal);
+  --chart-5:  var(--pink);
+  --chart-6:  var(--cyan);
+  --chart-7:  var(--red);
+  --chart-8:  var(--purple);
+  --chart-9:  var(--green);
+  --chart-10: var(--indigo);
+
+  /* Sequential buckets — single hue, less → more (map, heat) */
+  --chart-seq-1: var(--blue-l4);
+  --chart-seq-2: var(--blue-l2);
+  --chart-seq-3: var(--blue);
+
+  /* Plot structure — flip per skin through the semantic scale */
+  --chart-track:     var(--color-light-d1);   /* bar track / gridlines (#E2E4EA) */
+  --chart-grid:      var(--color-light-d1);   /* axis gridlines */
+  --chart-halo:      var(--color-white);      /* marker + segment separators */
+  --chart-axis:      var(--color-secondary);  /* axis + tick labels */
+  --chart-land:      var(--color-light);      /* map land fill (#F1F2F5) */
+  --chart-land-line: var(--color-light-d1);   /* map land borders (#E2E4EA) */
+}
+
+/* ── Site Preview Bar (LPD-97290) ────────────────────────────
+   The bar is a primary-filled surface, so it follows the same convention as
+   .btn--primary: background var(--color-primary), foreground var(--color-white).
+   Both flip per skin, so the bar stays legible without a single literal.
+
+   Controls on the bar are stock kit components (.btn--translucent for the
+   picker and the icon buttons, .btn--secondary for Exit), so the only thing
+   the bar needs of its own is the rule it draws between clusters. That is an
+   alpha of the foreground, which cannot be expressed as a token reference, so
+   each skin carries its own counterpart in tokens-dark.css and
+   tokens-high-contrast.css. */
+:root {
+  --preview-bar-rule: rgba(255, 255, 255, 0.32);   /* divider between clusters */
+}
+
+</style>
+<style>
+/* ── components.css (solo las reglas que usa la página) ── */
+.lexicon-icon {
+  display: inline-block;
+  width: 16px;   /* default size */
+  height: 16px;
+  fill: currentColor;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+.lexicon-icon-sm { width: 12px; height: 12px; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-3);
+  height: 40px;
+  padding: 0 var(--spacing-5);
+  border-radius: var(--rounded-lg);
+  border: 1px solid transparent;
+  background: transparent;
+  font-family: inherit;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  color: var(--color-dark);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color 0.1s ease,
+    border-color 0.1s ease,
+    color 0.1s ease,
+    box-shadow 0.1s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.btn:focus-visible {
+  outline: 0;
+  box-shadow: var(--focus-ring);
+}
+.btn:disabled, .btn[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.btn--secondary {
+  background: var(--color-white);
+  border-color: var(--color-secondary-l0);
+  color: var(--color-secondary);
+}
+.btn--secondary:hover { background: var(--color-light-l1); }
+.btn--secondary:active { background: var(--color-light); }
+.btn--borderless {
+  background: transparent;
+  color: var(--color-secondary);
+}
+.btn--borderless:hover { background: var(--color-light); }
+.btn--borderless:active { background: var(--color-light-d1); }
+.btn--xs { height: 24px; padding: 0 var(--spacing-3); font-size: var(--font-size-sm); gap: var(--spacing-2); }
+.btn--sm { height: 32px; padding: 0 var(--spacing-4); font-size: var(--font-size-base); font-weight: 600; }
+.btn--icon { width: 40px; min-width: 40px; padding: 0; flex-shrink: 0; }
+.btn--icon.btn--xs { width: 24px; min-width: 24px; }
+.btn--icon.btn--sm { width: 32px; min-width: 32px; }
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  height: 24px;
+  padding: 0 var(--spacing-3);
+  border: 1px solid var(--color-secondary-l2);
+  border-radius: var(--rounded-sm);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  line-height: 18px;
+  white-space: nowrap;
+  background: var(--color-white);
+  color: var(--color-secondary);
+}
+.label--sm {
+  height: 16px;
+  padding: 0 var(--spacing-2);
+  gap: var(--spacing-1);
+  font-size: var(--font-size-xs);
+  line-height: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+.label--secondary { color: var(--color-secondary); border-color: var(--color-secondary-l2); }
+.label--info { color: var(--color-info);      border-color: var(--color-info-l1);      }
+.btn-group {
+  display: inline-flex;
+  align-items: stretch;
+}
+.btn-group > .btn { border-radius: 0; position: relative; }
+.btn-group > .btn:first-child {
+  border-top-left-radius: var(--rounded-md);
+  border-bottom-left-radius: var(--rounded-md);
+}
+.btn-group > .btn:last-child {
+  border-top-right-radius: var(--rounded-md);
+  border-bottom-right-radius: var(--rounded-md);
+}
+.btn-group > .btn + .btn { margin-left: -1px; }
+.btn-group > .btn:hover, .btn-group > .btn:focus-visible { z-index: 1; }
+.btn-group > .btn--secondary.is-active {
+  background: var(--color-light);
+  z-index: 1;
+}
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-white);
+  border: 1px solid var(--color-secondary-l2);
+  border-radius: var(--rounded-xl);
+  font-family: var(--font-family-base);
+  color: var(--color-dark);
+  overflow: hidden;
+  transition: border-color 0.1s ease;
+}
+.card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  padding: var(--spacing-4) var(--spacing-3) var(--spacing-4) var(--spacing-5);
+  border-top: 1px solid var(--color-secondary-l3);
+  flex: 1 1 auto;
+  min-width: 0;
+  position: relative;
+}
+.card__title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  margin: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: var(--color-dark);
+}
+.card__subtitle {
+  font-size: var(--font-size-base);
+  color: var(--color-secondary);
+  margin: 0;
+}
+.card__body > .label { margin-top: var(--spacing-2); align-self: flex-start; }
+.section {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-5);
+  padding: var(--spacing-2-5) 0;
+  border-bottom: 1px solid var(--color-secondary-l2);
+  font-family: var(--font-family-base);
+  text-decoration: none;
+  color: var(--color-secondary);
+}
+.section__title {
+  flex: 1 0 0;
+  min-width: 0;
+  margin: 0;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  line-height: 1.5;
+}
+.section .lexicon-icon { color: var(--color-secondary); flex-shrink: 0; }
+.picker {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  position: relative;
+  min-width: 109px;
+}
+.picker__trigger {
+  justify-content: space-between;
+  width: 100%;
+}
+.picker__trigger-text { flex: 1 1 auto; min-width: 0; text-align: left; }
+.picker__trigger > .lexicon-icon { color: var(--color-secondary); flex-shrink: 0; }
+.control-menu {
+  align-items: center;
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-light-d2);
+  display: flex;
+  gap: var(--spacing-5);
+  padding: calc(var(--spacing-2) + var(--spacing-2-5)) var(--spacing-5);
+  width: 100%;
+}
+.control-menu__left {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  gap: var(--spacing-5);
+  min-width: 0;
+}
+.control-menu__title {
+  color: var(--color-dark);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.control-menu__right {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--spacing-5);
+}
+@media (max-width: 767px) {
+  .control-menu {
+    padding: var(--spacing-2-5) var(--spacing-4);
+  }
+}
+.skeleton {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+.sk {
+  background-color: var(--skeleton-shape);
+  background-image: linear-gradient(
+    100deg,
+    rgba(var(--skeleton-shimmer-rgb), 0) 25%,
+    rgba(var(--skeleton-shimmer-rgb), var(--skeleton-shimmer-alpha)) 50%,
+    rgba(var(--skeleton-shimmer-rgb), 0) 75%
+  );
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 60vw 100vh;
+  animation: sk-shimmer var(--skeleton-duration, 1.6s) linear infinite;
+  animation-play-state: var(--skeleton-play, running);
+  border-radius: var(--rounded-md);
+  flex-shrink: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sk { animation: none; background-image: none; }
+}
+.preview-bar {
+  /* Everything the bar paints comes from these six, so a colour scheme is a
+     modifier that reassigns them rather than a second copy of the component.
+     Default scheme: primary fill. */
+  --pb-bg:       var(--color-primary);
+  --pb-ink:      var(--color-white);
+  --pb-divider:  var(--color-white);
+  --pb-edge:     transparent;
+  --pb-btn-edge: var(--color-light-l1);
+  --pb-chip:     var(--color-primary-d2);
+  --pb-chip-ink: var(--color-light);
+
+  align-items: center;
+  background: var(--pb-bg);
+  border-bottom: 1px solid var(--pb-edge);
+  color: var(--pb-ink);
+  display: flex;
+  gap: var(--spacing-4);
+  min-height: 48px;
+  padding: var(--spacing-3) var(--spacing-6);
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+.preview-bar--blue-deepest {
+  --pb-bg:       var(--color-primary-d2);
+  --pb-ink:      var(--color-white);
+  --pb-divider:  var(--color-white);
+  --pb-btn-edge: var(--color-light-l1);
+  --pb-chip:     var(--color-primary-l2);
+  --pb-chip-ink: var(--color-primary-d2);
+}
+.preview-bar__signal {
+  align-items: center;
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: var(--spacing-4);
+}
+.preview-bar .label {
+  background: var(--pb-chip);
+  border-color: var(--pb-chip);
+  color: var(--pb-chip-ink);
+  /* .label--sm uppercases by default. Here the casing is authored: the mode
+     badge is written PREVIEW, the chips naming a control are written Launch
+     and Version. Let the text decide instead of transforming it. */
+  text-transform: none;
+  /* Figma sets these chips at 12px Semibold. The kit's .label--sm is 10px
+     (--font-size-xs), which is a step too small to read on the bar. */
+  font-size: var(--font-size-sm);
+}
+.preview-bar .label--info {
+  background: var(--color-white);
+  border-color: var(--color-info-l1);
+  color: var(--color-info);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+}
+.preview-bar__divider {
+  background: var(--pb-divider);
+  flex-shrink: 0;
+  height: var(--spacing-6);
+  width: 1px;
+}
+.preview-bar .picker { position: relative; }
+.preview-bar .btn--secondary {
+  background: transparent;
+  border-color: var(--pb-btn-edge);
+  color: var(--pb-ink);
+}
+.preview-bar .btn--secondary:hover, .preview-bar .btn--secondary:active {
+  background: var(--preview-bar-rule);
+  border-color: var(--pb-ink);
+  color: var(--pb-ink);
+}
+.preview-bar .btn-group > .btn--secondary.is-active {
+  background: var(--color-light);
+  border-color: var(--color-light);
+  color: var(--color-dark);
+}
+.preview-bar .btn--borderless, .preview-bar .btn--borderless > .lexicon-icon, .preview-bar .picker__trigger > .lexicon-icon { color: inherit; }
+.preview-bar .btn--borderless:hover, .preview-bar .btn--borderless:active { background: var(--preview-bar-rule); color: inherit; }
+.preview-bar__ctl {
+  align-items: center;
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: var(--spacing-2);
+}
+.preview-bar__meta {
+  align-items: center;
+  display: flex;
+  font-size: var(--font-size-sm);
+  gap: var(--spacing-2);
+  min-width: 0;
+  white-space: nowrap;
+}
+.preview-bar__spacer { flex: 1; }
+.preview-bar__inline-actions {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--spacing-2);
+}
+.preview-bar-shell {
+  container: preview-bar / inline-size;
+}
+@media (max-width: 1023px) {
+  .preview-bar__meta { display: none; }
+}
+@media (max-width: 767px) {
+  .preview-bar { gap: var(--spacing-3); padding: var(--spacing-3) var(--spacing-5); }
+  .preview-bar__divider { display: none; }
+  .preview-bar__inline-actions { display: none; }
+}
+@keyframes sk-shimmer {
+  0%   { background-position: -60vw 0; }
+  100% { background-position: 100vw 0; }
+}
+</style>
+<style>
+/* ═══ Chrome del repo ══════════════════════════════════════════════ */
+/* Cabecera del repo: misma que las otras páginas de liferay-tests.
+   Comparte superficie con el control-menu de abajo para que las dos se
+   lean como un solo bloque. */
+.site-header { display: flex; justify-content: flex-start;
+  padding: var(--spacing-6) var(--spacing-7) var(--spacing-4);
+  background: var(--color-light-l1); }
+.back { display: inline-flex; align-items: center; }
+.back svg { height: 48px; width: auto; display: block; }
+.back svg path { fill: var(--color-dark); transition: fill 150ms ease; }
+.back:hover svg path { fill: #F40B0F; }
+
+.wipe { position: fixed; inset: 0; background: #10DAF9; transform: translateX(-101%);
+  z-index: 99999; pointer-events: none; }
+.wipe.anim { transition: transform .45s cubic-bezier(.7,0,.3,1); }
+.wipe.cover { transform: translateX(0); }
+
+/* Geist solo en el chrome de la página. Los componentes de Lexicon se
+   quedan con el stack del producto: cambiarles la tipografía falsearía
+   el preview, que es justo lo que se viene a mirar aquí. */
+.control-menu__title { font-family: 'Geist', var(--font-family-base); font-weight: 500; }
+
+@media (max-width: 860px) {
+  .site-header { padding: var(--spacing-5) var(--spacing-5) var(--spacing-3); }
+  .back svg { height: 36px; }
+}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="angle-left" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M136.8,272.8l201.7,202.1c23.5,23.1,60-11.6,36.1-35.2L191.7,256l183-183.9c23.9-23.2-12.5-58.1-36-35.1L136.8,239.2C127.5,248.5,126.6,262.8,136.8,272.8z" />
+</symbol><symbol id="caret-double-l" viewBox="0 0 512 512">	<path class="lexicon-icon-outline caret-double-l-top" d="M347.913 199.336l-81.538-85c-5.413-5.642-14.188-5.642-19.6 0l-81.538 85c-8.731 9.101-2.548 24.664 9.8 24.664h163.077c12.348 0 18.531-15.563 9.8-24.664z"></path>
+	<path class="lexicon-icon-outline caret-double-l-bottom" d="M165.236 312.664l81.538 85c5.412 5.642 14.188 5.642 19.6 0l81.538-85c8.731-9.101 2.548-24.664-9.8-24.664h-163.077c-12.347 0-18.531 15.563-9.8 24.664z"></path>
+</symbol><symbol id="display" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M64,0h384c35.2,0,64,28.8,64,64v288c0,35.2-28.8,64-64,64H64c-35.2,0-64-28.8-64-64V64C0,28.8,28.8,0,64,0z M64,320h384V64H64V320z M192,448h128c41.6,0,41.6,64,0,64H192C150.4,512,147.2,448,192,448z M432,384c8.8,0,16-7.2,16-16s-7.2-16-16-16s-16,7.2-16,16S423.2,384,432,384z" />
+</symbol><symbol id="mobile-portrait" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" clip-rule="evenodd" d="M384 64H128v384h256V64ZM128 0C92.654 0 64 28.654 64 64v384c0 35.346 28.654 64 64 64h256c35.346 0 64-28.654 64-64V64c0-35.346-28.654-64-64-64H128Z" fill-rule="evenodd" />
+	<path class="lexicon-icon-outline" d="M192 368c0-8.837 7.163-16 16-16h96c8.837 0 16 7.163 16 16s-7.163 16-16 16h-96c-8.837 0-16-7.163-16-16Z" />
+</symbol><symbol id="page" viewBox="0 0 16 16">	<path class="lexicon-icon-outline" clip-rule="evenodd" d="M13.88.884a3 3 0 0 0-2.123-.88H1.982A1.983 1.983 0 0 0 0 1.988V14.02c0 1.095.888 1.983 1.982 1.983h11.88c1.094 0 2.138-.888 2.138-1.983V4.25a3 3 0 0 0-.877-2.12L13.879.883ZM14 13.94a.258.258 0 0 1-.137.062H2V2.007h8V5.01a1 1 0 0 0 1 1h3v7.929Z" fill-rule="evenodd" />
+</symbol><symbol id="reload" viewBox="0 0 512 512">	<path class="lexicon-icon-outline reload-arrow-down" d="M472.065 460.954l-80.854 2.365c67.538-47.63 108.976-125.482 108.976-208.888 0-97.148-53.904-184.701-140.685-228.505-11.483-5.768-25.463-1.169-31.231 10.286-5.795 11.483-1.197 25.463 10.286 31.257 71.020 35.856 115.142 107.487 115.142 186.987 0 68.947-34.659 133.269-90.981 172.129l-2.074-70.702c-0.372-12.838-11.19-23.23-23.921-22.566-12.838 0.372-22.938 11.084-22.566 23.921l3.854 131.462v0.027c0 0.027 0 0.027 0 0.027l0.027 0.478c0.372 12.599 10.685 22.566 23.23 22.566 0.239 0 0.478 0 0.691 0 0.904-0.027 1.647-0.452 2.525-0.585l128.964-3.774c12.838-0.372 22.938-11.084 22.566-23.921s-11.269-23.23-23.948-22.566z"></path>
+	<path class="lexicon-icon-outline reload-arrow-up" d="M194.017 23.27c0-0.027 0-0.027 0-0.053v-0.478c-0.372-12.838-11.111-22.938-23.922-22.566-0.904 0.027-1.648 0.452-2.525 0.585l-128.99 3.774c-12.838 0.372-22.938 11.084-22.566 23.922 0.372 12.599 10.685 22.566 23.23 22.566 0.239 0 0.452 0 0.691 0l80.855-2.365c-67.538 47.63-108.976 125.508-108.976 208.889 0 97.149 53.903 184.701 140.685 228.505 3.349 1.702 6.937 2.498 10.446 2.498 8.506 0 16.692-4.678 20.785-12.785 5.794-11.483 1.196-25.463-10.286-31.231-71.020-35.856-115.142-107.488-115.142-186.987 0-68.947 34.66-133.269 90.981-172.129l2.073 70.701c0.372 12.599 10.685 22.566 23.23 22.566 0.239 0 0.478 0 0.691 0 12.838-0.372 22.938-11.083 22.566-23.922l-3.854-131.462 0.027-0.027z"></path>
+</symbol><symbol id="sites" viewBox="0 0 512 512">	<path class="lexicon-icon-body lx-sites-bg" d="M437,75C388.7,26.6,324.4,0,256,0C187.6,0,123.3,26.6,75,75C26.6,123.3,0,187.6,0,256c0,68.4,26.6,132.7,75,181c48.4,48.4,112.6,75,181,75c68.4,0,132.7-26.6,181-75c48.4-48.4,75-112.6,75-181C512,187.6,485.4,123.3,437,75z" fill="none"></path>
+	<path class="lexicon-icon-outline lx-sites-border" d="M437,75C388.7,26.6,324.4,0,256,0C187.6,0,123.3,26.6,75,75C26.6,123.3,0,187.6,0,256c0,68.4,26.6,132.7,75,181c48.4,48.4,112.6,75,181,75c68.4,0,132.7-26.6,181-75c48.4-48.4,75-112.6,75-181C512,187.6,485.4,123.3,437,75z M256,448c-105.9,0-192-86.1-192-192S150.1,64,256,64s192,86.1,192,192S361.9,448,256,448z"></path>
+	<path class="lexicon-icon-outline lx-sites-hands" d="M128,384l192-64l64-192l-192,64L128,384z M254.9,224c17.7,0,32,14.3,32,32s-14.3,32-32,32s-32-14.3-32-32C222.9,238.3,237.2,224,254.9,224z"></path>
+</symbol><symbol id="tablet-landscape" viewBox="0 0 16 16">	<path class="lexicon-icon-outline" d="M6.5 11.003a.5.5 0 0 0 0 1h3a.5.5 0 1 0 0-1h-3Z" />
+	<path class="lexicon-icon-outline" clip-rule="evenodd" d="M0 13.005v-10c0-1.1.9-2 2-2h12c1.1 0 2 .9 2 2v10c0 1.1-.9 2-2 2H2c-1.1 0-2-.9-2-2Zm14 0v-10H2v10h12Z" fill-rule="evenodd" />
+</symbol><symbol id="view" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M5.1,273.3c127.1,192,374.7,188.6,501.6-0.1c7-10.4,7-24.5,0.1-34.9C378.6,45.8,132.4,51.3,5.3,238.5C-1.7,248.8-1.8,262.8,5.1,273.3z M63.7,255.8c120.8-137.8,266.3-139.6,384.5,0C330,393.5,183.9,391.7,63.7,255.8z M283.9,164.4c-91.6-26-160.9,74.5-102.8,151.5c57.4,75.2,195.5,24.2,166.5-87.9C301.4,304.3,208.7,209.5,283.9,164.4z" />
+</symbol></svg>
+
+<header class="site-header"><a class="back" href="https://diegoalo.github.io/liferay-tests/" data-wipe="#10daf9" aria-label="Back to liferay-tests" title="Back to liferay-tests"><svg width="289" height="180" viewBox="0 0 289 180" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M57.3224 2C58.0985 2.00019 59.7675 2.26634 61.7004 2.61426C63.6952 2.97336 66.1397 3.45233 68.5695 3.92773C71.0052 4.4043 73.4287 4.87845 75.4006 5.2334C77.4328 5.59917 78.8339 5.80841 79.3283 5.80859C80.1936 5.80887 80.8218 6.33285 81.215 6.80469C81.6215 7.2927 81.9542 7.92828 82.2336 8.60156C82.7976 9.96119 83.2675 11.7781 83.6437 13.7129C84.1382 16.2561 84.4931 19.1208 84.6799 21.6514C85.1211 20.5459 85.6116 19.277 86.134 17.9375C87.1627 15.2998 88.3042 12.4226 89.381 10.2012C89.9166 9.09644 90.4632 8.09792 90.9972 7.35938C91.2627 6.99238 91.56 6.63962 91.8888 6.36816C92.2005 6.11111 92.6831 5.80875 93.2941 5.80859L93.673 5.82129C94.6794 5.88177 96.5229 6.14515 98.6945 6.48535C101.235 6.8834 104.379 7.41307 107.523 7.94141C110.672 8.47063 113.824 8.99945 116.399 9.39453C119.023 9.79727 120.921 10.0398 121.648 10.04C122.44 10.0404 122.967 10.5257 123.251 10.9873C123.513 11.4129 123.649 11.9268 123.732 12.4014C123.901 13.3727 123.923 14.6744 123.869 16.1182C123.761 19.032 123.332 22.8945 122.91 26.6855C122.485 30.5117 122.069 34.2673 121.965 37.0664C121.913 38.4786 121.944 39.5581 122.066 40.2529C122.075 40.3051 122.085 40.3538 122.095 40.3984C122.132 40.3871 122.175 40.3751 122.218 40.3613C122.598 40.2393 123.094 40.0529 123.712 39.8027C124.95 39.3012 126.583 38.584 128.609 37.7061C132.643 35.9571 138.137 33.6147 144.765 31.2725C158.015 26.5896 175.835 21.8897 195.707 21.8896C216.152 21.8902 227.801 36.5605 234.329 52.0254C238.561 62.0505 241.78 70.2171 241.78 80.0908C241.781 89.9643 256.224 89.8801 256.224 80.0908C256.224 70.3012 257.176 34.3405 257.916 17.2354C258.657 0.130422 285.001 1.48008 285.001 17.2354V80.0908C285.001 91.5849 278.509 114.569 256.224 114.569C244.045 114.569 239.195 111.486 239.195 114.569C239.194 117.65 235.678 132.419 235.671 132.448C235.671 132.448 231.587 150.653 229.657 157.314C228.694 160.638 227.768 163.431 226.922 165.408C226.502 166.389 226.078 167.228 225.65 167.842C225.436 168.147 225.187 168.447 224.897 168.682C224.612 168.911 224.182 169.161 223.638 169.161H194.861C194.401 169.161 193.896 169.01 193.51 168.596C193.157 168.217 193.038 167.761 192.998 167.419C192.922 166.762 193.081 165.994 193.275 165.302C193.678 163.857 194.469 161.975 195.227 160.199C196.007 158.37 196.756 156.642 197.162 155.366C197.235 155.137 197.288 154.939 197.33 154.772H188.53C188.504 154.783 188.428 154.826 188.302 154.967C188.081 155.215 187.825 155.637 187.554 156.259C187.013 157.498 186.545 159.2 186.094 161.006C185.656 162.758 185.229 164.629 184.783 166.028C184.562 166.725 184.307 167.399 184 167.919C183.846 168.179 183.642 168.464 183.372 168.695C183.092 168.935 182.683 169.161 182.165 169.161H167.777C167.53 169.161 167.233 169.107 166.948 168.934C166.659 168.756 166.468 168.506 166.355 168.261C166.155 167.828 166.181 167.382 166.213 167.12C166.283 166.548 166.523 165.852 166.797 165.17C167.363 163.762 168.29 161.91 169.18 160.13C170.088 158.313 170.96 156.567 171.479 155.277C171.554 155.091 171.616 154.922 171.669 154.772H164.406C164.245 155.063 164.051 155.527 163.832 156.164C163.388 157.46 162.925 159.209 162.445 161.022C161.973 162.805 161.483 164.654 161.002 166.056C160.764 166.749 160.505 167.402 160.223 167.9C160.083 168.146 159.903 168.418 159.671 168.643C159.448 168.858 159.039 169.161 158.466 169.161H138.999C138.514 169.161 138.111 168.938 137.844 168.636C137.611 168.372 137.497 168.073 137.436 167.856C137.313 167.422 137.291 166.904 137.303 166.406C137.328 165.376 137.52 163.972 137.824 162.365C138.438 159.129 139.55 154.847 140.91 150.579C142.269 146.316 143.893 142.012 145.543 138.753C146.365 137.13 147.222 135.708 148.088 134.675C148.89 133.718 149.97 132.767 151.272 132.767H175.501C175.705 132.404 175.989 131.892 176.335 131.251C177.077 129.876 178.105 127.91 179.242 125.55C181.521 120.821 184.224 114.548 185.968 108.303C187.727 102.002 188.439 95.9675 186.996 91.585C186.29 89.4387 185.073 87.7097 183.205 86.501C181.321 85.2821 178.664 84.5226 174.971 84.5225C144.612 84.5226 128.419 120.494 128.419 120.494C126.637 125.974 118.071 158.768 116.07 162.524C115.073 164.397 114.045 165.992 113.006 167.137C112.011 168.233 110.782 169.161 109.375 169.161C107.722 169.161 101.561 169.476 93.1564 169.874C84.7841 170.271 74.2469 170.747 63.9211 171.064C53.6018 171.382 43.4648 171.542 35.8986 171.303C32.1245 171.183 28.9399 170.964 26.6808 170.604C25.564 170.425 24.5917 170.201 23.8703 169.901C23.5129 169.753 23.1355 169.552 22.8303 169.269C22.5111 168.972 22.1974 168.508 22.1974 167.892C22.1974 165.317 22.4113 158.074 23.1584 151.457C23.5309 148.158 24.0423 144.949 24.7482 142.54C25.0984 141.345 25.5204 140.261 26.048 139.45C26.5511 138.677 27.3601 137.845 28.5451 137.845C29.7287 137.845 31.6707 138.132 34.0724 138.522C36.5283 138.922 39.5629 139.447 43.0705 139.975C47.7566 140.679 53.2544 141.38 59.2033 141.768C58.9754 137.465 57.9037 131.499 56.0783 131.497C53.5393 131.497 48.859 131.497 44.6271 131.497C40.3952 131.497 35.7394 126.419 35.7394 118.378C35.7394 110.338 32.3536 107.375 27.2756 107.375C22.1974 107.375 15.0035 106.529 15.0031 104.836C15.0031 103.143 22.6209 98.4883 31.508 98.4883C40.3949 98.4892 51.3979 116.686 53.5138 116.686C55.6293 116.685 55.6302 113.3 61.131 113.3C66.6324 113.3 71.5363 120.472 71.5363 128.089C71.5365 133.167 77.7899 136.506 81.6652 139.883C85.8435 138.331 89.6751 135.871 92.9308 132.236C99.4636 124.943 103.874 112.713 103.874 92.9863C103.874 88.4235 102.732 84.7699 100.766 81.834C100.205 82.6394 99.4883 83.595 98.6691 84.6348C96.7454 87.0765 94.1779 90.1111 91.5705 93.0645C88.9631 96.0178 86.2915 98.9181 84.1535 101.09C83.0888 102.171 82.1297 103.099 81.3654 103.768C80.9881 104.098 80.6177 104.4 80.2824 104.632C80.1168 104.746 79.915 104.875 79.6955 104.981C79.532 105.061 79.1052 105.259 78.5588 105.259C77.546 105.259 76.9461 104.622 76.7219 104.326C76.4815 104.009 76.3489 103.679 76.2756 103.471C76.1207 103.031 76.0198 102.512 75.9465 102.018C75.7943 100.992 75.6922 99.5966 75.6252 98.0088C75.4902 94.8098 75.4904 90.5788 75.5969 86.373C75.7033 82.1673 75.9162 77.9366 76.2131 74.7383C76.3605 73.1505 76.5349 71.7577 76.7385 70.7344C76.7448 70.7024 76.7514 70.6698 76.758 70.6377C75.0151 70.432 73.2296 70.2823 71.4162 70.1807C71.4155 70.1827 71.4149 70.1854 71.4142 70.1875C71.0722 71.1451 70.5034 72.4446 69.8019 73.9277C68.3879 76.9174 66.3282 80.8742 64.1457 84.8135C61.9639 88.7513 59.6353 92.7147 57.6789 95.71C56.7056 97.2001 55.7936 98.498 55.0187 99.4424C54.6365 99.9082 54.2402 100.348 53.8488 100.689C53.6536 100.86 53.4098 101.05 53.1291 101.206C52.874 101.348 52.4116 101.561 51.8215 101.562C50.7304 101.562 50.0306 100.88 49.7336 100.538C49.3874 100.139 49.1196 99.6625 48.9113 99.2285C48.4856 98.3416 48.0898 97.1677 47.7228 95.8799C46.9807 93.2753 46.252 89.8244 45.6135 86.3389C44.9725 82.84 44.4124 79.2503 44.0119 76.3467C43.7469 74.4255 43.5403 72.7216 43.4347 71.5391C40.0442 71.971 36.8402 72.4542 33.9357 72.9336C29.8278 73.6117 26.3222 74.281 23.7336 74.7812C22.4442 75.0304 21.3697 75.24 20.5685 75.3867C20.1685 75.4599 19.8233 75.5198 19.548 75.5615C19.3 75.5991 19.0258 75.6357 18.8117 75.6357C17.9543 75.6354 17.4304 75.0663 17.1838 74.5586C16.9612 74.1002 16.8793 73.5569 16.8469 73.0615C16.7801 72.0397 16.8987 70.6653 17.1193 69.1211C17.1385 68.9866 17.1589 68.8502 17.1799 68.7119C13.0313 70.1477 5.93656 71.8262 5.33709 71.8271C4.49104 71.8264 4.06763 69.7108 4.06756 68.4414C4.06754 67.4034 13.97 64.1022 18.2756 62.9326C18.6417 61.2365 19.0531 59.4556 19.4826 57.6699C19.6367 57.0292 19.7935 56.3862 19.9513 55.7451H4.91424C3.6447 55.745 4.06765 53.6289 4.06756 52.3594C4.07076 51.3037 16.6608 51.4198 20.8947 51.9756C21.4543 49.7693 21.9962 47.6716 22.4621 45.8438C22.5644 45.4425 22.6608 45.0539 22.7551 44.6807C19.1841 44.2983 6.53748 42.2045 5.76092 42.2031C4.91445 42.2031 3.22152 39.2413 4.91424 39.2412C6.46759 39.2415 20.091 40.66 23.6681 40.8984C23.7223 40.648 23.7683 40.4267 23.8039 40.2373C23.8367 40.0627 23.8598 39.9228 23.8742 39.8164C23.8879 39.715 23.8895 39.6696 23.8898 39.6641C23.8898 39.1208 24.1281 38.6852 24.3849 38.3799C24.6355 38.0825 24.9517 37.849 25.257 37.665C25.8683 37.297 26.6731 36.986 27.5431 36.7178C29.3035 36.1752 31.6368 35.7148 34.008 35.3418C38.4718 34.6397 43.304 34.2139 45.1652 34.167C45.2727 34.032 45.423 33.8057 45.6047 33.46C46.0216 32.6662 46.4983 31.4809 47.0187 29.9883C48.0551 27.0159 49.1953 23.034 50.3351 19.0049C51.4684 14.9989 52.602 10.9441 53.6115 7.89551C54.1143 6.37701 54.6028 5.05704 55.0617 4.10156C55.2879 3.6306 55.5358 3.18631 55.8088 2.8418C55.9457 2.66914 56.123 2.47862 56.3439 2.32324C56.5656 2.1676 56.9006 2.00017 57.3224 2ZM261.687 86.8848C260.735 86.888 258.006 100.068 258.005 100.704C258.005 101.334 276.807 99.3731 276.81 97.3633C276.81 95.3533 262.638 86.8848 261.687 86.8848ZM80.7746 72.2051C80.6541 72.9647 80.5362 73.9534 80.4269 75.1309C80.142 78.2009 79.9334 82.3286 79.8283 86.4805C79.7232 90.6328 79.7232 94.7605 79.8527 97.8301C79.8754 98.3665 79.9031 98.8637 79.9328 99.3174C80.3022 98.9578 80.7064 98.5583 81.1369 98.1211C83.204 96.0214 85.8224 93.1816 88.3986 90.2637C90.9749 87.3456 93.4866 84.3753 95.3449 82.0166C96.2774 80.8331 97.0225 79.8311 97.5256 79.0811C97.546 79.0506 97.5648 79.0194 97.5842 78.9902C97.2186 78.7615 96.7471 78.4937 96.1711 78.1973C94.4517 77.3125 92.0926 76.2986 89.632 75.3301C87.182 74.3657 84.6806 73.4665 82.6965 72.8115C81.9696 72.5716 81.3201 72.3667 80.7746 72.2051ZM59.1779 70.1494C55.4259 70.3128 51.6994 70.614 48.1144 70.9932C47.9388 71.0353 47.7821 71.0765 47.6457 71.1182C47.7326 72.0922 47.9203 73.7104 48.2043 75.7695C48.5972 78.6185 49.1481 82.1446 49.7765 85.5752C50.4075 89.019 51.1071 92.3132 51.7931 94.7207C51.9454 95.2552 52.0941 95.7277 52.2336 96.1377C52.7768 95.4192 53.4194 94.4935 54.1359 93.3965C56.0147 90.52 58.2887 86.6537 60.4445 82.7627C62.5995 78.8731 64.6136 75.0003 65.9767 72.1182C66.3174 71.3978 66.6103 70.7519 66.8527 70.1924C64.8819 70.153 62.1049 70.1129 59.1779 70.1494ZM276.816 44.957C275.479 44.9571 263.448 69.5433 263.391 70.8809C263.334 72.2187 275.518 80.5098 276.815 80.5098C278.111 80.5049 278.153 44.957 276.816 44.957ZM202.907 38.4629C202.904 36.2242 175.724 34.6078 175.722 37.1465C175.722 39.6873 170 75.7042 172.015 75.7041C174.035 75.6964 202.907 40.7016 202.907 38.4629ZM211.058 43.4727C209.788 43.4727 202.594 75.2119 205.133 75.2119C207.676 75.2094 227.563 64.2085 227.563 62.0928C227.56 59.9753 212.334 43.4808 211.058 43.4727ZM167.777 35.8555C166.93 35.8555 145.347 41.3566 145.347 43.4727C145.347 45.5886 147.463 66.3237 149.155 66.3252C149.213 66.2349 168.608 35.8756 167.777 35.8555ZM42.0646 45.7578C35.9924 45.815 28.1093 44.3599 28.2775 51.8965C28.446 59.4333 33.4086 61.5632 36.0685 61.5635C38.7284 61.5636 52.4553 61.0146 52.4552 57.0791C52.4552 53.1437 48.1367 45.701 42.0646 45.7578ZM100.065 23.583C97.9471 23.5876 87.7922 43.8963 87.7922 45.5889C87.7929 47.2815 98.7918 51.9349 100.91 51.9365C103.027 51.9324 108.105 28.6608 108.105 27.8145C108.104 26.968 102.181 23.5839 100.065 23.583ZM101.684 28.5176C102.699 28.5193 102.621 35.9141 102.621 37.5713C102.621 39.2288 98.7391 45.8666 97.3371 45.8662C95.9355 45.8647 96.3849 38.3355 96.3849 36.3428C96.3849 34.3505 100.668 28.5176 101.684 28.5176ZM273.475 18.6895C272.687 18.6881 263.765 44.957 264.954 44.957C266.143 44.957 276.817 32.3939 276.817 30.5273C276.816 28.66 274.261 18.693 273.475 18.6895ZM65.3625 15.542C63.2466 15.5466 60.2844 36.2791 60.2844 37.9717C60.2861 39.6639 69.5926 40.5105 71.7101 40.5107C73.8251 40.5066 71.7102 17.2351 71.7101 16.8115C71.7101 16.3884 67.4786 15.5422 65.3625 15.542ZM67.5041 20.3545C68.9061 20.3555 69.756 27.5471 69.756 28.9492C69.756 30.3514 68.2548 36.7624 66.8527 36.7627C65.4507 36.7623 64.2511 30.3513 64.2511 28.9492C64.2511 27.5471 66.1021 20.3549 67.5041 20.3545Z" fill="#10DAF9"/></svg></a></header>
+
+<div class="control-menu">
+  <div class="control-menu__left">
+    <span class="control-menu__title">Preview Top Bar Exploration</span>
+  </div>
+  <div class="control-menu__right">
+    <span class="label label--sm label--secondary">LPD-106078</span>
+  </div>
+</div>
+
+<div style="background: var(--color-light); min-height: 100vh;">
+<main style="max-width: 1100px; margin: 0 auto; padding: var(--spacing-8) var(--spacing-7) var(--spacing-9); --skeleton-play: paused;">
+
+  <header style="margin-bottom: var(--spacing-8);">
+    <p style="font-size: var(--font-size-base); color: var(--color-secondary); margin: 0 0 var(--spacing-3); max-width: 720px; line-height: 1.5;">Full-saturation primary on a persistent, full-width bar reads as loud rather than as system chrome. That is the problem these options are measured against. The bar also needs a signal icon that nothing else in the product already claims.</p>
+    <p style="font-size: var(--font-size-base); color: var(--color-secondary); margin: 0; max-width: 720px; line-height: 1.5;">The hue itself stays blue. The <a href="https://liferay-headless.github.io/liferay-headless/launches-poc.html" target="_blank" rel="noopener">Launches proof of concept</a> already codes the launch path in blue throughout, against orange for publications. This bar exists to say “you are viewing a launch’s pinned versions”, so staying blue keeps that vocabulary instead of inventing a new color meaning just for preview. What is open is how much of that blue to use.</p>
+  </header>
+
+  <section style="margin-bottom: var(--spacing-9);">
+    <header class="section" style="margin-bottom: var(--spacing-5);"><h2 class="section__title">1 · Blue weight</h2></header>
+    <div style="display: flex; flex-direction: column; gap: var(--spacing-6);">
+      <!-- Vivid — shipped today, no modifier -->
+      <article class="card">
+        <div class="skeleton" style="display: flex; align-items: center; gap: var(--spacing-6); padding: var(--spacing-4) var(--spacing-6);">
+          <div class="sk" style="width: var(--spacing-6); height: var(--spacing-6);"></div>
+          <div class="sk" style="width: var(--spacing-10); height: var(--spacing-3);"></div>
+          <div class="sk" style="width: var(--spacing-10); height: var(--spacing-3);"></div>
+          <div class="sk" style="width: var(--spacing-10); height: var(--spacing-3);"></div>
+        </div>
+        <div class="preview-bar-shell">
+          <div class="preview-bar">
+            <button class="btn btn--borderless btn--sm btn--icon" type="button" aria-label="Back">
+              <svg class="lexicon-icon"><use href="#angle-left"></use></svg>
+            </button>
+            <span class="preview-bar__signal">
+              <svg class="lexicon-icon"><use href="#sites"></use></svg>
+              <span class="label label--sm">Preview</span>
+            </span>
+            <span class="preview-bar__divider"></span>
+            <span class="preview-bar__ctl">
+              <span class="label label--sm">Launch</span>
+              <div class="picker"><button type="button" class="btn btn--borderless btn--sm picker__trigger" aria-haspopup="listbox" aria-expanded="false">
+                <span class="picker__trigger-text">Christmas Campaign</span>
+                <svg class="lexicon-icon lexicon-icon-sm"><use href="#caret-double-l"></use></svg>
+              </button></div>
+            </span>
+            <span class="preview-bar__meta">Version: <strong>1</strong></span>
+            <span class="preview-bar__meta">Site: <strong>Bootcamp</strong></span>
+            <span class="preview-bar__spacer"></span>
+            <div class="btn-group" data-role="device-switch">
+              <button type="button" class="btn btn--secondary btn--sm btn--icon is-active" data-device="desktop" aria-label="Desktop view" aria-pressed="true">
+                <svg class="lexicon-icon"><use href="#display"></use></svg>
+              </button>
+              <button type="button" class="btn btn--secondary btn--sm btn--icon" data-device="tablet" aria-label="Tablet view" aria-pressed="false">
+                <svg class="lexicon-icon"><use href="#tablet-landscape"></use></svg>
+              </button>
+              <button type="button" class="btn btn--secondary btn--sm btn--icon" data-device="mobile" aria-label="Mobile view" aria-pressed="false">
+                <svg class="lexicon-icon"><use href="#mobile-portrait"></use></svg>
+              </button>
+            </div>
+            <span class="preview-bar__inline-actions">
+              <button class="btn btn--borderless btn--sm btn--icon" aria-label="Reload preview" type="button">
+                <svg class="lexicon-icon"><use href="#reload"></use></svg>
+              </button>
+            </span>
+          </div>
+        </div>
+        <div class="skeleton" style="display: flex; gap: var(--spacing-3); padding: var(--spacing-5) var(--spacing-6) var(--spacing-6);">
+          <div class="sk" style="flex: 1; height: var(--spacing-9);"></div>
+          <div class="sk" style="flex: 1; height: var(--spacing-9);"></div>
+          <div class="sk" style="flex: 1; height: var(--spacing-9);"></div>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">Vivid</h3>
+          <p class="card__subtitle">What ships today. Clears AA at 5.13:1, but full saturation across the whole width is what makes the bar feel like a banner instead of a system signal. Baseline, not the recommendation.</p>
+          <span class="label label--secondary">--color-primary</span>
+        </div>
+      </article>
+
+      <!-- Deepest -->
+      <article class="card">
+        <div class="skeleton" style="display: flex; align-items: center; gap: var(--spacing-6); padding: var(--spacing-4) var(--spacing-6);">
+          <div class="sk" style="width: var(--spacing-6); height: var(--spacing-6);"></div>
+          <div class="sk" style="width: var(--spacing-10); height: var(--spacing-3);"></div>
+          <div class="sk" style="width: var(--spacing-10); height: var(--spacing-3);"></div>
+          <div class="sk" style="width: var(--spacing-10); height: var(--spacing-3);"></div>
+        </div>
+        <div class="preview-bar-shell">
+          <div class="preview-bar preview-bar--blue-deepest">
+            <button class="btn btn--borderless btn--sm btn--icon" type="button" aria-label="Back">
+              <svg class="lexicon-icon"><use href="#angle-left"></use></svg>
+            </button>
+            <span class="preview-bar__signal">
+              <svg class="lexicon-icon"><use href="#sites"></use></svg>
+              <span class="label label--sm">Preview</span>
+            </span>
+            <span class="preview-bar__divider"></span>
+            <span class="preview-bar__ctl">
+              <span class="label label--sm">Launch</span>
+              <div class="picker"><button type="button" class="btn btn--borderless btn--sm picker__trigger" aria-haspopup="listbox" aria-expanded="false">
+                <span class="picker__trigger-text">Christmas Campaign</span>
+                <svg class="lexicon-icon lexicon-icon-sm"><use href="#caret-double-l"></use></svg>
+              </button></div>
+            </span>
+            <span class="preview-bar__meta">Version: <strong>1</strong></span>
+            <span class="preview-bar__meta">Site: <strong>Bootcamp</strong></span>
+            <span class="preview-bar__spacer"></span>
+            <div class="btn-group" data-role="device-switch">
+              <button type="button" class="btn btn--secondary btn--sm btn--icon is-active" data-device="desktop" aria-label="Desktop view" aria-pressed="true">
+                <svg class="lexicon-icon"><use href="#display"></use></svg>
+              </button>
+              <button type="button" class="btn btn--secondary btn--sm btn--icon" data-device="tablet" aria-label="Tablet view" aria-pressed="false">
+                <svg class="lexicon-icon"><use href="#tablet-landscape"></use></svg>
+              </button>
+              <button type="button" class="btn btn--secondary btn--sm btn--icon" data-device="mobile" aria-label="Mobile view" aria-pressed="false">
+                <svg class="lexicon-icon"><use href="#mobile-portrait"></use></svg>
+              </button>
+            </div>
+            <span class="preview-bar__inline-actions">
+              <button class="btn btn--borderless btn--sm btn--icon" aria-label="Reload preview" type="button">
+                <svg class="lexicon-icon"><use href="#reload"></use></svg>
+              </button>
+            </span>
+          </div>
+        </div>
+        <div class="skeleton" style="display: flex; gap: var(--spacing-3); padding: var(--spacing-5) var(--spacing-6) var(--spacing-6);">
+          <div class="sk" style="flex: 1; height: var(--spacing-9);"></div>
+          <div class="sk" style="flex: 1; height: var(--spacing-9);"></div>
+          <div class="sk" style="flex: 1; height: var(--spacing-9);"></div>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">Deepest</h3>
+          <p class="card__subtitle">Recommendation. Two steps down the same ramp, still unmistakably blue, still inside --color-primary so it keeps the same light/dark contract as every other primary-filled control. Contrast improves to 7.09:1, and it is the darkest step the ramp has before leaving primary for a chart token.</p>
+          <span class="label label--secondary">--color-primary-d2</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section style="margin-bottom: var(--spacing-9);">
+    <header class="section" style="margin-bottom: var(--spacing-5);"><h2 class="section__title">2 · Signal icon</h2>
+      <div class="btn-group" role="group" aria-label="Bar weight" data-role="weight-switch">
+        <button type="button" class="btn btn--secondary btn--xs" data-weight="" aria-pressed="false">Vivid</button>
+        <button type="button" class="btn btn--secondary btn--xs is-active" data-weight="preview-bar--blue-deepest" aria-pressed="true">Deepest</button>
+      </div>
+    </header>
+    <div style="display: flex; flex-direction: column; gap: var(--spacing-6);">
+      <!-- #view — current, flagged -->
+      <article class="card">
+        <div class="skeleton" style="display: flex; align-items: center; gap: var(--spacing-6); padding: var(--spacing-4) var(--spacing-6);">
+          <div class="sk" style="width: var(--spacing-6); height: var(--spacing-6);"></div>
+          <div class="sk" style="width: var(--spacing-10); height: var(--spacing-3);"></div>
+          <div class="sk" style="width: var(--spacing-10); height: var(--spacing-3);"></div>
+          <div class="sk" style="width: var(--spacing-10); height: var(--spacing-3);"></div>
+        </div>
+        <div class="preview-bar-shell">
+          <div class="preview-bar preview-bar--blue-deepest">
+            <button class="btn btn--borderless btn--sm btn--icon" type="button" aria-label="Back">
+              <svg class="lexicon-icon"><use href="#angle-left"></use></svg>
+            </button>
+            <span class="preview-bar__signal">
+              <svg class="lexicon-icon"><use href="#view"></use></svg>
+              <span class="label label--sm">Preview</span>
+            </span>
+            <span class="preview-bar__divider"></span>
+            <span class="preview-bar__ctl">
+              <span class="label label--sm">Launch</span>
+              <div class="picker"><button type="button" class="btn btn--borderless btn--sm picker__trigger" aria-haspopup="listbox" aria-expanded="false">
+                <span class="picker__trigger-text">Christmas Campaign</span>
+                <svg class="lexicon-icon lexicon-icon-sm"><use href="#caret-double-l"></use></svg>
+              </button></div>
+            </span>
+            <span class="preview-bar__meta">Version: <strong>1</strong></span>
+            <span class="preview-bar__meta">Site: <strong>Bootcamp</strong></span>
+            <span class="preview-bar__spacer"></span>
+            <div class="btn-group" data-role="device-switch">
+              <button type="button" class="btn btn--secondary btn--sm btn--icon is-active" data-device="desktop" aria-label="Desktop view" aria-pressed="true">
+                <svg class="lexicon-icon"><use href="#display"></use></svg>
+              </button>
+              <button type="button" class="btn btn--secondary btn--sm btn--icon" data-device="tablet" aria-label="Tablet view" aria-pressed="false">
+                <svg class="lexicon-icon"><use href="#tablet-landscape"></use></svg>
+              </button>
+              <button type="button" class="btn btn--secondary btn--sm btn--icon" data-device="mobile" aria-label="Mobile view" aria-pressed="false">
+                <svg class="lexicon-icon"><use href="#mobile-portrait"></use></svg>
+              </button>
+            </div>
+            <span class="preview-bar__inline-actions">
+              <button class="btn btn--borderless btn--sm btn--icon" aria-label="Reload preview" type="button">
+                <svg class="lexicon-icon"><use href="#reload"></use></svg>
+              </button>
+            </span>
+          </div>
+        </div>
+        <div class="skeleton" style="display: flex; gap: var(--spacing-3); padding: var(--spacing-5) var(--spacing-6) var(--spacing-6);">
+          <div class="sk" style="flex: 1; height: var(--spacing-9);"></div>
+          <div class="sk" style="flex: 1; height: var(--spacing-9);"></div>
+          <div class="sk" style="flex: 1; height: var(--spacing-9);"></div>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">#view</h3>
+          <p class="card__subtitle">Currently in use. The same eye glyph already stands for something else in the product, so reusing it for preview mode creates a collision. Flagged for replacement.</p>
+        </div>
+      </article>
+
+      <!-- #sites -->
+      <article class="card">
+        <div class="skeleton" style="display: flex; align-items: center; gap: var(--spacing-6); padding: var(--spacing-4) var(--spacing-6);">
+          <div class="sk" style="width: var(--spacing-6); height: var(--spacing-6);"></div>
+          <div class="sk" style="width: var(--spacing-10); height: var(--spacing-3);"></div>
+          <div class="sk" style="width: var(--spacing-10); height: var(--spacing-3);"></div>
+          <div class="sk" style="width: var(--spacing-10); height: var(--spacing-3);"></div>
+        </div>
+        <div class="preview-bar-shell">
+          <div class="preview-bar preview-bar--blue-deepest">
+            <button class="btn btn--borderless btn--sm btn--icon" type="button" aria-label="Back">
+              <svg class="lexicon-icon"><use href="#angle-left"></use></svg>
+            </button>
+            <span class="preview-bar__signal">
+              <svg class="lexicon-icon"><use href="#sites"></use></svg>
+              <span class="label label--sm">Preview</span>
+            </span>
+            <span class="preview-bar__divider"></span>
+            <span class="preview-bar__ctl">
+              <span class="label label--sm">Launch</span>
+              <div class="picker"><button type="button" class="btn btn--borderless btn--sm picker__trigger" aria-haspopup="listbox" aria-expanded="false">
+                <span class="picker__trigger-text">Christmas Campaign</span>
+                <svg class="lexicon-icon lexicon-icon-sm"><use href="#caret-double-l"></use></svg>
+              </button></div>
+            </span>
+            <span class="preview-bar__meta">Version: <strong>1</strong></span>
+            <span class="preview-bar__meta">Site: <strong>Bootcamp</strong></span>
+            <span class="preview-bar__spacer"></span>
+            <div class="btn-group" data-role="device-switch">
+              <button type="button" class="btn btn--secondary btn--sm btn--icon is-active" data-device="desktop" aria-label="Desktop view" aria-pressed="true">
+                <svg class="lexicon-icon"><use href="#display"></use></svg>
+              </button>
+              <button type="button" class="btn btn--secondary btn--sm btn--icon" data-device="tablet" aria-label="Tablet view" aria-pressed="false">
+                <svg class="lexicon-icon"><use href="#tablet-landscape"></use></svg>
+              </button>
+              <button type="button" class="btn btn--secondary btn--sm btn--icon" data-device="mobile" aria-label="Mobile view" aria-pressed="false">
+                <svg class="lexicon-icon"><use href="#mobile-portrait"></use></svg>
+              </button>
+            </div>
+            <span class="preview-bar__inline-actions">
+              <button class="btn btn--borderless btn--sm btn--icon" aria-label="Reload preview" type="button">
+                <svg class="lexicon-icon"><use href="#reload"></use></svg>
+              </button>
+            </span>
+          </div>
+        </div>
+        <div class="skeleton" style="display: flex; gap: var(--spacing-3); padding: var(--spacing-5) var(--spacing-6) var(--spacing-6);">
+          <div class="sk" style="flex: 1; height: var(--spacing-9);"></div>
+          <div class="sk" style="flex: 1; height: var(--spacing-9);"></div>
+          <div class="sk" style="flex: 1; height: var(--spacing-9);"></div>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">#sites</h3>
+          <p class="card__subtitle">The candidate. Reads as site vocabulary: you are previewing a site, not a template or a control panel, and the icon has no other use in the kit to collide with.</p>
+        </div>
+      </article>
+
+      <!-- #page -->
+      <article class="card">
+        <div class="skeleton" style="display: flex; align-items: center; gap: var(--spacing-6); padding: var(--spacing-4) var(--spacing-6);">
+          <div class="sk" style="width: var(--spacing-6); height: var(--spacing-6);"></div>
+          <div class="sk" style="width: var(--spacing-10); height: var(--spacing-3);"></div>
+          <div class="sk" style="width: var(--spacing-10); height: var(--spacing-3);"></div>
+          <div class="sk" style="width: var(--spacing-10); height: var(--spacing-3);"></div>
+        </div>
+        <div class="preview-bar-shell">
+          <div class="preview-bar preview-bar--blue-deepest">
+            <button class="btn btn--borderless btn--sm btn--icon" type="button" aria-label="Back">
+              <svg class="lexicon-icon"><use href="#angle-left"></use></svg>
+            </button>
+            <span class="preview-bar__signal">
+              <svg class="lexicon-icon"><use href="#page"></use></svg>
+              <span class="label label--sm">Preview</span>
+            </span>
+            <span class="preview-bar__divider"></span>
+            <span class="preview-bar__ctl">
+              <span class="label label--sm">Launch</span>
+              <div class="picker"><button type="button" class="btn btn--borderless btn--sm picker__trigger" aria-haspopup="listbox" aria-expanded="false">
+                <span class="picker__trigger-text">Christmas Campaign</span>
+                <svg class="lexicon-icon lexicon-icon-sm"><use href="#caret-double-l"></use></svg>
+              </button></div>
+            </span>
+            <span class="preview-bar__meta">Version: <strong>1</strong></span>
+            <span class="preview-bar__meta">Site: <strong>Bootcamp</strong></span>
+            <span class="preview-bar__spacer"></span>
+            <div class="btn-group" data-role="device-switch">
+              <button type="button" class="btn btn--secondary btn--sm btn--icon is-active" data-device="desktop" aria-label="Desktop view" aria-pressed="true">
+                <svg class="lexicon-icon"><use href="#display"></use></svg>
+              </button>
+              <button type="button" class="btn btn--secondary btn--sm btn--icon" data-device="tablet" aria-label="Tablet view" aria-pressed="false">
+                <svg class="lexicon-icon"><use href="#tablet-landscape"></use></svg>
+              </button>
+              <button type="button" class="btn btn--secondary btn--sm btn--icon" data-device="mobile" aria-label="Mobile view" aria-pressed="false">
+                <svg class="lexicon-icon"><use href="#mobile-portrait"></use></svg>
+              </button>
+            </div>
+            <span class="preview-bar__inline-actions">
+              <button class="btn btn--borderless btn--sm btn--icon" aria-label="Reload preview" type="button">
+                <svg class="lexicon-icon"><use href="#reload"></use></svg>
+              </button>
+            </span>
+          </div>
+        </div>
+        <div class="skeleton" style="display: flex; gap: var(--spacing-3); padding: var(--spacing-5) var(--spacing-6) var(--spacing-6);">
+          <div class="sk" style="flex: 1; height: var(--spacing-9);"></div>
+          <div class="sk" style="flex: 1; height: var(--spacing-9);"></div>
+          <div class="sk" style="flex: 1; height: var(--spacing-9);"></div>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">#page</h3>
+          <p class="card__subtitle">A fallback if the team would rather frame preview around content than around the site as a whole.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section style="margin-bottom: var(--spacing-9);">
+    <header class="section" style="margin-bottom: var(--spacing-5);"><h2 class="section__title">3 · Labels</h2>
+      <div class="btn-group" role="group" aria-label="Bar weight" data-role="weight-switch">
+        <button type="button" class="btn btn--secondary btn--xs" data-weight="" aria-pressed="false">Vivid</button>
+        <button type="button" class="btn btn--secondary btn--xs is-active" data-weight="preview-bar--blue-deepest" aria-pressed="true">Deepest</button>
+      </div>
+    </header>
+    <div style="display: flex; flex-direction: column; gap: var(--spacing-6);">
+      <!-- No labels — plain text -->
+      <article class="card">
+        <div class="skeleton" style="display: flex; align-items: center; gap: var(--spacing-6); padding: var(--spacing-4) var(--spacing-6);">
+          <div class="sk" style="width: var(--spacing-6); height: var(--spacing-6);"></div>
+          <div class="sk" style="width: var(--spacing-10); height: var(--spacing-3);"></div>
+          <div class="sk" style="width: var(--spacing-10); height: var(--spacing-3);"></div>
+          <div class="sk" style="width: var(--spacing-10); height: var(--spacing-3);"></div>
+        </div>
+        <div class="preview-bar-shell">
+          <div class="preview-bar preview-bar--blue-deepest">
+            <button class="btn btn--borderless btn--sm btn--icon" type="button" aria-label="Back">
+              <svg class="lexicon-icon"><use href="#angle-left"></use></svg>
+            </button>
+            <span class="preview-bar__signal">
+              <svg class="lexicon-icon"><use href="#sites"></use></svg>
+              <span>Preview</span>
+            </span>
+            <span class="preview-bar__divider"></span>
+            <span class="preview-bar__ctl">
+              <span>Launch</span>
+              <div class="picker"><button type="button" class="btn btn--borderless btn--sm picker__trigger" aria-haspopup="listbox" aria-expanded="false">
+                <span class="picker__trigger-text">Christmas Campaign</span>
+                <svg class="lexicon-icon lexicon-icon-sm"><use href="#caret-double-l"></use></svg>
+              </button></div>
+            </span>
+            <span class="preview-bar__meta">Version: <strong>1</strong></span>
+            <span class="preview-bar__meta">Site: <strong>Bootcamp</strong></span>
+            <span class="preview-bar__spacer"></span>
+            <div class="btn-group" data-role="device-switch">
+              <button type="button" class="btn btn--secondary btn--sm btn--icon is-active" data-device="desktop" aria-label="Desktop view" aria-pressed="true">
+                <svg class="lexicon-icon"><use href="#display"></use></svg>
+              </button>
+              <button type="button" class="btn btn--secondary btn--sm btn--icon" data-device="tablet" aria-label="Tablet view" aria-pressed="false">
+                <svg class="lexicon-icon"><use href="#tablet-landscape"></use></svg>
+              </button>
+              <button type="button" class="btn btn--secondary btn--sm btn--icon" data-device="mobile" aria-label="Mobile view" aria-pressed="false">
+                <svg class="lexicon-icon"><use href="#mobile-portrait"></use></svg>
+              </button>
+            </div>
+            <span class="preview-bar__inline-actions">
+              <button class="btn btn--borderless btn--sm btn--icon" aria-label="Reload preview" type="button">
+                <svg class="lexicon-icon"><use href="#reload"></use></svg>
+              </button>
+            </span>
+          </div>
+        </div>
+        <div class="skeleton" style="display: flex; gap: var(--spacing-3); padding: var(--spacing-5) var(--spacing-6) var(--spacing-6);">
+          <div class="sk" style="flex: 1; height: var(--spacing-9);"></div>
+          <div class="sk" style="flex: 1; height: var(--spacing-9);"></div>
+          <div class="sk" style="flex: 1; height: var(--spacing-9);"></div>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">No labels</h3>
+          <p class="card__subtitle">Launch and Preview as plain text, no chip. Lighter, but the mode and the control name now read at the same weight as the values next to them.</p>
+        </div>
+      </article>
+
+      <!-- Custom labels — the bar chip, same as variant 1 -->
+      <article class="card">
+        <div class="skeleton" style="display: flex; align-items: center; gap: var(--spacing-6); padding: var(--spacing-4) var(--spacing-6);">
+          <div class="sk" style="width: var(--spacing-6); height: var(--spacing-6);"></div>
+          <div class="sk" style="width: var(--spacing-10); height: var(--spacing-3);"></div>
+          <div class="sk" style="width: var(--spacing-10); height: var(--spacing-3);"></div>
+          <div class="sk" style="width: var(--spacing-10); height: var(--spacing-3);"></div>
+        </div>
+        <div class="preview-bar-shell">
+          <div class="preview-bar preview-bar--blue-deepest">
+            <button class="btn btn--borderless btn--sm btn--icon" type="button" aria-label="Back">
+              <svg class="lexicon-icon"><use href="#angle-left"></use></svg>
+            </button>
+            <span class="preview-bar__signal">
+              <svg class="lexicon-icon"><use href="#sites"></use></svg>
+              <span class="label label--sm">Preview</span>
+            </span>
+            <span class="preview-bar__divider"></span>
+            <span class="preview-bar__ctl">
+              <span class="label label--sm">Launch</span>
+              <div class="picker"><button type="button" class="btn btn--borderless btn--sm picker__trigger" aria-haspopup="listbox" aria-expanded="false">
+                <span class="picker__trigger-text">Christmas Campaign</span>
+                <svg class="lexicon-icon lexicon-icon-sm"><use href="#caret-double-l"></use></svg>
+              </button></div>
+            </span>
+            <span class="preview-bar__meta">Version: <strong>1</strong></span>
+            <span class="preview-bar__meta">Site: <strong>Bootcamp</strong></span>
+            <span class="preview-bar__spacer"></span>
+            <div class="btn-group" data-role="device-switch">
+              <button type="button" class="btn btn--secondary btn--sm btn--icon is-active" data-device="desktop" aria-label="Desktop view" aria-pressed="true">
+                <svg class="lexicon-icon"><use href="#display"></use></svg>
+              </button>
+              <button type="button" class="btn btn--secondary btn--sm btn--icon" data-device="tablet" aria-label="Tablet view" aria-pressed="false">
+                <svg class="lexicon-icon"><use href="#tablet-landscape"></use></svg>
+              </button>
+              <button type="button" class="btn btn--secondary btn--sm btn--icon" data-device="mobile" aria-label="Mobile view" aria-pressed="false">
+                <svg class="lexicon-icon"><use href="#mobile-portrait"></use></svg>
+              </button>
+            </div>
+            <span class="preview-bar__inline-actions">
+              <button class="btn btn--borderless btn--sm btn--icon" aria-label="Reload preview" type="button">
+                <svg class="lexicon-icon"><use href="#reload"></use></svg>
+              </button>
+            </span>
+          </div>
+        </div>
+        <div class="skeleton" style="display: flex; gap: var(--spacing-3); padding: var(--spacing-5) var(--spacing-6) var(--spacing-6);">
+          <div class="sk" style="flex: 1; height: var(--spacing-9);"></div>
+          <div class="sk" style="flex: 1; height: var(--spacing-9);"></div>
+          <div class="sk" style="flex: 1; height: var(--spacing-9);"></div>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">Custom labels</h3>
+          <p class="card__subtitle">The bar’s own chip, the one every row above uses: a .label recolored one step darker than the fill so it reads as system chrome, not content. Custom because it overrides the stock label colors.</p>
+          <span class="label label--secondary">--pb-chip</span>
+        </div>
+      </article>
+
+      <!-- Info labels — stock .label--info -->
+      <article class="card">
+        <div class="skeleton" style="display: flex; align-items: center; gap: var(--spacing-6); padding: var(--spacing-4) var(--spacing-6);">
+          <div class="sk" style="width: var(--spacing-6); height: var(--spacing-6);"></div>
+          <div class="sk" style="width: var(--spacing-10); height: var(--spacing-3);"></div>
+          <div class="sk" style="width: var(--spacing-10); height: var(--spacing-3);"></div>
+          <div class="sk" style="width: var(--spacing-10); height: var(--spacing-3);"></div>
+        </div>
+        <div class="preview-bar-shell">
+          <div class="preview-bar preview-bar--blue-deepest">
+            <button class="btn btn--borderless btn--sm btn--icon" type="button" aria-label="Back">
+              <svg class="lexicon-icon"><use href="#angle-left"></use></svg>
+            </button>
+            <span class="preview-bar__signal">
+              <svg class="lexicon-icon"><use href="#sites"></use></svg>
+              <span class="label label--sm label--info">Preview</span>
+            </span>
+            <span class="preview-bar__divider"></span>
+            <span class="preview-bar__ctl">
+              <span class="label label--sm label--info">Launch</span>
+              <div class="picker"><button type="button" class="btn btn--borderless btn--sm picker__trigger" aria-haspopup="listbox" aria-expanded="false">
+                <span class="picker__trigger-text">Christmas Campaign</span>
+                <svg class="lexicon-icon lexicon-icon-sm"><use href="#caret-double-l"></use></svg>
+              </button></div>
+            </span>
+            <span class="preview-bar__meta">Version: <strong>1</strong></span>
+            <span class="preview-bar__meta">Site: <strong>Bootcamp</strong></span>
+            <span class="preview-bar__spacer"></span>
+            <div class="btn-group" data-role="device-switch">
+              <button type="button" class="btn btn--secondary btn--sm btn--icon is-active" data-device="desktop" aria-label="Desktop view" aria-pressed="true">
+                <svg class="lexicon-icon"><use href="#display"></use></svg>
+              </button>
+              <button type="button" class="btn btn--secondary btn--sm btn--icon" data-device="tablet" aria-label="Tablet view" aria-pressed="false">
+                <svg class="lexicon-icon"><use href="#tablet-landscape"></use></svg>
+              </button>
+              <button type="button" class="btn btn--secondary btn--sm btn--icon" data-device="mobile" aria-label="Mobile view" aria-pressed="false">
+                <svg class="lexicon-icon"><use href="#mobile-portrait"></use></svg>
+              </button>
+            </div>
+            <span class="preview-bar__inline-actions">
+              <button class="btn btn--borderless btn--sm btn--icon" aria-label="Reload preview" type="button">
+                <svg class="lexicon-icon"><use href="#reload"></use></svg>
+              </button>
+            </span>
+          </div>
+        </div>
+        <div class="skeleton" style="display: flex; gap: var(--spacing-3); padding: var(--spacing-5) var(--spacing-6) var(--spacing-6);">
+          <div class="sk" style="flex: 1; height: var(--spacing-9);"></div>
+          <div class="sk" style="flex: 1; height: var(--spacing-9);"></div>
+          <div class="sk" style="flex: 1; height: var(--spacing-9);"></div>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">Info labels</h3>
+          <p class="card__subtitle">The kit’s Info label as it looks anywhere else: white fill, info text and border, uppercase. Inside the bar it only shows if its values are restated after the chip rule, which is what this row does.</p>
+          <span class="label label--secondary">.label--info</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+</main>
+</div>
+
+<div class="wipe" aria-hidden="true"></div>
+
+<script>
+  // Weight switcher — swaps the fill of every bar in its own section.
+  // Deepest by default, since it is the recommendation.
+  (function () {
+    document.querySelectorAll('[data-role="weight-switch"]').forEach(function (group) {
+      var buttons = group.querySelectorAll('button');
+      var section = group.closest('section');
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          buttons.forEach(function (b) {
+            b.classList.toggle('is-active', b === btn);
+            b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+          });
+          section.querySelectorAll('.preview-bar').forEach(function (bar) {
+            bar.classList.remove('preview-bar--blue-deepest');
+            if (btn.dataset.weight) bar.classList.add(btn.dataset.weight);
+          });
+        });
+      });
+    });
+  })();
+
+  // Device switcher — toggles which segment is active
+  (function () {
+    document.querySelectorAll('[data-role="device-switch"]').forEach(function (group) {
+      var buttons = group.querySelectorAll('button');
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          buttons.forEach(function (b) {
+            b.classList.toggle('is-active', b === btn);
+            b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+          });
+        });
+      });
+    });
+  })();
+</script>
+<script>
+(function () {
+  var wipe = document.querySelector('.wipe');
+  if (!wipe) return;
+  document.querySelectorAll('a[data-wipe]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+      e.preventDefault();
+      wipe.style.background = link.dataset.wipe;
+      wipe.classList.add('anim', 'cover');
+      setTimeout(function () { window.location.href = link.href; }, 460);
+    });
+  });
+  window.addEventListener('pageshow', function () { wipe.classList.remove('anim', 'cover'); });
+})();
+</script>
+</body>
+</html>
