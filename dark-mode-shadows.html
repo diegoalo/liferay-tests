@@ -1416,6 +1416,15 @@ a:hover { color: var(--color-primary-d1); }
   background: var(--color-white);
   color: var(--color-secondary);
 }
+.label--sm {
+  height: 16px;
+  padding: 0 var(--spacing-2);
+  gap: var(--spacing-1);
+  font-size: var(--font-size-xs);
+  line-height: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
 .label--secondary { color: var(--color-secondary); border-color: var(--color-secondary-l2); }
 .label--success { color: var(--color-success);   border-color: var(--color-success-l1);   }
 .label--warning { color: var(--color-warning);   border-color: var(--color-warning-l1);   }
@@ -2134,11 +2143,12 @@ a:hover { color: var(--color-primary-d1); }
 
   <style>
   /* ── Lo que se prueba: solo sombras ─────────────────────────────
-     #lab[data-s] redefine los --shadow-* del kit. Fondos, bordes y
+     [data-s] redefine los --shadow-* del kit en ese elemento: cada
+     columna y cada pantalla lleva la suya ("actual" = kit sin tocar). Fondos, bordes y
      colores de componente no se tocan. Los candidatos mezclan con
      #000 porque dark no tiene token negro: el que gane pasa a
      tokens-dark.css como --shadow-color y el literal desaparece. */
-  :is(.dark, .dark-hc) #lab[data-s] {
+  :is(.dark, .dark-hc) [data-s]:not([data-s="actual"]) {
     --c1: color-mix(in srgb, var(--sc) var(--a1), transparent);
     --c2: color-mix(in srgb, var(--sc) var(--a2), transparent);
     --c3: color-mix(in srgb, var(--sc) var(--a3, 0%), transparent);
@@ -2153,21 +2163,41 @@ a:hover { color: var(--color-primary-d1); }
     --shadow-lg:        var(--ring), var(--contact), 0 4px 16px var(--c2);
     --shadow-alert:     var(--ring), var(--contact), 0 8px 16px var(--c1);
   }
-  :is(.dark, .dark-hc) #lab[data-s="figma"]     { --sc: #000; --a1: 50%; --a2: 70%; }
-  :is(.dark, .dark-hc) #lab:is([data-s="surface"], [data-s="layered"], [data-s="ring"]) {
+  :is(.dark, .dark-hc) [data-s="figma"]     { --sc: #000; --a1: 50%; --a2: 70%; }
+  :is(.dark, .dark-hc) :is([data-s="surface"], [data-s="layered"], [data-s="ring"]) {
     --sc: color-mix(in oklab, var(--color-white) 30%, #000); --a1: 60%; --a2: 80%; }
-  :is(.dark, .dark-hc) #lab[data-s="secondary"] {
+  :is(.dark, .dark-hc) [data-s="secondary"] {
     --sc: color-mix(in oklab, var(--color-secondary-l3) 25%, #000); --a1: 60%; --a2: 80%; }
-  :is(.dark, .dark-hc) #lab[data-s="primary"]   {
+  :is(.dark, .dark-hc) [data-s="primary"]   {
     --sc: color-mix(in oklab, var(--color-primary-l3) 30%, #000); --a1: 60%; --a2: 80%; }
-  :is(.dark, .dark-hc) #lab:is([data-s="layered"], [data-s="ring"]) { --a3: 90%; }
-  :is(.dark, .dark-hc) #lab[data-s="ring"] {
+  :is(.dark, .dark-hc) :is([data-s="layered"], [data-s="ring"]) { --a3: 90%; }
+  :is(.dark, .dark-hc) [data-s="ring"] {
     --ring: 0 0 0 1px color-mix(in srgb, var(--color-dark) 8%, transparent); }
 
   /* El kit aún no sombrea card ni tooltip; el Figma sí */
   .spec-card         { box-shadow: var(--shadow-card); }
   .spec-card.is-drag { box-shadow: var(--shadow-card-drag, var(--shadow-lg)); }
   .spec-tooltip      { box-shadow: var(--shadow-tooltip, none); }
+
+  /* Al cambiar de sombra, el cambio se anima para que se vea */
+  @media (prefers-reduced-motion: no-preference) {
+    .alert--toast, .dropdown, .popover, .modal, .spec-card, .spec-tooltip,
+    .slider__input::-webkit-slider-thumb, .omni__head, .omni__body { transition: box-shadow .25s ease; }
+  }
+
+  /* ── Comparación: referencia a la izquierda, sombra elegida a la derecha ── */
+  .w { max-width: 1100px; margin-inline: auto; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; }
+  .pair.is-single { grid-template-columns: 1fr; }
+  .pair__col { display: flex; flex-direction: column; min-width: 0; }
+  .pair__col + .pair__col { border-left: 1px solid var(--color-secondary-l3); }
+  .pair__tag { align-self: flex-start; margin: var(--spacing-5) 0 0 var(--spacing-5); }
+  .pair__stage { flex: 1; }
+  .pair__stage .modal { width: 100%; }
+  @media (max-width: 760px) {
+    .pair { grid-template-columns: 1fr; }
+    .pair__col + .pair__col { border-left: 0; border-top: 1px solid var(--color-secondary-l3); }
+  }
 
   /* ── Omnisearch (beta, LPD-78171) compuesto con piezas del kit ──
      Réplica de OmniSearch.scss: dos paneles flotantes sin backdrop,
@@ -2199,7 +2229,7 @@ a:hover { color: var(--color-primary-d1); }
 
   /* ── Marco de pantalla DXP (se desplaza en horizontal en móvil) ── */
   .screen-scroll { overflow-x: auto; }
-  .screen { position: relative; min-width: 960px; height: 600px; overflow: hidden; background: var(--color-white); }
+  .screen { position: relative; min-width: 960px; height: max(640px, calc(100vh - 150px)); overflow: hidden; background: var(--color-white); }
   .screen__body { display: grid; grid-template-columns: 280px 1fr; height: calc(100% - 60px); }
   .screen__main { position: relative; min-width: 0; display: flex; flex-direction: column; }
   .screen__float { position: absolute; z-index: 4; }
@@ -2327,9 +2357,9 @@ a:hover { color: var(--color-primary-d1); }
 
 
 <div style="background: var(--color-light); min-height: 100vh;">
-<main id="lab" data-s="ring" style="max-width: 1100px; margin: 0 auto; padding: var(--spacing-8) var(--spacing-7) var(--spacing-9);">
+<main id="lab" style="padding: var(--spacing-8) var(--spacing-7) var(--spacing-9);">
 
-  <header style="margin-bottom: var(--spacing-7);">
+  <header class="w" style="margin-bottom: var(--spacing-7);">
     <h1 style="font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); color: var(--color-dark); margin: 0 0 var(--spacing-3);">Sombras en dark mode</h1>
     <p style="font-size: var(--font-size-sm); margin: 0 0 var(--spacing-3);"><a href="https://www.figma.com/design/uJmaBABXsx9voFQEdn20Di/branch/irC3h0DuaUdbLdBrNQ0qpH/Lexicon-Foundations?node-id=4178-2" target="_blank" rel="noopener" style="color: var(--color-primary);">Lexicon Foundations · Shadow</a></p>
     <p style="font-size: var(--font-size-base); color: var(--color-dark); opacity: .75; margin: 0 0 var(--spacing-3); max-width: 720px; line-height: 1.5;">Los <code>--shadow-*</code> del kit no tienen override en dark. Siguen siendo <code>rgba(39,40,51,.1–.2)</code>, y sobre la superficie oscura no se ven. En Figma pasaba lo contrario, porque el color de sombra se pasaba a light y salía un halo.</p>
@@ -2338,34 +2368,40 @@ a:hover { color: var(--color-primary-d1); }
 
   <!-- Barra fija: pestañas + estrategia + skin -->
   <div style="position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--color-light); padding-top: var(--spacing-3); margin-bottom: var(--spacing-8);">
-    <div style="display: flex; align-items: center; gap: var(--spacing-5); flex-wrap: wrap; padding-bottom: var(--spacing-4);">
+    <div class="w">
+    <div style="display: flex; align-items: center; gap: var(--spacing-5); flex-wrap: wrap; padding-bottom: var(--spacing-3);">
       <div class="btn-group" role="group" aria-label="Sombra" data-role="strategy-switch"></div>
+      <span data-role="compare-group" style="display: inline-flex; align-items: center; gap: var(--spacing-3);">
+        <span style="font-size: var(--font-size-sm); color: var(--color-dark); opacity: .7;">Frente a</span>
+        <div class="btn-group" role="group" aria-label="Comparar con" data-role="compare-switch">
+          <button type="button" class="btn btn--secondary btn--xs is-active" data-cmp="actual" aria-pressed="true">Kit actual</button>
+          <button type="button" class="btn btn--secondary btn--xs" data-cmp="figma" aria-pressed="false">Figma</button>
+          <button type="button" class="btn btn--secondary btn--xs" data-cmp="none" aria-pressed="false">Nada</button>
+        </div>
+      </span>
       <div class="btn-group" role="group" aria-label="Skin" data-role="skin-switch" style="margin-left: auto;">
         <button type="button" class="btn btn--secondary btn--xs" data-skin="light" aria-pressed="false">Light</button>
         <button type="button" class="btn btn--secondary btn--xs is-active" data-skin="dark" aria-pressed="true">Dark</button>
         <button type="button" class="btn btn--secondary btn--xs" data-skin="dark-hc" aria-pressed="false">Dark HC</button>
       </div>
     </div>
+    <p data-role="current-note" style="margin: 0 0 var(--spacing-4); font-size: var(--font-size-sm); color: var(--color-dark); opacity: .75; line-height: 1.5;"></p>
     <nav class="tabs" role="tablist">
       <button class="tabs__tab is-active" role="tab" aria-selected="true" data-tab="components">Componentes</button>
       <button class="tabs__tab" role="tab" aria-selected="false" data-tab="screens">Pantallas DXP</button>
     </nav>
+    </div>
   </div>
 
   <!-- ═══════════════ Pestaña 1 · Componentes ═══════════════ -->
-  <div data-panel="components">
+  <div data-panel="components" class="w">
 
     <section style="margin-bottom: var(--spacing-9);">
-      <header class="section" style="margin-bottom: var(--spacing-5);"><h2 class="section__title">1 · Estrategias</h2></header>
-      <div data-role="strategy-cards" style="display: flex; flex-direction: column; gap: var(--spacing-4);"></div>
-    </section>
-
-    <section style="margin-bottom: var(--spacing-9);">
-      <header class="section" style="margin-bottom: var(--spacing-5);"><h2 class="section__title">2 · Componentes</h2></header>
+      <header class="section" style="margin-bottom: var(--spacing-5);"><h2 class="section__title">1 · Componentes</h2></header>
       <div style="display: flex; flex-direction: column; gap: var(--spacing-6);">
 
         <article class="card">
-          <div style="padding: var(--spacing-9) var(--spacing-8); display: flex; justify-content: center;">
+          <div data-pair style="padding: var(--spacing-9) var(--spacing-8); display: flex; justify-content: center;">
             <div class="alert alert--toast alert--info" style="width: 100%; max-width: 480px;">
               <div class="alert__content">
                 <svg class="lexicon-icon"><use href="#info-circle"></use></svg>
@@ -2382,7 +2418,7 @@ a:hover { color: var(--color-primary-d1); }
         </article>
 
         <article class="card">
-          <div style="padding: var(--spacing-9) var(--spacing-8); display: flex; justify-content: center; gap: var(--spacing-8); flex-wrap: wrap;">
+          <div data-pair style="padding: var(--spacing-9) var(--spacing-8); display: flex; justify-content: center; gap: var(--spacing-8); flex-wrap: wrap;">
             <article class="card spec-card" style="width: 220px;">
               <div class="card__media"><svg class="lexicon-icon"><use href="#document"></use></svg></div>
               <div class="card__body">
@@ -2408,7 +2444,7 @@ a:hover { color: var(--color-primary-d1); }
         </article>
 
         <article class="card">
-          <div style="padding: var(--spacing-9) var(--spacing-8); display: flex; justify-content: center;">
+          <div data-pair style="padding: var(--spacing-9) var(--spacing-8); display: flex; justify-content: center;">
             <ul class="dropdown" role="menu" style="width: 240px;">
               <li><button class="dropdown__item" role="menuitem"><svg class="lexicon-icon dropdown__item-icon"><use href="#pencil"></use></svg><span class="dropdown__item-text">Edit</span></button></li>
               <li><button class="dropdown__item" role="menuitem"><svg class="lexicon-icon dropdown__item-icon"><use href="#copy"></use></svg><span class="dropdown__item-text">Duplicate</span></button></li>
@@ -2423,7 +2459,7 @@ a:hover { color: var(--color-primary-d1); }
         </article>
 
         <article class="card">
-          <div style="padding: var(--spacing-9) var(--spacing-8); display: flex; justify-content: center;">
+          <div data-pair style="padding: var(--spacing-9) var(--spacing-8); display: flex; justify-content: center;">
             <div class="popover" style="max-width: 280px;">
               <div class="popover__header"><h3 class="popover__title">Display page</h3></div>
               <p class="popover__body">Pages created from this template inherit its layout and fragments.</p>
@@ -2437,7 +2473,7 @@ a:hover { color: var(--color-primary-d1); }
         </article>
 
         <article class="card">
-          <div style="padding: var(--spacing-9) var(--spacing-8); display: flex; justify-content: center; align-items: center; gap: var(--spacing-9); flex-wrap: wrap;">
+          <div data-pair style="padding: var(--spacing-9) var(--spacing-8); display: flex; justify-content: center; align-items: center; gap: var(--spacing-9); flex-wrap: wrap;">
             <span class="tooltip spec-tooltip">Copy link</span>
             <div class="slider" style="--value: 60; width: 240px;">
               <div class="slider__field"><input type="range" class="slider__input" min="0" max="100" value="60" aria-label="Opacity"></div>
@@ -2452,7 +2488,7 @@ a:hover { color: var(--color-primary-d1); }
         </article>
 
         <article class="card">
-          <div style="padding: var(--spacing-9) var(--spacing-8); display: flex; justify-content: center;">
+          <div data-pair style="padding: var(--spacing-9) var(--spacing-8); display: flex; justify-content: center;">
             <div class="modal" style="max-width: 520px;">
               <header class="modal__header">
                 <h2 class="modal__title">Delete page</h2>
@@ -2474,15 +2510,20 @@ a:hover { color: var(--color-primary-d1); }
 
       </div>
     </section>
+    <section style="margin-bottom: var(--spacing-9);">
+      <header class="section" style="margin-bottom: var(--spacing-5);"><h2 class="section__title">2 · Estrategias</h2></header>
+      <div data-role="strategy-cards" style="display: flex; flex-direction: column; gap: var(--spacing-4);"></div>
+    </section>
   </div>
 
   <!-- ═══════════════ Pestaña 2 · Pantallas DXP ═══════════════ -->
   <div data-panel="screens" hidden>
+    <p class="w" style="margin-top: 0; margin-bottom: var(--spacing-7); font-size: var(--font-size-sm); color: var(--color-dark); opacity: .75;">Cada pantalla lleva la sombra seleccionada arriba. Usa ← → para recorrerlas sin mover el ratón.</p>
 
     <section style="margin-bottom: var(--spacing-9);">
       <header class="section" style="margin-bottom: var(--spacing-5);"><h2 class="section__title">1 · Omnisearch</h2></header>
       <article class="card">
-        <div class="screen-scroll"><div class="screen" data-shell="Web Content">
+        <div class="screen-scroll"><div class="screen" data-follow data-shell="Web Content">
           <div class="omni" role="dialog" aria-label="Omnisearch">
             <div class="omni__head">
               <div class="omni__field">
@@ -2531,7 +2572,7 @@ a:hover { color: var(--color-primary-d1); }
     <section style="margin-bottom: var(--spacing-9);">
       <header class="section" style="margin-bottom: var(--spacing-5);"><h2 class="section__title">2 · Documentos: menú de acciones y toast</h2></header>
       <article class="card">
-        <div class="screen-scroll"><div class="screen" data-shell="Documents">
+        <div class="screen-scroll"><div class="screen" data-follow data-shell="Documents">
           <ul class="dropdown screen__float" role="menu" style="width: 220px; top: 212px; right: var(--spacing-7);">
             <li><button class="dropdown__item" role="menuitem"><svg class="lexicon-icon dropdown__item-icon"><use href="#download"></use></svg><span class="dropdown__item-text">Download</span></button></li>
             <li><button class="dropdown__item" role="menuitem"><svg class="lexicon-icon dropdown__item-icon"><use href="#pencil"></use></svg><span class="dropdown__item-text">Edit</span></button></li>
@@ -2559,7 +2600,7 @@ a:hover { color: var(--color-primary-d1); }
     <section style="margin-bottom: var(--spacing-9);">
       <header class="section" style="margin-bottom: var(--spacing-5);"><h2 class="section__title">3 · Fragmentos: arrastrar y popover</h2></header>
       <article class="card">
-        <div class="screen-scroll"><div class="screen" data-shell="Fragments">
+        <div class="screen-scroll"><div class="screen" data-follow data-shell="Fragments">
           <div class="popover screen__float" style="max-width: 260px; top: 150px; left: 330px;">
             <div class="popover__header"><h3 class="popover__title">Hero banner</h3></div>
             <p class="popover__body">Used in 12 pages. Changes propagate on publish.</p>
@@ -2574,7 +2615,7 @@ a:hover { color: var(--color-primary-d1); }
     </section>
   </div>
 
-  <section>
+  <section class="w">
     <header class="section" style="margin-bottom: var(--spacing-5);"><h2 class="section__title">Cómo lo resuelven otros sistemas</h2></header>
     <div style="display: flex; flex-direction: column; gap: var(--spacing-4);">
       <article class="card"><div class="card__body">
@@ -2662,7 +2703,7 @@ a:hover { color: var(--color-primary-d1); }
 <script>
 (function () {
   var STRATEGIES = [
-    { id: '',          short: 'Actual',     name: 'Kit actual',                 code: 'rgba(39, 40, 51, .10–.20)',
+    { id: 'actual',    short: 'Actual',     name: 'Kit actual',                 code: 'rgba(39, 40, 51, .10–.20)',
       text: 'Sin override en dark. El toast y el popover, que no tienen borde, se funden con la superficie.' },
     { id: 'figma',     short: 'Figma',      name: 'Figma · negro 50 / 70 %',   code: '#000 · 50 / 70 %',
       text: 'La prueba de Figma sin cambios. Se lee la elevación y no hay halo, aunque en los blurs grandes el negro puro queda algo sucio sobre un fondo azulado.' },
@@ -2678,17 +2719,16 @@ a:hover { color: var(--color-primary-d1); }
       text: 'Dos capas más un aro de --color-dark al 8 %, también como box-shadow. El aro separa del fondo el popover, el toast y Omnisearch sin leerse como halo.', recommended: true }
   ];
 
-  var lab = document.getElementById('lab');
   var switchEl = document.querySelector('[data-role="strategy-switch"]');
   var cardsEl = document.querySelector('[data-role="strategy-cards"]');
 
   STRATEGIES.forEach(function (s) {
     var b = document.createElement('button');
-    b.type = 'button'; b.className = 'btn btn--secondary btn--xs'; b.dataset.s = s.id; b.textContent = s.short;
+    b.type = 'button'; b.className = 'btn btn--secondary btn--xs'; b.dataset.pick = s.id; b.textContent = s.short;
     switchEl.appendChild(b);
 
     var c = document.createElement('article');
-    c.className = 'card'; c.dataset.s = s.id; c.setAttribute('role', 'button'); c.tabIndex = 0; c.style.cursor = 'pointer';
+    c.className = 'card'; c.dataset.pick = s.id; c.setAttribute('role', 'button'); c.tabIndex = 0; c.style.cursor = 'pointer';
     c.innerHTML = '<div class="card__body"><h3 class="card__title"></h3><p class="card__subtitle"></p><span class="label label--secondary"></span></div>';
     c.querySelector('.card__title').textContent = s.name;
     if (s.recommended) c.querySelector('.card__title').insertAdjacentHTML('beforeend', ' <span class="label label--success">Recomendada</span>');
@@ -2697,19 +2737,59 @@ a:hover { color: var(--color-primary-d1); }
     cardsEl.appendChild(c);
   });
 
-  function pick(id) {
-    if (id) lab.dataset.s = id; else lab.removeAttribute('data-s');
-    switchEl.querySelectorAll('button').forEach(function (b) {
-      var on = b.dataset.s === id; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', on);
+  /* Duplica cada visual en dos columnas: referencia y sombra elegida */
+  document.querySelectorAll('[data-pair]').forEach(function (stage) {
+    var style = stage.getAttribute('style'), html = stage.innerHTML;
+    stage.removeAttribute('style'); stage.className = 'pair'; stage.innerHTML = '';
+    ['compare', 'current'].forEach(function (role) {
+      var col = document.createElement('div');
+      col.className = 'pair__col'; col.dataset.col = role;
+      col.innerHTML = '<span class="label label--sm label--secondary pair__tag"></span><div class="pair__stage"></div>';
+      var st = col.querySelector('.pair__stage'); st.setAttribute('style', style); st.innerHTML = html;
+      stage.appendChild(col);
     });
-    cardsEl.querySelectorAll('.card').forEach(function (c) { c.classList.toggle('is-selected', c.dataset.s === id); });
-  }
-  switchEl.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) pick(b.dataset.s); });
-  cardsEl.addEventListener('click', function (e) { var c = e.target.closest('.card'); if (c) pick(c.dataset.s); });
-  cardsEl.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter' || e.key === ' ') { var c = e.target.closest('.card'); if (c) { e.preventDefault(); pick(c.dataset.s); } }
   });
-  pick('ring');
+
+  var NAME = {}; STRATEGIES.forEach(function (s) { NAME[s.id] = s; });
+  var cur = 'ring', cmp = 'actual';
+  var note = document.querySelector('[data-role="current-note"]');
+  var cmpEl = document.querySelector('[data-role="compare-switch"]');
+
+  function apply() {
+    document.querySelectorAll('[data-follow], [data-col="current"]').forEach(function (el) { el.dataset.s = cur; });
+    document.querySelectorAll('.pair').forEach(function (pair) {
+      var c = pair.querySelector('[data-col="compare"]');
+      c.hidden = cmp === 'none'; pair.classList.toggle('is-single', cmp === 'none');
+      if (cmp !== 'none') { c.dataset.s = cmp; c.querySelector('.pair__tag').textContent = NAME[cmp].name; }
+      pair.querySelector('[data-col="current"] .pair__tag').textContent = NAME[cur].name;
+    });
+    switchEl.querySelectorAll('button').forEach(function (b) {
+      var on = b.dataset.pick === cur; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', on);
+    });
+    cmpEl.querySelectorAll('button').forEach(function (b) {
+      var on = b.dataset.cmp === cmp; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', on);
+    });
+    cardsEl.querySelectorAll('.card').forEach(function (c) { c.classList.toggle('is-selected', c.dataset.pick === cur); });
+    note.textContent = NAME[cur].name + '. ' + NAME[cur].text;
+  }
+  function pick(id) { cur = id; apply(); }
+
+  switchEl.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) pick(b.dataset.pick); });
+  cmpEl.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) { cmp = b.dataset.cmp; apply(); } });
+  cardsEl.addEventListener('click', function (e) { var c = e.target.closest('.card'); if (c) pick(c.dataset.pick); });
+  cardsEl.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { var c = e.target.closest('.card'); if (c) { e.preventDefault(); pick(c.dataset.pick); } }
+  });
+  /* ← → recorre las sombras */
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    var t = e.target;
+    if (t.closest && t.closest('input, textarea, select')) return;
+    var ids = STRATEGIES.map(function (s) { return s.id; }), i = ids.indexOf(cur);
+    i = (i + (e.key === 'ArrowRight' ? 1 : ids.length - 1)) % ids.length;
+    e.preventDefault(); pick(ids[i]);
+  });
+  apply();
 
   /* Skin */
   var skinEl = document.querySelector('[data-role="skin-switch"]');
@@ -2729,6 +2809,7 @@ a:hover { color: var(--color-primary-d1); }
     t.addEventListener('click', function () {
       tabs.forEach(function (x) { var on = x === t; x.classList.toggle('is-active', on); x.setAttribute('aria-selected', on); });
       document.querySelectorAll('[data-panel]').forEach(function (p) { p.hidden = p.dataset.panel !== t.dataset.tab; });
+      document.querySelector('[data-role="compare-group"]').hidden = t.dataset.tab !== 'components';
     });
   });
 
