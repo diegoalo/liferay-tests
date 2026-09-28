@@ -1,0 +1,2812 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sombras en dark mode from DIEGOALO</title>
+<meta name="description" content="Siete variantes de sombra en dark mode para Lexicon, con colores de sistema, probadas sobre componentes reales y sobre pantallas DXP como Omnisearch.">
+<link rel="icon" type="image/png" href="https://diegoalo.com/assets/favicon.png">
+<link rel="canonical" href="https://diegoalo.github.io/liferay-tests/dark-mode-shadows.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DIEGOALO">
+<meta property="og:title" content="Sombras en dark mode">
+<meta property="og:description" content="Siete variantes de sombra en dark mode para Lexicon, con colores de sistema, probadas sobre componentes reales y sobre pantallas DXP como Omnisearch.">
+<meta property="og:url" content="https://diegoalo.github.io/liferay-tests/dark-mode-shadows.html">
+<meta property="og:image" content="https://diegoalo.com/assets/og-image.jpg">
+<meta property="og:image:width" content="2400">
+<meta property="og:image:height" content="1260">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@_diegoalo">
+<meta name="twitter:image" content="https://diegoalo.com/assets/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <!-- Página de exploración: arranca siempre en Dark y no lee la clave
+       compartida vanilla-skin. El selector de skin es propio de la página. -->
+  <script>(function(){try{
+    var r=document.documentElement;
+    ['light','light-hc','dark-hc'].forEach(function(c){r.classList.remove(c);});
+    r.classList.add('dark');
+  }catch(e){}})()</script>
+<style>
+/* ── tokens.css ── */
+/* ============================================================
+   Lexicon base tokens — vanilla
+   Copy of tokens.css trimmed to colors, spacing, typography,
+   radius and shadow. Light mode only — no theming layer.
+   ============================================================ */
+
+:root {
+
+  /* ── Color: Primary ── */
+  --color-primary-d2: #004AD7;
+  --color-primary-d1: #0053F0;
+  --color-primary:    #0B5FFF;
+  --color-primary-l0: #5791FF;
+  --color-primary-l1: #80ACFF;
+  --color-primary-l2: #B3CDFF;
+  --color-primary-l3: #F0F5FF;
+
+  /* ── Color: Secondary ── */
+  --color-secondary:    #6B6C7E;
+  --color-secondary-l0: #9393A4;
+  --color-secondary-l1: #A7A9BC;
+  --color-secondary-l2: #CDCED9;
+  --color-secondary-l3: #E7E7ED;
+
+  /* ── Color: Dark / Light ── */
+  --color-dark-d2: #111116;
+  --color-dark-d1: #1C1C24;
+  --color-dark:    #272833;
+  --color-dark-l1: #30313F;
+  --color-dark-l2: #393A4A;
+  --color-light-d2: #D3D6E0;
+  --color-light-d1: #E2E4EA;
+  --color-light:    #F1F2F5;
+  --color-light-l1: #F7F8F9;
+  --color-white:    #FFFFFF;
+
+  /* Scrim — dim layer behind overlays (mobile drawer, dialogs). Kept as a
+     stable dark tint in every skin (dark counterpart in tokens-dark.css), so
+     it never inverts the way --color-dark does. */
+  --color-scrim: rgba(57, 58, 74, 0.5);
+
+  /* ── Color: Success ── */
+  --color-success-d2: #1C5629;
+  --color-success-d1: #226A33;
+  --color-success:    #287D3C;
+  --color-success-l1: #5ACA75;
+  --color-success-l2: #EDF9F0;
+
+  /* ── Color: Info ── */
+  --color-info-d2: #234584;
+  --color-info-d1: #294F98;
+  --color-info:    #2E5AAC;
+  --color-info-l1: #89A7E0;
+  --color-info-l2: #EEF2FA;
+
+  /* ── Color: Warning ── */
+  --color-warning-d2: #863A00;
+  --color-warning-d1: #9F4500;
+  --color-warning:    #B95000;
+  --color-warning-l1: #FF8F39;
+  --color-warning-l2: #FFF4EC;
+
+  /* ── Color: Danger ── */
+  --color-danger-d2: #AB1010;
+  --color-danger-d1: #C31212;
+  --color-danger:    #DA1414;
+  --color-danger-l1: #F48989;
+  --color-danger-l2: #FEEFEF;
+
+  /* ── Spacing ── */
+  --spacing-1:   2px;
+  --spacing-2:   4px;
+  --spacing-2-5: 6px;
+  --spacing-3:   8px;
+  --spacing-4:   12px;
+  --spacing-5:   16px;
+  --spacing-6:   20px;
+  --spacing-7:   24px;
+  --spacing-8:   32px;
+  --spacing-9:   40px;
+  --spacing-10: 48px;
+
+  /* ── Border radius ── */
+  --rounded-sm:    2px;
+  --rounded-md:    4px;
+  --rounded-lg:    8px;
+  --rounded-xl:    16px;
+  --rounded-full:  9999px;
+
+  /* ── Typography ── */
+  --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-size-xs:   10px;
+  --font-size-sm:   12px;
+  --font-size-base: 14px;
+  --font-size-md:   16px;
+  --font-size-lg:   18px;
+  --font-size-xl:   20px;
+  --font-size-2xl:  28px;
+  --font-size-3xl:  32px;
+  --font-weight-normal: 300;
+  --font-weight-semi:   400;
+  --font-weight-bold:   600;
+  --line-height-base:   1.5;
+
+  /* ── Shadow ── */
+  --shadow-sm:         0 1px 2px rgba(39, 40, 51, 0.10);
+  --shadow-card:       0 2px 4px rgba(39, 40, 51, 0.12);
+  --shadow-md:         0 2px 8px rgba(39, 40, 51, 0.14);
+  --shadow-dropdown:   0 4px 8px rgba(39, 40, 51, 0.12);
+  --shadow-lg:         0 4px 16px rgba(39, 40, 51, 0.18);
+  --shadow-alert:      0 8px 16px rgba(39, 40, 51, 0.20);
+  /* Scroll shadows — a soft edge cast by sticky chrome (header / footer) over
+     scrolling content, shown only while content is clipped past that edge. */
+  --shadow-scroll-top:    0 4px 24px rgba(0, 0, 0, 0.08);
+  --shadow-scroll-bottom: 0 -4px 24px rgba(0, 0, 0, 0.08);
+
+  /* ── Focus ring ── */
+  --focus-ring: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-primary-l0);
+
+  /* ── Chart colors ── */
+  --blue-d4: #004799;
+  --blue-d3: #0053B3;
+  --blue-d2: #005FCC;
+  --blue-d1: #006BE6;
+  --blue:    #006EFF;
+  --blue-l1: #338FFF;
+  --blue-l2: #66ABFF;
+  --blue-l3: #97C5FF;
+  --blue-l4: #CCE3FF;
+  --blue-l5: #E5F1FF;
+
+  --orange-d4: #662700;
+  --orange-d3: #803100;
+  --orange-d2: #993B00;
+  --orange-d1: #B34400;
+  --orange:    #CC4E00;
+  --orange-l1: #FF6200;
+  --orange-l2: #FF8133;
+  --orange-l3: #FFA166;
+  --orange-l4: #FFC099;
+  --orange-l5: #FFF0E5;
+
+  --red-d4: #800000;
+  --red-d3: #990000;
+  --red-d2: #B30000;
+  --red-d1: #CC0000;
+  --red:    #E50000;
+  --red-l1: #FF4D4D;
+  --red-l2: #FF6666;
+  --red-l3: #FF8080;
+  --red-l4: #FF9999;
+  --red-l5: #FFE5E5;
+
+  --teal-d4: #092A25;
+  --teal-d3: #0D3F37;
+  --teal-d2: #125449;
+  --teal-d1: #16695B;
+  --teal:    #1B7E6E;
+  --teal-l1: #24A892;
+  --teal-l2: #42D7BE;
+  --teal-l3: #6CE0CC;
+  --teal-l4: #96E9DB;
+  --teal-l5: #EAFBF8;
+
+  --pink-d4: #800048;
+  --pink-d3: #990057;
+  --pink-d2: #B30065;
+  --pink-d1: #CC0074;
+  --pink:    #E50082;
+  --pink-l1: #FF4DB2;
+  --pink-l2: #FF80C8;
+  --pink-l3: #FF99D3;
+  --pink-l4: #FFB2DE;
+  --pink-l5: #FFE5F4;
+
+  --green-d4: #162D06;
+  --green-d3: #22430A;
+  --green-d2: #2E590D;
+  --green-d1: #397010;
+  --green:    #458613;
+  --green-l1: #53A117;
+  --green-l2: #67C91D;
+  --green-l3: #81E236;
+  --green-l4: #9DE963;
+  --green-l5: #F1FCE9;
+
+  --purple-d4: #7700CC;
+  --purple-d3: #8600E6;
+  --purple-d2: #9500FF;
+  --purple-d1: #9F1AFF;
+  --purple:    #AA33FF;
+  --purple-l1: #BF66FF;
+  --purple-l2: #CA80FF;
+  --purple-l3: #D499FF;
+  --purple-l4: #DFB3FF;
+  --purple-l5: #F2E5FF;
+
+  --yellow-d4: #997000;
+  --yellow-d3: #B38900;
+  --yellow-d2: #CC9600;
+  --yellow-d1: #E6A800;
+  --yellow:    #FFBB00;
+  --yellow-l1: #FFC933;
+  --yellow-l2: #FFD666;
+  --yellow-l3: #FFE499;
+  --yellow-l4: #FFF1CC;
+  --yellow-l5: #FFF8E5;
+
+  --cyan-d4: #00334D;
+  --cyan-d3: #004466;
+  --cyan-d2: #005580;
+  --cyan-d1: #006699;
+  --cyan:    #0077B3;
+  --cyan-l1: #0099E6;
+  --cyan-l2: #33BBFF;
+  --cyan-l3: #66CCFF;
+  --cyan-l4: #99DDFF;
+  --cyan-l5: #E5F6FF;
+
+  --indigo-d4: #0017E5;
+  --indigo-d3: #001AFF;
+  --indigo-d2: #1A30FF;
+  --indigo-d1: #3347FF;
+  --indigo:    #4D5FFF;
+  --indigo-l1: #808CFF;
+  --indigo-l2: #99A3FF;
+  --indigo-l3: #B2BAFF;
+  --indigo-l4: #CCD1FF;
+  --indigo-l5: #E5E8FF;
+}
+
+/* Sensible defaults for the document */
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+
+body {
+  margin: 0;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--color-dark);
+  background: var(--color-white);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.25;
+  margin: 0;
+}
+
+p { margin: 0; }
+
+a { color: var(--color-primary); }
+a:hover { color: var(--color-primary-d1); }
+
+/* ============================================================
+   SKELETON tokens — loading-state shapes and shimmer sweep.
+   Shape and surface resolve from the semantic scale (they flip
+   per skin automatically); the shimmer gradient needs raw RGB
+   components, overridden for dark skins in tokens-dark.css.
+   ============================================================ */
+:root {
+  --skeleton-shape: var(--color-secondary-l3);
+  --skeleton-surface: var(--color-light-l1);
+  --skeleton-shimmer-rgb: 247, 248, 249;  /* light-l1 */
+  --skeleton-shimmer-alpha: 0.6;
+}
+
+/* ============================================================
+   CHART tokens — categorical series, sequential buckets and
+   plot structure.
+   Categorical series alias the base chart hues (--yellow, --blue,
+   …) in a fixed order chosen for maximum adjacent contrast and
+   accessibility; the base hues already carry per-skin overrides,
+   so charts reskin for free. (Never point a series at a -l2/-l3
+   tint — those collapse to near-white in the HC skins.) The
+   sequential buckets alias the --blue scale, and the structural
+   tokens alias the semantic scale so grid / track / halo / axis /
+   land flip per skin automatically.
+   ============================================================ */
+:root {
+  /* Categorical series — bar (stacked), pie, multi-series line.
+     Ordered for maximum adjacent contrast + accessibility; alias
+     the base chart hues so each series reskins per skin. */
+  --chart-1:  var(--yellow);
+  --chart-2:  var(--blue);
+  --chart-3:  var(--orange);
+  --chart-4:  var(--teal);
+  --chart-5:  var(--pink);
+  --chart-6:  var(--cyan);
+  --chart-7:  var(--red);
+  --chart-8:  var(--purple);
+  --chart-9:  var(--green);
+  --chart-10: var(--indigo);
+
+  /* Sequential buckets — single hue, less → more (map, heat) */
+  --chart-seq-1: var(--blue-l4);
+  --chart-seq-2: var(--blue-l2);
+  --chart-seq-3: var(--blue);
+
+  /* Plot structure — flip per skin through the semantic scale */
+  --chart-track:     var(--color-light-d1);   /* bar track / gridlines (#E2E4EA) */
+  --chart-grid:      var(--color-light-d1);   /* axis gridlines */
+  --chart-halo:      var(--color-white);      /* marker + segment separators */
+  --chart-axis:      var(--color-secondary);  /* axis + tick labels */
+  --chart-land:      var(--color-light);      /* map land fill (#F1F2F5) */
+  --chart-land-line: var(--color-light-d1);   /* map land borders (#E2E4EA) */
+}
+
+/* ── Site Preview Bar (LPD-97290) ────────────────────────────
+   The bar is a primary-filled surface, so it follows the same convention as
+   .btn--primary: background var(--color-primary), foreground var(--color-white).
+   Both flip per skin, so the bar stays legible without a single literal.
+
+   Controls on the bar are stock kit components (.btn--translucent for the
+   picker and the icon buttons, .btn--secondary for Exit), so the only thing
+   the bar needs of its own is the rule it draws between clusters. That is an
+   alpha of the foreground, which cannot be expressed as a token reference, so
+   each skin carries its own counterpart in tokens-dark.css and
+   tokens-high-contrast.css. */
+:root {
+  --preview-bar-rule: rgba(255, 255, 255, 0.32);   /* divider between clusters */
+}
+
+</style>
+<style>
+/* ── tokens-high-contrast.css ── */
+/* ============================================================
+   LEXICON DESIGN TOKENS — Light High Contrast
+   Auto-generated from "Light High Contrast.tokens.json"
+   Usage: add class="light-hc" to <html> or use @media (prefers-contrast: more)
+   ============================================================ */
+
+.light-hc, [data-theme="light-hc"] {
+  --color-primary-d2: #001133;
+  --color-primary-d1: #002161;
+  --color-primary: #002875;
+  --color-primary-l0: #0058FF;
+  --color-primary-l1: #387DFF;
+  --color-primary-l2: #70A0FF;
+  --color-primary-l3: #F5F8FF;
+  --color-secondary: #28282F;
+  --color-secondary-l0: #42424D;
+  --color-secondary-l1: #6C6F8E;
+  --color-secondary-l2: #CDCDDA;
+  --color-secondary-l3: #F0F0F4;
+  --color-dark-d2: #09090C;
+  --color-dark-d1: #14141A;
+  --color-dark: #1F1F28;
+  --color-dark-l1: #2E2F3D;
+  --color-dark-l2: #505168;
+  --color-light-d2: #D5D8E1;
+  --color-light-d1: #E1E3EA;
+  --color-light: #EDEEF2;
+  --color-light-l1: #F9FAFB;
+  --color-white: #FFFFFF;
+  --color-success-d2: #071309;
+  --color-success-d1: #0E2A14;
+  --color-success: #154220;
+  --color-success-l1: #319B4B;
+  --color-success-l2: #F0FAF3;
+  --color-info-d2: #0B1528;
+  --color-info-d1: #182E58;
+  --color-info: #213F78;
+  --color-info-l1: #3364C2;
+  --color-info-l2: #EFF3FA;
+  --color-warning-d2: #1A0B00;
+  --color-warning-d1: #381800;
+  --color-warning: #662C00;
+  --color-warning-l1: #FA6D00;
+  --color-warning-l2: #FFF6F0;
+  --color-danger-d2: #180202;
+  --color-danger-d1: #340404;
+  --color-danger: #5E0808;
+  --color-danger-l1: #E01515;
+  --color-danger-l2: #FEF1F1;
+  --blue-d4: #004799;
+  --blue-d3: #004799;
+  --blue-d2: #004799;
+  --blue-d1: #004799;
+  --blue: #006EFF;
+  --blue-l1: #E5F1FF;
+  --blue-l2: #E5F1FF;
+  --blue-l3: #E5F1FF;
+  --blue-l4: #E5F1FF;
+  --blue-l5: #E5F1FF;
+  --orange-d4: #662700;
+  --orange-d3: #662700;
+  --orange-d2: #662700;
+  --orange-d1: #662700;
+  --orange: #993B00;
+  --orange-l1: #FFF0E5;
+  --orange-l2: #FFF0E5;
+  --orange-l3: #FFF0E5;
+  --orange-l4: #FFF0E5;
+  --orange-l5: #FFF0E5;
+  --red-d4: #800000;
+  --red-d3: #800000;
+  --red-d2: #800000;
+  --red-d1: #800000;
+  --red: #B30000;
+  --red-l1: #FFE5E5;
+  --red-l2: #FFE5E5;
+  --red-l3: #FFE5E5;
+  --red-l4: #FFE5E5;
+  --red-l5: #FFE5E5;
+  --teal-d4: #092A25;
+  --teal-d3: #092A25;
+  --teal-d2: #092A25;
+  --teal-d1: #092A25;
+  --teal: #125449;
+  --teal-l1: #EAFBF8;
+  --teal-l2: #EAFBF8;
+  --teal-l3: #EAFBF8;
+  --teal-l4: #EAFBF8;
+  --teal-l5: #EAFBF8;
+  --pink-d4: #800048;
+  --pink-d3: #800048;
+  --pink-d2: #800048;
+  --pink-d1: #800048;
+  --pink: #990057;
+  --pink-l1: #FFE5F4;
+  --pink-l2: #FFE5F4;
+  --pink-l3: #FFE5F4;
+  --pink-l4: #FFE5F4;
+  --pink-l5: #FFE5F4;
+  --green-d4: #162D06;
+  --green-d3: #162D06;
+  --green-d2: #162D06;
+  --green-d1: #162D06;
+  --green: #2E590D;
+  --green-l1: #F1FCE9;
+  --green-l2: #F1FCE9;
+  --green-l3: #F1FCE9;
+  --green-l4: #F1FCE9;
+  --green-l5: #F1FCE9;
+  --purple-d4: #7700CC;
+  --purple-d3: #7700CC;
+  --purple-d2: #7700CC;
+  --purple-d1: #7700CC;
+  --purple: #8600E6;
+  --purple-l1: #F2E5FF;
+  --purple-l2: #F2E5FF;
+  --purple-l3: #F2E5FF;
+  --purple-l4: #F2E5FF;
+  --purple-l5: #F2E5FF;
+  --yellow-d4: #997000;
+  --yellow-d3: #997000;
+  --yellow-d2: #997000;
+  --yellow-d1: #997000;
+  --yellow: #FFBB00;
+  --yellow-l1: #FFF8E5;
+  --yellow-l2: #FFF8E5;
+  --yellow-l3: #FFF8E5;
+  --yellow-l4: #FFF8E5;
+  --yellow-l5: #FFF8E5;
+  --cyan-d4: #00334D;
+  --cyan-d3: #00334D;
+  --cyan-d2: #00334D;
+  --cyan-d1: #00334D;
+  --cyan: #005580;
+  --cyan-l1: #E5F6FF;
+  --cyan-l2: #E5F6FF;
+  --cyan-l3: #E5F6FF;
+  --cyan-l4: #E5F6FF;
+  --cyan-l5: #E5F6FF;
+  --indigo-d4: #0017E5;
+  --indigo-d3: #0017E5;
+  --indigo-d2: #0017E5;
+  --indigo-d1: #0017E5;
+  --indigo: #1A30FF;
+  --indigo-l1: #E5E8FF;
+  --indigo-l2: #E5E8FF;
+  --indigo-l3: #E5E8FF;
+  --indigo-l4: #E5E8FF;
+  --indigo-l5: #E5E8FF;
+}
+
+/* Auto-apply high contrast when OS preference is set */
+@media (prefers-contrast: more) {
+  :root {
+  --color-primary-d2: #001133;
+    --color-primary-d1: #002161;
+    --color-primary: #002875;
+    --color-primary-l0: #0058FF;
+    --color-primary-l1: #387DFF;
+    --color-primary-l2: #70A0FF;
+    --color-primary-l3: #F5F8FF;
+    --color-secondary: #28282F;
+    --color-secondary-l0: #42424D;
+    --color-secondary-l1: #6C6F8E;
+    --color-secondary-l2: #CDCDDA;
+    --color-secondary-l3: #F0F0F4;
+    --color-dark-d2: #09090C;
+    --color-dark-d1: #14141A;
+    --color-dark: #1F1F28;
+    --color-dark-l1: #2E2F3D;
+    --color-dark-l2: #505168;
+    --color-light-d2: #D5D8E1;
+    --color-light-d1: #E1E3EA;
+    --color-light: #EDEEF2;
+    --color-light-l1: #F9FAFB;
+    --color-white: #FFFFFF;
+    --color-success-d2: #071309;
+    --color-success-d1: #0E2A14;
+    --color-success: #154220;
+    --color-success-l1: #319B4B;
+    --color-success-l2: #F0FAF3;
+    --color-info-d2: #0B1528;
+    --color-info-d1: #182E58;
+    --color-info: #213F78;
+    --color-info-l1: #3364C2;
+    --color-info-l2: #EFF3FA;
+    --color-warning-d2: #1A0B00;
+    --color-warning-d1: #381800;
+    --color-warning: #662C00;
+    --color-warning-l1: #FA6D00;
+    --color-warning-l2: #FFF6F0;
+    --color-danger-d2: #180202;
+    --color-danger-d1: #340404;
+    --color-danger: #5E0808;
+    --color-danger-l1: #E01515;
+    --color-danger-l2: #FEF1F1;
+    --blue-d4: #004799;
+    --blue-d3: #004799;
+    --blue-d2: #004799;
+    --blue-d1: #004799;
+    --blue: #006EFF;
+    --blue-l1: #E5F1FF;
+    --blue-l2: #E5F1FF;
+    --blue-l3: #E5F1FF;
+    --blue-l4: #E5F1FF;
+    --blue-l5: #E5F1FF;
+    --orange-d4: #662700;
+    --orange-d3: #662700;
+    --orange-d2: #662700;
+    --orange-d1: #662700;
+    --orange: #993B00;
+    --orange-l1: #FFF0E5;
+    --orange-l2: #FFF0E5;
+    --orange-l3: #FFF0E5;
+    --orange-l4: #FFF0E5;
+    --orange-l5: #FFF0E5;
+    --red-d4: #800000;
+    --red-d3: #800000;
+    --red-d2: #800000;
+    --red-d1: #800000;
+    --red: #B30000;
+    --red-l1: #FFE5E5;
+    --red-l2: #FFE5E5;
+    --red-l3: #FFE5E5;
+    --red-l4: #FFE5E5;
+    --red-l5: #FFE5E5;
+    --teal-d4: #092A25;
+    --teal-d3: #092A25;
+    --teal-d2: #092A25;
+    --teal-d1: #092A25;
+    --teal: #125449;
+    --teal-l1: #EAFBF8;
+    --teal-l2: #EAFBF8;
+    --teal-l3: #EAFBF8;
+    --teal-l4: #EAFBF8;
+    --teal-l5: #EAFBF8;
+    --pink-d4: #800048;
+    --pink-d3: #800048;
+    --pink-d2: #800048;
+    --pink-d1: #800048;
+    --pink: #990057;
+    --pink-l1: #FFE5F4;
+    --pink-l2: #FFE5F4;
+    --pink-l3: #FFE5F4;
+    --pink-l4: #FFE5F4;
+    --pink-l5: #FFE5F4;
+    --green-d4: #162D06;
+    --green-d3: #162D06;
+    --green-d2: #162D06;
+    --green-d1: #162D06;
+    --green: #2E590D;
+    --green-l1: #F1FCE9;
+    --green-l2: #F1FCE9;
+    --green-l3: #F1FCE9;
+    --green-l4: #F1FCE9;
+    --green-l5: #F1FCE9;
+    --purple-d4: #7700CC;
+    --purple-d3: #7700CC;
+    --purple-d2: #7700CC;
+    --purple-d1: #7700CC;
+    --purple: #8600E6;
+    --purple-l1: #F2E5FF;
+    --purple-l2: #F2E5FF;
+    --purple-l3: #F2E5FF;
+    --purple-l4: #F2E5FF;
+    --purple-l5: #F2E5FF;
+    --yellow-d4: #997000;
+    --yellow-d3: #997000;
+    --yellow-d2: #997000;
+    --yellow-d1: #997000;
+    --yellow: #FFBB00;
+    --yellow-l1: #FFF8E5;
+    --yellow-l2: #FFF8E5;
+    --yellow-l3: #FFF8E5;
+    --yellow-l4: #FFF8E5;
+    --yellow-l5: #FFF8E5;
+    --cyan-d4: #00334D;
+    --cyan-d3: #00334D;
+    --cyan-d2: #00334D;
+    --cyan-d1: #00334D;
+    --cyan: #005580;
+    --cyan-l1: #E5F6FF;
+    --cyan-l2: #E5F6FF;
+    --cyan-l3: #E5F6FF;
+    --cyan-l4: #E5F6FF;
+    --cyan-l5: #E5F6FF;
+    --indigo-d4: #0017E5;
+    --indigo-d3: #0017E5;
+    --indigo-d2: #0017E5;
+    --indigo-d1: #0017E5;
+    --indigo: #1A30FF;
+    --indigo-l1: #E5E8FF;
+    --indigo-l2: #E5E8FF;
+    --indigo-l3: #E5E8FF;
+    --indigo-l4: #E5E8FF;
+    --indigo-l5: #E5E8FF;
+  }
+}
+
+/* ── Site Preview Bar — high-contrast counterpart ────────────
+   Light HC keeps a white foreground (primary is a deep blue) but needs the
+   divider pushed harder to stay visible. */
+.light-hc, [data-theme="light-hc"] {
+  --preview-bar-rule: rgba(255, 255, 255, 0.60);
+}
+
+@media (prefers-contrast: more) {
+  :root:not(.light):not([data-theme="light"]):not(.dark):not([data-theme="dark"]):not(.dark-hc):not([data-theme="dark-hc"]) {
+    --preview-bar-rule: rgba(255, 255, 255, 0.60);
+  }
+}
+
+</style>
+<style>
+/* ── tokens-dark.css ── */
+/* ============================================================
+   LEXICON DESIGN TOKENS — Dark Themes
+   Dark Mode + Dark High Contrast
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   Dark Mode
+   Activate: <html data-theme="dark"> or <html class="dark">
+---------------------------------------------------------- */
+.dark, [data-theme="dark"] {
+
+  /* Focus ring — inner dark + outer primary-l0 (inverted for dark bg) */
+  --focus-ring: 0 0 0 2px var(--color-dark, #1C1C24), 0 0 0 4px var(--color-primary-l0, #7AA8FF);
+
+  /* Primary */
+  --color-primary-d3: #D6E4FF;
+  --color-primary-d2: #D6E4FF;
+  --color-primary-d1: #7AA8FF;
+  --color-primary: #6198FF;
+  --color-primary-l0: #0F62FF;
+  --color-primary-l1: #004CDB;
+  --color-primary-l2: #003AA8;
+  --color-primary-l3: #001A4D;
+
+  /* Secondary */
+  --color-secondary: #B3B3C6;
+  --color-secondary-l0: #9A9CB2;
+  --color-secondary-l1: #7D809C;
+  --color-secondary-l2: #696A7C;
+  --color-secondary-l3: #4D4E5B;
+
+  /* Dark */
+  --color-dark-d2: #FFFFFF;
+  --color-dark-d1: #F7F8F9;
+  --color-dark: #F1F2F5;
+  --color-dark-l1: #E2E4EA;
+  --color-dark-l2: #E2E4EA;
+
+  /* Light */
+  --color-light-d2: #47485D;
+  --color-light-d1: #3E3F51;
+  --color-light: #313240;
+  --color-light-l1: #262631;
+  --color-white: #1B1B23;
+
+  /* Success */
+  --color-success-d2: #BAE8C6;
+  --color-success-d1: #59C974;
+  --color-success: #3BB959;
+  --color-success-l1: #2A8340;
+  --color-success-l2: #13391B;
+
+  /* Info */
+  --color-info-d2: #DCE4F5;
+  --color-info-d1: #9EB7E6;
+  --color-info: #7E9FDD;
+  --color-info-l1: #4E7BD0;
+  --color-info-l2: #142648;
+
+  /* Warning */
+  --color-warning-d2: #FFDFC7;
+  --color-warning-d1: #FF9A4D;
+  --color-warning: #FF7A14;
+  --color-warning-l1: #D15B00;
+  --color-warning-l2: #4D2100;
+
+  /* Danger */
+  --color-danger-d2: #FDE2E2;
+  --color-danger-d1: #F69D9D;
+  --color-danger: #F67474;
+  --color-danger-l1: #EC2D2D;
+  --color-danger-l2: #470606;
+
+  /* Charts */
+  --blue: #429AFF;
+  --blue-d4: #E5F1FF;
+  --blue-d3: #B8D8FF;
+  --blue-d2: #94C4FF;
+  --blue-d1: #70B1FF;
+  --blue-l1: #2487FF;
+  --blue-l2: #006BE6;
+  --blue-l3: #0056B8;
+  --blue-l4: #004799;
+  --blue-l5: #002147;
+  --orange: #FF6E14;
+  --orange-d4: #FFE7D6;
+  --orange-d3: #FFC099;
+  --orange-d2: #FFA770;
+  --orange-d1: #FF8A42;
+  --orange-l1: #E55800;
+  --orange-l2: #B84600;
+  --orange-l3: #8F3700;
+  --orange-l4: #6B2900;
+  --orange-l5: #3D1700;
+  --red: #FF6666;
+  --red-d4: #FFE5E5;
+  --red-d3: #FFCCCC;
+  --red-d2: #FFB2B2;
+  --red-d1: #FF8F8F;
+  --red-l1: #FF2E2E;
+  --red-l2: #F50000;
+  --red-l3: #C70000;
+  --red-l4: #8F0000;
+  --red-l5: #420000;
+  --teal: #28BDA4;
+  --teal-d4: #DDF8F4;
+  --teal-d3: #ABEDE2;
+  --teal-d2: #7CE4D2;
+  --teal-d1: #4AD9C0;
+  --teal-l1: #22A08B;
+  --teal-l2: #1B7E6E;
+  --teal-l3: #156154;
+  --teal-l4: #0E443B;
+  --teal-l5: #0A2E29;
+  --pink: #FF5CB8;
+  --pink-d4: #FFF0F9;
+  --pink-d3: #FFD6ED;
+  --pink-d2: #FFB2DE;
+  --pink-d1: #FF8ACC;
+  --pink-l1: #FF33A7;
+  --pink-l2: #FA008E;
+  --pink-l3: #C2006D;
+  --pink-l4: #85004B;
+  --pink-l5: #570031;
+  --green: #5CB21A;
+  --green-d4: #DDF8C9;
+  --green-d3: #BCF094;
+  --green-d2: #9AE85F;
+  --green-d1: #79E029;
+  --green-l1: #4A8F14;
+  --green-l2: #397010;
+  --green-l3: #2C550C;
+  --green-l4: #22430A;
+  --green-l5: #162D06;
+  --purple: #C87AFF;
+  --purple-d4: #F5EBFF;
+  --purple-d3: #ECD1FF;
+  --purple-d2: #E1B8FF;
+  --purple-d1: #D499FF;
+  --purple-l1: #B54DFF;
+  --purple-l2: #9F1AFF;
+  --purple-l3: #8C00F0;
+  --purple-l4: #6800B2;
+  --purple-l5: #47007A;
+  --yellow: #FFC524;
+  --yellow-d4: #FFF8E5;
+  --yellow-d3: #FFEAB2;
+  --yellow-d2: #FFDC7A;
+  --yellow-d1: #FFCC42;
+  --yellow-l1: #D69C00;
+  --yellow-l2: #B88600;
+  --yellow-l3: #8A6500;
+  --yellow-l4: #664E00;
+  --yellow-l5: #473400;
+  --cyan: #05ACFF;
+  --cyan-d4: #D1EFFF;
+  --cyan-d3: #99DDFF;
+  --cyan-d2: #70CFFF;
+  --cyan-d1: #38BDFF;
+  --cyan-l1: #0095E0;
+  --cyan-l2: #007EBD;
+  --cyan-l3: #006699;
+  --cyan-l4: #004E75;
+  --cyan-l5: #00334D;
+  --indigo: #8A95FF;
+  --indigo-d4: #F0F1FF;
+  --indigo-d3: #D1D6FF;
+  --indigo-d2: #BDC3FF;
+  --indigo-d1: #A8B1FF;
+  --indigo-l1: #5C6DFF;
+  --indigo-l2: #384CFF;
+  --indigo-l3: #0019FA;
+  --indigo-l4: #0013C2;
+  --indigo-l5: #000A66;
+}
+
+/* ----------------------------------------------------------
+   Dark High Contrast
+   Activate: <html data-theme="dark-hc"> or <html class="dark-hc">
+---------------------------------------------------------- */
+.dark-hc, [data-theme="dark-hc"] {
+
+  /* Focus ring */
+  --focus-ring: 0 0 0 2px var(--color-dark, #1C1C24), 0 0 0 4px var(--color-primary-l0, #C7DAFF);
+
+  /* Primary */
+  --color-primary-d3: #F0F5FF;
+  --color-primary-d2: #D6E4FF;
+  --color-primary-d1: #C7DAFF;
+  --color-primary: #B3CDFF;
+  --color-primary-l0: #003EB2;
+  --color-primary-l1: #00318F;
+  --color-primary-l2: #002366;
+  --color-primary-l3: #001A4D;
+
+  /* Secondary */
+  --color-secondary: #F6F6F8;
+  --color-secondary-l0: #D9D9E3;
+  --color-secondary-l1: #BCBDCC;
+  --color-secondary-l2: #A5A7BB;
+  --color-secondary-l3: #8B8DA7;
+
+  /* Dark */
+  --color-dark-d2: #FFFFFF;
+  --color-dark-d1: #F7F8F9;
+  --color-dark: #F1F2F5;
+  --color-dark-l1: #E2E4EA;
+  --color-dark-l2: #E2E4EA;
+
+  /* Light */
+  --color-light-d2: #30313F;
+  --color-light-d1: #30313F;
+  --color-light: #272833;
+  --color-light-l1: #111116;
+  --color-white: #111116;
+
+  /* Success */
+  --color-success-d2: #C9EED2;
+  --color-success-d1: #A2E1B2;
+  --color-success: #8CD99E;
+  --color-success-l1: #26783A;
+  --color-success-l2: #1A5127;
+
+  /* Info */
+  --color-info-d2: #DFE7F7;
+  --color-info-d1: #CAD8F1;
+  --color-info: #B6C9EC;
+  --color-info-l1: #254A8D;
+  --color-info-l2: #1F3D75;
+
+  /* Warning */
+  --color-warning-d2: #FFD9BD;
+  --color-warning-d1: #FFCBA3;
+  --color-warning: #FFB780;
+  --color-warning-l1: #B24D00;
+  --color-warning-l2: #863A00;
+
+  /* Danger */
+  --color-danger-d2: #FDDEDE;
+  --color-danger-d1: #FAC7C7;
+  --color-danger: #F8B0B0;
+  --color-danger-l1: #B61111;
+  --color-danger-l2: #750B0B;
+
+  /* Charts */
+  --blue: #94C4FF;
+  --blue-d4: #F0F7FF;
+  --blue-d3: #D6E9FF;
+  --blue-d2: #C2DDFF;
+  --blue-d1: #A8CFFF;
+  --blue-l1: #006CF0;
+  --blue-l2: #005DC7;
+  --blue-l3: #004594;
+  --blue-l4: #002F66;
+  --blue-l5: #002147;
+  --orange: #FFB385;
+  --orange-d4: #FFF6F0;
+  --orange-d3: #FFE6D6;
+  --orange-d2: #FFD6BD;
+  --orange-d1: #FFC39E;
+  --orange-l1: #EB5A00;
+  --orange-l2: #C24A00;
+  --orange-l3: #A33F00;
+  --orange-l4: #803100;
+  --orange-l5: #3D1700;
+  --red: #FFADAD;
+  --red-d4: #FFF5F5;
+  --red-d3: #FFE0E0;
+  --red-d2: #FFD6D6;
+  --red-d1: #FFC7C7;
+  --red-l1: #F50000;
+  --red-l2: #C20000;
+  --red-l3: #990000;
+  --red-l4: #700000;
+  --red-l5: #420000;
+  --teal: #67DFCA;
+  --teal-d4: #EAFBF8;
+  --teal-d3: #CCF4ED;
+  --teal-d2: #B3EFE5;
+  --teal-d1: #96E9DB;
+  --teal-l1: #28BEA4;
+  --teal-l2: #1F9380;
+  --teal-l3: #197667;
+  --teal-l4: #12594E;
+  --teal-l5: #0D3B34;
+  --pink: #FFADDC;
+  --pink-d4: #FFF5FB;
+  --pink-d3: #FFE5F4;
+  --pink-d2: #FFD6ED;
+  --pink-d1: #FFC7E7;
+  --pink-l1: #F5008B;
+  --pink-l2: #C2006E;
+  --pink-l3: #940053;
+  --pink-l4: #610037;
+  --pink-l5: #3D0022;
+  --green: #79E029;
+  --green-d4: #F1FCE9;
+  --green-d3: #CFF4B3;
+  --green-d2: #A6EA70;
+  --green-d1: #92E651;
+  --green-l1: #57AA18;
+  --green-l2: #498F14;
+  --green-l3: #3A6F10;
+  --green-l4: #29500C;
+  --green-l5: #162D06;
+  --purple: #E1B8FF;
+  --purple-d4: #F5EBFF;
+  --purple-d3: #ECD1FF;
+  --purple-d2: #ECD1FF;
+  --purple-d1: #ECD1FF;
+  --purple-l1: #9B0FFF;
+  --purple-l2: #7F00DB;
+  --purple-l3: #6E00BD;
+  --purple-l4: #590099;
+  --purple-l5: #3C0066;
+  --yellow: #FFC524;
+  --yellow-d4: #FFF8E5;
+  --yellow-d3: #FFEAB2;
+  --yellow-d2: #FFDC7A;
+  --yellow-d1: #FFCC42;
+  --yellow-l1: #D69C00;
+  --yellow-l2: #B88600;
+  --yellow-l3: #8A6500;
+  --yellow-l4: #664E00;
+  --yellow-l5: #473400;
+  --cyan: #75D1FF;
+  --cyan-d4: #E5F6FF;
+  --cyan-d3: #C7ECFF;
+  --cyan-d2: #ADE4FF;
+  --cyan-d1: #94DBFF;
+  --cyan-l1: #0095E0;
+  --cyan-l2: #0073AD;
+  --cyan-l3: #005F8F;
+  --cyan-l4: #00476B;
+  --cyan-l5: #00334D;
+  --indigo: #BDC3FF;
+  --indigo-d4: #F0F1FF;
+  --indigo-d3: #D6DAFF;
+  --indigo-d2: #D6DAFF;
+  --indigo-d1: #D6DAFF;
+  --indigo-l1: #051FFF;
+  --indigo-l2: #0015D1;
+  --indigo-l3: #0012B2;
+  --indigo-l4: #000D85;
+  --indigo-l5: #000A66;
+}
+
+/* Auto dark (OS preference) — only when no explicit theme class is set */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not([data-theme="light"]):not(.light-hc):not([data-theme="light-hc"]):not(.dark):not([data-theme="dark"]):not(.dark-hc):not([data-theme="dark-hc"]) {
+
+    /* Primary */
+    --color-primary-d3: #D6E4FF;
+    --color-primary-d2: #D6E4FF;
+    --color-primary-d1: #7AA8FF;
+    --color-primary: #6198FF;
+    --color-primary-l0: #0F62FF;
+    --color-primary-l1: #004CDB;
+    --color-primary-l2: #003AA8;
+    --color-primary-l3: #001A4D;
+
+    /* Secondary */
+    --color-secondary: #B3B3C6;
+    --color-secondary-l0: #9A9CB2;
+    --color-secondary-l1: #7D809C;
+    --color-secondary-l2: #696A7C;
+    --color-secondary-l3: #4D4E5B;
+
+    /* Dark */
+    --color-dark-d2: #FFFFFF;
+    --color-dark-d1: #F7F8F9;
+    --color-dark: #F1F2F5;
+    --color-dark-l1: #E2E4EA;
+    --color-dark-l2: #E2E4EA;
+
+    /* Light */
+    --color-light-d2: #47485D;
+    --color-light-d1: #3E3F51;
+    --color-light: #313240;
+    --color-light-l1: #262631;
+    --color-white: #1B1B23;
+
+    /* Success */
+    --color-success-d2: #BAE8C6;
+    --color-success-d1: #59C974;
+    --color-success: #3BB959;
+    --color-success-l1: #2A8340;
+    --color-success-l2: #13391B;
+
+    /* Info */
+    --color-info-d2: #DCE4F5;
+    --color-info-d1: #9EB7E6;
+    --color-info: #7E9FDD;
+    --color-info-l1: #4E7BD0;
+    --color-info-l2: #142648;
+
+    /* Warning */
+    --color-warning-d2: #FFDFC7;
+    --color-warning-d1: #FF9A4D;
+    --color-warning: #FF7A14;
+    --color-warning-l1: #D15B00;
+    --color-warning-l2: #4D2100;
+
+    /* Danger */
+    --color-danger-d2: #FDE2E2;
+    --color-danger-d1: #F69D9D;
+    --color-danger: #F67474;
+    --color-danger-l1: #EC2D2D;
+    --color-danger-l2: #470606;
+
+    /* Charts */
+    --blue: #429AFF;
+    --blue-d4: #E5F1FF;
+    --blue-d3: #B8D8FF;
+    --blue-d2: #94C4FF;
+    --blue-d1: #70B1FF;
+    --blue-l1: #2487FF;
+    --blue-l2: #006BE6;
+    --blue-l3: #0056B8;
+    --blue-l4: #004799;
+    --blue-l5: #002147;
+    --orange: #FF6E14;
+    --orange-d4: #FFE7D6;
+    --orange-d3: #FFC099;
+    --orange-d2: #FFA770;
+    --orange-d1: #FF8A42;
+    --orange-l1: #E55800;
+    --orange-l2: #B84600;
+    --orange-l3: #8F3700;
+    --orange-l4: #6B2900;
+    --orange-l5: #3D1700;
+    --red: #FF6666;
+    --red-d4: #FFE5E5;
+    --red-d3: #FFCCCC;
+    --red-d2: #FFB2B2;
+    --red-d1: #FF8F8F;
+    --red-l1: #FF2E2E;
+    --red-l2: #F50000;
+    --red-l3: #C70000;
+    --red-l4: #8F0000;
+    --red-l5: #420000;
+    --teal: #28BDA4;
+    --teal-d4: #DDF8F4;
+    --teal-d3: #ABEDE2;
+    --teal-d2: #7CE4D2;
+    --teal-d1: #4AD9C0;
+    --teal-l1: #22A08B;
+    --teal-l2: #1B7E6E;
+    --teal-l3: #156154;
+    --teal-l4: #0E443B;
+    --teal-l5: #0A2E29;
+    --pink: #FF5CB8;
+    --pink-d4: #FFF0F9;
+    --pink-d3: #FFD6ED;
+    --pink-d2: #FFB2DE;
+    --pink-d1: #FF8ACC;
+    --pink-l1: #FF33A7;
+    --pink-l2: #FA008E;
+    --pink-l3: #C2006D;
+    --pink-l4: #85004B;
+    --pink-l5: #570031;
+    --green: #5CB21A;
+    --green-d4: #DDF8C9;
+    --green-d3: #BCF094;
+    --green-d2: #9AE85F;
+    --green-d1: #79E029;
+    --green-l1: #4A8F14;
+    --green-l2: #397010;
+    --green-l3: #2C550C;
+    --green-l4: #22430A;
+    --green-l5: #162D06;
+    --purple: #C87AFF;
+    --purple-d4: #F5EBFF;
+    --purple-d3: #ECD1FF;
+    --purple-d2: #E1B8FF;
+    --purple-d1: #D499FF;
+    --purple-l1: #B54DFF;
+    --purple-l2: #9F1AFF;
+    --purple-l3: #8C00F0;
+    --purple-l4: #6800B2;
+    --purple-l5: #47007A;
+    --yellow: #FFC524;
+    --yellow-d4: #FFF8E5;
+    --yellow-d3: #FFEAB2;
+    --yellow-d2: #FFDC7A;
+    --yellow-d1: #FFCC42;
+    --yellow-l1: #D69C00;
+    --yellow-l2: #B88600;
+    --yellow-l3: #8A6500;
+    --yellow-l4: #664E00;
+    --yellow-l5: #473400;
+    --cyan: #05ACFF;
+    --cyan-d4: #D1EFFF;
+    --cyan-d3: #99DDFF;
+    --cyan-d2: #70CFFF;
+    --cyan-d1: #38BDFF;
+    --cyan-l1: #0095E0;
+    --cyan-l2: #007EBD;
+    --cyan-l3: #006699;
+    --cyan-l4: #004E75;
+    --cyan-l5: #00334D;
+    --indigo: #8A95FF;
+    --indigo-d4: #F0F1FF;
+    --indigo-d3: #D1D6FF;
+    --indigo-d2: #BDC3FF;
+    --indigo-d1: #A8B1FF;
+    --indigo-l1: #5C6DFF;
+    --indigo-l2: #384CFF;
+    --indigo-l3: #0019FA;
+    --indigo-l4: #0013C2;
+    --indigo-l5: #000A66;
+  }
+}
+
+/* ── Skeleton shimmer — dark counterparts ──────────────────── */
+.dark, [data-theme="dark"],
+.dark-hc, [data-theme="dark-hc"] {
+  --skeleton-shimmer-rgb: 99, 102, 130;   /* secondary-l1 (light scale) */
+  --skeleton-shimmer-alpha: 0.35;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not([data-theme="light"]):not(.light-hc):not([data-theme="light-hc"]):not(.dark):not([data-theme="dark"]):not(.dark-hc):not([data-theme="dark-hc"]) {
+    --skeleton-shimmer-rgb: 99, 102, 130;
+    --skeleton-shimmer-alpha: 0.35;
+  }
+}
+
+/* ── Scrim — dark counterpart ───────────────────────────────
+   The light scrim (#393A4A tint) reads too soft over dark surfaces, so dim
+   with black instead. */
+.dark, [data-theme="dark"],
+.dark-hc, [data-theme="dark-hc"] {
+  --color-scrim: rgba(0, 0, 0, 0.6);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not([data-theme="light"]):not(.light-hc):not([data-theme="light-hc"]):not(.dark):not([data-theme="dark"]):not(.dark-hc):not([data-theme="dark-hc"]) {
+    --color-scrim: rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* ── Site Preview Bar — dark counterparts ────────────────────
+   In dark and dark-hc the primary fill becomes a *light* blue and the bar's
+   foreground (--color-white) becomes near-black, so the divider has to be an
+   alpha of black rather than of white. */
+.dark, [data-theme="dark"],
+.dark-hc, [data-theme="dark-hc"] {
+  --preview-bar-rule: rgba(17, 17, 22, 0.28);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not([data-theme="light"]):not(.light-hc):not([data-theme="light-hc"]):not(.dark):not([data-theme="dark"]):not(.dark-hc):not([data-theme="dark-hc"]) {
+    --preview-bar-rule: rgba(17, 17, 22, 0.28);
+  }
+}
+
+</style>
+<style>
+/* ── components.css (solo las reglas que usa la página) ── */
+.lexicon-icon {
+  display: inline-block;
+  width: 16px;   /* default size */
+  height: 16px;
+  fill: currentColor;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-3);
+  height: 40px;
+  padding: 0 var(--spacing-5);
+  border-radius: var(--rounded-lg);
+  border: 1px solid transparent;
+  background: transparent;
+  font-family: inherit;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  color: var(--color-dark);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color 0.1s ease,
+    border-color 0.1s ease,
+    color 0.1s ease,
+    box-shadow 0.1s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.btn:focus-visible {
+  outline: 0;
+  box-shadow: var(--focus-ring);
+}
+.btn:disabled, .btn[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.btn--primary {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+.btn--primary:hover { background: var(--color-primary-d1); }
+.btn--primary:active { background: var(--color-primary-d2); }
+.btn--secondary {
+  background: var(--color-white);
+  border-color: var(--color-secondary-l0);
+  color: var(--color-secondary);
+}
+.btn--secondary:hover { background: var(--color-light-l1); }
+.btn--secondary:active { background: var(--color-light); }
+.btn--borderless {
+  background: transparent;
+  color: var(--color-secondary);
+}
+.btn--borderless:hover { background: var(--color-light); }
+.btn--borderless:active { background: var(--color-light-d1); }
+.btn--primary.btn--danger { background: var(--color-danger); }
+.btn--primary.btn--danger:hover { background: var(--color-danger-d1); }
+.btn--secondary.btn--danger { color: var(--color-danger);  border-color: var(--color-danger);  }
+.btn--secondary.btn--danger:hover { background: var(--color-danger-l2);  }
+.alert--info    .btn--secondary:hover { background: var(--color-info);    border-color: var(--color-info);    color: var(--color-white); }
+.alert--success .btn--secondary:hover { background: var(--color-success); border-color: var(--color-success); color: var(--color-white); }
+.btn--borderless.btn--danger { color: var(--color-danger);  }
+.btn--borderless.btn--danger:hover { background: var(--color-danger-l2);  }
+.btn--xs { height: 24px; padding: 0 var(--spacing-3); font-size: var(--font-size-sm); gap: var(--spacing-2); }
+.btn--sm { height: 32px; padding: 0 var(--spacing-4); font-size: var(--font-size-base); font-weight: 600; }
+.btn--icon { width: 40px; min-width: 40px; padding: 0; flex-shrink: 0; }
+.btn--icon.btn--xs { width: 24px; min-width: 24px; }
+.btn--icon.btn--sm { width: 32px; min-width: 32px; }
+.alert {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--spacing-5);          /* 16 between sections */
+  padding: var(--spacing-5);      /* 16 inside container */
+  border: 1px solid;
+  border-radius: var(--rounded-md);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+}
+.alert--toast {
+  box-shadow: var(--shadow-alert);
+}
+.alert__content {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-3);          /* 8 between icon and text */
+  padding: var(--spacing-2-5) 0 var(--spacing-2); /* 6px top, 4px bottom */
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.alert__content .lexicon-icon { margin-top: var(--spacing-1); flex-shrink: 0; }
+.alert__text {
+  margin: 0;
+  min-width: 0;
+  color: inherit;                 /* inherits validation color from .alert--{x} */
+}
+.alert__text strong {
+  font-weight: var(--font-weight-bold);
+}
+.alert__close { color: inherit; flex: 0 0 auto; }
+.alert--info { background: var(--color-info-l2);    border-color: var(--color-info-l1);    color: var(--color-info);    }
+.alert--success { background: var(--color-success-l2); border-color: var(--color-success-l1); color: var(--color-success); }
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  color: var(--color-dark);
+  cursor: pointer;
+  user-select: none;
+}
+.checkbox__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+.checkbox__box {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--color-secondary-l0);
+  border-radius: var(--rounded-sm);
+  background: var(--color-white);
+  color: var(--color-white);
+}
+.checkbox__icon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  display: none;
+}
+.checkbox__input:checked ~ .checkbox__box {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+.checkbox__input:checked ~ .checkbox__box .checkbox__icon--check {
+  display: block;
+}
+.checkbox__input:focus-visible ~ .checkbox__box::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0 -12px;
+  border-radius: var(--rounded-full);
+  border: 2px solid var(--color-primary-l0);
+  box-sizing: border-box;
+  pointer-events: none;
+}
+.checkbox:has(.checkbox__input:disabled) {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  height: 24px;
+  padding: 0 var(--spacing-3);
+  border: 1px solid var(--color-secondary-l2);
+  border-radius: var(--rounded-sm);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  line-height: 18px;
+  white-space: nowrap;
+  background: var(--color-white);
+  color: var(--color-secondary);
+}
+.label--secondary { color: var(--color-secondary); border-color: var(--color-secondary-l2); }
+.label--success { color: var(--color-success);   border-color: var(--color-success-l1);   }
+.label--warning { color: var(--color-warning);   border-color: var(--color-warning-l1);   }
+.label--danger { color: var(--color-danger);    border-color: var(--color-danger-l1);    }
+.loading-animation {
+  color: var(--color-primary);
+  display: inline-block;
+  height: 1em;
+  overflow: hidden;
+  position: relative;
+  vertical-align: middle;
+  width: 1em;
+}
+.loading-animation::before {
+  animation: loading-animation-circle 1s linear infinite;
+  border-radius: 50%;
+  box-shadow: -0.03125em -0.375em 0 0 currentColor;
+  content: '';
+  height: 0.25em;
+  left: 50%;
+  margin-left: -0.125em;
+  margin-top: -0.125em;
+  position: absolute;
+  top: 50%;
+  width: 0.25em;
+}
+.loading-animation::after {
+  animation: loading-animation-circle 1s linear infinite;
+  background-color: currentColor;
+  border-radius: 50%;
+  content: '';
+  display: block;
+  height: 1em;
+  -webkit-mask: conic-gradient(transparent 10%, #000), linear-gradient(#000 0 0) content-box;
+  -webkit-mask-composite: source-out;
+  mask: conic-gradient(transparent 10%, #000), linear-gradient(#000 0 0) content-box;
+  mask-composite: subtract;
+  padding: 0.25em;
+  width: 1em;
+}
+@media (prefers-reduced-motion: reduce) {
+  .loading-animation::before, .loading-animation::after { animation: none; }
+}
+.loading-animation-sm { font-size: 1rem; }
+.tooltip {
+  position: relative;
+  display: inline-block;
+  max-width: 240px;
+  padding: var(--spacing-4);
+  border-radius: var(--rounded-md);
+  background: var(--color-dark-d2);
+  color: var(--color-white);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-base);
+}
+.tooltip::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 4px solid transparent;
+}
+.tooltip::after {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-top-color: var(--color-dark-d2);
+}
+.slider {
+  --value: 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--spacing-4);
+  width: 100%;
+}
+.slider__field {
+  position: relative;
+}
+.slider__input {
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 24px;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.slider__input::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: var(--rounded-md);
+  background: linear-gradient(
+    to right,
+    var(--color-primary) 0,
+    var(--color-primary) calc(var(--value) * 1%),
+    var(--color-light) calc(var(--value) * 1%),
+    var(--color-light) 100%
+  );
+}
+.slider__input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  margin-top: -10px;
+  border-radius: 50%;
+  background: var(--color-white);
+  border: 1px solid var(--color-secondary-l2);
+  box-shadow: var(--shadow-sm);
+  cursor: grab;
+}
+.slider__input:active::-webkit-slider-thumb { cursor: grabbing; }
+.slider__input::-moz-range-track {
+  height: 4px;
+  border-radius: var(--rounded-md);
+  background: var(--color-light);
+}
+.slider__input::-moz-range-progress {
+  height: 4px;
+  border-radius: var(--rounded-md);
+  background: var(--color-primary);
+}
+.slider__input::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-white);
+  border: 1px solid var(--color-secondary-l2);
+  box-shadow: var(--shadow-sm);
+  cursor: grab;
+}
+.slider__input:focus-visible { outline: 0; }
+.slider__input:focus-visible::-webkit-slider-thumb { box-shadow: var(--focus-ring); }
+.slider__input:focus-visible::-moz-range-thumb { box-shadow: var(--focus-ring); }
+.slider__value {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  color: var(--color-secondary);
+  white-space: nowrap;
+  min-width: 28px;
+  text-align: right;
+}
+.slider:has(.slider__input:disabled) {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.slider:has(.slider__input:disabled) .slider__input { cursor: not-allowed; }
+.sticker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--rounded-lg);
+  overflow: hidden;
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-bold);
+  font-size: 12px;
+  line-height: 1;
+  background: var(--color-secondary-l3);
+  color: var(--color-secondary);
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+.sticker > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.sticker--md { width: 32px; height: 32px; font-size: 14px; }
+.sticker--circle { border-radius: var(--rounded-full); }
+.sticker--outline {
+  background: var(--color-secondary-l3);
+  color: var(--color-secondary);
+  border: 1px solid var(--color-secondary);
+}
+.sticker--outline.sticker--primary { background: var(--color-primary-l3); color: var(--color-primary); border-color: var(--color-primary); }
+.sticker--icon {
+  background: var(--color-white);
+  border: 1px solid var(--color-light-d2);
+  color: var(--color-secondary);
+}
+.sticker--icon .lexicon-icon { width: 50%; height: 50%; }
+.input__field {
+  display: block;
+  width: 100%;
+  height: 40px;
+  padding: 0 var(--spacing-5);
+  border: 1px solid var(--color-secondary-l3);
+  border-radius: var(--rounded-md);
+  background: var(--color-light);
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  color: var(--color-dark);
+  -webkit-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  transition: background 0.1s ease, border-color 0.1s ease, box-shadow 0.1s ease;
+}
+.input__field::placeholder { color: var(--color-dark); opacity: 0.55; }
+.input__field:focus-visible {
+  outline: 0;
+  background: var(--color-primary-l3);
+  border-color: var(--color-primary-l1);
+  box-shadow: var(--focus-ring);
+}
+.input__field:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.search {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+.search__field {
+  padding-right: 64px;
+}
+.search__submit {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  border-radius: var(--rounded-sm);
+  color: var(--color-secondary);
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.search__submit:hover { color: var(--color-dark); }
+.search__submit { right: var(--spacing-3); }
+.btn-group {
+  display: inline-flex;
+  align-items: stretch;
+}
+.btn-group > .btn { border-radius: 0; position: relative; }
+.btn-group > .btn:first-child {
+  border-top-left-radius: var(--rounded-md);
+  border-bottom-left-radius: var(--rounded-md);
+}
+.btn-group > .btn:last-child {
+  border-top-right-radius: var(--rounded-md);
+  border-bottom-right-radius: var(--rounded-md);
+}
+.btn-group > .btn + .btn { margin-left: -1px; }
+.btn-group > .btn:hover, .btn-group > .btn:focus-visible { z-index: 1; }
+.btn-group > .btn--secondary.is-active {
+  background: var(--color-light);
+  z-index: 1;
+}
+.tabs {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--spacing-3);
+  padding: 0 var(--spacing-2);
+  border-bottom: 1px solid var(--color-light-d2);
+}
+.tabs__tab {
+  position: relative;
+  margin-bottom: -1px;
+  padding: var(--spacing-3) var(--spacing-4);
+  border: 1px solid transparent;
+  border-bottom: 0;
+  border-radius: var(--rounded-md) var(--rounded-md) 0 0;
+  background: transparent;
+  color: var(--color-secondary);
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.25;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.tabs__tab:hover { color: var(--color-dark); }
+.tabs__tab:focus-visible {
+  outline: 0;
+  box-shadow: var(--focus-ring);
+}
+.tabs__tab:disabled, .tabs__tab[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.tabs__tab.is-active, .tabs__tab[aria-selected="true"] {
+  background: var(--color-white);
+  color: var(--color-dark);
+  border-color: var(--color-light-d2);
+  /* Hide the slice of the baseline that runs under the active card */
+  box-shadow: 0 1px 0 0 var(--color-white);
+}
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-white);
+  border: 1px solid var(--color-secondary-l2);
+  border-radius: var(--rounded-xl);
+  font-family: var(--font-family-base);
+  color: var(--color-dark);
+  overflow: hidden;
+  transition: border-color 0.1s ease;
+}
+.card.is-selected {
+  border: 2px solid var(--color-primary-l1);
+}
+.card__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-light-l1);
+  aspect-ratio: 16 / 9;
+  color: var(--color-secondary);
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  overflow: hidden;
+}
+.card__media img, .card__media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.card__media .lexicon-icon { width: 64px; height: 64px; }
+.card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  padding: var(--spacing-4) var(--spacing-3) var(--spacing-4) var(--spacing-5);
+  border-top: 1px solid var(--color-secondary-l3);
+  flex: 1 1 auto;
+  min-width: 0;
+  position: relative;
+}
+.card__title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  margin: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: var(--color-dark);
+}
+.card__subtitle {
+  font-size: var(--font-size-base);
+  color: var(--color-secondary);
+  margin: 0;
+}
+.card__body > .label { margin-top: var(--spacing-2); align-self: flex-start; }
+.card__menu {
+  position: absolute;
+  top: var(--spacing-2);
+  right: var(--spacing-2);
+  width: 32px;
+  height: 32px;
+  padding: var(--spacing-3);
+  border: 0;
+  border-radius: var(--rounded-md);
+  background: transparent;
+  color: var(--color-secondary);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.card__menu:hover { background: var(--color-light); }
+.section {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-5);
+  padding: var(--spacing-2-5) 0;
+  border-bottom: 1px solid var(--color-secondary-l2);
+  font-family: var(--font-family-base);
+  text-decoration: none;
+  color: var(--color-secondary);
+}
+.section__title {
+  flex: 1 0 0;
+  min-width: 0;
+  margin: 0;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  line-height: 1.5;
+}
+.section .lexicon-icon { color: var(--color-secondary); flex-shrink: 0; }
+.popover {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4) var(--spacing-5);
+  background: var(--color-white);
+  border-radius: var(--rounded-md);
+  box-shadow: var(--shadow-md);
+  font-family: var(--font-family-base);
+  color: var(--color-dark);
+  max-width: 320px;
+}
+.popover__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  border-bottom: 1px solid var(--color-secondary-l3);
+  padding-bottom: var(--spacing-4);
+}
+.popover__title {
+  margin: 0;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.5;
+  color: var(--color-dark);
+  flex: 1 1 auto;
+}
+.popover__body {
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  color: var(--color-secondary);
+}
+.dropdown {
+  list-style: none;
+  margin: 0;
+  padding: var(--spacing-3) 0;
+  background: var(--color-white);
+  border: 1px solid var(--color-secondary-l3);
+  border-radius: var(--rounded-md);
+  /* Figma: Shadow/Dropdown — y=4, blur=8, opacity=12% */
+  box-shadow: var(--shadow-dropdown);
+  font-family: var(--font-family-base);
+  min-width: 240px;
+}
+.dropdown__item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  width: 100%;
+  /* Figma: pt=5px pb=6px px=16px — nearest token is spacing-2-5 (6px) */
+  padding: var(--spacing-2-5) var(--spacing-5);
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  /* Figma: 14/Regular = weight 400 = --font-weight-semi in this token scale */
+  font-weight: var(--font-weight-semi);
+  color: var(--color-secondary);
+  background: var(--color-white);
+  border: 0;
+  text-align: left;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: var(--line-height-base);
+}
+.dropdown__item:hover { background: var(--color-light-l1); color: var(--color-dark); }
+.dropdown__item:disabled { color: var(--color-secondary-l1); cursor: not-allowed; background: var(--color-white); }
+.dropdown__item.is-active { color: var(--color-secondary); }
+.dropdown__item-icon { flex-shrink: 0; color: var(--color-secondary); }
+.dropdown__item-text { flex: 1 1 auto; min-width: 0; }
+.dropdown__divider {
+  list-style: none;
+  height: 1px;
+  background: var(--color-secondary-l3);
+  margin: var(--spacing-2) 0;
+}
+.dropdown .alert {
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  padding: var(--spacing-3) var(--spacing-5);
+  margin-bottom: 0;
+}
+.modal {
+  background: var(--color-white);
+  border-radius: var(--rounded-md);
+  box-shadow: var(--shadow-lg);
+  font-family: var(--font-family-base);
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - var(--spacing-9));
+  overflow: hidden;
+}
+.modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  padding: var(--spacing-5) var(--spacing-7);
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-secondary-l3);
+  flex-shrink: 0;
+}
+.modal__title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-dark);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.modal__close { flex-shrink: 0; }
+.modal__body {
+  padding: var(--spacing-7);
+  overflow-y: auto;
+  flex: 1 1 auto;
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  color: var(--color-dark);
+}
+.modal__footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--spacing-5);
+  padding: var(--spacing-5) var(--spacing-7);
+  border-top: 1px solid var(--color-secondary-l3);
+  flex-shrink: 0;
+}
+.modal__footer > .btn--borderless:first-child { margin-right: auto; }
+.vert-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.vert-nav__item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) var(--spacing-5);
+  cursor: pointer;
+  font-weight: var(--font-weight-semi);
+  color: var(--color-dark);
+  overflow: hidden;
+}
+.vert-nav__item:hover { background: var(--color-light); }
+.vert-nav__item.is-active {
+  background: var(--color-primary-l3);
+  border-left: 6px solid var(--color-primary);
+  padding-left: calc(var(--spacing-5) - 6px);
+}
+.vert-nav__group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) var(--spacing-5);
+  min-height: 40px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  color: var(--color-dark);
+  cursor: pointer;
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+}
+.vert-nav__group-header:hover { background: var(--color-light); }
+.vert-nav__icon-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+.vert-nav__icon { color: var(--color-secondary); flex-shrink: 0; }
+.vert-nav__item .lexicon-icon[href*="angle"], .vert-nav__item > .lexicon-icon:last-child { margin-left: auto; color: var(--color-secondary); }
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  color: var(--color-dark);
+  border: 1px solid var(--color-secondary-l3);
+  border-radius: var(--rounded-md);
+  overflow: hidden;
+  background: var(--color-white);
+}
+.table th, .table td {
+  padding: var(--spacing-5) var(--spacing-5);
+  text-align: left;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--color-secondary-l3);
+}
+.table th {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-secondary);
+  background: var(--color-white);
+}
+.table tbody tr { background: var(--color-white); }
+.table tbody tr:nth-child(even) { background: var(--color-light-l1); }
+.table tbody tr.is-selected, .table tbody tr.is-selected:nth-child(even) { background: var(--color-primary-l3); }
+.table tbody tr:last-child td { border-bottom: 0; }
+.table__cell--gutter { width: 48px; padding-left: var(--spacing-5); padding-right: var(--spacing-5); }
+.table__cell--gutter:last-child { padding-left: var(--spacing-3); padding-right: var(--spacing-3); width: 48px; }
+.management-toolbar {
+  background: var(--color-white);
+  /* No border in default state — Figma default is borderless */
+  width: 100%;
+}
+.management-toolbar__bar {
+  align-items: center;
+  display: flex;
+  gap: var(--spacing-5);                       /* 16px */
+  padding: var(--spacing-4) var(--spacing-7);  /* 12px 24px */
+}
+.management-toolbar__search { flex: 1; min-width: 0; }
+@media (max-width: 767px) {
+  .management-toolbar__bar {
+    gap: var(--spacing-2);                     /* 4px */
+    padding: var(--spacing-3) var(--spacing-4); /* 8px 12px */
+  }
+}
+.cms-menu {
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-7) 0;
+  background: var(--color-light-l1);
+  border-right: 1px solid var(--color-secondary-l2);
+  font-family: var(--font-family-base);
+}
+.cms-menu__groups {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5);
+}
+.cms-menu .vert-nav__icon { color: var(--color-dark); }
+.cms-menu__groups > li {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+.cms-menu .vert-nav__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+.control-menu {
+  align-items: center;
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-light-d2);
+  display: flex;
+  gap: var(--spacing-5);
+  padding: calc(var(--spacing-2) + var(--spacing-2-5)) var(--spacing-5);
+  width: 100%;
+}
+.control-menu__left {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  gap: var(--spacing-5);
+  min-width: 0;
+}
+.control-menu__btns {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--spacing-5);
+}
+.control-menu__btn {
+  align-items: center;
+  background: transparent;
+  border: none;
+  border-radius: var(--rounded-md);
+  color: var(--color-secondary);
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  padding: var(--spacing-3);
+}
+.control-menu__btn:hover { background: var(--color-light); }
+.control-menu__title {
+  color: var(--color-dark);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.control-menu__right {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--spacing-5);
+}
+@media (max-width: 767px) {
+  .control-menu {
+    padding: var(--spacing-2-5) var(--spacing-4);
+  }
+}
+@keyframes loading-animation-circle {
+  100% { transform: rotate(360deg); }
+}
+</style>
+
+  <style>
+  /* ── Lo que se prueba: solo sombras ─────────────────────────────
+     #lab[data-s] redefine los --shadow-* del kit. Fondos, bordes y
+     colores de componente no se tocan. Los candidatos mezclan con
+     #000 porque dark no tiene token negro: el que gane pasa a
+     tokens-dark.css como --shadow-color y el literal desaparece. */
+  :is(.dark, .dark-hc) #lab[data-s] {
+    --c1: color-mix(in srgb, var(--sc) var(--a1), transparent);
+    --c2: color-mix(in srgb, var(--sc) var(--a2), transparent);
+    --c3: color-mix(in srgb, var(--sc) var(--a3, 0%), transparent);
+    --ring: 0 0 0 0 transparent;
+    --contact: 0 1px 2px var(--c3);
+    --shadow-sm:        0 1px 4px var(--c2);
+    --shadow-tooltip:   0 2px 4px var(--c2);
+    --shadow-card:      var(--contact), 0 0 12px var(--c1);
+    --shadow-card-drag: var(--ring), var(--contact), 0 8px 16px var(--c1);
+    --shadow-dropdown:  var(--ring), var(--contact), 0 4px 8px var(--c1);
+    --shadow-md:        var(--ring), var(--contact), 0 8px 16px var(--c2);
+    --shadow-lg:        var(--ring), var(--contact), 0 4px 16px var(--c2);
+    --shadow-alert:     var(--ring), var(--contact), 0 8px 16px var(--c1);
+  }
+  :is(.dark, .dark-hc) #lab[data-s="figma"]     { --sc: #000; --a1: 50%; --a2: 70%; }
+  :is(.dark, .dark-hc) #lab:is([data-s="surface"], [data-s="layered"], [data-s="ring"]) {
+    --sc: color-mix(in oklab, var(--color-white) 30%, #000); --a1: 60%; --a2: 80%; }
+  :is(.dark, .dark-hc) #lab[data-s="secondary"] {
+    --sc: color-mix(in oklab, var(--color-secondary-l3) 25%, #000); --a1: 60%; --a2: 80%; }
+  :is(.dark, .dark-hc) #lab[data-s="primary"]   {
+    --sc: color-mix(in oklab, var(--color-primary-l3) 30%, #000); --a1: 60%; --a2: 80%; }
+  :is(.dark, .dark-hc) #lab:is([data-s="layered"], [data-s="ring"]) { --a3: 90%; }
+  :is(.dark, .dark-hc) #lab[data-s="ring"] {
+    --ring: 0 0 0 1px color-mix(in srgb, var(--color-dark) 8%, transparent); }
+
+  /* El kit aún no sombrea card ni tooltip; el Figma sí */
+  .spec-card         { box-shadow: var(--shadow-card); }
+  .spec-card.is-drag { box-shadow: var(--shadow-card-drag, var(--shadow-lg)); }
+  .spec-tooltip      { box-shadow: var(--shadow-tooltip, none); }
+
+  /* ── Omnisearch (beta, LPD-78171) compuesto con piezas del kit ──
+     Réplica de OmniSearch.scss: dos paneles flotantes sin backdrop,
+     rounded-xl + shadow-lg, 16 px entre ellos. */
+  .omni { position: absolute; z-index: 5; top: var(--spacing-10); left: 50%; transform: translateX(-50%);
+    width: min(600px, calc(100% - var(--spacing-8))); display: flex; flex-direction: column; gap: var(--spacing-5); }
+  .omni__head, .omni__body { background: var(--color-white); border-radius: var(--rounded-xl); box-shadow: var(--shadow-lg); }
+  .omni__head { padding: var(--spacing-5); }
+  .omni__field { position: relative; display: flex; align-items: center; }
+  .omni__field > .lexicon-icon { position: absolute; left: var(--spacing-5); color: var(--color-dark); opacity: .55; }
+  .omni__field > .loading-animation { position: absolute; right: var(--spacing-5); }
+  .omni__field .input__field { height: var(--spacing-10); font-size: var(--font-size-xl);
+    padding-left: var(--spacing-10); padding-right: var(--spacing-10); }
+  .omni__body { padding: var(--spacing-5); display: flex; flex-direction: column; }
+  .omni__section { display: flex; align-items: center; gap: var(--spacing-3); margin: var(--spacing-5) 0 var(--spacing-3);
+    font-size: var(--font-size-sm); font-weight: var(--font-weight-bold); letter-spacing: .05em; text-transform: uppercase;
+    color: var(--color-dark); opacity: .65; }
+  .omni__section:first-child { margin-top: 0; }
+  .omni__list { list-style: none; margin: 0; padding: 0; }
+  .omni__result { display: flex; align-items: center; gap: var(--spacing-4); width: 100%; padding: var(--spacing-3);
+    border: 0; border-radius: var(--rounded-md); background: transparent; color: var(--color-dark);
+    font: inherit; text-align: left; cursor: pointer; }
+  .omni__result:hover, .omni__result.is-active { background: var(--color-light); }
+  .omni__text { display: flex; flex-direction: column; min-width: 0; line-height: 1.4; }
+  .omni__title { font-weight: var(--font-weight-bold); }
+  .omni__source { font-size: var(--font-size-sm); opacity: .7; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  body { margin: 0; }
+
+  /* ── Marco de pantalla DXP (se desplaza en horizontal en móvil) ── */
+  .screen-scroll { overflow-x: auto; }
+  .screen { position: relative; min-width: 960px; height: 600px; overflow: hidden; background: var(--color-white); }
+  .screen__body { display: grid; grid-template-columns: 280px 1fr; height: calc(100% - 60px); }
+  .screen__main { position: relative; min-width: 0; display: flex; flex-direction: column; }
+  .screen__float { position: absolute; z-index: 4; }
+  </style>
+<style>
+/* label--sm (etiqueta del control-menu) */
+.label--sm {
+  height: 16px;
+  padding: 0 var(--spacing-2);
+  gap: var(--spacing-1);
+  font-size: var(--font-size-xs);
+  line-height: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+/* ═══ Chrome del repo ══════════════════════════════════════════════ */
+/* Cabecera del repo: misma que las otras páginas de liferay-tests.
+   Comparte superficie con el control-menu de abajo para que las dos se
+   lean como un solo bloque. */
+.site-header { display: flex; justify-content: flex-start;
+  padding: var(--spacing-6) var(--spacing-7) var(--spacing-4);
+  background: var(--color-light-l1); }
+.back { display: inline-flex; align-items: center; }
+.back svg { height: 48px; width: auto; display: block; }
+.back svg path { fill: var(--color-dark); transition: fill 150ms ease; }
+.back:hover svg path { fill: #F40B0F; }
+
+.wipe { position: fixed; inset: 0; background: #10DAF9; transform: translateX(-101%);
+  z-index: 99999; pointer-events: none; }
+.wipe.anim { transition: transform .45s cubic-bezier(.7,0,.3,1); }
+.wipe.cover { transform: translateX(0); }
+
+/* Geist solo en el chrome de la página. Los componentes de Lexicon se
+   quedan con el stack del producto: cambiarles la tipografía falsearía
+   el preview, que es justo lo que se viene a mirar aquí. */
+.control-menu__title { font-family: 'Geist', var(--font-family-base); font-weight: 500; }
+
+@media (max-width: 860px) {
+  .site-header { padding: var(--spacing-5) var(--spacing-5) var(--spacing-3); }
+  .back svg { height: 36px; }
+}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="angle-down-small" viewBox="0 0 16 16">	<path class="lexicon-icon-outline" d="m8.672 10.56 4.05-4.11c.793-.844-.285-1.99-1.063-1.165L8 9.008 4.3 5.263c-.721-.768-1.781.415-1.056 1.186l4.06 4.12c.489.532.786.62 1.369-.01Z" />
+</symbol><symbol id="blogs" viewBox="0 0 512 512">	<path class="lexicon-icon-body" d="M448,0H64C28.7,0,0,28.7,0,64v384c0,35.3,28.7,64,64,64h384c35.3,0,64-28.7,64-64V64C512,28.7,483.3,0,448,0z" fill="none"></path>
+	<path class="lexicon-icon-outline blogs-border" d="M448,0H64C28.7,0,0,28.7,0,64v384c0,35.3,28.7,64,64,64h384c35.3,0,64-28.7,64-64V64C512,28.7,483.3,0,448,0z M448,448H64V64h384V448C448,448,448,448,448,448z"></path>
+	<path class="lexicon-icon-outline blogs-line-middle" d="M384,256H128c-17.7,0-32,14.3-32,32s14.3,32,32,32h256c17.7,0,32-14.3,32-32S401.7,256,384,256z"></path>
+	<path class="lexicon-icon-outline blogs-line-bottom" d="M288,352H128c-17.7,0-32,14.3-32,32s14.3,32,32,32h160c17.7,0,32-14.3,32-32S305.7,352,288,352z"></path>
+	<path class="lexicon-icon-outline blogs-line-top" d="M384,96H128c-17.6,0-32,14.4-32,32v64c0,17.6,14.4,32,32,32h256c17.6,0,32-14.4,32-32v-64C416,110.4,401.6,96,384,96z"></path>
+</symbol><symbol id="button" viewBox="0 0 512 512">
+
+	<path class="lexicon-icon-outline" d="M448,416H64c-32,0-64-31.93-64-64V160c0.02-31.85,32.02-64,64-64h384c32,0.02,64,31.93,64,64v192C512,384.03,480.02,416,448,416z M64,160V352h384V160H64z" />
+</symbol><symbol id="calendar" viewBox="0 0 16 16">	<path class="lexicon-icon-outline" d="M2.994 5.999h1.001v1H2.994v-1Zm3.003 0h-1v1h1v-1Zm2.003 0H6.998v1H8v-1Zm2.002 0H9.001v1h1.001v-1Zm2.002 0h-1v1h1v-1ZM3.995 7.998H2.994v1h1.001v-1Zm2.002 0h-1v1h1v-1Zm2.003 0H6.998v1H8v-1Zm2.002 0H9.001v1h1.001v-1Zm2.002 0h-1v1h1v-1Zm-8.009 2H2.994v1h1.001v-1Zm0 2H2.994v1h1.001v-1Zm2.002 0h-1v1h1v-1Zm0-2h-1v1h1v-1Zm2.003 0H6.998v1H8v-1Z" />
+	<path class="lexicon-icon-outline" clip-rule="evenodd" d="M14.001 0a2 2 0 0 1 2 2v9.757a3 3 0 0 1-.88 2.122l-1.246 1.244a3 3 0 0 1-2.12.877H1.984C.889 16 0 14.957 0 13.863V4.98l.001-.062V2a2 2 0 0 1 2-2h12ZM2.002 5v8.86c0 .04.032.1.063.137h8.928l.002-2a1 1 0 0 1 1-1l2.003.001V5H2.002Z" fill-rule="evenodd" />
+</symbol><symbol id="caret-bottom" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M103.5,204.3l136.1,136.1c9,9,23.7,9,32.7,0l136.1-136.1c14.6-14.6,4.3-39.5-16.4-39.5H119.9C99.2,164.8,88.9,189.7,103.5,204.3L103.5,204.3z"></path>
+</symbol><symbol id="caret-double" viewBox="0 0 512 512">	<path class="lexicon-icon-outline caret-double-top" d="M407.139 151.999l-136.136-136.136c-9.036-9.037-23.688-9.037-32.725 0l-136.136 136.136c-14.577 14.577-4.253 39.501 16.362 39.501h272.272c20.615 0 30.94-24.924 16.362-39.501z"></path>
+	<path class="lexicon-icon-outline caret-double-bottom" d="M103.18 359.002l136.136 136.136c9.036 9.036 23.688 9.036 32.724 0l136.136-136.136c14.577-14.577 4.253-39.502-16.362-39.502h-272.272c-20.615 0-30.939 24.925-16.362 39.502z"></path>
+</symbol><symbol id="check-circle-full" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M471.2,117.7L280.3,340.8c-5.9,6.8-14.6,11.2-24.3,11.2c-8.8,0-16.8-3.6-22.6-9.4l-96-96.1 c-29.1-28.9,16.1-74.2,45.2-45.3l71.6,71.7L423.7,74.8c2.2-2.5,4.7-3.9,7.1-5.5C385,26.5,323.7,0,256,0C114.6,0,0,114.6,0,256 s114.6,256,256,256s256-114.6,256-256C512,205,496.9,157.6,471.2,117.7z" />
+</symbol><symbol id="check-small" viewBox="0 0 512 512">
+
+	<path class="lexicon-icon-outline" d="M220.9,377.2c-8,0-15.8-3.2-21.5-8.9l-91-91c-28.1-28.1,14.8-71,42.9-42.9l68.2,68.2l139.8-157.2c26.4-30,72,10.1,45.6,40.1 L243.7,366.9c-5.5,6.3-13.4,10-21.8,10.3C221.5,377.2,221.2,377.2,220.9,377.2z" />
+</symbol><symbol id="cog" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M451.1,280.9c2.3-15.5-0.5-39.3-1.9-50.1l48.5-32.2c13.4-9.3,17.6-27.1,9.9-41.4l-35.7-63c-7.9-14.7-25.7-20.8-41-14.2l-51.2,23.5c-12.9-10.4-34.3-21.9-49.9-28l-6.7-47.9C320.9,11.8,307.3,0,291.3,0l-70,0c-16.1,0-29.6,11.9-31.8,27.7l-6.5,46.9c-18.5,7.7-36.9,19.1-50.3,29.1L82.7,79.5c-14.7-5.8-30.4-4.5-38.4,9.2l-39.8,61c-7.9,13.4-4.9,30.5,7,40.6l50.3,40.2c-1.6,11.7-3,35.2-0.6,50.9l-47.4,32.6c-13.5,9.5-17.6,27.7-9.5,42l38.9,64.5c8.2,14.3,26,20.1,41.1,13.4l48.4-25.7c13.2,10.2,34.5,23.2,50.2,29.3l5.7,46.2c1.9,16.1,15.5,28.2,31.8,28.3l72.1,0.2c16.3,0,30-12.1,31.9-28.2l5.3-46.9c18.7-7.5,37.2-17.4,50.4-27.8l52.7,21.7c15.4,7.2,33.8,1.2,41.9-13.7l33.6-60.1c7.6-14.1,3.7-31.6-9.3-41L451.1,280.9z M256.4,343.4c-103.7,0-110.4-160,0-160C365.1,183.4,360.1,343.4,256.4,343.4z M504.1,318.2 M83.7,75.1" />
+</symbol><symbol id="copy" viewBox="0 0 512 512">	<path class="lexicon-icon-body" d="M412,128h-60V68c0-37.4-30.6-68-68-68H100C62.6,0,32,30.6,32,68v248c0,37.4,30.6,68,68,68h60v60c0,37.4,30.6,68,68,68h184c37.4,0,68-30.6,68-68V196C480,158.6,449.4,128,412,128z" fill="none" />
+	<path class="lexicon-icon-outline" d="M412,128h-60V68c0-37.4-30.6-68-68-68H100C62.6,0,32,30.6,32,68v248c0,37.4,30.6,68,68,68h60v60c0,37.4,30.6,68,68,68h184c37.4,0,68-30.6,68-68V196C480,158.6,449.4,128,412,128z M160,196v124H96V64h192v64h-60C190.6,128,160,158.6,160,196z M416,448H224V192h192V448z" />
+</symbol><symbol id="document" viewBox="0 0 16 16">	<path class="lexicon-icon-outline" clip-rule="evenodd" d="M4 2.003v12h8v-9.5h-1.5c-.5 0-1-.5-1-1v-1.5H4Zm6.25-2H3.5a1.5 1.5 0 0 0-1.5 1.5v13c0 .83.671 1.5 1.5 1.5h9c.83 0 1.5-.67 1.5-1.5V3.753L10.25.003Z" fill-rule="evenodd" />
+	<path class="lexicon-icon-outline" d="M5.5 8.003h5c.688 0 .626-1 0-1h-5c-.656 0-.687 1 0 1Zm5 2h-5c-.687 0-.656-1 0-1h5c.626 0 .688 1 0 1Zm-5 2h3c.688 0 .626-1 0-1h-3c-.656 0-.687 1 0 1Z" />
+</symbol><symbol id="documents-and-media" viewBox="0 0 512 512">	<path class="lexicon-icon-body" d="M448,96h-64V64c0-35.3-28.7-64-64-64H64C28.7,0,0,28.7,0,64v256c0,35.3,28.7,64,64,64h32v64c0,35.3,28.7,64,64,64h288c35.3,0,64-28.7,64-64V160C512,124.7,483.3,96,448,96z" fill="none"></path>
+	<path class="lexicon-icon-outline documents-and-media-border" d="M448,96h-64V64c0-35.3-28.7-64-64-64H64C28.7,0,0,28.7,0,64v256c0,35.3,28.7,64,64,64h32v64c0,35.3,28.7,64,64,64h288c35.3,0,64-28.7,64-64V160C512,124.7,483.3,96,448,96z M64,320V64h256l0,32h0v64h0l0,160c0,0,0,0,0,0H160v0H96v0H64z M448,448H160v-64h160c35.3,0,64-28.7,64-64V160h64V448C448,448,448,448,448,448z"></path>
+	<path class="lexicon-icon-outline documents-and-media-line-top" d="M148,188.8c2.5,2.2,5.5,3.2,8.7,3.2c3.9,0,6.9-1.2,8.9-3.5c1.5-1.8,3.2-4.9,5.1-9.6l3.7-8.9h34.4l3.7,8.7l0,0.1c0.6,1.4,1.4,2.9,2.2,4.7c1,2,1.9,3.6,2.9,4.6c1.1,1.2,2.4,2.2,3.9,2.9c1.5,0.7,3.3,1,5.4,1c3.5,0,6.5-1.1,9-3.4c2.6-2.3,3.9-5.1,3.9-8.1c0-2.5-1-5.9-3.3-10.7l-25.1-55.5c-1.2-2.8-2.2-5-2.9-6.7c-0.9-1.9-2-3.7-3.2-5.3c-1.4-1.9-3.3-3.4-5.6-4.5c-2.3-1.2-5.1-1.8-8.4-1.8c-3.2,0-6,0.6-8.3,1.8c-2.3,1.2-4.2,2.7-5.6,4.6c-1.3,1.7-2.5,3.8-3.5,6.3l-2.5,5.8l-24.5,55.9c-1.1,2.3-1.8,4.1-2.3,5.5c-0.6,1.6-0.8,3.2-0.8,4.8C144,182.8,144.7,185.9,148,188.8z M191.5,127.2l9.3,22.8h-18.4L191.5,127.2z"></path>
+	<path class="lexicon-icon-outline documents-and-media-line-bottom" d="M128,288h128c17.7,0,32-14.3,32-32s-14.3-32-32-32H128c-17.7,0-32,14.3-32,32S110.3,288,128,288z"></path>
+</symbol><symbol id="download" viewBox="0 0 512 512">	<path class="download-arrow-down lexicon-icon-outline" d="M256 384C251.745 384.002 247.531 383.164 243.6 381.533C239.669 379.903 236.099 377.513 233.094 374.5L161.5 302.9C148.781 290.301 148.781 269.801 161.5 257.1C174.094 244.4 194.594 244.4 207.281 257.1L224 273.801V32C224 14.3 238.281 0 256 0C273.688 0 288 14.3 288 32V273.801L304.688 257.1C307.694 254.088 311.264 251.698 315.195 250.068C319.125 248.438 323.339 247.599 327.594 247.6C331.849 247.6 336.063 248.438 339.993 250.068C343.924 251.699 347.494 254.088 350.5 257.1C363.188 269.699 363.188 290.199 350.5 302.9L278.906 374.5C272.781 380.6 264.594 384 256 384Z"></path>
+	<path class="download-border lexicon-icon-outline" d="M384 384C384 366.301 398.312 352 416 352C433.688 352 448 366.301 448 384V448C448 483.346 419.346 512 384 512H128C92.654 512 64 483.346 64 448V384C64 366.301 78.313 352 96 352C113.688 352 128 366.301 128 384V448H384V384Z"></path>
+</symbol><symbol id="ellipsis-v" viewBox="0 0 512 512">	<path class="lexicon-icon-outline ellipsis-v-dot-2" d="M319 255.5c0 35.346-28.654 64-64 64s-64-28.654-64-64c0-35.346 28.654-64 64-64s64 28.654 64 64z"></path>
+	<path class="lexicon-icon-outline ellipsis-v-dot-3" d="M319 448c0 35.346-28.654 64-64 64s-64-28.654-64-64c0-35.346 28.654-64 64-64s64 28.654 64 64z"></path>
+	<path class="lexicon-icon-outline ellipsis-v-dot-1" d="M319 64c0 35.346-28.654 64-64 64s-64-28.654-64-64c0-35.346 28.654-64 64-64s64 28.654 64 64z"></path>
+</symbol><symbol id="filter" viewBox="0 0 512 512">	<path class="lexicon-icon-outline filter-body" d="M448,160H63.9c-42.5,0-42.5-64,0-64H448C490.7,96,490.7,160,448,160z M384,224H128c-42.7,0-42.7,64,0,64h256C426.7,288,426.7,224,384,224z M320,352H192c-42.7,0-42.7,64,0,64h128C362.7,416,362.7,352,320,352z" />
+</symbol><symbol id="gallery" viewBox="0 0 16 16">	<path class="lexicon-icon-outline" d="M0 14.7a.7.7 0 0 1 .7-.7h2.6a.7.7 0 0 1 .7.7v.6a.7.7 0 0 1-.7.7H.7a.7.7 0 0 1-.7-.7v-.6Zm6 0a.7.7 0 0 1 .7-.7h2.6a.7.7 0 0 1 .7.7v.6a.7.7 0 0 1-.7.7H6.7a.7.7 0 0 1-.7-.7v-.6Zm6 0a.7.7 0 0 1 .7-.7h2.6a.7.7 0 0 1 .7.7v.6a.7.7 0 0 1-.7.7h-2.6a.7.7 0 0 1-.7-.7v-.6Zm2-2.7H2c-1 0-2-1.197-2-2.4V2.4C0 1.206 1 0 2 0h12c1 0 2 1.197 2 2.4v7.2c0 1.201-1 2.4-2 2.4ZM2 2v8h12V2H2Z" />
+</symbol><symbol id="grid" viewBox="0 0 512 512">	<path class="lexicon-icon-outline grid-square-3" d="M495.965 0.018h-95.993c-8.813 0-15.981 7.168-15.981 16.017v95.993c0 8.85 7.168 16.017 16.017 16.017h95.993c8.849 0 16.017-7.168 16.017-16.017v-95.993c-0.037-8.85-7.204-16.017-16.054-16.017z"></path>
+	<path class="lexicon-icon-outline grid-square-4" d="M112.028 192.005h-95.993c-8.85 0-16.017 7.167-16.017 16.017v95.993c0 8.849 7.168 16.017 16.017 16.017h95.993c8.85 0 15.981-7.168 15.981-16.017v-95.993c0-8.85-7.168-16.017-15.981-16.017z"></path>
+	<path class="lexicon-icon-outline grid-square-5" d="M303.978 192.005h-95.993c-8.85 0-16.017 7.167-16.017 16.017v95.993c0 8.849 7.167 16.017 16.017 16.017h95.993c8.849 0 16.017-7.168 16.017-16.017v-95.993c0-8.85-7.168-16.017-16.017-16.017z"></path>
+	<path class="lexicon-icon-outline grid-square-6" d="M495.965 192.005h-95.993c-8.849 0-16.017 7.167-16.017 16.017v95.993c0 8.849 7.168 16.017 16.017 16.017h95.993c8.849 0 16.017-7.168 16.017-16.017v-95.993c0-8.85-7.168-16.017-16.017-16.017z"></path>
+	<path class="lexicon-icon-outline grid-square-7" d="M112.028 383.991h-95.993c-8.85 0-16.017 7.168-16.017 16.017v95.993c0 8.813 7.168 15.981 16.017 15.981h95.993c8.85 0 15.981-7.168 15.981-16.017v-95.993c0-8.813-7.168-15.981-15.981-15.981z"></path>
+	<path class="lexicon-icon-outline grid-square-8" d="M303.978 383.991h-95.993c-8.85 0-16.017 7.168-16.017 16.017v95.993c0 8.849 7.167 16.017 16.017 16.017h95.993c8.849 0 16.017-7.168 16.017-16.017v-95.993c0-8.849-7.168-16.017-16.017-16.017z"></path>
+	<path class="lexicon-icon-outline grid-square-9" d="M495.965 383.991h-95.993c-8.849 0-16.017 7.168-16.017 16.017v95.993c0 8.849 7.168 16.017 16.017 16.017h95.993c8.849-0.037 16.017-7.204 16.017-16.054v-95.993c0-8.813-7.168-15.981-16.017-15.981z"></path>
+	<path class="lexicon-icon-outline grid-square-1" d="M112.028 0.018h-95.993c-8.85 0-16.017 7.168-16.017 16.017v95.993c0 8.814 7.168 15.981 16.017 15.981h95.993c8.85 0 15.981-7.168 15.981-16.017v-95.956c0-8.85-7.168-16.017-15.981-16.017z"></path>
+	<path class="lexicon-icon-outline grid-square-2" d="M303.978 0.018h-95.993c-8.85 0-16.017 7.168-16.017 16.017v95.993c0 8.85 7.167 16.017 16.017 16.017h95.993c8.849 0 16.017-7.168 16.017-16.017v-95.993c0-8.85-7.168-16.017-16.017-16.017z"></path>
+</symbol><symbol id="home" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M461.3,205.2L278.4,22.4c-12.5-12.5-32.3-12.5-44.8,0L50.7,205.3c-12,12-18.7,28.3-18.7,45.3V512h192V352c0-42.7,64-42.7,64,0v160h192V250.5C480,233.5,473.3,217.2,461.3,205.2z M416,448h-64v-96c0-128-192-128-192,0c0,21.3,0,74.7,0,96H96V256L256,96l160,160V448z" />
+</symbol><symbol id="hr" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M384,288H128c-42.7,0-42.7-64,0-64h256C426.7,224,426.7,288,384,288z" />
+</symbol><symbol id="info-circle" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M437,75C388.7,26.6,324.4,0,256,0C187.6,0,123.3,26.6,75,75C26.6,123.3,0,187.6,0,256c0,68.4,26.6,132.7,75,181c48.4,48.4,112.6,75,181,75c68.4,0,132.7-26.6,181-75c48.4-48.4,75-112.6,75-181C512,187.6,485.4,123.3,437,75z M288,384c0,17.7-14.3,32-32,32c-17.7,0-32-14.3-32-32V224c0-17.7,14.3-32,32-32c17.7,0,32,14.3,32,32V384z M256,160c-17.7,0-32-14.3-32-32c0-17.7,14.3-32,32-32s32,14.3,32,32C288,145.7,273.7,160,256,160z"></path>
+</symbol><symbol id="list" viewBox="0 0 512 512">	<path class="lexicon-icon-outline list-li-bullet-1" d="M96.037 0h-64c-17.664 0-32 14.336-32 32s14.336 32 32 32h64c17.664 0 32-14.336 32-32s-14.336-32-32-32z"></path>
+	<path class="lexicon-icon-outline list-li-bullet-2" d="M96.037 224h-64c-17.664 0-32 14.336-32 32s14.336 32 32 32h64c17.664 0 32-14.336 32-32s-14.336-32-32-32z"></path>
+	<path class="lexicon-icon-outline list-li-bullet-3" d="M96.037 448h-64c-17.664 0-32 14.336-32 32s14.336 32 32 32h64c17.664 0 32-14.336 32-32s-14.336-32-32-32z"></path>
+	<path class="lexicon-icon-outline list-li-item-2" d="M480 288h-256c-17.6 0-32-14.4-32-32v0c0-17.6 14.4-32 32-32h256c17.6 0 32 14.4 32 32v0c0 17.6-14.4 32-32 32z"></path>
+	<path class="lexicon-icon-outline list-li-item-1" d="M480 64h-256c-17.6 0-32-14.4-32-32v0c0-17.6 14.4-32 32-32h256c17.6 0 32 14.4 32 32v0c0 17.6-14.4 32-32 32z"></path>
+	<path class="lexicon-icon-outline list-li-item-3" d="M480 512h-256c-17.6 0-32-14.4-32-32v0c0-17.6 14.4-32 32-32h256c17.6 0 32 14.4 32 32v0c0 17.6-14.4 32-32 32z"></path>
+</symbol><symbol id="move-folder" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M448,128h-96L241.1,44.8C230,36.5,216.5,32,202.7,32H64C28.7,32,0,60.7,0,96v320c0,35.3,28.7,64,64,64h384c35.3,0,64-28.7,64-64V192C512,156.7,483.3,128,448,128z M423.1,325l-65.9,65.9c-28.4,27.3-69.6-12.9-42.2-42.2l15.4-15.4H207.8c-39.1,0-39.1-58.9,0-58.9h122.6L315,259c-26.8-27.6,11.2-69.6,42.2-42.2l65.9,65.9C433.5,294.7,433.1,314,423.1,325z"></path>
+</symbol><symbol id="page" viewBox="0 0 16 16">	<path class="lexicon-icon-outline" clip-rule="evenodd" d="M13.88.884a3 3 0 0 0-2.123-.88H1.982A1.983 1.983 0 0 0 0 1.988V14.02c0 1.095.888 1.983 1.982 1.983h11.88c1.094 0 2.138-.888 2.138-1.983V4.25a3 3 0 0 0-.877-2.12L13.879.883ZM14 13.94a.258.258 0 0 1-.137.062H2V2.007h8V5.01a1 1 0 0 0 1 1h3v7.929Z" fill-rule="evenodd" />
+</symbol><symbol id="pencil" viewBox="0 0 16 16">	<path class="lexicon-icon-outline" clip-rule="evenodd" d="M15.21.798a2.689 2.689 0 0 0-1.913-.794 2.7 2.7 0 0 0-1.912.79L1.173 11.005A4 4 0 0 0 0 13.834v1.168a1 1 0 0 0 1 1h1.327a4 4 0 0 0 2.85-1.193L15.209 4.62a2.705 2.705 0 0 0 0-3.822ZM3.897 13.595a2 2 0 0 1-.948.545l-.64.16a.5.5 0 0 1-.607-.606l.16-.64a2 2 0 0 1 .545-.948l8.135-7.92 1.274 1.272-7.919 8.137Zm9.2-9.413.838-.838a.905.905 0 0 0 0-1.273.924.924 0 0 0-1.274 0l-.838.838 1.274 1.273Z" fill-rule="evenodd" />
+</symbol><symbol id="picture" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M509.6,486.8L336.6,200c-5.5-9.1-18-10.7-25.5-3.2L199.4,308.2l-41-40.9c-7.5-7.5-20-6-25.5,3.2L2.4,486.8c-6.7,11,1.2,25.2,14,25.2h479.1C508.4,512,516.2,497.8,509.6,486.8L509.6,486.8z M160,79.8c0,106.9-160,106.9-160,0C0-26.7,160-26.5,160,79.8z" />
+</symbol><symbol id="product-menu-closed" viewBox="0 0 512 512">	<path class="lexicon-icon-outline lx-product-menu-closed-left" d="M0,31C0,13.9,13.9,0,31,0c17.2,0,31.1,13.9,31,31v450c0,17.1-13.9,31-31,31S0,498.1,0,481V31z" />
+	<path class="lexicon-icon-outline lx-product-menu-closed-right" d="M464,512H144c-26.5,0-48-21.5-48-48V48c0-26.4,21.5-48,48-48h320c26.5,0,48,21.5,48,48v416C512,490.4,490.4,512,464,512z M160,448h288V64H160V448z" />
+</symbol><symbol id="search" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M499.2,455.5L377.7,333.4c146-241.1-148.1-435.8-318.2-274c-165.1,185.9,41.6,460.6,273.4,319l121.5,118.8C489.5,535.8,534.4,490.8,499.2,455.5z M206.2,63.6c191.9,0,198.1,289,0,289C13.3,352.6,18.8,63.6,206.2,63.6z" />
+</symbol><symbol id="times" viewBox="0 0 512 512">	<path class="lexicon-icon-outline" d="M300.4,256L467,89.4c29.6-29.6-14.8-74.1-44.4-44.4L256,211.6L89.4,45C59.8,15.3,15.3,59.8,45,89.4L211.6,256L45,422.6 c-29.7,29.7,14.7,74.1,44.4,44.4L256,300.4L422.6,467c29.7,29.7,74.1-14.7,44.4-44.4L300.4,256z" />
+</symbol><symbol id="trash" viewBox="0 0 16 16">	<path class="lexicon-icon-outline" clip-rule="evenodd" d="M10 0a1 1 0 0 1 1 1v.03h2.013a.987.987 0 0 1 0 1.974H2.987a.987.987 0 0 1 0-1.974H5V1a1 1 0 0 1 1-1h4ZM2 13.773C2 15.002 3 16 4.231 16h7.535a2.23 2.23 0 0 0 2.231-2.227v-7.75a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v7.75ZM4 6.02h8v7.243a.745.745 0 0 1-.744.742H4.744A.745.745 0 0 1 4 13.262V6.019Zm5 .967h2v5.989H9v-5.99Zm-2 0H5v5.989h2v-5.99Z" fill-rule="evenodd" />
+</symbol><symbol id="web-content" viewBox="0 0 512 512">	<path class="lexicon-icon-outline web-content-border" d="M0,64v384c0,35.3,28.7,64,64,64h384c35.3,0,64-28.7,64-64V64c0-35.3-28.7-64-64-64H64C28.7,0,0,28.7,0,64z M448,448H64V64h384V448z"></path>
+	<path class="lexicon-icon-outline web-content-text-1" d="M144,320h224c22,0,21-32,0-32H144C123,288,123,320,144,320z"></path>
+	<path class="lexicon-icon-outline web-content-text-2" d="M144,384h160c22,0,20-32,0-32H144C123,352,122,384,144,384z"></path>
+	<circle class="lexicon-icon-outline web-content-circle" cx="320" cy="160" r="64"></circle>
+	<polygon class="lexicon-icon-outline web-content-triangle" points="128,224 192,96 256,224 "></polygon>
+</symbol></svg>
+
+<header class="site-header"><a class="back" href="https://diegoalo.github.io/liferay-tests/" data-wipe="#10daf9" aria-label="Back to liferay-tests" title="Back to liferay-tests"><svg width="289" height="180" viewBox="0 0 289 180" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M57.3224 2C58.0985 2.00019 59.7675 2.26634 61.7004 2.61426C63.6952 2.97336 66.1397 3.45233 68.5695 3.92773C71.0052 4.4043 73.4287 4.87845 75.4006 5.2334C77.4328 5.59917 78.8339 5.80841 79.3283 5.80859C80.1936 5.80887 80.8218 6.33285 81.215 6.80469C81.6215 7.2927 81.9542 7.92828 82.2336 8.60156C82.7976 9.96119 83.2675 11.7781 83.6437 13.7129C84.1382 16.2561 84.4931 19.1208 84.6799 21.6514C85.1211 20.5459 85.6116 19.277 86.134 17.9375C87.1627 15.2998 88.3042 12.4226 89.381 10.2012C89.9166 9.09644 90.4632 8.09792 90.9972 7.35938C91.2627 6.99238 91.56 6.63962 91.8888 6.36816C92.2005 6.11111 92.6831 5.80875 93.2941 5.80859L93.673 5.82129C94.6794 5.88177 96.5229 6.14515 98.6945 6.48535C101.235 6.8834 104.379 7.41307 107.523 7.94141C110.672 8.47063 113.824 8.99945 116.399 9.39453C119.023 9.79727 120.921 10.0398 121.648 10.04C122.44 10.0404 122.967 10.5257 123.251 10.9873C123.513 11.4129 123.649 11.9268 123.732 12.4014C123.901 13.3727 123.923 14.6744 123.869 16.1182C123.761 19.032 123.332 22.8945 122.91 26.6855C122.485 30.5117 122.069 34.2673 121.965 37.0664C121.913 38.4786 121.944 39.5581 122.066 40.2529C122.075 40.3051 122.085 40.3538 122.095 40.3984C122.132 40.3871 122.175 40.3751 122.218 40.3613C122.598 40.2393 123.094 40.0529 123.712 39.8027C124.95 39.3012 126.583 38.584 128.609 37.7061C132.643 35.9571 138.137 33.6147 144.765 31.2725C158.015 26.5896 175.835 21.8897 195.707 21.8896C216.152 21.8902 227.801 36.5605 234.329 52.0254C238.561 62.0505 241.78 70.2171 241.78 80.0908C241.781 89.9643 256.224 89.8801 256.224 80.0908C256.224 70.3012 257.176 34.3405 257.916 17.2354C258.657 0.130422 285.001 1.48008 285.001 17.2354V80.0908C285.001 91.5849 278.509 114.569 256.224 114.569C244.045 114.569 239.195 111.486 239.195 114.569C239.194 117.65 235.678 132.419 235.671 132.448C235.671 132.448 231.587 150.653 229.657 157.314C228.694 160.638 227.768 163.431 226.922 165.408C226.502 166.389 226.078 167.228 225.65 167.842C225.436 168.147 225.187 168.447 224.897 168.682C224.612 168.911 224.182 169.161 223.638 169.161H194.861C194.401 169.161 193.896 169.01 193.51 168.596C193.157 168.217 193.038 167.761 192.998 167.419C192.922 166.762 193.081 165.994 193.275 165.302C193.678 163.857 194.469 161.975 195.227 160.199C196.007 158.37 196.756 156.642 197.162 155.366C197.235 155.137 197.288 154.939 197.33 154.772H188.53C188.504 154.783 188.428 154.826 188.302 154.967C188.081 155.215 187.825 155.637 187.554 156.259C187.013 157.498 186.545 159.2 186.094 161.006C185.656 162.758 185.229 164.629 184.783 166.028C184.562 166.725 184.307 167.399 184 167.919C183.846 168.179 183.642 168.464 183.372 168.695C183.092 168.935 182.683 169.161 182.165 169.161H167.777C167.53 169.161 167.233 169.107 166.948 168.934C166.659 168.756 166.468 168.506 166.355 168.261C166.155 167.828 166.181 167.382 166.213 167.12C166.283 166.548 166.523 165.852 166.797 165.17C167.363 163.762 168.29 161.91 169.18 160.13C170.088 158.313 170.96 156.567 171.479 155.277C171.554 155.091 171.616 154.922 171.669 154.772H164.406C164.245 155.063 164.051 155.527 163.832 156.164C163.388 157.46 162.925 159.209 162.445 161.022C161.973 162.805 161.483 164.654 161.002 166.056C160.764 166.749 160.505 167.402 160.223 167.9C160.083 168.146 159.903 168.418 159.671 168.643C159.448 168.858 159.039 169.161 158.466 169.161H138.999C138.514 169.161 138.111 168.938 137.844 168.636C137.611 168.372 137.497 168.073 137.436 167.856C137.313 167.422 137.291 166.904 137.303 166.406C137.328 165.376 137.52 163.972 137.824 162.365C138.438 159.129 139.55 154.847 140.91 150.579C142.269 146.316 143.893 142.012 145.543 138.753C146.365 137.13 147.222 135.708 148.088 134.675C148.89 133.718 149.97 132.767 151.272 132.767H175.501C175.705 132.404 175.989 131.892 176.335 131.251C177.077 129.876 178.105 127.91 179.242 125.55C181.521 120.821 184.224 114.548 185.968 108.303C187.727 102.002 188.439 95.9675 186.996 91.585C186.29 89.4387 185.073 87.7097 183.205 86.501C181.321 85.2821 178.664 84.5226 174.971 84.5225C144.612 84.5226 128.419 120.494 128.419 120.494C126.637 125.974 118.071 158.768 116.07 162.524C115.073 164.397 114.045 165.992 113.006 167.137C112.011 168.233 110.782 169.161 109.375 169.161C107.722 169.161 101.561 169.476 93.1564 169.874C84.7841 170.271 74.2469 170.747 63.9211 171.064C53.6018 171.382 43.4648 171.542 35.8986 171.303C32.1245 171.183 28.9399 170.964 26.6808 170.604C25.564 170.425 24.5917 170.201 23.8703 169.901C23.5129 169.753 23.1355 169.552 22.8303 169.269C22.5111 168.972 22.1974 168.508 22.1974 167.892C22.1974 165.317 22.4113 158.074 23.1584 151.457C23.5309 148.158 24.0423 144.949 24.7482 142.54C25.0984 141.345 25.5204 140.261 26.048 139.45C26.5511 138.677 27.3601 137.845 28.5451 137.845C29.7287 137.845 31.6707 138.132 34.0724 138.522C36.5283 138.922 39.5629 139.447 43.0705 139.975C47.7566 140.679 53.2544 141.38 59.2033 141.768C58.9754 137.465 57.9037 131.499 56.0783 131.497C53.5393 131.497 48.859 131.497 44.6271 131.497C40.3952 131.497 35.7394 126.419 35.7394 118.378C35.7394 110.338 32.3536 107.375 27.2756 107.375C22.1974 107.375 15.0035 106.529 15.0031 104.836C15.0031 103.143 22.6209 98.4883 31.508 98.4883C40.3949 98.4892 51.3979 116.686 53.5138 116.686C55.6293 116.685 55.6302 113.3 61.131 113.3C66.6324 113.3 71.5363 120.472 71.5363 128.089C71.5365 133.167 77.7899 136.506 81.6652 139.883C85.8435 138.331 89.6751 135.871 92.9308 132.236C99.4636 124.943 103.874 112.713 103.874 92.9863C103.874 88.4235 102.732 84.7699 100.766 81.834C100.205 82.6394 99.4883 83.595 98.6691 84.6348C96.7454 87.0765 94.1779 90.1111 91.5705 93.0645C88.9631 96.0178 86.2915 98.9181 84.1535 101.09C83.0888 102.171 82.1297 103.099 81.3654 103.768C80.9881 104.098 80.6177 104.4 80.2824 104.632C80.1168 104.746 79.915 104.875 79.6955 104.981C79.532 105.061 79.1052 105.259 78.5588 105.259C77.546 105.259 76.9461 104.622 76.7219 104.326C76.4815 104.009 76.3489 103.679 76.2756 103.471C76.1207 103.031 76.0198 102.512 75.9465 102.018C75.7943 100.992 75.6922 99.5966 75.6252 98.0088C75.4902 94.8098 75.4904 90.5788 75.5969 86.373C75.7033 82.1673 75.9162 77.9366 76.2131 74.7383C76.3605 73.1505 76.5349 71.7577 76.7385 70.7344C76.7448 70.7024 76.7514 70.6698 76.758 70.6377C75.0151 70.432 73.2296 70.2823 71.4162 70.1807C71.4155 70.1827 71.4149 70.1854 71.4142 70.1875C71.0722 71.1451 70.5034 72.4446 69.8019 73.9277C68.3879 76.9174 66.3282 80.8742 64.1457 84.8135C61.9639 88.7513 59.6353 92.7147 57.6789 95.71C56.7056 97.2001 55.7936 98.498 55.0187 99.4424C54.6365 99.9082 54.2402 100.348 53.8488 100.689C53.6536 100.86 53.4098 101.05 53.1291 101.206C52.874 101.348 52.4116 101.561 51.8215 101.562C50.7304 101.562 50.0306 100.88 49.7336 100.538C49.3874 100.139 49.1196 99.6625 48.9113 99.2285C48.4856 98.3416 48.0898 97.1677 47.7228 95.8799C46.9807 93.2753 46.252 89.8244 45.6135 86.3389C44.9725 82.84 44.4124 79.2503 44.0119 76.3467C43.7469 74.4255 43.5403 72.7216 43.4347 71.5391C40.0442 71.971 36.8402 72.4542 33.9357 72.9336C29.8278 73.6117 26.3222 74.281 23.7336 74.7812C22.4442 75.0304 21.3697 75.24 20.5685 75.3867C20.1685 75.4599 19.8233 75.5198 19.548 75.5615C19.3 75.5991 19.0258 75.6357 18.8117 75.6357C17.9543 75.6354 17.4304 75.0663 17.1838 74.5586C16.9612 74.1002 16.8793 73.5569 16.8469 73.0615C16.7801 72.0397 16.8987 70.6653 17.1193 69.1211C17.1385 68.9866 17.1589 68.8502 17.1799 68.7119C13.0313 70.1477 5.93656 71.8262 5.33709 71.8271C4.49104 71.8264 4.06763 69.7108 4.06756 68.4414C4.06754 67.4034 13.97 64.1022 18.2756 62.9326C18.6417 61.2365 19.0531 59.4556 19.4826 57.6699C19.6367 57.0292 19.7935 56.3862 19.9513 55.7451H4.91424C3.6447 55.745 4.06765 53.6289 4.06756 52.3594C4.07076 51.3037 16.6608 51.4198 20.8947 51.9756C21.4543 49.7693 21.9962 47.6716 22.4621 45.8438C22.5644 45.4425 22.6608 45.0539 22.7551 44.6807C19.1841 44.2983 6.53748 42.2045 5.76092 42.2031C4.91445 42.2031 3.22152 39.2413 4.91424 39.2412C6.46759 39.2415 20.091 40.66 23.6681 40.8984C23.7223 40.648 23.7683 40.4267 23.8039 40.2373C23.8367 40.0627 23.8598 39.9228 23.8742 39.8164C23.8879 39.715 23.8895 39.6696 23.8898 39.6641C23.8898 39.1208 24.1281 38.6852 24.3849 38.3799C24.6355 38.0825 24.9517 37.849 25.257 37.665C25.8683 37.297 26.6731 36.986 27.5431 36.7178C29.3035 36.1752 31.6368 35.7148 34.008 35.3418C38.4718 34.6397 43.304 34.2139 45.1652 34.167C45.2727 34.032 45.423 33.8057 45.6047 33.46C46.0216 32.6662 46.4983 31.4809 47.0187 29.9883C48.0551 27.0159 49.1953 23.034 50.3351 19.0049C51.4684 14.9989 52.602 10.9441 53.6115 7.89551C54.1143 6.37701 54.6028 5.05704 55.0617 4.10156C55.2879 3.6306 55.5358 3.18631 55.8088 2.8418C55.9457 2.66914 56.123 2.47862 56.3439 2.32324C56.5656 2.1676 56.9006 2.00017 57.3224 2ZM261.687 86.8848C260.735 86.888 258.006 100.068 258.005 100.704C258.005 101.334 276.807 99.3731 276.81 97.3633C276.81 95.3533 262.638 86.8848 261.687 86.8848ZM80.7746 72.2051C80.6541 72.9647 80.5362 73.9534 80.4269 75.1309C80.142 78.2009 79.9334 82.3286 79.8283 86.4805C79.7232 90.6328 79.7232 94.7605 79.8527 97.8301C79.8754 98.3665 79.9031 98.8637 79.9328 99.3174C80.3022 98.9578 80.7064 98.5583 81.1369 98.1211C83.204 96.0214 85.8224 93.1816 88.3986 90.2637C90.9749 87.3456 93.4866 84.3753 95.3449 82.0166C96.2774 80.8331 97.0225 79.8311 97.5256 79.0811C97.546 79.0506 97.5648 79.0194 97.5842 78.9902C97.2186 78.7615 96.7471 78.4937 96.1711 78.1973C94.4517 77.3125 92.0926 76.2986 89.632 75.3301C87.182 74.3657 84.6806 73.4665 82.6965 72.8115C81.9696 72.5716 81.3201 72.3667 80.7746 72.2051ZM59.1779 70.1494C55.4259 70.3128 51.6994 70.614 48.1144 70.9932C47.9388 71.0353 47.7821 71.0765 47.6457 71.1182C47.7326 72.0922 47.9203 73.7104 48.2043 75.7695C48.5972 78.6185 49.1481 82.1446 49.7765 85.5752C50.4075 89.019 51.1071 92.3132 51.7931 94.7207C51.9454 95.2552 52.0941 95.7277 52.2336 96.1377C52.7768 95.4192 53.4194 94.4935 54.1359 93.3965C56.0147 90.52 58.2887 86.6537 60.4445 82.7627C62.5995 78.8731 64.6136 75.0003 65.9767 72.1182C66.3174 71.3978 66.6103 70.7519 66.8527 70.1924C64.8819 70.153 62.1049 70.1129 59.1779 70.1494ZM276.816 44.957C275.479 44.9571 263.448 69.5433 263.391 70.8809C263.334 72.2187 275.518 80.5098 276.815 80.5098C278.111 80.5049 278.153 44.957 276.816 44.957ZM202.907 38.4629C202.904 36.2242 175.724 34.6078 175.722 37.1465C175.722 39.6873 170 75.7042 172.015 75.7041C174.035 75.6964 202.907 40.7016 202.907 38.4629ZM211.058 43.4727C209.788 43.4727 202.594 75.2119 205.133 75.2119C207.676 75.2094 227.563 64.2085 227.563 62.0928C227.56 59.9753 212.334 43.4808 211.058 43.4727ZM167.777 35.8555C166.93 35.8555 145.347 41.3566 145.347 43.4727C145.347 45.5886 147.463 66.3237 149.155 66.3252C149.213 66.2349 168.608 35.8756 167.777 35.8555ZM42.0646 45.7578C35.9924 45.815 28.1093 44.3599 28.2775 51.8965C28.446 59.4333 33.4086 61.5632 36.0685 61.5635C38.7284 61.5636 52.4553 61.0146 52.4552 57.0791C52.4552 53.1437 48.1367 45.701 42.0646 45.7578ZM100.065 23.583C97.9471 23.5876 87.7922 43.8963 87.7922 45.5889C87.7929 47.2815 98.7918 51.9349 100.91 51.9365C103.027 51.9324 108.105 28.6608 108.105 27.8145C108.104 26.968 102.181 23.5839 100.065 23.583ZM101.684 28.5176C102.699 28.5193 102.621 35.9141 102.621 37.5713C102.621 39.2288 98.7391 45.8666 97.3371 45.8662C95.9355 45.8647 96.3849 38.3355 96.3849 36.3428C96.3849 34.3505 100.668 28.5176 101.684 28.5176ZM273.475 18.6895C272.687 18.6881 263.765 44.957 264.954 44.957C266.143 44.957 276.817 32.3939 276.817 30.5273C276.816 28.66 274.261 18.693 273.475 18.6895ZM65.3625 15.542C63.2466 15.5466 60.2844 36.2791 60.2844 37.9717C60.2861 39.6639 69.5926 40.5105 71.7101 40.5107C73.8251 40.5066 71.7102 17.2351 71.7101 16.8115C71.7101 16.3884 67.4786 15.5422 65.3625 15.542ZM67.5041 20.3545C68.9061 20.3555 69.756 27.5471 69.756 28.9492C69.756 30.3514 68.2548 36.7624 66.8527 36.7627C65.4507 36.7623 64.2511 30.3513 64.2511 28.9492C64.2511 27.5471 66.1021 20.3549 67.5041 20.3545Z" fill="#10DAF9"/></svg></a></header>
+
+<div class="control-menu">
+  <div class="control-menu__left">
+    <span class="control-menu__title">Sombras en dark mode</span>
+  </div>
+  <div class="control-menu__right">
+    <span class="label label--sm label--secondary">Lexicon Foundations</span>
+  </div>
+</div>
+
+
+<div style="background: var(--color-light); min-height: 100vh;">
+<main id="lab" data-s="ring" style="max-width: 1100px; margin: 0 auto; padding: var(--spacing-8) var(--spacing-7) var(--spacing-9);">
+
+  <header style="margin-bottom: var(--spacing-7);">
+    <h1 style="font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); color: var(--color-dark); margin: 0 0 var(--spacing-3);">Sombras en dark mode</h1>
+    <p style="font-size: var(--font-size-sm); margin: 0 0 var(--spacing-3);"><a href="https://www.figma.com/design/uJmaBABXsx9voFQEdn20Di/branch/irC3h0DuaUdbLdBrNQ0qpH/Lexicon-Foundations?node-id=4178-2" target="_blank" rel="noopener" style="color: var(--color-primary);">Lexicon Foundations · Shadow</a></p>
+    <p style="font-size: var(--font-size-base); color: var(--color-dark); opacity: .75; margin: 0 0 var(--spacing-3); max-width: 720px; line-height: 1.5;">Los <code>--shadow-*</code> del kit no tienen override en dark. Siguen siendo <code>rgba(39,40,51,.1–.2)</code>, y sobre la superficie oscura no se ven. En Figma pasaba lo contrario, porque el color de sombra se pasaba a light y salía un halo.</p>
+    <p style="font-size: var(--font-size-base); color: var(--color-dark); opacity: .75; margin: 0; max-width: 720px; line-height: 1.5;">En esta página solo cambia la sombra. La paleta dark es la actual y ningún componente cambia de fondo, borde ni color. Los offsets y blurs son los de Figma. Lo que varía es el token de sistema del que sale el color, la opacidad y el número de capas.</p>
+  </header>
+
+  <!-- Barra fija: pestañas + estrategia + skin -->
+  <div style="position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--color-light); padding-top: var(--spacing-3); margin-bottom: var(--spacing-8);">
+    <div style="display: flex; align-items: center; gap: var(--spacing-5); flex-wrap: wrap; padding-bottom: var(--spacing-4);">
+      <div class="btn-group" role="group" aria-label="Sombra" data-role="strategy-switch"></div>
+      <div class="btn-group" role="group" aria-label="Skin" data-role="skin-switch" style="margin-left: auto;">
+        <button type="button" class="btn btn--secondary btn--xs" data-skin="light" aria-pressed="false">Light</button>
+        <button type="button" class="btn btn--secondary btn--xs is-active" data-skin="dark" aria-pressed="true">Dark</button>
+        <button type="button" class="btn btn--secondary btn--xs" data-skin="dark-hc" aria-pressed="false">Dark HC</button>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button class="tabs__tab is-active" role="tab" aria-selected="true" data-tab="components">Componentes</button>
+      <button class="tabs__tab" role="tab" aria-selected="false" data-tab="screens">Pantallas DXP</button>
+    </nav>
+  </div>
+
+  <!-- ═══════════════ Pestaña 1 · Componentes ═══════════════ -->
+  <div data-panel="components">
+
+    <section style="margin-bottom: var(--spacing-9);">
+      <header class="section" style="margin-bottom: var(--spacing-5);"><h2 class="section__title">1 · Estrategias</h2></header>
+      <div data-role="strategy-cards" style="display: flex; flex-direction: column; gap: var(--spacing-4);"></div>
+    </section>
+
+    <section style="margin-bottom: var(--spacing-9);">
+      <header class="section" style="margin-bottom: var(--spacing-5);"><h2 class="section__title">2 · Componentes</h2></header>
+      <div style="display: flex; flex-direction: column; gap: var(--spacing-6);">
+
+        <article class="card">
+          <div style="padding: var(--spacing-9) var(--spacing-8); display: flex; justify-content: center;">
+            <div class="alert alert--toast alert--info" style="width: 100%; max-width: 480px;">
+              <div class="alert__content">
+                <svg class="lexicon-icon"><use href="#info-circle"></use></svg>
+                <p class="alert__text"><strong>Info:</strong> The page was published successfully.</p>
+              </div>
+              <button class="btn btn--borderless btn--sm btn--icon alert__close" aria-label="Close"><svg class="lexicon-icon"><use href="#times"></use></svg></button>
+            </div>
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Alert toast</h3>
+            <p class="card__subtitle">0 8px 16px, opacidad suave. No tiene borde propio, así que con el kit actual se funde con la superficie.</p>
+            <span class="label label--secondary">--shadow-alert</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div style="padding: var(--spacing-9) var(--spacing-8); display: flex; justify-content: center; gap: var(--spacing-8); flex-wrap: wrap;">
+            <article class="card spec-card" style="width: 220px;">
+              <div class="card__media"><svg class="lexicon-icon"><use href="#document"></use></svg></div>
+              <div class="card__body">
+                <h3 class="card__title">Quarterly report</h3>
+                <p class="card__subtitle">Edited 2 hours ago</p>
+                <button class="card__menu" aria-label="More"><svg class="lexicon-icon"><use href="#ellipsis-v"></use></svg></button>
+              </div>
+            </article>
+            <article class="card spec-card is-drag" style="width: 220px;">
+              <div class="card__media"><svg class="lexicon-icon"><use href="#picture"></use></svg></div>
+              <div class="card__body">
+                <h3 class="card__title">Hero banner</h3>
+                <p class="card__subtitle">Dragging…</p>
+                <button class="card__menu" aria-label="More"><svg class="lexicon-icon"><use href="#ellipsis-v"></use></svg></button>
+              </div>
+            </article>
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Card · reposo y arrastre</h3>
+            <p class="card__subtitle">Reposo 0 0 12px, arrastre 0 8px 16px. El kit todavía no sombrea la card. Aquí se añade para compararla con el Figma.</p>
+            <span class="label label--secondary">--shadow-card · --shadow-card-drag</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div style="padding: var(--spacing-9) var(--spacing-8); display: flex; justify-content: center;">
+            <ul class="dropdown" role="menu" style="width: 240px;">
+              <li><button class="dropdown__item" role="menuitem"><svg class="lexicon-icon dropdown__item-icon"><use href="#pencil"></use></svg><span class="dropdown__item-text">Edit</span></button></li>
+              <li><button class="dropdown__item" role="menuitem"><svg class="lexicon-icon dropdown__item-icon"><use href="#copy"></use></svg><span class="dropdown__item-text">Duplicate</span></button></li>
+              <li><button class="dropdown__item" role="menuitem"><svg class="lexicon-icon dropdown__item-icon"><use href="#trash"></use></svg><span class="dropdown__item-text">Delete</span></button></li>
+            </ul>
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Dropdown</h3>
+            <p class="card__subtitle">0 4px 8px, opacidad suave. Ya tiene borde secondary-l3, así que la sombra solo añade elevación.</p>
+            <span class="label label--secondary">--shadow-dropdown</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div style="padding: var(--spacing-9) var(--spacing-8); display: flex; justify-content: center;">
+            <div class="popover" style="max-width: 280px;">
+              <div class="popover__header"><h3 class="popover__title">Display page</h3></div>
+              <p class="popover__body">Pages created from this template inherit its layout and fragments.</p>
+            </div>
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Popover</h3>
+            <p class="card__subtitle">0 8px 16px, opacidad fuerte. Como no tiene borde, es donde más se nota el aro de 1 px.</p>
+            <span class="label label--secondary">--shadow-md</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div style="padding: var(--spacing-9) var(--spacing-8); display: flex; justify-content: center; align-items: center; gap: var(--spacing-9); flex-wrap: wrap;">
+            <span class="tooltip spec-tooltip">Copy link</span>
+            <div class="slider" style="--value: 60; width: 240px;">
+              <div class="slider__field"><input type="range" class="slider__input" min="0" max="100" value="60" aria-label="Opacity"></div>
+              <span class="slider__value">60</span>
+            </div>
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Tooltip y slider</h3>
+            <p class="card__subtitle">Tooltip 0 2px 4px y thumb 0 1px 4px, los dos a opacidad fuerte. En Dark el tooltip es claro (--color-dark-d2), así que su sombra apenas cuenta.</p>
+            <span class="label label--secondary">--shadow-tooltip · --shadow-sm</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div style="padding: var(--spacing-9) var(--spacing-8); display: flex; justify-content: center;">
+            <div class="modal" style="max-width: 520px;">
+              <header class="modal__header">
+                <h2 class="modal__title">Delete page</h2>
+                <button class="btn btn--borderless btn--sm btn--icon modal__close" aria-label="Close"><svg class="lexicon-icon"><use href="#times"></use></svg></button>
+              </header>
+              <div class="modal__body"><p>This page and its 4 versions will be removed. You can restore it from the Recycle Bin.</p></div>
+              <footer class="modal__footer">
+                <button class="btn btn--secondary">Cancel</button>
+                <button class="btn btn--primary btn--danger">Delete</button>
+              </footer>
+            </div>
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Modal</h3>
+            <p class="card__subtitle">0 4px 16px, opacidad fuerte. Omnisearch y el side panel usan la misma.</p>
+            <span class="label label--secondary">--shadow-lg</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══════════════ Pestaña 2 · Pantallas DXP ═══════════════ -->
+  <div data-panel="screens" hidden>
+
+    <section style="margin-bottom: var(--spacing-9);">
+      <header class="section" style="margin-bottom: var(--spacing-5);"><h2 class="section__title">1 · Omnisearch</h2></header>
+      <article class="card">
+        <div class="screen-scroll"><div class="screen" data-shell="Web Content">
+          <div class="omni" role="dialog" aria-label="Omnisearch">
+            <div class="omni__head">
+              <div class="omni__field">
+                <svg class="lexicon-icon"><use href="#search"></use></svg>
+                <input class="input__field" type="text" value="holiday" aria-label="Search">
+                <span class="loading-animation loading-animation-sm" aria-hidden="true"></span>
+              </div>
+            </div>
+            <div class="omni__body">
+              <div class="omni__section"><svg class="lexicon-icon"><use href="#web-content"></use></svg>Web content</div>
+              <ul class="omni__list" role="listbox">
+                <li><button class="omni__result is-active" type="button" role="option" aria-selected="true">
+                  <span class="sticker sticker--md sticker--icon"><svg class="lexicon-icon"><use href="#web-content"></use></svg></span>
+                  <span class="omni__text"><span class="omni__title">Holiday Gift Guide</span><span class="omni__source">Acme Market · Web Content · Draft</span></span>
+                </button></li>
+                <li><button class="omni__result" type="button" role="option">
+                  <span class="sticker sticker--md sticker--icon"><svg class="lexicon-icon"><use href="#web-content"></use></svg></span>
+                  <span class="omni__text"><span class="omni__title">Holiday opening hours</span><span class="omni__source">Acme Market · Web Content · Approved</span></span>
+                </button></li>
+              </ul>
+              <div class="omni__section"><svg class="lexicon-icon"><use href="#documents-and-media"></use></svg>Documents</div>
+              <ul class="omni__list" role="listbox">
+                <li><button class="omni__result" type="button" role="option">
+                  <span class="sticker sticker--md sticker--icon"><svg class="lexicon-icon"><use href="#document"></use></svg></span>
+                  <span class="omni__text"><span class="omni__title">holiday-campaign-brief.pdf</span><span class="omni__source">Marketing / Campaigns / 2026</span></span>
+                </button></li>
+              </ul>
+              <div class="omni__section"><svg class="lexicon-icon"><use href="#cog"></use></svg>Applications</div>
+              <ul class="omni__list" role="listbox">
+                <li><button class="omni__result" type="button" role="option">
+                  <span class="sticker sticker--md sticker--icon"><svg class="lexicon-icon"><use href="#calendar"></use></svg></span>
+                  <span class="omni__text"><span class="omni__title">Holidays calendar</span><span class="omni__source">Control Panel · Configuration</span></span>
+                </button></li>
+              </ul>
+            </div>
+          </div>
+        </div></div>
+        <div class="card__body">
+          <h3 class="card__title">Buscador global sobre Web Content</h3>
+          <p class="card__subtitle">Réplica de la beta (LPD-78171), sacada de sus fuentes en DXP. Son dos paneles con rounded-xl y --shadow-lg, y el backdrop del modal va a opacidad 0. Sin scrim detrás, en dark solo la sombra separa el buscador del listado.</p>
+          <span class="label label--secondary">--shadow-lg</span>
+        </div>
+      </article>
+    </section>
+
+    <section style="margin-bottom: var(--spacing-9);">
+      <header class="section" style="margin-bottom: var(--spacing-5);"><h2 class="section__title">2 · Documentos: menú de acciones y toast</h2></header>
+      <article class="card">
+        <div class="screen-scroll"><div class="screen" data-shell="Documents">
+          <ul class="dropdown screen__float" role="menu" style="width: 220px; top: 212px; right: var(--spacing-7);">
+            <li><button class="dropdown__item" role="menuitem"><svg class="lexicon-icon dropdown__item-icon"><use href="#download"></use></svg><span class="dropdown__item-text">Download</span></button></li>
+            <li><button class="dropdown__item" role="menuitem"><svg class="lexicon-icon dropdown__item-icon"><use href="#pencil"></use></svg><span class="dropdown__item-text">Edit</span></button></li>
+            <li><button class="dropdown__item" role="menuitem"><svg class="lexicon-icon dropdown__item-icon"><use href="#move-folder"></use></svg><span class="dropdown__item-text">Move</span></button></li>
+            <li class="dropdown__divider" role="separator"></li>
+            <li><button class="dropdown__item" role="menuitem"><svg class="lexicon-icon dropdown__item-icon"><use href="#trash"></use></svg><span class="dropdown__item-text">Move to Recycle Bin</span></button></li>
+          </ul>
+          <span class="tooltip spec-tooltip screen__float" style="top: 108px; right: 88px;">View options</span>
+          <div class="alert alert--toast alert--success screen__float" style="bottom: var(--spacing-7); right: var(--spacing-7); width: 380px;">
+            <div class="alert__content">
+              <svg class="lexicon-icon"><use href="#check-circle-full"></use></svg>
+              <p class="alert__text"><strong>Success:</strong> 3 files were uploaded.</p>
+            </div>
+            <button class="btn btn--borderless btn--sm btn--icon alert__close" aria-label="Close"><svg class="lexicon-icon"><use href="#times"></use></svg></button>
+          </div>
+        </div></div>
+        <div class="card__body">
+          <h3 class="card__title">Listado con overlays abiertos</h3>
+          <p class="card__subtitle">Dropdown de acciones sobre la tabla, tooltip sobre la toolbar y toast de confirmación. Los tres flotan sobre --color-white, la superficie más oscura del skin.</p>
+          <span class="label label--secondary">--shadow-dropdown · --shadow-alert · --shadow-tooltip</span>
+        </div>
+      </article>
+    </section>
+
+    <section style="margin-bottom: var(--spacing-9);">
+      <header class="section" style="margin-bottom: var(--spacing-5);"><h2 class="section__title">3 · Fragmentos: arrastrar y popover</h2></header>
+      <article class="card">
+        <div class="screen-scroll"><div class="screen" data-shell="Fragments">
+          <div class="popover screen__float" style="max-width: 260px; top: 150px; left: 330px;">
+            <div class="popover__header"><h3 class="popover__title">Hero banner</h3></div>
+            <p class="popover__body">Used in 12 pages. Changes propagate on publish.</p>
+          </div>
+        </div></div>
+        <div class="card__body">
+          <h3 class="card__title">Rejilla de cards con una arrastrándose</h3>
+          <p class="card__subtitle">Cards en reposo junto a una en arrastre y un popover de información. Aquí se ve si el paso de reposo a arrastre se lee como elevación o solo como otra card.</p>
+          <span class="label label--secondary">--shadow-card · --shadow-card-drag · --shadow-md</span>
+        </div>
+      </article>
+    </section>
+  </div>
+
+  <section>
+    <header class="section" style="margin-bottom: var(--spacing-5);"><h2 class="section__title">Cómo lo resuelven otros sistemas</h2></header>
+    <div style="display: flex; flex-direction: column; gap: var(--spacing-4);">
+      <article class="card"><div class="card__body">
+        <h3 class="card__title">Primer (GitHub)</h3>
+        <p class="card__subtitle">Sombras de neutral.0 (casi negro) a opacidades del 40 al 100 % y, en todos los floating, una primera capa de 1 px con overlay.borderColor. Coincide con la opción 7.</p>
+        <a class="label label--secondary" href="https://github.com/primer/primitives/blob/main/src/tokens/functional/shadow/shadow.json5" target="_blank" rel="noopener">primer/primitives · shadow.json5</a>
+      </div></article>
+      <article class="card"><div class="card__body">
+        <h3 class="card__title">Atlassian</h3>
+        <p class="card__subtitle">En dark, raised y overlay siguen llevando sombra, pero cuentan sobre todo con superficies más claras. Aclarar superficies queda fuera de esta prueba.</p>
+        <a class="label label--secondary" href="https://atlassian.design/foundations/elevation" target="_blank" rel="noopener">atlassian.design · Elevation</a>
+      </div></article>
+      <article class="card"><div class="card__body">
+        <h3 class="card__title">Apple, Radix y Fluent</h3>
+        <p class="card__subtitle">Aro fino claro más sombra difusa con el matiz del fondo (Apple, Radix) o los mismos offsets con la opacidad doblada (Fluent). Lo cito de memoria y conviene revisarlo antes de usarlo.</p>
+        <span class="label label--secondary">sin verificar</span>
+      </div></article>
+    </div>
+  </section>
+
+</main>
+</div>
+
+<!-- Chrome DXP compartido por las tres pantallas -->
+<template id="shell">
+  <div class="control-menu">
+    <div class="control-menu__left">
+      <div class="control-menu__btns">
+        <button class="control-menu__btn" type="button" aria-label="Toggle product menu"><svg class="lexicon-icon"><use href="#product-menu-closed"></use></svg></button>
+      </div>
+      <span class="control-menu__title" data-slot="title"></span>
+    </div>
+    <div class="control-menu__right">
+      <button class="control-menu__btn" type="button" aria-label="Search (Ctrl+K)"><svg class="lexicon-icon"><use href="#search"></use></svg></button>
+      <button class="control-menu__btn" type="button" aria-label="Global navigation"><svg class="lexicon-icon"><use href="#grid"></use></svg></button>
+      <span class="sticker sticker--md sticker--circle sticker--outline sticker--primary">DA</span>
+    </div>
+  </div>
+  <div class="screen__body">
+    <aside class="cms-menu">
+      <ul class="cms-menu__groups">
+        <li><ul class="vert-nav__list">
+          <li class="vert-nav__item"><span class="vert-nav__icon-cell"><svg class="lexicon-icon vert-nav__icon"><use href="#home"></use></svg></span>Home</li>
+        </ul></li>
+        <li>
+          <button class="vert-nav__group-header" aria-expanded="true">CONTENT<svg class="lexicon-icon"><use href="#angle-down-small"></use></svg></button>
+          <ul class="vert-nav__list">
+            <li class="vert-nav__item" data-nav="Web Content"><span class="vert-nav__icon-cell"><svg class="lexicon-icon vert-nav__icon"><use href="#web-content"></use></svg></span>Web Content</li>
+            <li class="vert-nav__item" data-nav="Documents"><span class="vert-nav__icon-cell"><svg class="lexicon-icon vert-nav__icon"><use href="#documents-and-media"></use></svg></span>Documents</li>
+            <li class="vert-nav__item"><span class="vert-nav__icon-cell"><svg class="lexicon-icon vert-nav__icon"><use href="#blogs"></use></svg></span>Blogs</li>
+          </ul>
+        </li>
+        <li>
+          <button class="vert-nav__group-header" aria-expanded="true">STRUCTURE<svg class="lexicon-icon"><use href="#angle-down-small"></use></svg></button>
+          <ul class="vert-nav__list">
+            <li class="vert-nav__item"><span class="vert-nav__icon-cell"><svg class="lexicon-icon vert-nav__icon"><use href="#page"></use></svg></span>Content Types</li>
+            <li class="vert-nav__item" data-nav="Fragments"><span class="vert-nav__icon-cell"><svg class="lexicon-icon vert-nav__icon"><use href="#gallery"></use></svg></span>Fragments</li>
+          </ul>
+        </li>
+      </ul>
+    </aside>
+    <div class="screen__main" data-slot="main"></div>
+  </div>
+</template>
+
+<template id="main-list">
+  <div class="management-toolbar">
+    <div class="management-toolbar__bar">
+      <label class="checkbox"><input type="checkbox" class="checkbox__input"><span class="checkbox__box"><svg class="checkbox__icon checkbox__icon--check"><use href="#check-small"></use></svg><svg class="checkbox__icon checkbox__icon--hr"><use href="#hr"></use></svg></span></label>
+      <button class="btn btn--borderless btn--sm" type="button"><svg class="lexicon-icon"><use href="#filter"></use></svg>Filter<svg class="lexicon-icon"><use href="#caret-bottom"></use></svg></button>
+      <div class="management-toolbar__search"><div class="search">
+        <input class="input__field search__field" type="search" placeholder="Search">
+        <button class="search__submit" aria-label="Search" type="button"><svg class="lexicon-icon"><use href="#search"></use></svg></button>
+      </div></div>
+      <button class="btn btn--borderless btn--sm" type="button" aria-label="Switch view"><svg class="lexicon-icon"><use href="#list"></use></svg><svg class="lexicon-icon"><use href="#caret-double"></use></svg></button>
+      <button class="btn btn--primary btn--sm" type="button">New<svg class="lexicon-icon"><use href="#caret-bottom"></use></svg></button>
+    </div>
+  </div>
+  <table class="table">
+    <thead><tr><th class="table__cell--gutter"></th><th>Title</th><th>Author</th><th>Modified</th><th>Status</th><th class="table__cell--gutter"></th></tr></thead>
+    <tbody data-slot="rows"></tbody>
+  </table>
+</template>
+
+<script>
+(function () {
+  var STRATEGIES = [
+    { id: '',          short: 'Actual',     name: 'Kit actual',                 code: 'rgba(39, 40, 51, .10–.20)',
+      text: 'Sin override en dark. El toast y el popover, que no tienen borde, se funden con la superficie.' },
+    { id: 'figma',     short: 'Figma',      name: 'Figma · negro 50 / 70 %',   code: '#000 · 50 / 70 %',
+      text: 'La prueba de Figma sin cambios. Se lee la elevación y no hay halo, aunque en los blurs grandes el negro puro queda algo sucio sobre un fondo azulado.' },
+    { id: 'surface',   short: 'Superficie', name: 'Superficie oscurecida',      code: 'color-mix(in oklab, var(--color-white) 30%, #000) · 60 / 80 %',
+      text: 'La sombra tiene el matiz de la superficie, así que no ensucia. Sale de --color-white y cambia con el skin sin tocar nada más.' },
+    { id: 'secondary', short: 'Secondary',  name: 'Neutro de sistema',          code: 'color-mix(in oklab, var(--color-secondary-l3) 25%, #000) · 60 / 80 %',
+      text: 'Sale del gris de bordes del sistema, oscurecido. Queda muy cerca de Superficie, con un matiz algo más neutro.' },
+    { id: 'primary',   short: 'Primary',    name: 'Primario de sistema',        code: 'color-mix(in oklab, var(--color-primary-l3) 30%, #000) · 60 / 80 %',
+      text: 'Da una sombra fría, con un punto azul en los blurs grandes. Hay que mezclarlo con negro, porque primary-l3 solo es más claro que el fondo y vuelve el glow.' },
+    { id: 'layered',   short: 'Dos capas',  name: 'Dos capas · contacto + ambiente', code: '0 1px 2px (90 %), 0 8px 16px (80 %)',
+      text: 'La de Superficie más una sombra de 1–2 px casi opaca, pegada al borde. La capa corta dibuja el canto, que en dark es lo que más cuesta ver.' },
+    { id: 'ring',      short: '+ Aro',      name: 'Dos capas + aro de 1 px',    code: '0 0 0 1px color-mix(in srgb, var(--color-dark) 8%, transparent), …',
+      text: 'Dos capas más un aro de --color-dark al 8 %, también como box-shadow. El aro separa del fondo el popover, el toast y Omnisearch sin leerse como halo.', recommended: true }
+  ];
+
+  var lab = document.getElementById('lab');
+  var switchEl = document.querySelector('[data-role="strategy-switch"]');
+  var cardsEl = document.querySelector('[data-role="strategy-cards"]');
+
+  STRATEGIES.forEach(function (s) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'btn btn--secondary btn--xs'; b.dataset.s = s.id; b.textContent = s.short;
+    switchEl.appendChild(b);
+
+    var c = document.createElement('article');
+    c.className = 'card'; c.dataset.s = s.id; c.setAttribute('role', 'button'); c.tabIndex = 0; c.style.cursor = 'pointer';
+    c.innerHTML = '<div class="card__body"><h3 class="card__title"></h3><p class="card__subtitle"></p><span class="label label--secondary"></span></div>';
+    c.querySelector('.card__title').textContent = s.name;
+    if (s.recommended) c.querySelector('.card__title').insertAdjacentHTML('beforeend', ' <span class="label label--success">Recomendada</span>');
+    c.querySelector('.card__subtitle').textContent = s.text;
+    c.querySelector('.label--secondary').textContent = s.code;
+    cardsEl.appendChild(c);
+  });
+
+  function pick(id) {
+    if (id) lab.dataset.s = id; else lab.removeAttribute('data-s');
+    switchEl.querySelectorAll('button').forEach(function (b) {
+      var on = b.dataset.s === id; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', on);
+    });
+    cardsEl.querySelectorAll('.card').forEach(function (c) { c.classList.toggle('is-selected', c.dataset.s === id); });
+  }
+  switchEl.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) pick(b.dataset.s); });
+  cardsEl.addEventListener('click', function (e) { var c = e.target.closest('.card'); if (c) pick(c.dataset.s); });
+  cardsEl.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { var c = e.target.closest('.card'); if (c) { e.preventDefault(); pick(c.dataset.s); } }
+  });
+  pick('ring');
+
+  /* Skin */
+  var skinEl = document.querySelector('[data-role="skin-switch"]');
+  skinEl.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    var r = document.documentElement;
+    ['light', 'light-hc', 'dark', 'dark-hc'].forEach(function (c) { r.classList.remove(c); });
+    r.classList.add(b.dataset.skin);
+    skinEl.querySelectorAll('button').forEach(function (x) {
+      x.classList.toggle('is-active', x === b); x.setAttribute('aria-pressed', x === b);
+    });
+  });
+
+  /* Pestañas */
+  var tabs = document.querySelectorAll('[data-tab]');
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      tabs.forEach(function (x) { var on = x === t; x.classList.toggle('is-active', on); x.setAttribute('aria-selected', on); });
+      document.querySelectorAll('[data-panel]').forEach(function (p) { p.hidden = p.dataset.panel !== t.dataset.tab; });
+    });
+  });
+
+  /* Pantallas DXP: chrome común + contenido de cada una */
+  var ROWS = {
+    'Web Content': [['Holiday Gift Guide', 'Marta Ruiz', '2 hours ago', '<span class="label label--secondary">Draft</span>'],
+                    ['Winter at Acme Market', 'Diego Alonso', 'Yesterday', '<span class="label label--success">Approved</span>'],
+                    ['Store opening hours', 'Leo Park', 'Sep 22', '<span class="label label--success">Approved</span>'],
+                    ['Returns policy', 'Ana Gil', 'Sep 18', '<span class="label label--warning">Pending</span>'],
+                    ['Gift wrapping FAQ', 'Marta Ruiz', 'Sep 15', '<span class="label label--success">Approved</span>']],
+    'Documents':   [['holiday-campaign-brief.pdf', 'Ana Gil', '1 hour ago', '<span class="label label--success">Approved</span>'],
+                    ['hero-winter.jpg', 'Leo Park', '3 hours ago', '<span class="label label--success">Approved</span>'],
+                    ['price-list-q4.xlsx', 'Diego Alonso', 'Yesterday', '<span class="label label--secondary">Draft</span>'],
+                    ['store-map.svg', 'Marta Ruiz', 'Sep 20', '<span class="label label--danger">Expired</span>'],
+                    ['brand-guidelines.pdf', 'Ana Gil', 'Sep 12', '<span class="label label--success">Approved</span>']]
+  };
+  var shellTpl = document.getElementById('shell');
+  var listTpl = document.getElementById('main-list');
+
+  document.querySelectorAll('[data-shell]').forEach(function (screen) {
+    var name = screen.dataset.shell;
+    var frag = shellTpl.content.cloneNode(true);
+    frag.querySelector('[data-slot="title"]').textContent = name;
+    var active = frag.querySelector('[data-nav="' + name + '"]'); if (active) active.classList.add('is-active');
+    var main = frag.querySelector('[data-slot="main"]');
+
+    if (ROWS[name]) {
+      main.appendChild(listTpl.content.cloneNode(true));
+      var tbody = main.querySelector('[data-slot="rows"]');
+      ROWS[name].forEach(function (r, i) {
+        var tr = document.createElement('tr');
+        if (name === 'Documents' && i === 1) tr.className = 'is-selected';
+        tr.innerHTML =
+          '<td class="table__cell--gutter"><label class="checkbox"><input type="checkbox" class="checkbox__input"' + (tr.className ? ' checked' : '') + '><span class="checkbox__box"><svg class="checkbox__icon checkbox__icon--check"><use href="#check-small"></use></svg><svg class="checkbox__icon checkbox__icon--hr"><use href="#hr"></use></svg></span></label></td>' +
+          '<td><strong></strong></td><td></td><td></td><td></td>' +
+          '<td class="table__cell--gutter"><button class="btn btn--borderless btn--sm btn--icon" type="button" aria-label="Actions"><svg class="lexicon-icon"><use href="#ellipsis-v"></use></svg></button></td>';
+        var td = tr.querySelectorAll('td');
+        td[1].firstChild.textContent = r[0]; td[2].textContent = r[1]; td[3].textContent = r[2];
+        td[4].innerHTML = r[3];
+        tbody.appendChild(tr);
+      });
+    } else {
+      var names = ['Hero banner', 'Card grid', 'Footer', 'Heading', 'Button', 'Image', 'Video', 'Tabs'];
+      var icons = ['picture', 'gallery', 'page', 'web-content', 'hr', 'document', 'blogs', 'list'];
+      var grid = document.createElement('div');
+      grid.style.cssText = 'display:grid;grid-template-columns:repeat(4,1fr);gap:var(--spacing-7);padding:var(--spacing-8);';
+      names.forEach(function (n, i) {
+        var c = document.createElement('article');
+        c.className = 'card spec-card' + (i === 1 ? ' is-drag' : '');
+        if (i === 1) c.style.transform = 'translate(var(--spacing-5), calc(var(--spacing-3) * -1))';
+        c.innerHTML = '<div class="card__media"><svg class="lexicon-icon"><use href="#' + icons[i] + '"></use></svg></div>' +
+          '<div class="card__body"><h3 class="card__title"></h3><p class="card__subtitle">Basic component</p>' +
+          '<button class="card__menu" aria-label="More"><svg class="lexicon-icon"><use href="#ellipsis-v"></use></svg></button></div>';
+        c.querySelector('.card__title').textContent = n;
+        grid.appendChild(c);
+      });
+      main.appendChild(grid);
+    }
+    screen.insertBefore(frag, screen.firstChild);
+  });
+})();
+</script>
+<div class="wipe" aria-hidden="true"></div>
+<script>
+(function () {
+  var wipe = document.querySelector('.wipe');
+  if (!wipe) return;
+  document.querySelectorAll('a[data-wipe]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+      e.preventDefault();
+      wipe.style.background = link.dataset.wipe;
+      wipe.classList.add('anim', 'cover');
+      setTimeout(function () { window.location.href = link.href; }, 460);
+    });
+  });
+  window.addEventListener('pageshow', function () { wipe.classList.remove('anim', 'cover'); });
+})();
+</script>
+</body>
+</html>
