@@ -340,21 +340,6 @@ a:hover { color: var(--color-primary-d1); }
   --chart-land-line: var(--color-light-d1);   /* map land borders (#E2E4EA) */
 }
 
-/* ── Site Preview Bar (LPD-97290) ────────────────────────────
-   The bar is a primary-filled surface, so it follows the same convention as
-   .btn--primary: background var(--color-primary), foreground var(--color-white).
-   Both flip per skin, so the bar stays legible without a single literal.
-
-   Controls on the bar are stock kit components (.btn--translucent for the
-   picker and the icon buttons, .btn--secondary for Exit), so the only thing
-   the bar needs of its own is the rule it draws between clusters. That is an
-   alpha of the foreground, which cannot be expressed as a token reference, so
-   each skin carries its own counterpart in tokens-dark.css and
-   tokens-high-contrast.css. */
-:root {
-  --preview-bar-rule: rgba(255, 255, 255, 0.32);   /* divider between clusters */
-}
-
 </style>
 <style>
 /* ── tokens-high-contrast.css ── */
@@ -365,48 +350,48 @@ a:hover { color: var(--color-primary-d1); }
    ============================================================ */
 
 .light-hc, [data-theme="light-hc"] {
-  --color-primary-d2: #001133;
-  --color-primary-d1: #002161;
-  --color-primary: #002875;
-  --color-primary-l0: #0058FF;
-  --color-primary-l1: #387DFF;
-  --color-primary-l2: #70A0FF;
-  --color-primary-l3: #F5F8FF;
-  --color-secondary: #28282F;
-  --color-secondary-l0: #42424D;
-  --color-secondary-l1: #6C6F8E;
-  --color-secondary-l2: #CDCDDA;
-  --color-secondary-l3: #F0F0F4;
-  --color-dark-d2: #09090C;
-  --color-dark-d1: #14141A;
-  --color-dark: #1F1F28;
-  --color-dark-l1: #2E2F3D;
-  --color-dark-l2: #505168;
-  --color-light-d2: #D5D8E1;
-  --color-light-d1: #E1E3EA;
-  --color-light: #EDEEF2;
-  --color-light-l1: #F9FAFB;
-  --color-white: #FFFFFF;
-  --color-success-d2: #071309;
-  --color-success-d1: #0E2A14;
-  --color-success: #154220;
-  --color-success-l1: #319B4B;
-  --color-success-l2: #F0FAF3;
-  --color-info-d2: #0B1528;
-  --color-info-d1: #182E58;
-  --color-info: #213F78;
-  --color-info-l1: #3364C2;
-  --color-info-l2: #EFF3FA;
-  --color-warning-d2: #1A0B00;
-  --color-warning-d1: #381800;
-  --color-warning: #662C00;
-  --color-warning-l1: #FA6D00;
-  --color-warning-l2: #FFF6F0;
-  --color-danger-d2: #180202;
-  --color-danger-d1: #340404;
-  --color-danger: #5E0808;
-  --color-danger-l1: #E01515;
-  --color-danger-l2: #FEF1F1;
+  --color-primary-d2: #0D2A65;
+  --color-primary-d1: #0D2A65;
+  --color-primary: #1852BF;
+  --color-primary-l0: #A3C3FF;
+  --color-primary-l1: #A3C3FF;
+  --color-primary-l2: #A3C3FF;
+  --color-primary-l3: #A3C3FF;
+  --color-secondary: #6B6C7E;
+  --color-secondary-l0: #B0B0C4;
+  --color-secondary-l1: #B0B0C4;
+  --color-secondary-l2: #B0B0C4;
+  --color-secondary-l3: #B0B0C4;
+  --color-dark-d2: #1A1A1A;
+  --color-dark-d1: #1A1A1A;
+  --color-dark: #272833;
+  --color-dark-l1: #4A4B57;
+  --color-dark-l2: #4A4B57;
+  --color-light-d2: #4A4B57;
+  --color-light-d1: #4A4B57;
+  --color-light: #BFC0C8;
+  --color-light-l1: #F5F6F7;
+  --color-white: #F5F6F7;
+  --color-success-d2: #1C5629;
+  --color-success-d1: #1C5629;
+  --color-success: #5ACA75;
+  --color-success-l1: #EDF9F0;
+  --color-success-l2: #EDF9F0;
+  --color-info-d2: #234584;
+  --color-info-d1: #234584;
+  --color-info: #294F98;
+  --color-info-l1: #EEF2FA;
+  --color-info-l2: #EEF2FA;
+  --color-warning-d2: #863A00;
+  --color-warning-d1: #863A00;
+  --color-warning: #B95000;
+  --color-warning-l1: #FFF4EC;
+  --color-warning-l2: #FFF4EC;
+  --color-danger-d2: #AB1010;
+  --color-danger-d1: #AB1010;
+  --color-danger: #C31212;
+  --color-danger-l1: #FEEFEF;
+  --color-danger-l2: #FEEFEF;
   --blue-d4: #004799;
   --blue-d3: #004799;
   --blue-d2: #004799;
@@ -512,48 +497,48 @@ a:hover { color: var(--color-primary-d1); }
 /* Auto-apply high contrast when OS preference is set */
 @media (prefers-contrast: more) {
   :root {
-  --color-primary-d2: #001133;
-    --color-primary-d1: #002161;
-    --color-primary: #002875;
-    --color-primary-l0: #0058FF;
-    --color-primary-l1: #387DFF;
-    --color-primary-l2: #70A0FF;
-    --color-primary-l3: #F5F8FF;
-    --color-secondary: #28282F;
-    --color-secondary-l0: #42424D;
-    --color-secondary-l1: #6C6F8E;
-    --color-secondary-l2: #CDCDDA;
-    --color-secondary-l3: #F0F0F4;
-    --color-dark-d2: #09090C;
-    --color-dark-d1: #14141A;
-    --color-dark: #1F1F28;
-    --color-dark-l1: #2E2F3D;
-    --color-dark-l2: #505168;
-    --color-light-d2: #D5D8E1;
-    --color-light-d1: #E1E3EA;
-    --color-light: #EDEEF2;
-    --color-light-l1: #F9FAFB;
-    --color-white: #FFFFFF;
-    --color-success-d2: #071309;
-    --color-success-d1: #0E2A14;
-    --color-success: #154220;
-    --color-success-l1: #319B4B;
-    --color-success-l2: #F0FAF3;
-    --color-info-d2: #0B1528;
-    --color-info-d1: #182E58;
-    --color-info: #213F78;
-    --color-info-l1: #3364C2;
-    --color-info-l2: #EFF3FA;
-    --color-warning-d2: #1A0B00;
-    --color-warning-d1: #381800;
-    --color-warning: #662C00;
-    --color-warning-l1: #FA6D00;
-    --color-warning-l2: #FFF6F0;
-    --color-danger-d2: #180202;
-    --color-danger-d1: #340404;
-    --color-danger: #5E0808;
-    --color-danger-l1: #E01515;
-    --color-danger-l2: #FEF1F1;
+  --color-primary-d2: #0D2A65;
+    --color-primary-d1: #0D2A65;
+    --color-primary: #1852BF;
+    --color-primary-l0: #A3C3FF;
+    --color-primary-l1: #A3C3FF;
+    --color-primary-l2: #A3C3FF;
+    --color-primary-l3: #A3C3FF;
+    --color-secondary: #6B6C7E;
+    --color-secondary-l0: #B0B0C4;
+    --color-secondary-l1: #B0B0C4;
+    --color-secondary-l2: #B0B0C4;
+    --color-secondary-l3: #B0B0C4;
+    --color-dark-d2: #1A1A1A;
+    --color-dark-d1: #1A1A1A;
+    --color-dark: #272833;
+    --color-dark-l1: #4A4B57;
+    --color-dark-l2: #4A4B57;
+    --color-light-d2: #4A4B57;
+    --color-light-d1: #4A4B57;
+    --color-light: #BFC0C8;
+    --color-light-l1: #F5F6F7;
+    --color-white: #F5F6F7;
+    --color-success-d2: #1C5629;
+    --color-success-d1: #1C5629;
+    --color-success: #5ACA75;
+    --color-success-l1: #EDF9F0;
+    --color-success-l2: #EDF9F0;
+    --color-info-d2: #234584;
+    --color-info-d1: #234584;
+    --color-info: #294F98;
+    --color-info-l1: #EEF2FA;
+    --color-info-l2: #EEF2FA;
+    --color-warning-d2: #863A00;
+    --color-warning-d1: #863A00;
+    --color-warning: #B95000;
+    --color-warning-l1: #FFF4EC;
+    --color-warning-l2: #FFF4EC;
+    --color-danger-d2: #AB1010;
+    --color-danger-d1: #AB1010;
+    --color-danger: #C31212;
+    --color-danger-l1: #FEEFEF;
+    --color-danger-l2: #FEEFEF;
     --blue-d4: #004799;
     --blue-d3: #004799;
     --blue-d2: #004799;
@@ -657,19 +642,6 @@ a:hover { color: var(--color-primary-d1); }
   }
 }
 
-/* ── Site Preview Bar — high-contrast counterpart ────────────
-   Light HC keeps a white foreground (primary is a deep blue) but needs the
-   divider pushed harder to stay visible. */
-.light-hc, [data-theme="light-hc"] {
-  --preview-bar-rule: rgba(255, 255, 255, 0.60);
-}
-
-@media (prefers-contrast: more) {
-  :root:not(.light):not([data-theme="light"]):not(.dark):not([data-theme="dark"]):not(.dark-hc):not([data-theme="dark-hc"]) {
-    --preview-bar-rule: rgba(255, 255, 255, 0.60);
-  }
-}
-
 </style>
 <style>
 /* ── tokens-dark.css ── */
@@ -706,17 +678,17 @@ a:hover { color: var(--color-primary-d1); }
 
   /* Dark */
   --color-dark-d2: #FFFFFF;
-  --color-dark-d1: #F7F8F9;
-  --color-dark: #F1F2F5;
-  --color-dark-l1: #E2E4EA;
-  --color-dark-l2: #E2E4EA;
+  --color-dark-d1: #EAECF3;
+  --color-dark: #D5D9E7;
+  --color-dark-l1: #BEC4DA;
+  --color-dark-l2: #A4ACCB;
 
   /* Light */
-  --color-light-d2: #47485D;
-  --color-light-d1: #3E3F51;
-  --color-light: #313240;
-  --color-light-l1: #262631;
-  --color-white: #1B1B23;
+  --color-light-d2: #485265;
+  --color-light-d1: #3B4554;
+  --color-light: #2C333F;
+  --color-light-l1: #242933;
+  --color-white: #181C25;
 
   /* Success */
   --color-success-d2: #BAE8C6;
@@ -860,7 +832,7 @@ a:hover { color: var(--color-primary-d1); }
 
   /* Primary */
   --color-primary-d3: #F0F5FF;
-  --color-primary-d2: #D6E4FF;
+  --color-primary-d2: #F0F5FF;
   --color-primary-d1: #C7DAFF;
   --color-primary: #B3CDFF;
   --color-primary-l0: #003EB2;
@@ -877,45 +849,45 @@ a:hover { color: var(--color-primary-d1); }
 
   /* Dark */
   --color-dark-d2: #FFFFFF;
-  --color-dark-d1: #F7F8F9;
-  --color-dark: #F1F2F5;
-  --color-dark-l1: #E2E4EA;
-  --color-dark-l2: #E2E4EA;
+  --color-dark-d1: #FFFFFF;
+  --color-dark: #EAECF3;
+  --color-dark-l1: #EAECF3;
+  --color-dark-l2: #EAECF3;
 
   /* Light */
-  --color-light-d2: #30313F;
-  --color-light-d1: #30313F;
-  --color-light: #272833;
-  --color-light-l1: #111116;
-  --color-white: #111116;
+  --color-light-d2: #404B5D;
+  --color-light-d1: #404B5D;
+  --color-light: #1F2531;
+  --color-light-l1: #070B13;
+  --color-white: #070B13;
 
   /* Success */
-  --color-success-d2: #C9EED2;
+  --color-success-d2: #D9F2DF;
   --color-success-d1: #A2E1B2;
   --color-success: #8CD99E;
   --color-success-l1: #26783A;
-  --color-success-l2: #1A5127;
+  --color-success-l2: #102E16;
 
   /* Info */
-  --color-info-d2: #DFE7F7;
+  --color-info-d2: #F3F6FC;
   --color-info-d1: #CAD8F1;
   --color-info: #B6C9EC;
   --color-info-l1: #254A8D;
-  --color-info-l2: #1F3D75;
+  --color-info-l2: #0C172C;
 
   /* Warning */
-  --color-warning-d2: #FFD9BD;
+  --color-warning-d2: #FFF4EC;
   --color-warning-d1: #FFCBA3;
   --color-warning: #FFB780;
   --color-warning-l1: #B24D00;
-  --color-warning-l2: #863A00;
+  --color-warning-l2: #331600;
 
   /* Danger */
-  --color-danger-d2: #FDDEDE;
+  --color-danger-d2: #FEF1F1;
   --color-danger-d1: #FAC7C7;
   --color-danger: #F8B0B0;
   --color-danger-l1: #B61111;
-  --color-danger-l2: #750B0B;
+  --color-danger-l2: #420606;
 
   /* Charts */
   --blue: #94C4FF;
@@ -1043,17 +1015,17 @@ a:hover { color: var(--color-primary-d1); }
 
     /* Dark */
     --color-dark-d2: #FFFFFF;
-    --color-dark-d1: #F7F8F9;
-    --color-dark: #F1F2F5;
-    --color-dark-l1: #E2E4EA;
-    --color-dark-l2: #E2E4EA;
+    --color-dark-d1: #EAECF3;
+    --color-dark: #D5D9E7;
+    --color-dark-l1: #BEC4DA;
+    --color-dark-l2: #A4ACCB;
 
     /* Light */
-    --color-light-d2: #47485D;
-    --color-light-d1: #3E3F51;
-    --color-light: #313240;
-    --color-light-l1: #262631;
-    --color-white: #1B1B23;
+    --color-light-d2: #485265;
+    --color-light-d1: #3B4554;
+    --color-light: #2C333F;
+    --color-light-l1: #242933;
+    --color-white: #181C25;
 
     /* Success */
     --color-success-d2: #BAE8C6;
@@ -1215,21 +1187,6 @@ a:hover { color: var(--color-primary-d1); }
   }
 }
 
-/* ── Site Preview Bar — dark counterparts ────────────────────
-   In dark and dark-hc the primary fill becomes a *light* blue and the bar's
-   foreground (--color-white) becomes near-black, so the divider has to be an
-   alpha of black rather than of white. */
-.dark, [data-theme="dark"],
-.dark-hc, [data-theme="dark-hc"] {
-  --preview-bar-rule: rgba(17, 17, 22, 0.28);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not(.light):not([data-theme="light"]):not(.light-hc):not([data-theme="light-hc"]):not(.dark):not([data-theme="dark"]):not(.dark-hc):not([data-theme="dark-hc"]) {
-    --preview-bar-rule: rgba(17, 17, 22, 0.28);
-  }
-}
-
 </style>
 <style>
 /* ── components.css (solo las reglas que usa la página) ── */
@@ -1248,7 +1205,9 @@ a:hover { color: var(--color-primary-d1); }
   gap: var(--spacing-3);
   height: 40px;
   padding: 0 var(--spacing-5);
-  border-radius: var(--rounded-lg);
+  /* Kit-wide default is --rounded-md, always. Page-specific radii
+     (e.g. site-preview.html) belong in that page's own <style>. */
+  border-radius: var(--rounded-md);
   border: 1px solid transparent;
   background: transparent;
   font-family: inherit;
@@ -1302,7 +1261,7 @@ a:hover { color: var(--color-primary-d1); }
 .btn--borderless.btn--danger { color: var(--color-danger);  }
 .btn--borderless.btn--danger:hover { background: var(--color-danger-l2);  }
 .btn--xs { height: 24px; padding: 0 var(--spacing-3); font-size: var(--font-size-sm); gap: var(--spacing-2); }
-.btn--sm { height: 32px; padding: 0 var(--spacing-4); font-size: var(--font-size-base); font-weight: 600; }
+.btn--sm { height: 32px; padding: 0 var(--spacing-4); font-size: var(--font-size-sm); }
 .btn--icon { width: 40px; min-width: 40px; padding: 0; flex-shrink: 0; }
 .btn--icon.btn--xs { width: 24px; min-width: 24px; }
 .btn--icon.btn--sm { width: 32px; min-width: 32px; }
@@ -1581,7 +1540,9 @@ a:hover { color: var(--color-primary-d1); }
   justify-content: center;
   width: 24px;
   height: 24px;
-  border-radius: var(--rounded-lg);
+  /* Kit-wide default is --rounded-md. Page-specific radii (browse-panel,
+     modern-sidebar, site-preview) live in each page's own <style>. */
+  border-radius: var(--rounded-md);
   overflow: hidden;
   font-family: var(--font-family-base);
   font-weight: var(--font-weight-bold);
@@ -1648,6 +1609,7 @@ a:hover { color: var(--color-primary-d1); }
 .search__field {
   padding-right: 64px;
 }
+.search__field::-webkit-search-cancel-button, .search__field::-webkit-search-decoration { -webkit-appearance: none; }
 .search__submit {
   position: absolute;
   top: 50%;
