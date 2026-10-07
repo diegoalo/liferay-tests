@@ -14,13 +14,18 @@
 <meta property="og:description" content="HTML previews and product design experiments on Liferay.">
 <meta property="og:url" content="https://diegoalo.github.io/liferay-tests/">
 <meta property="og:image" content="https://diegoalo.com/assets/og-image.jpg">
+<meta property="og:image:secure_url" content="https://diegoalo.com/assets/og-image.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="2400">
+<meta property="og:image:height" content="1260">
+<meta property="og:image:alt" content="DIEGOALO: black tiger illustration on a red background">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@_diegoalo">
 <meta name="twitter:image" content="https://diegoalo.com/assets/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400&family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet">
-<script>document.documentElement.classList.add('js-anim')</script>
+<script>document.documentElement.classList.add('js-anim','loading')</script>
 <style>
   :root{
     /* tokens de Figma (coleccion DIEGOALO) */
@@ -110,17 +115,8 @@
     position:relative;display:inline-block;align-self:flex-start;
     font-family:'Geist Mono',monospace;font-weight:300;line-height:1.05;
     font-size:max(34px, calc(var(--u) * 96));color:var(--accent);text-decoration:none;
-    transition:color .2s ease;
   }
-  /* al hover: aparece el `>` (colgando, sin mover el texto) y pasa a amarillo */
-  .pe-title::before{
-    content:">";position:absolute;right:100%;margin-right:.12em;
-    opacity:0;transition:opacity .2s ease;
-  }
-  @media (hover:hover) and (pointer:fine){
-    a.pe-title:hover{color:var(--saffron)}
-    a.pe-title:hover::before{opacity:1}
-  }
+  /* el titulo ya no es enlace: el enlace va en el boton >check live de debajo */
   .pe-items{list-style:none;display:flex;flex-direction:column;gap:calc(var(--u) * 8);
     font-family:'Geist Mono',monospace;font-weight:400;line-height:1.3;
     font-size:max(16px, calc(var(--u) * 40));color:var(--crimson)}
@@ -133,14 +129,14 @@
   .pe-items.open .pe-extra{grid-template-rows:1fr;margin-top:0}
   .pe-extra > ul{overflow:hidden;min-height:0;list-style:none;
     display:flex;flex-direction:column;gap:calc(var(--u) * 8)}
-  .pe-more{font:inherit;color:var(--accent);--hl:var(--accent);background-color:transparent;border:0;cursor:pointer}
+  .pe-more{font:inherit;color:var(--accent);--hl:var(--accent);background-color:transparent;border:0;cursor:pointer;text-decoration:none}
   .pe-rule{height:2px;background:var(--rule);width:100%;margin-top:calc(var(--u) * 8)}
 
   /* ---------- capa de imagenes ---------- */
   /* el boton va en azul; al abrirse, la capa tapa la pagina y el `>back`
      queda sustituido por un `>close` en su misma posicion */
   .pe-check{font:inherit;color:var(--saffron);--hl:var(--saffron);
-    background-color:transparent;border:0;cursor:pointer}
+    background-color:transparent;border:0;cursor:pointer;text-decoration:none}
   /* la capa deja ver un poco la pagina: el rectangulo del lienzo va al 95% */
   .gal{position:fixed;inset:0;z-index:60;background:rgba(0,9,10,.95);
     overflow-y:auto;overscroll-behavior:contain}
@@ -154,7 +150,7 @@
     font-family:'Geist Mono',monospace;font-weight:400;
     font-size:max(16px, calc(var(--u) * 40));line-height:1.3;
     color:var(--saffron);--hl:var(--saffron);
-    background-color:transparent;border:0;cursor:pointer}
+    background-color:transparent;border:0;cursor:pointer;text-decoration:none}
   /* rejilla de 2 columnas de 551 con 26 de calle, celdas de 551x541 */
   .gal-grid{display:grid;grid-template-columns:repeat(2,1fr);
     column-gap:calc(var(--u) * 26);row-gap:calc(var(--u) * 24)}
@@ -208,27 +204,43 @@
     body.over-tag .cursor-tag{display:block}
   }
 
-  /* ---------- transicion entre paginas ----------
-     Los selectores van explicitos (no `[data-rise]` puesto por JS): si el
+  /* el contenido espera a fuentes + load antes de entrar; en paginas de
+     proyecto no hay contador, la animacion arranca directamente */
+  html.loading .cursor,html.loading .cursor-tag{display:none}
+
+  /* ---------- entrada y transicion entre paginas ----------
+     Los selectores van explicitos (no un atributo puesto por JS): si el
      atributo lo añade un script al final del body, entre el primer pintado y
-     ese momento la pagina se ve entera, desaparece y entonces anima — que es
-     justo el salto que se veia al cargar.
+     ese momento la pagina se ve entera, desaparece y entonces anima.
      Transiciones y no keyframes, para poder interrumpir la entrada a mitad. */
   @media (prefers-reduced-motion: no-preference){
-    html.js-anim .proj-side-head,html.js-anim .proj-vtitle,html.js-anim .pentry,html.js-anim .site-footer{
-      opacity:0;transform:translateY(calc(var(--u) * 32));
-      transition:opacity .6s var(--ease-page), transform .6s var(--ease-page);
-      transition-delay:calc(var(--i,0) * 70ms)}
-    html.js-anim.is-in .proj-side-head,html.js-anim.is-in .proj-vtitle,html.js-anim.is-in .pentry,html.js-anim.is-in .site-footer{opacity:1;transform:none}
-    html.js-anim.is-out .proj-side-head,html.js-anim.is-out .proj-vtitle,html.js-anim.is-out .pentry,html.js-anim.is-out .site-footer{
-      opacity:0;transform:translateY(calc(var(--u) * 16));
+    html.js-anim .proj-side-head,html.js-anim .proj-vtitle,html.js-anim .pentry,html.js-anim .fgroup,html.js-anim .f-creature{
+      opacity:0;transform:translate3d(0,calc(var(--u) * 24),0);
+      transition:opacity .95s var(--ease-page), transform .95s var(--ease-page);
+      transition-delay:calc(var(--i,0) * 110ms)}
+    html.js-anim .proj-side-head.is-seen,html.js-anim .proj-vtitle.is-seen,html.js-anim .pentry.is-seen,html.js-anim .fgroup.is-seen,html.js-anim .f-creature.is-seen{opacity:1;transform:none}
+    html.js-anim.is-out .proj-side-head,html.js-anim.is-out .proj-vtitle,html.js-anim.is-out .pentry,html.js-anim.is-out .fgroup,html.js-anim.is-out .f-creature{
+      opacity:0;transform:translate3d(0,calc(var(--u) * 16),0);
       transition-duration:.32s;transition-delay:calc(var(--i,0) * 20ms)}
   }
-  /* movimiento reducido: se mantiene la opacidad, se quita el desplazamiento */
+  /* movil: el mismo gesto, mas corto y algo mas rapido. Solo opacity y
+     transform (van por el compositor, sin layout ni repintado). La capa la
+     gestiona el JS bloque a bloque (ver `show`). */
+  @media (prefers-reduced-motion: no-preference) and (max-width:700px){
+    html.js-anim .proj-side-head,html.js-anim .proj-vtitle,html.js-anim .pentry,html.js-anim .fgroup,html.js-anim .f-creature{transform:translate3d(0,calc(var(--m) * 16),0);
+      /* curvas mas repartidas que la expo-out de escritorio: esa hace el 80% del
+         cambio en los primeros 150 ms, y en movil (y mas en Safari, que puede
+         perder los primeros frames) se lee como un pop. El fundido va con una
+         curva estandar y el desplazamiento con ease-out cubica. */
+      transition:opacity .6s cubic-bezier(.4,0,.2,1), transform .6s cubic-bezier(.33,1,.68,1);
+      transition-delay:calc(var(--i,0) * 90ms)}
+    html.js-anim.is-out .proj-side-head,html.js-anim.is-out .proj-vtitle,html.js-anim.is-out .pentry,html.js-anim.is-out .fgroup,html.js-anim.is-out .f-creature{transform:translate3d(0,calc(var(--m) * 8),0);
+      transition-duration:.24s;transition-delay:calc(var(--i,0) * 16ms)}
+  }
   @media (prefers-reduced-motion: reduce){
-    html.js-anim .proj-side-head,html.js-anim .proj-vtitle,html.js-anim .pentry,html.js-anim .site-footer{opacity:0;transition:opacity .2s ease}
-    html.js-anim.is-in .proj-side-head,html.js-anim.is-in .proj-vtitle,html.js-anim.is-in .pentry,html.js-anim.is-in .site-footer{opacity:1}
-    html.js-anim.is-out .proj-side-head,html.js-anim.is-out .proj-vtitle,html.js-anim.is-out .pentry,html.js-anim.is-out .site-footer{opacity:0}
+    html.js-anim .proj-side-head,html.js-anim .proj-vtitle,html.js-anim .pentry,html.js-anim .fgroup,html.js-anim .f-creature{opacity:0;transition:opacity .2s ease}
+    html.js-anim .proj-side-head.is-seen,html.js-anim .proj-vtitle.is-seen,html.js-anim .pentry.is-seen,html.js-anim .fgroup.is-seen,html.js-anim .f-creature.is-seen{opacity:1}
+    html.js-anim.is-out .proj-side-head,html.js-anim.is-out .proj-vtitle,html.js-anim.is-out .pentry,html.js-anim.is-out .fgroup,html.js-anim.is-out .f-creature{opacity:0}
   }
 
   /* pantallas muy anchas: el lienzo crece con el viewport (sin salto en 1600)
@@ -289,49 +301,53 @@
     </div>
     <div class="proj-entries">
       <article class="pentry">
-        <a class="pe-title" href="scope-item-spacing.html" data-wipe="#10daf9" data-cursor="CHECK LIVE">zone spacing</a>
-        <ul class="pe-items"><li class="pe-blue">&lt;ui design&gt;</li><li>&lt;control panel&gt;</li><li>&lt;tokens&gt;</li></ul>
+        <span class="pe-title">slides</span>
+        <ul class="pe-items"><li><a class="pe-check u-line" href="lpd-100289-starting-point.html" data-wipe="#10daf9" data-cursor="GO">&gt;LPD-100289 starting point</a></li><li><a class="pe-check u-line" href="devcon-2026/" data-wipe="#10daf9" data-cursor="GO">&gt;DEVCON 2026 slides</a></li><li class="pe-blue">&lt;presentations&gt;</li></ul>
         <div class="pe-rule"></div>
       </article>
       <article class="pentry">
-        <a class="pe-title" href="ai-exploration.html" data-wipe="#10daf9" data-cursor="CHECK LIVE">ai interaction</a>
-        <ul class="pe-items"><li class="pe-blue">&lt;ui design&gt;</li><li>&lt;ai&gt;</li><li>&lt;motion&gt;</li></ul>
+        <span class="pe-title">zone spacing</span>
+        <ul class="pe-items"><li><a class="pe-check u-line" href="scope-item-spacing.html" data-wipe="#10daf9" data-cursor="GO">&gt;check live</a></li><li class="pe-blue">&lt;ui design&gt;</li><li>&lt;control panel&gt;</li><li>&lt;tokens&gt;</li></ul>
         <div class="pe-rule"></div>
       </article>
       <article class="pentry">
-        <a class="pe-title" href="card-revamp.html" data-wipe="#10daf9" data-cursor="CHECK LIVE">card revamp</a>
-        <ul class="pe-items"><li class="pe-blue">&lt;ui design&gt;</li><li>&lt;components&gt;</li><li>&lt;design system&gt;</li></ul>
+        <span class="pe-title">ai interaction</span>
+        <ul class="pe-items"><li><a class="pe-check u-line" href="ai-exploration.html" data-wipe="#10daf9" data-cursor="GO">&gt;check live</a></li><li class="pe-blue">&lt;ui design&gt;</li><li>&lt;ai&gt;</li><li>&lt;motion&gt;</li></ul>
         <div class="pe-rule"></div>
       </article>
       <article class="pentry">
-        <a class="pe-title" href="dark-mode-shadows.html" data-wipe="#10daf9" data-cursor="CHECK LIVE">shadows</a>
-        <ul class="pe-items"><li class="pe-blue">&lt;ui design&gt;</li><li>&lt;dark mode&gt;</li><li>&lt;tokens&gt;</li></ul>
+        <span class="pe-title">card revamp</span>
+        <ul class="pe-items"><li><a class="pe-check u-line" href="card-revamp.html" data-wipe="#10daf9" data-cursor="GO">&gt;check live</a></li><li class="pe-blue">&lt;ui design&gt;</li><li>&lt;components&gt;</li><li>&lt;design system&gt;</li></ul>
         <div class="pe-rule"></div>
       </article>
       <article class="pentry">
-        <a class="pe-title" href="preview-top-bar-exploration.html" data-wipe="#10daf9" data-cursor="CHECK LIVE">preview top bar</a>
-        <ul class="pe-items"><li class="pe-blue">&lt;ui design&gt;</li><li>&lt;color&gt;</li></ul>
+        <span class="pe-title">shadows</span>
+        <ul class="pe-items"><li><a class="pe-check u-line" href="dark-mode-shadows.html" data-wipe="#10daf9" data-cursor="GO">&gt;check live</a></li><li class="pe-blue">&lt;ui design&gt;</li><li>&lt;dark mode&gt;</li><li>&lt;tokens&gt;</li></ul>
         <div class="pe-rule"></div>
       </article>
       <article class="pentry">
-        <a class="pe-title" href="dark-mode-scrollbars.html" data-wipe="#10daf9" data-cursor="CHECK LIVE">scrollbars</a>
-        <ul class="pe-items"><li class="pe-blue">&lt;ui design&gt;</li><li>&lt;dark mode&gt;</li><li>&lt;tokens&gt;</li></ul>
+        <span class="pe-title">preview top bar</span>
+        <ul class="pe-items"><li><a class="pe-check u-line" href="preview-top-bar-exploration.html" data-wipe="#10daf9" data-cursor="GO">&gt;check live</a></li><li class="pe-blue">&lt;ui design&gt;</li><li>&lt;color&gt;</li></ul>
         <div class="pe-rule"></div>
       </article>
       <article class="pentry">
-        <a class="pe-title" href="dark-mode-palette-lab.html" data-wipe="#10daf9" data-cursor="CHECK LIVE">color palette</a>
-        <ul class="pe-items"><li class="pe-blue">&lt;ui design&gt;</li><li>&lt;color&gt;</li><li>&lt;revamp&gt;</li></ul>
+        <span class="pe-title">scrollbars</span>
+        <ul class="pe-items"><li><a class="pe-check u-line" href="dark-mode-scrollbars.html" data-wipe="#10daf9" data-cursor="GO">&gt;check live</a></li><li class="pe-blue">&lt;ui design&gt;</li><li>&lt;dark mode&gt;</li><li>&lt;tokens&gt;</li></ul>
         <div class="pe-rule"></div>
       </article>
       <article class="pentry">
-        <a class="pe-title" href="empty-state-animations.html" data-wipe="#10daf9" data-cursor="CHECK LIVE">empty states</a>
-        <ul class="pe-items"><li class="pe-blue">&lt;illustration&gt;</li><li>&lt;motion&gt;</li></ul>
+        <span class="pe-title">color palette</span>
+        <ul class="pe-items"><li><a class="pe-check u-line" href="dark-mode-palette-lab.html" data-wipe="#10daf9" data-cursor="GO">&gt;check live</a></li><li class="pe-blue">&lt;ui design&gt;</li><li>&lt;color&gt;</li><li>&lt;revamp&gt;</li></ul>
         <div class="pe-rule"></div>
       </article>
       <article class="pentry">
-        <a class="pe-title" href="lexicon-skeleton-previews.html" data-wipe="#10daf9" data-cursor="CHECK LIVE">loading skeletons</a>
-        <ul class="pe-items"><li class="pe-blue">&lt;ui design&gt;</li></ul>
-        
+        <span class="pe-title">empty states</span>
+        <ul class="pe-items"><li><a class="pe-check u-line" href="empty-state-animations.html" data-wipe="#10daf9" data-cursor="GO">&gt;check live</a></li><li class="pe-blue">&lt;illustration&gt;</li><li>&lt;motion&gt;</li></ul>
+        <div class="pe-rule"></div>
+      </article>
+      <article class="pentry">
+        <span class="pe-title">loading skeletons</span>
+        <ul class="pe-items"><li><a class="pe-check u-line" href="lexicon-skeleton-previews.html" data-wipe="#10daf9" data-cursor="GO">&gt;check live</a></li><li class="pe-blue">&lt;ui design&gt;</li></ul>
       </article>
     </div>
   </div>
@@ -354,7 +370,7 @@
         </div>
         <div class="fgroup"><span class="fgroup-label">PROJECTS</span>
           <nav class="flinks">
-            <a class="flink u-line" href="https://substack.com/@diegoalo" target="_blank" rel="noopener" data-cursor="CHECK OUT">my newsletter - ALO!</a>
+            <a class="flink u-line" href="https://substack.com/@diegoalo" target="_blank" rel="noopener" data-cursor="GO">my newsletter - ALO!</a>
           </nav>
         </div>
       </div>
@@ -397,36 +413,46 @@
   </defs>
 </svg></span><span class="tag">GO HOME</span></div>
 <script>
-/* la columna de entradas baja o sube para que el primer titulo quede alineado con el tigre */
+/* la base del nombre del proyecto se alinea con la de la primera linea del primer titulo */
 (function(){
-  var entries=document.querySelector('.proj-entries'),
-      first=entries&&entries.querySelector('.pe-title'),
-      tiger=document.querySelector('.back-tiger svg'),
-      side=document.querySelector('.proj-side');
-  if(!entries||!first||!tiger) return;
-  /* base de la primera linea, aunque el titulo ocupe varias */
-  function baseline(el){
+  var name=document.querySelector('.proj-name'),
+      entries=document.querySelector('.proj-entries'),
+      first=entries&&entries.querySelector('.pe-title');
+  if(!name||!entries||!first) return;
+  /* base de la primera linea (marcador al principio) o de la ultima (al final) */
+  function baseline(el,last){
     var s=document.createElement('span');
     s.style.cssText='display:inline-block;width:0;height:0';
-    el.insertBefore(s,el.firstChild);
+    if(last) el.appendChild(s); else el.insertBefore(s,el.firstChild);
     var y=s.getBoundingClientRect().bottom;
     el.removeChild(s);
     return y;
   }
+  var vtitle=document.querySelector('.proj-vtitle'),
+      firstItem=entries.querySelector('.pe-items > li'),
+      side=document.querySelector('.proj-side');
   function align(){
     entries.style.marginTop='';
+    if(vtitle) vtitle.style.marginTop='';
     if(window.matchMedia('(max-width:700px)').matches) return;
     /* el lateral es sticky: con la pagina ya desplazada (el navegador recupera
-       el scroll al recargar) el tigre se mediria pegado arriba y la diferencia
-       se sumaria al margen. Se mide en su sitio natural y se restaura. */
+       el scroll al recargar) se mediria pegado arriba y la diferencia se
+       sumaria al margen. Se mide en su sitio natural y se restaura. */
     var prev=side?side.style.position:'';
     if(side) side.style.position='static';
     var current=parseFloat(getComputedStyle(entries).marginTop)||0;
-    /* el tigre arranca a la altura de las letras altas de la primera linea
-       del primer titulo (0.7em por encima de su base). "work" no se toca: se
-       queda pegado bajo el nombre, en su sitio natural. */
-    var ref=baseline(first)-parseFloat(getComputedStyle(first).fontSize)*0.7;
-    entries.style.marginTop=(current+(tiger.getBoundingClientRect().top-ref))+'px';
+    entries.style.marginTop=(current+(baseline(name)-baseline(first)))+'px';
+    /* y las letras verticales arrancan a la altura de la primera tag: la caja de
+       texto lleva interlineado por encima, asi que se busca el alto de mayuscula
+       (0.7em por debajo de la base). Si el primer titulo ocupa varias lineas se
+       descuentan las de mas, para que queden donde las dejaria uno de una sola. */
+    if(vtitle&&firstItem){
+      var fs=parseFloat(getComputedStyle(firstItem).fontSize),
+          extra=baseline(first,true)-baseline(first),
+          capTop=baseline(firstItem)-fs*0.7-extra,
+          now=parseFloat(getComputedStyle(vtitle).marginTop)||0;
+      vtitle.style.marginTop=(now+(capTop-vtitle.getBoundingClientRect().top))+'px';
+    }
     if(side) side.style.position=prev;
   }
   align();
@@ -515,48 +541,96 @@
   });
 })();
 
-/* transicion entre paginas: los bloques suben escalonados al entrar y caen al salir */
+/* intro: contador 0-100, y entrada por secciones segun entran en pantalla */
 (function(){
   var root=document.documentElement,
       reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches,
-      blocks=[].slice.call(document.querySelectorAll('.proj-side-head, .proj-vtitle, .pentry, .site-footer'));
-  blocks.forEach(function(el,i){ el.style.setProperty('--i', Math.min(i,8)); });
-  var last=Math.min(Math.max(blocks.length-1,0),8),
-      inMs =reduce?200:600+last*70,
-      outMs=reduce?200:320+last*20;
-  /* Las alineaciones se calculan midiendo en pantalla, y con la fuente todavia
-     sin cargar dan otro valor. Si se anima antes, los bloques se recolocan a
-     medio camino y se ve un salto. Asi que: esperar a la fuente -> realinear
-     -> y solo entonces arrancar la entrada, con todo aun invisible. */
-  function start(){
-    void document.body.offsetHeight;   /* fuerza el calculo del estado inicial */
-    requestAnimationFrame(function(){
-      requestAnimationFrame(function(){ root.classList.add('is-in'); });
+      /* en movil la entrada es mas corta: menos escalones y salida mas rapida */
+      small=window.matchMedia('(max-width:700px)').matches,
+      blocks=[].slice.call(document.querySelectorAll('.proj-side-head, .proj-vtitle, .pentry, .fgroup, .f-creature'));
+
+  /* acabada la entrada, fuera la capa: will-change solo mientras se mueve */
+  blocks.forEach(function(el){
+    el.addEventListener('transitionend',function done(e){
+      if(e.target!==el||e.propertyName!=='opacity'||!el.classList.contains('is-seen')) return;
+      el.style.willChange='auto';
+      el.removeEventListener('transitionend',done);
+    });
+  });
+
+  /* Revelar en dos tiempos. Safari (sobre todo en iOS) se salta la transicion
+     y pinta el estado final de golpe si el bloque cambia de estado en el mismo
+     frame en que se le crea la capa. Asi que: primero se prepara la capa
+     (will-change), se deja pasar un frame entero con el estado inicial ya
+     pintado, y solo entonces se cambia la clase. La capa se pide justo antes
+     de mover cada bloque y se suelta al acabar, en vez de tener todas vivas
+     desde el principio: iOS tiene poca memoria para capas y, cuando se pasa,
+     deja de componerlas y los bloques aparecen ya colocados. */
+  function show(el,i){
+    el.style.setProperty('--i',i);
+    el.style.willChange='opacity, transform';
+    function go(){ el.classList.add('is-seen'); }
+    requestAnimationFrame(function(){ requestAnimationFrame(go); });
+    setTimeout(go,150);   /* por si el navegador pausa los frames: nunca se queda oculto */
+  }
+
+  /* --- se revela lo que ya esta en pantalla; el resto, al llegar a el --- */
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      io.unobserve(e.target);
+      show(e.target,0);
+    });
+  },{rootMargin:'0px'}):null;   /* en cuanto asoma: con el scroll de iOS, esperar mas hace que llegue tarde */
+
+  function reveal(){
+    var vh=window.innerHeight, i=0;
+    blocks.forEach(function(el){
+      if(el.getBoundingClientRect().top < vh*0.92){
+        show(el, Math.min(i++,small?4:6));
+      }else if(io){ io.observe(el); }
+      else{ el.classList.add('is-seen'); }
     });
   }
-  var started=false;
-  function go(){
-    if(started) return;
-    started=true;
-    window.dispatchEvent(new Event('resize'));   /* realinea ya con la fuente buena */
-    start();
+
+  function finish(){
+    root.classList.remove('loading');
+    /* las alineaciones se recalculan ANTES de revelar: con todos los bloques
+       aun igual de desplazados, las medidas relativas son correctas */
+    window.dispatchEvent(new Event('resize'));
+    reveal();
   }
-  if(document.fonts&&document.fonts.ready){
-    document.fonts.ready.then(go);
-    setTimeout(go,700);          /* red de seguridad si la fuente tarda demasiado */
-  }else{
-    go();
+
+  if(reduce){ finish(); }
+  else{
+    /* sin contador: en cuanto hay fuentes y load, entra el contenido.
+       Se sigue esperando porque medir antes de que llegue Geist Mono
+       descuadra las alineaciones y provoca el salto. */
+    var started=false;
+    function go(){ if(started) return; started=true; finish(); }
+    var waits=[];
+    if(document.fonts&&document.fonts.ready) waits.push(document.fonts.ready);
+    waits.push(new Promise(function(res){
+      if(document.readyState==='complete') res();
+      else window.addEventListener('load',res,{once:true});
+    }));
+    Promise.all(waits).then(go);
+    setTimeout(go, 4000);
   }
+
+  var outMs=reduce?0:(small?240:320)+Math.min(blocks.length-1,8)*(small?16:20);
   document.querySelectorAll('a[data-wipe]').forEach(function(a){
     a.addEventListener('click',function(e){
-      if(e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey) return;
+      if(!outMs||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey) return;
       e.preventDefault();
-      root.classList.remove('is-in'); root.classList.add('is-out');
+      root.classList.add('is-out');
       setTimeout(function(){ location.href=a.href; }, outMs);
     });
   });
   window.addEventListener('pageshow',function(ev){
-    if(ev.persisted){ root.classList.remove('is-out'); root.classList.add('is-in'); }
+    if(!ev.persisted) return;
+    root.classList.remove('is-out','loading');
+    blocks.forEach(function(el){ el.classList.add('is-seen'); });
   });
 })();
 </script>
