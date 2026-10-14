@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDMyIDMyIj4KICA8cGF0aCBmaWxsPSIjMDA2RUZGIiBkPSJNMCAwaDMydjMySDB6Ii8+CiAgPGcgY2xpcC1wYXRoPSJ1cmwoI2EpIj4KICAgIDxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xNS45MzYgMTUuMTIzYS44NzUuODc1IDAgMCAwLS44NzUuODc0djEwLjEzMmEuODc1Ljg3NSAwIDAgMCAxLjc1IDBWMTUuOTk0YS44NzQuODc0IDAgMCAwLS44NzUtLjg3MU0xMi45NiAyMi4yNmEuODcuODcgMCAwIDAtLjg3Ni44NTl2MS43MjNjMCAuNDc0LjM5My44NTguODc1Ljg1OGEuODcuODcgMCAwIDAgLjg3Ni0uODU4di0xLjcyM2EuODY3Ljg2NyAwIDAgMC0uODc2LS44NThtOS4wNTgtMS40MjlhLjg3Ljg3IDAgMCAwLS44NzUuODY1djEuMzIzYzAgLjIzLjA5LjQ0OC4yNTYuNjExYS44OC44OCAwIDAgMCAuNjIuMjUzLjg3Ljg3IDAgMCAwIC44NzQtLjg2NHYtMS4zMjNhLjg2Ny44NjcgMCAwIDAtLjg3NS0uODY1bS0yLjk3Ny0yLjg1NmEuODc1Ljg3NSAwIDAgMC0uODc1Ljg3NHY1Ljk3OWEuODc3Ljg3NyAwIDAgMCAxLjQ5NS42MTguODcuODcgMCAwIDAgLjI1Ni0uNjE4VjE4Ljg1YS44Ny44NyAwIDAgMC0uODc1LS44NzQiLz4KICAgIDxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xOC4xOTcgMTYuMDM1YzAgLjQ4LjM4Ny44NzEuODYuODcxLjQ3MiAwIC44NTktLjM5Ljg1OS0uODY4di0xLjQ3YzAtLjUwOS0uMzY4LTEuMTUyLS44MDUtMS40MDVsLTIuMzEyLTEuMzQ4Yy0uMjE4LS4xMjgtLjUxMi0uMTktLjgwMi0uMTktLjI5NCAwLS41ODUuMDY1LS44MDIuMTlsLTIuMzEyIDEuMzQ4Yy0uNDM1LjI1My0uODA1LjktLjgwNSAxLjQwNnY1LjcyNWMwIC40OC4zODYuODcxLjg2Ljg3MS40NzIgMCAuODU4LS4zOS44NTgtLjg3VjE1LjI0YzAtLjM0LjIzLS43NC41Mi0uOTEzbDEuMTU3LS42NzVjLjI5NC0uMTczLjc1LS4xNzMgMS4wNDQgMGwxLjE1Ny42NzJjLjI5LjE3LjUyLjU3LjUyLjkxM3YuNzk3em0tNC4wNDMtOC42OTdjMS4wMTItLjU5IDIuNjY0LS41OSAzLjY3NiAwbC42MDQuMzUycS4xNzQuMDg3LjM2Ny4wODZhLjg2Ljg2IDAgMCAwIC44NTYtLjg2NC44Ny44NyAwIDAgMC0uNDI4LS43NWwtLjAzMi0uMDE5LTEuMDg5LS42MzRDMTcuNTQ5IDUuMTggMTYuNzk1IDUgMTUuOTkgNXMtMS41NTUuMTgtMi4xMTcuNTA2TDguMTE4IDguODU5Yy0uNTYzLjMyNi0xLjA5My44OTMtMS40OTUgMS41OTgtLjQwMy43MDEtLjYyMyAxLjQ0Ny0uNjIzIDIuMXYxLjE5NWMuMDEzLjQ0NS4zOS43OS44NTYuNzlzLjg0My0uMzQ1Ljg1Ni0uNzl2LS41MjJjMC0xLjE3OC44MjQtMi42MiAxLjgzNi0zLjIwOXptMTEuMjIgMy4xMzhjLS40MDYtLjcwNS0uOTM2LTEuMjc1LTEuNTAxLTEuNjAxbC0yLjI2OC0xLjMyYS44Ni44NiAwIDAgMC0uMzc3LS4wOS44NjcuODY3IDAgMCAwLS44NjIuODcyYzAgLjMwNC4xNTMuNTgzLjQxMi43NDNsMS42NTQuOTY0YzEuMDIuNTkyIDEuODQ3IDIuMDM2IDEuODQ3IDMuMjIxVjE3LjdjMCAuNDc4LjM4Ni44NjguODU5Ljg2OGEuODYzLjg2MyAwIDAgMCAuODYtLjg2OHYtNS4xMWMuMDAyLS42NTctLjIyMi0xLjQwNi0uNjI0LTIuMTE0TTYuODc1IDE1Ljc3YS44NzQuODc0IDAgMCAwLS44NzUuODY3djMuMDFhLjg3Ljg3IDAgMCAwIC44NzUuODY1Ljg3Ljg3IDAgMCAwIC44NzUtLjg2NHYtMy4wMWEuODc0Ljg3NCAwIDAgMC0uODc1LS44NjkiLz4KICAgIDxwYXRoIGZpbGw9IiNmZmYiIGQ9Im0yMS4yMjUgMTAuODczLTMuNTY3LTIuMDk3Yy0uNDQxLS4yNi0xLjAzMi0uNC0xLjY2OC0uNHMtMS4yMjYuMTQzLTEuNjY3LjRsLS44MTQuNDc3YS44Ny44NyAwIDAgMC0uMzkuNzNjMCAuNDguMzgzLjg2OC44NTMuODY4YS44Ni44NiAwIDAgMCAuMzg2LS4wOTNsLjY4LS40Yy4yNjItLjE1NC42MS0uMjMxLjk1Ni0uMjMxLjM0NSAwIC42OTMuMDc3Ljk1NS4yM2wzLjI5OSAxLjkzOGMuNTI3LjMwNy45NTIgMS4wNjMuOTUyIDEuNjc4djQuODljMCAuNDc3LjM4Ljg2OC44NS44NjguMzE5IDAgLjYxLS4xODMuNzU2LS40NzRhLjkuOSAwIDAgMCAuMDkzLS4zOTR2LTUuMDQ3YzAtLjUxOS0uMTc2LTEuMTE0LS40OTItMS42NzUtLjMyMy0uNTU3LS43NDEtMS4wMDgtMS4xODItMS4yNjhtLTguODE1LjU4M2EuODYuODYgMCAwIDAtLjg0Ni0uODc0LjguOCAwIDAgMC0uMzg3LjA5NmwtLjQxMi4yNDNjLS40MzcuMjYtLjg1My43MTQtMS4xNjkgMS4yNzgtLjMxNi41NjMtLjQ4OCAxLjE2LS40ODggMS42ODF2OS4yNjFjMCAuMjM0LjA5LjQ1NS4yNDkuNjE4LjE2LjE2NC4zNy4yNTMuNTk0LjI1My40NjYgMCAuODQzLS4zOS44NDMtLjg3VjE0LjA0YzAtLjYxOC40MjUtMS4zNzcuOTQ5LTEuNjg3YTkgOSAwIDAgMCAuMjk3LS4xNzdjLjIzLS4xNi4zNy0uNDI5LjM3LS43MiIvPgogIDwvZz4KICA8ZGVmcz4KICAgIDxjbGlwUGF0aCBpZD0iYSI+CiAgICAgIDxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik02IDVoMjB2MjJINnoiLz4KICAgIDwvY2xpcFBhdGg+CiAgPC9kZWZzPgo8L3N2Zz4K">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Naming Liferay products · Proposal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=Source+Code+Pro:wght@300..700&display=swap">
+<style>
+/* Source Sans Pro: the copy installed on this Mac first, Google's only as a fallback */
+@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:300;font-display:swap;src:local("Source Sans Pro Light Italic"),local("SourceSansPro-LightItalic"),url(https://fonts.gstatic.com/s/sourcesanspro/v24/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZMkids18S0xR41.woff2) format("woff2")}
+@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:400;font-display:swap;src:local("Source Sans Pro Italic"),local("SourceSansPro-Italic"),url(https://fonts.gstatic.com/s/sourcesanspro/v24/6xK1dSBYKcSV-LCoeQqfX1RYOo3qPZ7nsDJB9cme.woff2) format("woff2")}
+@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:300;font-display:swap;src:local("Source Sans Pro Light"),local("SourceSansPro-Light"),url(https://fonts.gstatic.com/s/sourcesanspro/v24/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdu3cOWxw.woff2) format("woff2")}
+@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:400;font-display:swap;src:local("Source Sans Pro"),local("SourceSansPro-Regular"),url(https://fonts.gstatic.com/s/sourcesanspro/v24/6xK3dSBYKcSV-LCoeQqfX1RYOo3qOK7lujVj9w.woff2) format("woff2")}
+@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:600;font-display:swap;src:local("Source Sans Pro SemiBold"),local("SourceSansPro-SemiBold"),url(https://fonts.gstatic.com/s/sourcesanspro/v24/6xKydSBYKcSV-LCoeQqfX1RYOo3i54rwlxdu3cOWxw.woff2) format("woff2")}
+@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:700;font-display:swap;src:local("Source Sans Pro Bold"),local("SourceSansPro-Bold"),url(https://fonts.gstatic.com/s/sourcesanspro/v24/6xKydSBYKcSV-LCoeQqfX1RYOo3ig4vwlxdu3cOWxw.woff2) format("woff2")}
+/* ════════════════════════════════════════════════════════════
+   INTERNAL DECK — engine, type and motion from the DEVCON 2026
+   deck (ai-augmented-design.html). Neutral paper background;
+   colour only in the backdrops, all from Lexicon Foundations.
+   Type: Source Serif 4 for titles and numbers, Source Sans Pro
+   for everything else, Source Code Pro for literals.
+   ════════════════════════════════════════════════════════════ */
+:root{
+  /* Lexicon Vanilla tokens.css + the chart families in colors.html */
+  --lx-blue:#0B5FFF;      /* primary */
+  --lx-primary:#004AD7;   /* primary-d2: accent text, 6.4:1 on paper */
+  --lx-primary-l0:#5791FF; --lx-primary-l1:#80ACFF; --lx-primary-l2:#B3CDFF; --lx-primary-l3:#F0F5FF;
+  --lx-indigo:#4D5FFF; --lx-indigo-d3:#001AFF; --lx-indigo-d4:#0017E5; --lx-indigo-l4:#CCD1FF;
+  --lx-blue-l3:#97C5FF; --lx-blue-l4:#CCE3FF;
+  --lx-cyan-l2:#33BBFF; --lx-cyan-l4:#99DDFF;
+  --lx-teal-l1:#24A892; --lx-teal-l3:#6CE0CC;
+  --lx-purple:#9500FF; --lx-purple-l1:#BF66FF; --lx-purple-l4:#DFB3FF;
+  --lx-pink:#E50082; --lx-pink-l1:#FF4DB2; --lx-pink-l4:#FFB2DE;
+  --lx-orange-l1:#FF6200; --lx-orange-l3:#FFA166;
+  --lx-yellow:#FFBB00; --lx-yellow-l2:#FFD666;
+
+  /* neutral paper and ink (light-l1, dark-d1, secondary) */
+  --paper:#F7F8F9;
+  --ink:#1C1C24;          /* 16:1 on paper */
+  --ink-2:#6B6C7E;        /* 5.0:1 */
+  --ink-3:#A7A9BC;        /* decorative only */
+  --accent:var(--lx-primary);
+  --rule:rgba(28,28,36,.14);
+  --hairline:rgba(28,28,36,.09);
+  --code-bg:rgba(11,95,255,.07);
+  --focus-ring:0 0 0 2px var(--paper),0 0 0 4px var(--lx-blue);
+  --brand-grad:linear-gradient(100deg,var(--lx-indigo-d3),var(--lx-blue) 38%,var(--lx-purple) 72%,var(--lx-pink));
+
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='.33 .33 .33 0 0 .33 .33 .33 0 0 .33 .33 .33 0 0 0 0 0 0 1'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+
+  --font-sans:"Source Sans Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --font-serif:"Source Serif 4","Source Serif Pro",Georgia,serif;
+  --font-mono:"Source Code Pro",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --font-display:var(--font-serif);
+
+  --font-size-xs:clamp(12px,.98vw,18px);
+  --font-size-sm:clamp(14px,1.15vw,21px);
+  --font-size-base:clamp(16px,1.35vw,24px);
+  --spacing-2:clamp(4px,.30vw,6px);    --spacing-3:clamp(8px,.55vw,12px);
+  --spacing-4:clamp(12px,.80vw,17px);  --spacing-5:clamp(16px,1.10vw,23px);
+  --spacing-6:clamp(20px,1.35vw,28px); --spacing-7:clamp(24px,1.65vw,34px);
+  --rounded-md:6px;--rounded-full:9999px;
+
+  --dk-pad-x:clamp(32px,5.6vw,132px);
+  --dk-pad-y:clamp(36px,4.6vh,78px);
+  --dk-gap:clamp(20px,1.9vw,40px);
+  --dk-gap-lg:clamp(28px,3.2vw,64px);
+  --dk-measure:min(2040px,90vw);
+  --dk-chrome:clamp(60px,5.4vh,88px);
+  --dk-bw:max(1px,.075vw);
+
+  /* motion — the DEVCON motion pass */
+  --ease-page:cubic-bezier(.16,1,.3,1);
+  --ease:cubic-bezier(.22,1,.36,1);
+  --ease-out:cubic-bezier(.215,.61,.355,1);
+  --ease-butter:cubic-bezier(.19,1,.22,1);
+  --rise:clamp(12px,1vw,22px);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;overflow:hidden;background:var(--paper);color:var(--ink);
+  font-family:var(--font-sans);font-size:var(--font-size-base);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+::selection{background:var(--lx-blue);color:#fff}
+
+/* ── backdrops: neutral paper, colour bleeding in from the right, always moving ── */
+@property --sheen{syntax:'<percentage>';inherits:false;initial-value:0%}
+#dk-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:var(--paper)}
+.dk-bgl{position:absolute;inset:0;opacity:0;transform:scale(1.045);transition:opacity .9s ease,transform 2.2s var(--ease-page);overflow:hidden}
+.dk-bgl.is-on{opacity:1;transform:none}
+.dk-bgl > *{position:absolute;inset:0}
+/* SVG filters take a moment the first time: keep the wave painted at 0.1% so it is ready */
+.bgl-wave:not(.is-on){opacity:.001}
+.dk-bgl > .blob{inset:auto;border-radius:50%;will-change:transform}
+.bg-grainl{inset:-12% !important;background-image:var(--grain);background-size:220px 220px;animation:grain 1.1s steps(1) infinite}
+@keyframes grain{0%{transform:translate(0,0)}17%{transform:translate(-3%,2%)}33%{transform:translate(2%,-4%)}50%{transform:translate(-4%,-1%)}67%{transform:translate(3%,3%)}83%{transform:translate(-1%,4%)}}
+.bgl-grain,.bgl-wave{-webkit-mask-image:linear-gradient(90deg,transparent 30%,rgba(0,0,0,.35) 46%,#000 72%);mask-image:linear-gradient(90deg,transparent 30%,rgba(0,0,0,.35) 46%,#000 72%)}
+
+/* neutral: paper with three pastel Lexicon blobs drifting in the corners */
+.bgl-neutral .blob{filter:blur(clamp(40px,5vw,110px));opacity:.62}
+.bgl-neutral .b1{width:48vw;height:48vw;left:-16vw;top:-26vw;background:radial-gradient(circle,var(--lx-primary-l2),rgba(179,205,255,0) 68%);animation:d1 26s ease-in-out infinite alternate}
+.bgl-neutral .b2{width:40vw;height:40vw;right:-14vw;bottom:-22vw;background:radial-gradient(circle,var(--lx-pink-l4),rgba(255,178,222,0) 68%);animation:d2 31s ease-in-out infinite alternate}
+.bgl-neutral .b3{width:30vw;height:30vw;right:-10vw;top:-8vw;background:radial-gradient(circle,var(--lx-cyan-l4),rgba(153,221,255,0) 68%);animation:d3 37s ease-in-out infinite alternate}
+.bgl-neutral .bg-grainl{opacity:.13;mix-blend-mode:multiply}
+@keyframes d1{to{transform:translate(9vw,7vh) scale(1.18)}}
+@keyframes d2{to{transform:translate(-10vw,-6vh) scale(1.22)}}
+@keyframes d3{to{transform:translate(-6vw,12vh) scale(.88)}}
+
+/* grain: primary-l3 to primary to indigo, sprayed, with cyan and purple light moving through */
+.bgl-grain .bg-field{background:linear-gradient(90deg,var(--lx-primary-l3) 0%,var(--lx-primary-l2) 24%,var(--lx-primary-l0) 44%,var(--lx-blue) 62%,var(--lx-indigo-d3) 82%,var(--lx-indigo-d4) 100%)}
+.bgl-grain .blob{filter:blur(clamp(30px,4vw,90px))}
+.bgl-grain .g1{width:44vw;height:44vw;right:-6vw;top:-18vw;background:radial-gradient(circle,var(--lx-cyan-l2),rgba(51,187,255,0) 66%);opacity:.85;animation:g1 19s ease-in-out infinite alternate}
+.bgl-grain .g2{width:36vw;height:36vw;right:-12vw;bottom:-14vw;background:radial-gradient(circle,var(--lx-purple),rgba(149,0,255,0) 66%);opacity:.7;animation:g2 23s ease-in-out infinite alternate}
+.bgl-grain .g3{width:30vw;height:30vw;right:18vw;top:30vh;background:radial-gradient(circle,var(--lx-indigo-d4),rgba(0,23,229,0) 66%);opacity:.6;animation:g3 27s ease-in-out infinite alternate}
+.bgl-grain .bg-grainl{opacity:.95;mix-blend-mode:overlay}
+@keyframes g1{to{transform:translate(-12vw,22vh) scale(1.2)}}
+@keyframes g2{to{transform:translate(-14vw,-20vh) scale(.85)}}
+@keyframes g3{to{transform:translate(10vw,-18vh) scale(1.3)}}
+
+/* wave: liquid bands, mostly Lexicon blues with purple and pink, halftoned; two layers drifting against each other */
+.bgl-wave .bg-svg{inset:-18% !important;width:136%;height:136%;will-change:transform}
+.bgl-wave .w1{animation:w1 34s ease-in-out infinite alternate}
+.bgl-wave .w2{mix-blend-mode:soft-light;opacity:.8;animation:w2 41s ease-in-out infinite alternate}
+@keyframes w1{from{transform:translate(-3%,-2%) rotate(-3deg) scale(1)}to{transform:translate(4%,3%) rotate(4deg) scale(1.08)}}
+@keyframes w2{from{transform:translate(4%,2%) rotate(5deg) scale(1.06)}to{transform:translate(-4%,-3%) rotate(-4deg) scale(1)}}
+.bgl-wave .bg-dots{background:radial-gradient(circle,rgba(28,28,36,.6) 0 .75px,transparent 1.15px) 0 0/4px 4px;opacity:.6;mix-blend-mode:overlay}
+.bgl-wave .bg-grainl{opacity:.3;mix-blend-mode:overlay}
+
+/* ── slides ─────────────────────────────────────────────── */
+.dk-slide{position:absolute;inset:0;z-index:1;display:none;
+  padding:var(--dk-pad-y) var(--dk-pad-x) calc(var(--dk-chrome) + var(--spacing-4));overflow:auto;scrollbar-width:none}
+.dk-slide::-webkit-scrollbar{display:none}
+.dk-slide.is-active{display:flex}
+.dk-inner{width:100%;max-width:var(--dk-measure);margin:auto;display:flex;flex-direction:column;gap:var(--dk-gap-lg)}
+.dk-head{display:flex;flex-direction:column;gap:var(--spacing-5)}
+.dk-slide p{margin:0}
+.dk-slide strong{color:var(--ink);font-weight:600}
+/* slides on a coloured backdrop keep their text on the paper side */
+.dk-slide.is-left .dk-inner{margin:auto auto auto 0;max-width:min(1180px,54vw)}
+
+/* reveal — the DEVCON motion pass: whole blocks, short rise, expo-out, 120ms stagger */
+.r,.f{opacity:0;transform:translateY(var(--rise))}
+.dk-slide.is-in .r{opacity:1;transform:none;
+  transition:opacity 1.1s var(--ease-butter),transform 1.3s var(--ease-butter);transition-delay:calc(var(--i,0) * 120ms + 150ms)}
+.dk-slide .f.is-shown{opacity:1;transform:none;transition:opacity 1s var(--ease-butter),transform 1.2s var(--ease-butter)}
+.dk-slide.is-out .r,.dk-slide.is-out .f{opacity:0;transform:translateY(calc(var(--rise) * -.4));transition:opacity .5s ease,transform .6s ease;transition-delay:0s}
+.dk-title.r{transform:translateY(calc(var(--rise) * 1.2))}
+.dk-slide.is-in .dk-title.r{transition:opacity 1.3s var(--ease-butter),transform 1.6s var(--ease-butter);transition-delay:calc(var(--i,0) * 120ms + 150ms)}
+
+/* ── type ───────────────────────────────────────────────── */
+.dk-eyebrow{font-size:clamp(15px,1.2vw,24px);font-weight:600;letter-spacing:.005em;color:var(--accent)}
+.dk-title{font-family:var(--font-display);font-size:clamp(38px,4.6vw,108px);font-weight:400;line-height:1.03;letter-spacing:-.022em;
+  margin:0;color:var(--ink);text-wrap:balance;font-optical-sizing:auto}
+.dk-title--hero{font-size:clamp(56px,8.2vw,184px);line-height:.95;letter-spacing:-.03em}
+.dk-title--mid{font-size:clamp(34px,3.6vw,86px)}
+.dk-sub{font-size:clamp(22px,2.1vw,48px);font-weight:300;line-height:1.2;color:var(--ink);text-wrap:balance}
+.dk-lead{font-size:clamp(18px,1.6vw,32px);line-height:1.45;color:var(--ink-2);max-width:48ch;text-wrap:pretty}
+.dk-meta{font-size:var(--font-size-sm);color:var(--ink-2)}
+code{font-family:var(--font-mono);font-size:.86em;background:var(--code-bg);border-radius:var(--rounded-md);padding:1px 6px;color:var(--ink);white-space:nowrap}
+.dk-link{font-size:var(--font-size-xs);letter-spacing:.04em;color:var(--ink-2);text-decoration:none;font-weight:600;
+  background-image:linear-gradient(var(--lx-primary-l2),var(--lx-primary-l2));background-repeat:no-repeat;background-position:0 55%;background-size:0% 88%;
+  border-radius:3px;padding:.05em .2em;margin:0 -.2em;transition:background-size .6s var(--ease-butter),color .3s ease}
+.dk-link:hover,.dk-link:focus-visible{color:var(--ink);background-size:100% 88%;outline:none}
+.dk-links{display:flex;flex-wrap:wrap;gap:var(--spacing-4) var(--spacing-7)}
+
+@keyframes sheen{from{background-position:0% 50%}to{background-position:100% 50%}}
+
+/* highlighter — plays on entry */
+.hl{position:relative;display:inline-block;padding-inline:.06em;margin-inline:-.06em;overflow:visible}
+.hl::after{content:attr(data-text);position:absolute;inset:0;padding-inline:.06em;background:linear-gradient(90deg,var(--lx-blue),var(--lx-purple));color:#fff;pointer-events:none;
+  clip-path:inset(0 100% 0 0);transition:clip-path 1.1s var(--ease-butter)}
+.dk-slide.is-in .hl::after{clip-path:inset(0 0 0 0);transition-delay:var(--hl-delay,.9s)}
+.dk-slide.is-out .hl::after{clip-path:inset(0 0 0 100%);transition-duration:.26s;transition-delay:0s}
+
+/* marker pen, Lexicon yellow */
+.mk{--mc:var(--lx-yellow-l2);background-image:linear-gradient(var(--mc),var(--mc));background-repeat:no-repeat;background-position:0 60%;background-size:0% 78%;
+  border-radius:3px;padding:0 .08em;margin:0 -.08em;box-decoration-break:clone;-webkit-box-decoration-break:clone;transition:background-size .7s var(--ease)}
+.mk.is-on{background-size:100% 78%}
+
+/* hand-drawn loop */
+.lp-word{position:relative;display:inline-block}
+.loop{position:absolute;left:-10%;top:-38%;width:120%;height:176%;pointer-events:none;overflow:visible}
+.loop use{fill:none;stroke:var(--lx-pink);stroke-width:2.6;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;vector-effect:non-scaling-stroke;transition:stroke-dashoffset .9s var(--ease)}
+.is-looped .loop use{stroke-dashoffset:0}
+
+/* underline = the whole word washed in primary-l2, drawn left to right after the title lands */
+.ul{background-image:linear-gradient(var(--lx-primary-l2),var(--lx-primary-l2));background-repeat:no-repeat;background-position:0 55%;background-size:0% 88%;
+  border-radius:4px;padding:0 .08em;margin:0 -.08em;box-decoration-break:clone;-webkit-box-decoration-break:clone;
+  transition:background-size 1.1s var(--ease-butter)}
+.dk-slide.is-in .ul{background-size:100% 88%;transition-delay:1.5s}
+.dk-slide.is-out .ul{background-size:0% 88%;transition-duration:.4s;transition-delay:0s}
+
+/* tags: plain text with a middle dot, no pills (DEVCON .tag after its type pass) */
+.tag{font-family:var(--font-sans);font-size:clamp(13px,.95vw,19px);font-weight:600;color:var(--ink-2);white-space:nowrap}
+.tag+.tag::before{content:"·";margin:0 .55em;color:var(--ink-3)}
+.tags{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:0}
+/* the row that matters: serif title, serif italic tag in the accent (DEVCON .td-us) */
+.row.is-on .tag,.tag--on{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:clamp(22px,2vw,46px);letter-spacing:-.01em;color:var(--accent)}
+
+/* rows — edge-to-edge hairlines, no rule above the first or below the last */
+.rows{display:flex;flex-direction:column}
+.row{display:grid;align-items:center;border-bottom:var(--dk-bw) solid var(--rule)}
+.rows > .row:last-child{border-bottom:0}
+
+/* ════════ layouts ════════ */
+/* cover */
+.cv .dk-inner{gap:var(--dk-gap)}
+.cv .dk-sub{max-width:22ch;margin-top:clamp(10px,1.4vh,24px)}
+.cv-meta{margin-top:clamp(16px,3vh,48px)}
+
+/* agenda rows: index · text · tags */
+.ag .row{grid-template-columns:clamp(64px,5.4vw,124px) 1fr auto;column-gap:var(--dk-gap);padding:clamp(12px,1.7vh,26px) 0}
+.ag-i{font-size:var(--font-size-sm);color:var(--ink-2);font-variant-numeric:tabular-nums}
+.ag .row.is-on .ag-i{color:var(--ink)}
+.ag .row.is-on .ag-n{font-family:var(--font-display);font-size:clamp(24px,2.3vw,52px);letter-spacing:-.015em}
+.ag .row.is-on{border-bottom-color:var(--lx-blue)}
+.ag-n{font-size:clamp(19px,1.7vw,38px);line-height:1.2;color:var(--ink)}
+.ag-n small{display:block;font-family:var(--font-sans);font-size:.6em;color:var(--ink-2);margin-top:3px;letter-spacing:.01em}
+.ag .row.is-on .ag-n small{font-size:.45em}
+.ag-call{grid-template-columns:1fr !important;padding-top:clamp(18px,2.4vh,36px) !important}
+.ag-call p{font-family:var(--font-display);font-size:clamp(24px,2.3vw,52px);line-height:1.2;letter-spacing:-.015em;max-width:30ch}
+
+/* figures: big serif numerals, label beside them */
+.fg .row{grid-template-columns:clamp(220px,17vw,420px) 1fr;align-items:end;column-gap:var(--dk-gap);padding:clamp(8px,1.2vh,18px) 0 clamp(12px,1.6vh,24px)}
+.fg-n{font-family:var(--font-display);font-weight:300;background:var(--brand-grad);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:sheen 9s ease-in-out infinite alternate;font-size:clamp(88px,9.6vw,232px);line-height:.9;letter-spacing:-.035em;color:var(--ink)}
+.fg-lab{display:flex;flex-direction:column;gap:4px;padding-bottom:.55em}
+.fg-t{font-size:clamp(24px,2.3vw,54px);line-height:1.1}
+.fg-d{font-size:clamp(16px,1.3vw,26px);color:var(--ink-2)}
+.dk-slide .fg .row.r{transform:translateX(-5vw);opacity:0}
+.dk-slide.is-in .fg .row.r{transform:none;opacity:1;transition:transform 1.2s var(--ease-out),opacity .9s var(--ease-out);transition-delay:calc(var(--i,0) * 110ms + 100ms)}
+
+/* names: one product, several names */
+.nm .row{grid-template-columns:clamp(110px,9vw,210px) 1fr;column-gap:var(--dk-gap);padding:clamp(14px,2vh,30px) 0;align-items:baseline}
+.nm-k{font-size:clamp(14px,1.05vw,21px);font-weight:600;color:var(--ink-2)}
+.nm-v{display:flex;flex-wrap:wrap;align-items:baseline;gap:.15em 0}
+.nm-v > span{font-family:var(--font-display);font-size:clamp(24px,2.4vw,56px);letter-spacing:-.015em;line-height:1.15;color:var(--ink)}
+.nm-v > span small{font-family:var(--font-sans);font-size:clamp(12px,.85vw,17px);color:var(--ink-2);margin-left:.4em;letter-spacing:.01em;white-space:nowrap}
+.nm-v > span+span::before{content:"/";font-family:var(--font-sans);font-weight:300;margin:0 .45em;color:var(--ink-3)}
+
+/* word + items (three columns of short points) */
+.wi .row{grid-template-columns:minmax(0,.9fr) minmax(0,2fr);column-gap:var(--dk-gap-lg);padding:clamp(16px,2.4vh,36px) 0;align-items:start}
+.wi-w{display:flex;align-items:center;gap:.35em;font-size:clamp(30px,3vw,72px);font-weight:600;letter-spacing:-.03em;line-height:1;font-family:var(--font-display);font-weight:400}
+.wi-w i{width:.3em;height:.3em;border-radius:50%;background:var(--c);flex:none}
+.wi-items{display:grid;grid-template-columns:repeat(var(--n,3),1fr);gap:var(--dk-gap)}
+.wi-items p{font-size:clamp(17px,1.4vw,30px);line-height:1.3;color:var(--ink)}
+.wi-items p small{display:block;font-size:.72em;color:var(--ink-2);margin-top:4px}
+.wi--verbs .row{padding:clamp(8px,1.2vh,18px) 0;align-items:center}
+.wi--verbs .wi-w{font-size:clamp(24px,2.1vw,48px)}
+.wi--verbs .wi-items p{display:flex;align-items:center}
+.wi--verbs .wi-items p:not(:has(.pi)){padding-left:1.5em}
+.wi--verbs .dk-links{margin-top:clamp(16px,2.6vh,40px)}
+.wi-foot{font-size:clamp(17px,1.4vw,30px);color:var(--ink-2);max-width:60ch}
+
+/* questions: big serif index, question, detail */
+.qs .row{grid-template-columns:clamp(70px,6vw,150px) minmax(0,1fr) minmax(0,1.25fr);column-gap:var(--dk-gap);padding:clamp(16px,2.6vh,40px) 0;align-items:baseline}
+.qs .row:nth-child(2) .qs-i{color:var(--lx-purple)}
+.qs .row:nth-child(3) .qs-i{color:var(--lx-pink)}
+.qs-i{font-family:var(--font-display);font-weight:300;font-size:clamp(48px,5vw,120px);line-height:.85;color:var(--lx-blue)}
+.qs-q{font-family:var(--font-display);font-size:clamp(28px,2.8vw,66px);letter-spacing:-.02em;line-height:1.05}
+.qs-d{font-size:clamp(17px,1.4vw,30px);line-height:1.35;color:var(--ink-2)}
+
+/* table rows: label · text · pattern */
+.tb .row{grid-template-columns:minmax(0,.9fr) minmax(0,1.6fr) minmax(0,1fr);column-gap:var(--dk-gap);padding:clamp(12px,1.8vh,26px) 0;align-items:baseline}
+.tb-k:has(.pi),.nm-k:has(.pi){display:flex;align-items:flex-start}
+.pi{width:1.05em;height:1.05em;flex:none;margin-right:.45em;margin-top:.02em}
+.pi-pad{padding-left:1.5em}
+.tb-k{font-family:var(--font-display);font-size:clamp(22px,2vw,46px);letter-spacing:-.015em;line-height:1.1}
+.tb-k a{text-decoration:none;background-image:linear-gradient(var(--lx-primary-l2),var(--lx-primary-l2));background-repeat:no-repeat;background-position:0 58%;background-size:0% 80%;
+  border-radius:4px;padding:0 .08em;margin:0 -.08em;transition:background-size .6s var(--ease-butter)}
+.tb-k a:hover,.tb-k a:focus-visible{background-size:100% 80%;outline:none}
+.nm-k:has(.pi){align-items:center}
+.nm-k .pi{width:1.9em;height:1.9em;margin-right:.6em;margin-top:0}
+/* names: old → proposed. On →, old names leave like a slide exit (up and out) and the new
+   names, icons and levels enter like any .r block (rise and fade, 120 ms stagger). */
+.mv .row{grid-template-columns:1.15em minmax(0,1fr) auto;column-gap:clamp(12px,1.1vw,24px);padding:clamp(8px,1.15vh,17px) 0;font-size:clamp(22px,1.9vw,44px)}
+.mv-x{display:grid;justify-items:start}
+.mv-x > span{grid-area:1/1;font-family:var(--font-display);line-height:1.1;letter-spacing:-.015em;white-space:nowrap;color:var(--ink)}
+.mv-i{display:flex}.mv-i .pi{width:1.05em;height:1.05em;margin:0}
+.mv-a{transition:opacity .5s ease calc(var(--k)*60ms),transform .6s ease calc(var(--k)*60ms)}
+.mv-b,.mv-i,.mv-p{opacity:0;transform:translateY(var(--rise));transition:opacity 1.1s var(--ease-butter) calc(var(--k)*120ms + 350ms),transform 1.3s var(--ease-butter) calc(var(--k)*120ms + 350ms)}
+.mv-p{font-family:var(--font-sans);font-size:.5em;font-weight:600;color:var(--ink)}
+.mv-h{font-size:clamp(22px,1.9vw,44px)}
+.mv-h .mv-x > span,.mv-h .mv-p{font-family:var(--font-sans);font-size:clamp(12px,.85vw,17px);font-weight:600;letter-spacing:0;color:var(--ink-3)}
+.mv-h .mv-p{opacity:1;transform:none}
+.mv.is-turned .mv-a{opacity:0;transform:translateY(calc(var(--rise) * -.4))}
+.mv.is-turned .mv-b,.mv.is-turned .mv-i,.mv.is-turned .mv-p{opacity:1;transform:none}
+/* where the name appears: context × level */
+.px .row{grid-template-columns:minmax(0,.85fr) minmax(0,1fr) minmax(0,1.35fr);column-gap:var(--dk-gap);padding:clamp(14px,2.2vh,32px) 0;align-items:start}
+.px-h{padding:0 0 clamp(8px,1vh,14px) !important}
+.px-h span{font-size:clamp(12px,.85vw,17px);font-weight:600;color:var(--ink-3)}
+.px-k{font-size:clamp(17px,1.35vw,28px);font-weight:600;color:var(--ink);line-height:1.2}
+.px-k small{display:block;font-size:.72em;font-weight:400;color:var(--ink-2);margin-top:4px}
+.px-n{display:flex;align-items:center;flex-wrap:wrap;gap:0 .45em;font-family:var(--font-display);font-size:clamp(20px,1.75vw,40px);line-height:1.15;letter-spacing:-.015em;color:var(--ink)}
+.px-n .pi{width:1em;height:1em;margin:0}
+.px-n small{flex-basis:100%;font-family:var(--font-sans);font-size:.5em;letter-spacing:0;color:var(--ink-2);margin-top:.5em}
+.px-span{grid-column:2 / -1;font-size:clamp(18px,1.5vw,34px);color:var(--ink-2)}
+.vb{display:inline-flex;align-items:center;gap:.3em;font-family:var(--font-sans);font-size:.5em;font-weight:600;letter-spacing:.01em;color:var(--lx-primary);background:var(--lx-primary-l3);box-shadow:inset 0 0 0 1px var(--lx-primary-l2);border-radius:6px;padding:.35em .65em .35em .5em;line-height:1}
+.vb-c{width:1.05em;height:1.05em}
+.tb--mq .tb-k{font-size:clamp(20px,1.7vw,40px)}
+.tb--mq .row{grid-template-columns:minmax(0,.75fr) minmax(0,1.35fr) minmax(0,1.1fr)}
+.tb--mq .tb-p{font-weight:400;color:var(--ink-2);font-size:clamp(14px,1.05vw,22px)}
+.tb-v{font-size:clamp(15px,1.2vw,25px);color:var(--ink-2);line-height:1.35}
+.tb-p{font-size:clamp(15px,1.2vw,25px);color:var(--ink);font-weight:600}
+.tb-head{font-size:clamp(12px,.85vw,17px) !important;font-weight:600;color:var(--ink-3) !important;font-family:var(--font-sans) !important}
+
+/* close */
+.cl .dk-inner{gap:var(--dk-gap)}
+.cl .rows{max-width:52ch}
+.cl .row{grid-template-columns:clamp(40px,3vw,70px) 1fr;padding:clamp(10px,1.4vh,20px) 0;align-items:baseline}
+.cl-i{font-family:var(--font-display);color:var(--lx-blue);font-size:clamp(18px,1.5vw,34px)}
+.cl-t{font-size:clamp(18px,1.6vw,34px)}
+
+/* ── footer label ───────────────────────────────────────── */
+#dk-brand{position:fixed;left:var(--dk-pad-x);bottom:0;height:var(--dk-chrome);display:flex;align-items:center;z-index:31;pointer-events:none;
+  font-size:clamp(12px,.9vw,17px);font-weight:600;letter-spacing:.01em;color:var(--ink-2);transition:opacity .45s ease}
+#dk-brand b{color:var(--ink);font-weight:700;margin-right:.5em}
+html.no-strip #dk-brand{opacity:0}
+
+/* ── chrome ─────────────────────────────────────────────── */
+#dk-rail{position:fixed;left:0;bottom:0;height:3px;width:0;z-index:33;background:var(--lx-blue);transition:width .45s var(--ease-page)}
+#dk-foot{position:fixed;left:0;right:0;bottom:0;z-index:32;min-height:var(--dk-chrome);display:flex;align-items:center;gap:var(--spacing-6);
+  padding:var(--spacing-4) var(--dk-pad-x) calc(var(--spacing-4) + 8px);font-size:var(--font-size-xs);color:var(--ink-2);
+  opacity:.32;transition:opacity .45s ease;pointer-events:none}
+#dk-foot > *{pointer-events:auto}
+#dk-foot:hover,#dk-foot:focus-within{opacity:1}
+#dk-foot.is-idle{opacity:0}
+#dk-foot.is-idle:hover,#dk-foot.is-idle:focus-within{opacity:1}
+#dk-foot .sp{flex:1;pointer-events:none}
+#dk-num{font-variant-numeric:tabular-nums;color:var(--ink-2);flex:none;letter-spacing:.06em}
+.dk-nav{display:flex;align-items:center;gap:var(--spacing-2)}
+.dk-nav button{font:inherit;background:none;border:0;padding:var(--spacing-2) var(--spacing-3);cursor:pointer;color:var(--ink-2);border-radius:var(--rounded-full);transition:background .2s ease,color .2s ease}
+.dk-nav button:hover{color:var(--ink)}
+.dk-nav button[disabled]{opacity:.28;cursor:default;background:none}
+.dk-nav button:focus-visible,.txt:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.txt{font:inherit;cursor:pointer;background:none;border:0;padding:var(--spacing-2) var(--spacing-3);color:var(--ink-2);position:relative;border-radius:var(--rounded-md);transition:color .2s ease}
+.txt:hover,.txt.is-on{color:var(--ink)}
+.txt.is-on::after{content:"";position:absolute;left:50%;bottom:-2px;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--lx-blue)}
+.dk-sep{color:var(--ink-3)}
+.dk-fs{display:inline-flex;align-items:center;gap:.45em}
+.dk-fs.is-on::after{display:none}
+html.is-fs #dk-foot,html.is-fs #dk-foot.is-idle{opacity:0}
+html.is-fs #dk-foot:hover,html.is-fs #dk-foot:has(:focus-visible){opacity:1}
+#dk-notes{position:fixed;left:0;right:0;bottom:0;z-index:30;max-height:44vh;overflow:auto;
+  padding:var(--spacing-7) var(--dk-pad-x) calc(var(--dk-chrome) + var(--spacing-5));
+  background:#FFFFFF;border-top:1px solid var(--hairline);box-shadow:0 -20px 50px -30px rgba(28,28,36,.25);
+  transform:translateY(101%);transition:transform .4s var(--ease-page);font-size:var(--font-size-base);line-height:1.55;color:var(--ink)}
+#dk-notes.is-open{transform:none}
+#dk-notes h4{margin:0 0 var(--spacing-4);font-size:var(--font-size-xs);letter-spacing:.005em;color:var(--accent);font-weight:600}
+#dk-notes ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:var(--spacing-3);max-width:110ch}
+#dk-notes li{color:var(--ink-2)}
+#dk-notes li strong{color:var(--ink);font-weight:600}
+.dk-timing{color:var(--ink-2);margin-left:.8em;letter-spacing:.06em;font-weight:400}
+
+@media (max-width:1000px){
+  .wi .row,.qs .row,.tb .row{grid-template-columns:1fr}.wi-items{grid-template-columns:1fr}
+  .dk-slide.is-left .dk-inner{max-width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  .ul{background-size:100% 88%!important}
+  .r,.f,.dk-slide.is-out .r,.dk-slide.is-out .f,.dk-slide .fg .row.r{transform:none!important}
+  *{transition-duration:.01ms!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<div id="dk-bg">
+  <div class="dk-bgl bgl-neutral" data-name="neutral"><i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i><div class="bg-grainl"></div></div>
+  <div class="dk-bgl bgl-grain" data-name="grain"><div class="bg-field"></div><i class="blob g1"></i><i class="blob g2"></i><i class="blob g3"></i><div class="bg-grainl"></div></div>
+  <div class="dk-bgl bgl-wave" data-name="wave">
+    <svg class="bg-svg w1" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="wv" x1="0" y1="0" x2=".42" y2=".34" spreadMethod="reflect"><stop offset="0" stop-color="#CCE3FF"/><stop offset="0.18" stop-color="#66ABFF"/><stop offset="0.36" stop-color="#0B5FFF"/><stop offset="0.52" stop-color="#001AFF"/><stop offset="0.68" stop-color="#9500FF"/><stop offset="0.84" stop-color="#FF4DB2"/><stop offset="1" stop-color="#99DDFF"/></linearGradient>
+        <filter id="wvf" x="-20%" y="-20%" width="140%" height="140%">
+          <feTurbulence type="fractalNoise" baseFrequency=".0021 .0032" numOctaves="2" seed="11"/>
+          <feDisplacementMap in="SourceGraphic" scale="460" xChannelSelector="R" yChannelSelector="G"/>
+          <feGaussianBlur stdDeviation="7"/>
+        </filter>
+      </defs>
+      <rect x="-300" y="-300" width="2200" height="1600" fill="url(#wv)" filter="url(#wvf)"/>
+    </svg>
+    <svg class="bg-svg w2" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="wv2" x1="0" y1="0" x2=".42" y2=".34" spreadMethod="reflect"><stop offset="0" stop-color="#6CE0CC"/><stop offset="0.3" stop-color="#0B5FFF"/><stop offset="0.6" stop-color="#E50082"/><stop offset="1" stop-color="#F0F5FF"/></linearGradient>
+        <filter id="wvf2" x="-20%" y="-20%" width="140%" height="140%">
+          <feTurbulence type="fractalNoise" baseFrequency=".0021 .0032" numOctaves="2" seed="23"/>
+          <feDisplacementMap in="SourceGraphic" scale="460" xChannelSelector="R" yChannelSelector="G"/>
+          <feGaussianBlur stdDeviation="7"/>
+        </filter>
+      </defs>
+      <rect x="-300" y="-300" width="2200" height="1600" fill="url(#wv2)" filter="url(#wvf2)"/>
+    </svg>
+    <div class="bg-dots"></div><div class="bg-grainl"></div>
+  </div>
+</div>
+<div id="dk-rail"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs><path id="loop-d" pathLength="1" d="M118,9 C168,10 196,28 194,50 C192,76 150,92 100,92 C48,92 5,78 5,50 C5,24 44,7 104,8 C132,8 152,12 166,17"/></defs>
+</svg>
+
+<!-- ═════════ 01 · cover ═════════ -->
+<section class="dk-slide cv is-left is-active" data-bg="grain" data-notes="cover" data-strip="off">
+  <div class="dk-inner">
+    <p class="dk-eyebrow r">Naming proposal · LPD-108523</p>
+    <h1 class="dk-title dk-title--hero r">Naming Liferay products</h1>
+    <p class="dk-sub r">One rule per level: short names inside the product, “Liferay” outside it</p>
+    <p class="dk-meta cv-meta r">October 2026 · Platform Experience Design</p>
+  </div>
+</section>
+
+<!-- ═════════ 02 · the ask ═════════ -->
+<section class="dk-slide ag" data-bg="neutral" data-notes="ask">
+  <div class="dk-inner">
+    <div class="dk-head">
+      <p class="dk-eyebrow r">Why we are here</p>
+      <h2 class="dk-title dk-title--mid r">We want to agree on one naming rule for every Liferay product.</h2>
+    </div>
+    <div class="rows r">
+      <div class="row is-on"><span class="ag-i">01</span><span class="ag-n">Approve the rule<small>Short names inside the product, “Liferay” in front only outside it</small></span><span class="tags"><span class="tag">Decision today</span></span></div>
+      <div class="row"><span class="ag-i">02</span><span class="ag-n">Name an owner in Marketing<small>To review the final names and the external use of the prefix</small></span><span class="tags"><span class="tag">Owner</span></span></div>
+      <div class="row"><span class="ag-i">03</span><span class="ag-n">Naming only<small>Global Menu, navigation and UI changes are a separate workstream</small></span><span class="tags"><span class="tag">Out of scope</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 03 · the problem ═════════ -->
+<section class="dk-slide nm" data-bg="neutral" data-notes="problem">
+  <div class="dk-inner">
+    <div class="dk-head">
+      <p class="dk-eyebrow r">The problem</p>
+      <h2 class="dk-title dk-title--mid r" style="--hl-delay:1.5s">Today, one product has <span class="hl" data-text="several names">several names</span>.</h2>
+    </div>
+    <div class="rows r">
+      <div class="row"><span class="nm-k"><svg class="pi" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 243 243"><path fill="#B3CDFF" d="m145.253 24.209 72.627 72.626v101.678c0 10.696-10.839 19.367-24.209 19.367H60.522c-13.37 0-24.209-8.671-24.209-19.367V43.576c0-10.696 10.839-19.367 24.21-19.367h84.73Z"/><path fill="#80ACFF" d="M242.089 193.671c0 26.74-21.678 48.418-48.418 48.418s-48.418-21.678-48.418-48.418 21.678-48.418 48.418-48.418 48.418 21.678 48.418 48.418ZM.841 73.339 35.327 4.35c2.9-5.801 11.177-5.801 14.078 0L83.89 73.34c2.616 5.234-1.189 11.392-7.039 11.392H7.88c-5.85 0-9.655-6.158-7.039-11.392Z"/><path fill="#004AD7" d="M145.253 72.627V24.209l72.627 72.626h-48.418c-13.37 0-24.209-10.838-24.209-24.208Z"/><path fill="#0B5FFF" d="M193.671 145.253a48.18 48.18 0 0 1 24.209 6.49V197.3c0 11.365-10.839 20.58-24.209 20.58h-41.928a48.18 48.18 0 0 1-6.49-24.209c0-26.74 21.678-48.418 48.418-48.418ZM83.89 73.339c2.616 5.234-1.189 11.392-7.039 11.392H36.313V44.789c0-11.031 10.213-20.014 23.039-20.533L83.89 73.34Z"/><path fill="#5791FF" d="M60.522 127.097c0-10.028 8.13-18.157 18.157-18.157h48.418c10.027 0 18.156 8.129 18.156 18.157 0 10.027-8.129 18.156-18.156 18.156H78.679c-10.028 0-18.157-8.129-18.157-18.156Z"/><path fill="#0B5FFF" d="M60.522 175.514c0-10.027 8.13-18.156 18.157-18.156h24.209c10.027 0 18.156 8.129 18.156 18.156 0 10.028-8.129 18.157-18.156 18.157h-24.21c-10.027 0-18.156-8.129-18.156-18.157Z"/></svg>CMS</span><span class="nm-v"><span>Content Management System<small>Brand Architecture</small></span><span>Liferay CMS<small>CMS Home</small></span><span>CMS<small>Global Menu</small></span></span></div>
+      <div class="row"><span class="nm-k"><svg class="pi" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 243 243"><path fill="#B3CDFF" fill-rule="evenodd" d="M89.529 107.726a18.266 18.266 0 0 1 18.381 11.926l7.855 21.412a18.229 18.229 0 0 1-1.83 16.211l-49.728 76.504c-5.492 8.45-16.802 10.852-25.26 5.364L8.317 219.27c-8.458-5.487-10.862-16.787-5.369-25.237l49.728-76.504a18.264 18.264 0 0 1 14.079-8.264l22.774-1.539Zm-1.27 22.055c-6.344-4.115-14.826-2.314-18.945 4.024-4.12 6.337-2.317 14.812 4.027 18.928 6.343 4.115 14.825 2.313 18.945-4.024 4.12-6.337 2.317-14.812-4.027-18.928Z" clip-rule="evenodd"/><path fill="#80ACFF" d="M100.709 110.627a18.237 18.237 0 0 1 7.201 9.025l7.855 21.412a18.229 18.229 0 0 1-1.83 16.211l-49.728 76.504c-5.492 8.45-16.802 10.852-25.26 5.364l-15.316-9.934 24.855-38.238 24.855-38.238c6.343 4.115 14.825 2.313 18.945-4.024 4.12-6.337 2.317-14.812-4.027-18.928l12.45-19.154Z"/><path fill="#0B5FFF" d="M58.643 168.869c2.412-3.712 8.129-.003 5.716 3.709l-2.075 3.191c2.065 2.104 3.429 4.736 3.87 7.533.634 4.146-6.045 5.472-6.754 1.086-4.07-11.601-19.485-6.256-9.006 3.551l.027.017c11.9 8.856 6.642 26.642-10.345 21.98l-1.882 2.896c-2.489 3.828-8.193.101-5.717-3.709l1.877-2.887c-2.082-2.115-4.9-6.123-5.334-8.929-.62-4.072 6.096-5.413 6.76-1.056 3.697 12.29 23.932 9.307 8.71-4.763-12.057-11.404 1.578-23.882 12.072-19.418l2.08-3.201Z"/><path fill="#5791FF" d="M165.325 87.855c0-30.083-24.409-54.47-54.519-54.47s-54.52 24.387-54.52 54.47 24.41 54.47 54.52 54.47v12.104c-36.802 0-66.636-29.806-66.636-66.574S74.004 21.28 110.806 21.28c36.801 0 66.635 29.807 66.635 66.575s-29.834 66.574-66.635 66.574v-12.104c30.11 0 54.519-24.387 54.519-54.47Z"/><path fill="#80ACFF" d="M94.404 139.804a54.559 54.559 0 0 0 16.402 2.521c1.771 0 3.522-.098 5.25-.263a18.154 18.154 0 0 1-.568 12.175c-1.548.107-3.108.192-4.682.192a66.616 66.616 0 0 1-20.602-3.254c.768-.728 1.48-1.54 2.082-2.466a13.61 13.61 0 0 0 2.118-8.905Z"/><path fill="#5791FF" d="M61.24 110.536a54.614 54.614 0 0 0 13.725 18.345 13.636 13.636 0 0 0-5.651 4.924 13.636 13.636 0 0 0-1.898 4.557 66.837 66.837 0 0 1-15.594-19.528l.854-1.305a18.233 18.233 0 0 1 8.564-6.993Z"/><path fill="#0B5FFF" fill-rule="evenodd" d="M128.657 6.339c28.588-14.553 63.571-3.197 78.138 25.365 14.566 28.562 3.199 63.513-25.389 78.066-28.588 14.553-63.571 3.196-78.137-25.365-14.567-28.562-3.2-63.514 25.388-78.066Zm6.594 12.928c-10.721 5.458-14.983 18.565-9.521 29.275 5.462 10.71 18.581 14.97 29.302 9.512 10.72-5.457 14.983-18.564 9.52-29.275-5.462-10.71-18.581-14.969-29.301-9.512Z" clip-rule="evenodd"/><path fill="#80ACFF" d="M155.278 90.5c-3.641-7.14-.8-15.879 6.347-19.517s15.893-.8 19.535 6.341l59.343 116.361c3.641 7.14.799 15.878-6.348 19.516-7.147 3.638-15.892.799-19.534-6.341L155.278 90.5Z"/><path fill="#004AD7" d="M161.625 70.983c7.147-3.638 15.893-.8 19.535 6.341l12.356 24.229a58.149 58.149 0 0 1-12.11 8.217 58.267 58.267 0 0 1-13.771 4.959l-12.357-24.23c-3.641-7.14-.8-15.878 6.347-19.516Z"/><path fill="#0B5FFF" d="M162.365 168.319c-3.642-7.14-.8-15.878 6.347-19.516l25.882-13.175c7.147-3.639 15.892-.8 19.534 6.341l13.187 25.858c3.642 7.14.8 15.878-6.347 19.516l-25.881 13.175c-7.147 3.639-15.893.8-19.535-6.341l-13.187-25.858Z"/><path fill="#B3CDFF" d="M194.594 135.628c7.147-3.639 15.892-.8 19.534 6.341l13.187 25.858c3.642 7.14.8 15.878-6.347 19.516l-12.941 6.588-26.374-51.716 12.941-6.587Z"/><path fill="#5791FF" d="M110.806 21.28c6.373 0 12.534.905 18.371 2.574a21.788 21.788 0 0 0-5.478 11.064 54.703 54.703 0 0 0-12.893-1.533c-2.952 0-5.852.231-8.676.682a58.031 58.031 0 0 1 7.927-12.778c.248-.003.5-.009.749-.009Z"/></svg>DSR</span><span class="nm-v"><span>Digital Sales Room<small>Commerce menu</small></span><span>Liferay DSR<small>Brand Architecture</small></span><span>DSR<small>Global Menu</small></span></span></div>
+      <div class="row"><span class="nm-k"><svg class="pi" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 40 40"><path d="M30.8915 17.2879C30.8915 24.9546 24.6603 31.1697 16.9738 31.1697C9.28729 31.1697 3.05614 24.9546 3.05614 17.2879C3.05614 9.62118 9.28729 3.40609 16.9738 3.40609C24.6603 3.40609 30.8915 9.62118 30.8915 17.2879Z" fill="#B3CDFF"/><path d="M26.516 7.18939C29.2078 9.72069 30.8915 13.3067 30.8915 17.2879C30.8915 21.6215 28.8983 25.4884 25.7791 28.0342C23.089 25.503 21.408 21.9154 21.408 17.9357C21.4082 13.6035 23.3985 9.73504 26.516 7.18939Z" fill="#80ACFF"/><path d="M8.17906 0.619447C8.40391 -0.206482 9.57855 -0.206482 9.8034 0.619446L11.291 6.08407C11.3693 6.37155 11.5945 6.59612 11.8827 6.67418L17.3614 8.15799C18.1895 8.38226 18.1895 9.55388 17.3614 9.77814L11.8827 11.262C11.5945 11.34 11.3693 11.5646 11.291 11.8521L9.8034 17.3167C9.57855 18.1426 8.40391 18.1426 8.17906 17.3167L6.69142 11.8521C6.61316 11.5646 6.388 11.34 6.09978 11.262L0.621046 9.77814C-0.207015 9.55388 -0.207016 8.38226 0.621046 8.15799L6.09978 6.67418C6.388 6.59612 6.61316 6.37155 6.69142 6.08407L8.17906 0.619447Z" fill="#5791FF"/><path d="M11.291 6.08407C11.3693 6.37155 11.5945 6.59612 11.8827 6.67418L17.3614 8.15799C18.1895 8.38226 18.1895 9.55388 17.3614 9.77814L11.8827 11.262C11.5945 11.34 11.3693 11.5646 11.291 11.8521L9.8034 17.3167C9.57855 18.1426 8.40391 18.1426 8.17906 17.3167L6.69142 11.8521C6.61316 11.5646 6.388 11.34 6.09978 11.262L4.63744 10.8646C6.02379 8.22113 8.2356 6.07762 10.9354 4.7787L11.291 6.08407Z" fill="#0B5FFF"/><path d="M29.6645 20.3674C27.0954 17.805 22.9253 17.8087 20.3516 20.3758C17.7779 22.9429 17.7741 27.1022 20.3432 29.6647C22.9123 32.2271 27.0824 32.2234 29.6561 29.6563L31.8446 31.8391C28.0597 35.6142 21.9288 35.6198 18.1507 31.8515C14.3727 28.0832 14.3783 21.9681 18.1631 18.193C21.948 14.4178 28.0789 14.4123 31.8569 18.1806C35.635 21.9489 35.6294 28.064 31.8446 31.8391L29.6561 29.6563C32.2298 27.0892 32.2335 22.9298 29.6645 20.3674Z" fill="#0053F0"/><path d="M30.1163 32.8495C29.3593 32.0944 29.3593 30.8703 30.1163 30.1153C30.8733 29.3603 32.1006 29.3603 32.8575 30.1153L33.9555 31.2104C34.7125 31.9654 34.7125 33.1896 33.9555 33.9446C33.1985 34.6996 31.9712 34.6996 31.2143 33.9446L30.1163 32.8495Z" fill="#0053F0"/><path d="M33.1997 32.922C33.5472 32.5755 34.0959 32.5334 34.4921 32.8233L34.5031 32.8315C34.4492 33.2383 34.2689 33.632 33.9555 33.9446C33.6124 34.2867 33.1726 34.4726 32.7239 34.5046C32.4715 34.1145 32.521 33.5989 32.8546 33.2662L33.1997 32.922Z" fill="#5791FF"/><path d="M32.699 34.5529C32.4343 34.159 32.4858 33.6333 32.822 33.298L33.2322 32.8889C33.565 32.5569 34.0855 32.5028 34.4798 32.7593L38.9224 35.6483C40.1857 36.4698 40.3709 38.2427 39.3045 39.3063C38.2468 40.3613 36.4864 40.1896 35.6536 38.9502L32.699 34.5529Z" fill="#B3CDFF"/><path d="M33.2322 32.8889C33.565 32.5569 34.0855 32.5028 34.4798 32.7593L38.9224 35.6483C40.1827 36.4683 40.3685 38.2339 39.3095 39.2981L33.0577 33.0624L33.2322 32.8889Z" fill="#5791FF"/><path d="M11.4 22.0054C12.8298 23.5273 13.2404 25.4607 12.3169 26.3238C11.3935 27.1869 9.48576 26.6529 8.05592 25.131C6.62608 23.6091 6.21556 21.6757 7.139 20.8126C8.06245 19.9494 9.97016 20.4835 11.4 22.0054Z" fill="#80ACFF"/><path d="M17.4679 16.0178C17.1838 17.0774 16.0923 17.7065 15.03 17.4231C13.9677 17.1397 13.3369 16.051 13.621 14.9914C13.9052 13.9319 14.9967 13.3027 16.059 13.5861C17.1213 13.8695 17.7521 14.9582 17.4679 16.0178Z" fill="#80ACFF"/></svg>SEO</span><span class="nm-v"><span>SEO Studio<small>Design and Brand Architecture</small></span><span>SEO &amp; AEO Studio<small>UI</small></span></span></div>
+    </div>
+    <p class="wi-foot f">If customers can’t tell what each product is, it is harder to explain, to buy and to manage.</p>
+  </div>
+</section>
+
+<!-- ═════════ 03c · what customers see ═════════ -->
+<section class="dk-slide ag" data-bg="neutral" data-notes="today">
+  <div class="dk-inner">
+    <div class="dk-head">
+      <p class="dk-eyebrow r">What customers see today</p>
+      <h2 class="dk-title dk-title--mid r">Outside the product, the same mix is public.</h2>
+    </div>
+    <div class="rows r">
+      <div class="row"><span class="ag-i">01</span><span class="ag-n">Add-ons on different bases<small>DSR is announced as an add-on to DXP, CMP as an add-on to CMS</small></span><span class="tags"><span class="tag">Press releases</span></span></div>
+      <div class="row"><span class="ag-i">02</span><span class="ag-n">Product or feature<small>DSR launches as a new offering; the docs call it a beta feature</small></span><span class="tags"><span class="tag">Docs</span></span></div>
+      <div class="row"><span class="ag-i">03</span><span class="ag-n">Four nouns for one thing<small>Offering, add-on, feature and capability, under liferay.com/capabilities</small></span><span class="tags"><span class="tag">Website</span></span></div>
+      <div class="row"><span class="ag-i">04</span><span class="ag-n">Old names that never left<small>“Analytics Cloud” still shows in the Liferay Data Platform docs</small></span><span class="tags"><span class="tag">Docs</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 03a · research ═════════ -->
+<section class="dk-slide ag" data-bg="neutral" data-notes="research">
+  <div class="dk-inner">
+    <div class="dk-head">
+      <p class="dk-eyebrow r">What research says</p>
+      <h2 class="dk-title dk-title--mid r">Companies with one consistent brand are valued higher than those that mix.</h2>
+    </div>
+    <div class="rows r">
+      <div class="row is-on"><span class="ag-i">1st</span><span class="ag-n">One brand across every product<small>Liferay plus a name that says what each product does</small></span><span class="tags"><span class="tag">Proposal</span></span></div>
+      <div class="row"><span class="ag-i">2nd</span><span class="ag-n">Each product with its own brand<small>Products that stand alone, with no parent brand</small></span><span class="tags"></span></div>
+      <div class="row"><span class="ag-i">3rd</span><span class="ag-n">A mix of both<small>Some products carry the parent brand and some don’t</small></span><span class="tags"><span class="tag">Closest to Liferay today</span></span></div>
+    </div>
+    <div class="dk-links r">
+      <a class="dk-link" href="https://www.jstor.org/stable/30162021" target="_blank" rel="noopener">Rao, Agarwal and Dahlhoff, Journal of Marketing, 2004 · 113 US companies</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 03b · evidence ═════════ -->
+<section class="dk-slide fg" data-bg="neutral" data-notes="evidence">
+  <div class="dk-inner">
+    <div class="dk-head">
+      <p class="dk-eyebrow r">A peer that did it</p>
+      <h2 class="dk-title dk-title--mid r">Optimizely renamed its products by function, then sold them as one suite.</h2>
+    </div>
+    <div class="rows">
+      <div class="row r"><span class="fg-n">2022</span><span class="fg-lab"><span class="fg-t">Names describe the product</span><span class="fg-d">Content Cloud became Optimizely CMS; Welcome became Optimizely CMP</span></span></div>
+      <div class="row r"><span class="fg-n">52%</span><span class="fg-lab"><span class="fg-t">Of revenue from customers with more than one product</span><span class="fg-d">Optimizely, May 2024, at $400M in annual recurring revenue</span></span></div>
+      <div class="row r"><span class="fg-n">21%</span><span class="fg-lab"><span class="fg-t">Yearly growth in that multi-product revenue</span><span class="fg-d">Optimizely credits the suite, Optimizely One. Clear names came first</span></span></div>
+    </div>
+    <div class="dk-links f">
+      <a class="dk-link" href="https://world.optimizely.com/products/product-migration/" target="_blank" rel="noopener">Optimizely name changes</a>
+      <a class="dk-link" href="https://www.optimizely.com/company/press/400m-arr" target="_blank" rel="noopener">Optimizely press release, May 2024</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 05 · Gartner quadrant ═════════ -->
+<section class="dk-slide tb tb--mq" data-bg="neutral" data-notes="peers">
+  <div class="dk-inner">
+    <div class="dk-head">
+      <p class="dk-eyebrow r">Gartner DXP Magic Quadrant · 17 vendors</p>
+      <h2 class="dk-title dk-title--mid r">Brand plus function is the most common pattern. It is already ours.</h2>
+    </div>
+    <div class="rows r">
+      <div class="row"><span class="tb-k tb-head">Pattern</span><span class="tb-v tb-head">Vendors</span><span class="tb-p tb-head">Notes</span></div>
+      <div class="row"><span class="tb-k">Brand + function</span><span class="tb-v">Optimizely, Acquia, Contentful, Builder.io, Sitefinity, Liferay</span><span class="tb-p">Two Leaders. Builder.io moved here in September 2026</span></div>
+      <div class="row"><span class="tb-k">House of brands</span><span class="tb-v">Adobe, HCL, OpenText, Squiz</span><span class="tb-p">Gartner warned Adobe about complexity and HCL about bloat</span></div>
+      <div class="row"><span class="tb-k">Single brand</span><span class="tb-v">Kentico, Magnolia, Uniform, Pimcore</span><span class="tb-p">One product with modules or editions</span></div>
+      <div class="row"><span class="tb-k">Clouds</span><span class="tb-v">Contentstack, CoreMedia</span><span class="tb-p">“X Cloud” blocks with sub-brands</span></div>
+    </div>
+    <p class="wi-foot f">The quadrant is renaming itself: Contentstack, Optimizely and Acquia dropped or reworked “DXP” in 2026.</p>
+  </div>
+</section>
+
+<!-- ═════════ 05b · what Gartner scores ═════════ -->
+<section class="dk-slide ag" data-bg="neutral" data-notes="gartner">
+  <div class="dk-inner">
+    <div class="dk-head">
+      <p class="dk-eyebrow r">What Gartner scores</p>
+      <h2 class="dk-title dk-title--mid r">Gartner rewards a portfolio customers can read.</h2>
+    </div>
+    <div class="rows r">
+      <div class="row"><span class="ag-i">01</span><span class="ag-n">One integrated product under one name<small>Required to be in the quadrant at all</small></span><span class="tags"><span class="tag">Inclusion</span></span></div>
+      <div class="row"><span class="ag-i">02</span><span class="ag-n">A cohesive platform, not a collection<small>Product integrity carries extra weight</small></span><span class="tags"><span class="tag">Product</span></span></div>
+      <div class="row"><span class="ag-i">03</span><span class="ag-n">Customers understand what is offered<small>Scored under marketing execution</small></span><span class="tags"><span class="tag">Marketing</span></span></div>
+      <div class="row ag-call f"><p style="max-width:44ch">Our pattern is right. What is missing are the rules: what is a product, what is an add-on, no acronyms, and which names retire.</p></div>
+    </div>
+    <div class="dk-links f">
+      <a class="dk-link" href="https://liferay.atlassian.net/wiki/spaces/PEDS/pages/5441749179/Product+Naming+Benchmark+Liferay+vs.+Gartner+DXP+Magic+Quadrant+Vendors+October+2026" target="_blank" rel="noopener">Naming benchmark by Marcos Castro</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 06 · the rule ═════════ -->
+<section class="dk-slide wi" data-bg="neutral" data-notes="rule">
+  <div class="dk-inner">
+    <div class="dk-head">
+      <p class="dk-eyebrow r">The proposal</p>
+      <h2 class="dk-title dk-title--mid r">One rule for each level.</h2>
+    </div>
+    <div class="rows r">
+      <div class="row"><span class="wi-w"><i style="--c:var(--lx-teal-l1)"></i>Hub</span><div class="wi-items" style="--n:3"><p>Liferay Hub<small>Where every product lives. The only name with “Liferay” inside</small></p></div></div>
+      <div class="row"><span class="wi-w"><i style="--c:var(--lx-blue)"></i>Product</span><div class="wi-items" style="--n:3"><p>One noun, no suffix<small>Content · Sales Rooms · AI Agents · Commerce · Data</small></p></div></div>
+      <div class="row"><span class="wi-w"><i style="--c:var(--lx-pink)"></i>Add-on</span><div class="wi-items" style="--n:3"><p>What it does + Studio<small>Product Information Studio · Content Marketing Studio · SEO &amp; AEO Studio</small></p></div></div>
+      <div class="row"><span class="wi-w"><i style="--c:var(--ink-3)"></i>App</span><div class="wi-items" style="--n:3"><p>No change<small>Liferay and Marketplace apps keep their names; the UI shows where they come from</small></p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 07 · the names ═════════ -->
+<section class="dk-slide mv" data-bg="neutral" data-notes="names">
+  <div class="dk-inner">
+    <div class="dk-head">
+      <p class="dk-eyebrow r">Today and proposed</p>
+      <h2 class="dk-title dk-title--mid r">Seven names change. Commerce already follows the rule.</h2>
+    </div>
+    <div class="rows r">
+      <div class="row mv-h" style="--k:0"><span></span><span class="mv-x"><span class="mv-a">Today</span><span class="mv-b" aria-hidden="true">Proposed</span></span><span class="mv-p">Level</span></div>
+      <div class="row" style="--k:1"><span class="mv-i"><svg class="pi" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="60 60 280 280"><defs><clipPath id="dxp-r"><path d="M150 95C190 70 280 70 315 110C345 145 335 215 300 260C265 305 215 330 175 315C135 300 115 250 118 195C121 140 125 110 150 95Z"/></clipPath></defs><path fill="#1BA1E8" d="M150 95C190 70 280 70 315 110C345 145 335 215 300 260C265 305 215 330 175 315C135 300 115 250 118 195C121 140 125 110 150 95Z"/><path fill="#0D63D1" d="M135 108C175 92 240 90 270 120C295 145 290 190 260 230C225 275 175 305 135 305C95 305 70 265 68 215C66 165 95 125 135 108Z"/><path fill="#134096" clip-path="url(#dxp-r)" d="M135 108C175 92 240 90 270 120C295 145 290 190 260 230C225 275 175 305 135 305C95 305 70 265 68 215C66 165 95 125 135 108Z"/></svg></span><span class="mv-x"><span class="mv-a">Liferay DXP</span><span class="mv-b" aria-hidden="true">Liferay Hub</span></span><span class="mv-p">Hub</span></div>
+      <div class="row" style="--k:2"><span class="mv-i"><svg class="pi" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 243 243"><path fill="#B3CDFF" d="m145.253 24.209 72.627 72.626v101.678c0 10.696-10.839 19.367-24.209 19.367H60.522c-13.37 0-24.209-8.671-24.209-19.367V43.576c0-10.696 10.839-19.367 24.21-19.367h84.73Z"/><path fill="#80ACFF" d="M242.089 193.671c0 26.74-21.678 48.418-48.418 48.418s-48.418-21.678-48.418-48.418 21.678-48.418 48.418-48.418 48.418 21.678 48.418 48.418ZM.841 73.339 35.327 4.35c2.9-5.801 11.177-5.801 14.078 0L83.89 73.34c2.616 5.234-1.189 11.392-7.039 11.392H7.88c-5.85 0-9.655-6.158-7.039-11.392Z"/><path fill="#004AD7" d="M145.253 72.627V24.209l72.627 72.626h-48.418c-13.37 0-24.209-10.838-24.209-24.208Z"/><path fill="#0B5FFF" d="M193.671 145.253a48.18 48.18 0 0 1 24.209 6.49V197.3c0 11.365-10.839 20.58-24.209 20.58h-41.928a48.18 48.18 0 0 1-6.49-24.209c0-26.74 21.678-48.418 48.418-48.418ZM83.89 73.339c2.616 5.234-1.189 11.392-7.039 11.392H36.313V44.789c0-11.031 10.213-20.014 23.039-20.533L83.89 73.34Z"/><path fill="#5791FF" d="M60.522 127.097c0-10.028 8.13-18.157 18.157-18.157h48.418c10.027 0 18.156 8.129 18.156 18.157 0 10.027-8.129 18.156-18.156 18.156H78.679c-10.028 0-18.157-8.129-18.157-18.156Z"/><path fill="#0B5FFF" d="M60.522 175.514c0-10.027 8.13-18.156 18.157-18.156h24.209c10.027 0 18.156 8.129 18.156 18.156 0 10.028-8.129 18.157-18.156 18.157h-24.21c-10.027 0-18.156-8.129-18.156-18.157Z"/></svg></span><span class="mv-x"><span class="mv-a">Content Management System</span><span class="mv-b" aria-hidden="true">Content</span></span><span class="mv-p">Product</span></div>
+      <div class="row" style="--k:3"><span class="mv-i"><svg class="pi" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 243 243"><path fill="#B3CDFF" fill-rule="evenodd" d="M89.529 107.726a18.266 18.266 0 0 1 18.381 11.926l7.855 21.412a18.229 18.229 0 0 1-1.83 16.211l-49.728 76.504c-5.492 8.45-16.802 10.852-25.26 5.364L8.317 219.27c-8.458-5.487-10.862-16.787-5.369-25.237l49.728-76.504a18.264 18.264 0 0 1 14.079-8.264l22.774-1.539Zm-1.27 22.055c-6.344-4.115-14.826-2.314-18.945 4.024-4.12 6.337-2.317 14.812 4.027 18.928 6.343 4.115 14.825 2.313 18.945-4.024 4.12-6.337 2.317-14.812-4.027-18.928Z" clip-rule="evenodd"/><path fill="#80ACFF" d="M100.709 110.627a18.237 18.237 0 0 1 7.201 9.025l7.855 21.412a18.229 18.229 0 0 1-1.83 16.211l-49.728 76.504c-5.492 8.45-16.802 10.852-25.26 5.364l-15.316-9.934 24.855-38.238 24.855-38.238c6.343 4.115 14.825 2.313 18.945-4.024 4.12-6.337 2.317-14.812-4.027-18.928l12.45-19.154Z"/><path fill="#0B5FFF" d="M58.643 168.869c2.412-3.712 8.129-.003 5.716 3.709l-2.075 3.191c2.065 2.104 3.429 4.736 3.87 7.533.634 4.146-6.045 5.472-6.754 1.086-4.07-11.601-19.485-6.256-9.006 3.551l.027.017c11.9 8.856 6.642 26.642-10.345 21.98l-1.882 2.896c-2.489 3.828-8.193.101-5.717-3.709l1.877-2.887c-2.082-2.115-4.9-6.123-5.334-8.929-.62-4.072 6.096-5.413 6.76-1.056 3.697 12.29 23.932 9.307 8.71-4.763-12.057-11.404 1.578-23.882 12.072-19.418l2.08-3.201Z"/><path fill="#5791FF" d="M165.325 87.855c0-30.083-24.409-54.47-54.519-54.47s-54.52 24.387-54.52 54.47 24.41 54.47 54.52 54.47v12.104c-36.802 0-66.636-29.806-66.636-66.574S74.004 21.28 110.806 21.28c36.801 0 66.635 29.807 66.635 66.575s-29.834 66.574-66.635 66.574v-12.104c30.11 0 54.519-24.387 54.519-54.47Z"/><path fill="#80ACFF" d="M94.404 139.804a54.559 54.559 0 0 0 16.402 2.521c1.771 0 3.522-.098 5.25-.263a18.154 18.154 0 0 1-.568 12.175c-1.548.107-3.108.192-4.682.192a66.616 66.616 0 0 1-20.602-3.254c.768-.728 1.48-1.54 2.082-2.466a13.61 13.61 0 0 0 2.118-8.905Z"/><path fill="#5791FF" d="M61.24 110.536a54.614 54.614 0 0 0 13.725 18.345 13.636 13.636 0 0 0-5.651 4.924 13.636 13.636 0 0 0-1.898 4.557 66.837 66.837 0 0 1-15.594-19.528l.854-1.305a18.233 18.233 0 0 1 8.564-6.993Z"/><path fill="#0B5FFF" fill-rule="evenodd" d="M128.657 6.339c28.588-14.553 63.571-3.197 78.138 25.365 14.566 28.562 3.199 63.513-25.389 78.066-28.588 14.553-63.571 3.196-78.137-25.365-14.567-28.562-3.2-63.514 25.388-78.066Zm6.594 12.928c-10.721 5.458-14.983 18.565-9.521 29.275 5.462 10.71 18.581 14.97 29.302 9.512 10.72-5.457 14.983-18.564 9.52-29.275-5.462-10.71-18.581-14.969-29.301-9.512Z" clip-rule="evenodd"/><path fill="#80ACFF" d="M155.278 90.5c-3.641-7.14-.8-15.879 6.347-19.517s15.893-.8 19.535 6.341l59.343 116.361c3.641 7.14.799 15.878-6.348 19.516-7.147 3.638-15.892.799-19.534-6.341L155.278 90.5Z"/><path fill="#004AD7" d="M161.625 70.983c7.147-3.638 15.893-.8 19.535 6.341l12.356 24.229a58.149 58.149 0 0 1-12.11 8.217 58.267 58.267 0 0 1-13.771 4.959l-12.357-24.23c-3.641-7.14-.8-15.878 6.347-19.516Z"/><path fill="#0B5FFF" d="M162.365 168.319c-3.642-7.14-.8-15.878 6.347-19.516l25.882-13.175c7.147-3.639 15.892-.8 19.534 6.341l13.187 25.858c3.642 7.14.8 15.878-6.347 19.516l-25.881 13.175c-7.147 3.639-15.893.8-19.535-6.341l-13.187-25.858Z"/><path fill="#B3CDFF" d="M194.594 135.628c7.147-3.639 15.892-.8 19.534 6.341l13.187 25.858c3.642 7.14.8 15.878-6.347 19.516l-12.941 6.588-26.374-51.716 12.941-6.587Z"/><path fill="#5791FF" d="M110.806 21.28c6.373 0 12.534.905 18.371 2.574a21.788 21.788 0 0 0-5.478 11.064 54.703 54.703 0 0 0-12.893-1.533c-2.952 0-5.852.231-8.676.682a58.031 58.031 0 0 1 7.927-12.778c.248-.003.5-.009.749-.009Z"/></svg></span><span class="mv-x"><span class="mv-a">Digital Sales Room</span><span class="mv-b" aria-hidden="true">Sales Rooms</span></span><span class="mv-p">Product</span></div>
+      <div class="row" style="--k:4"><span class="mv-i"><svg class="pi" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 243 243"><path fill="#80ACFF" d="M230.317 124.482c0 58.454-47.387 105.84-105.841 105.84-58.454 0-105.84-47.386-105.84-105.84s47.386-105.84 105.84-105.84 105.841 47.386 105.841 105.84Z"/><path fill="#B3CDFF" d="M151.2 45.36c22.388 0 43.144 6.965 60.244 18.826 11.886 17.112 18.873 37.883 18.873 60.296 0 58.454-47.387 105.84-105.841 105.84-22.404 0-43.168-6.985-60.275-18.863-11.869-17.104-18.84-37.863-18.84-60.259 0-58.454 47.385-105.84 105.839-105.84Z"/><path fill="#0B5FFF" d="M75.648 5.744c2.08-7.659 12.944-7.659 15.024 0l13.759 50.673a7.783 7.783 0 0 0 5.472 5.472l50.673 13.76c7.659 2.079 7.659 12.943 0 15.023l-50.673 13.759a7.783 7.783 0 0 0-5.472 5.472l-13.76 50.673c-2.079 7.659-12.943 7.659-15.023 0L61.89 109.903a7.783 7.783 0 0 0-5.472-5.472L5.744 90.671c-7.659-2.079-7.659-12.943 0-15.023L56.417 61.89a7.784 7.784 0 0 0 5.472-5.472l13.76-50.673Z"/><path fill="#004AD7" d="M104.431 56.417a7.783 7.783 0 0 0 5.472 5.472l50.673 13.76c7.659 2.079 7.659 12.943 0 15.023l-50.673 13.759a7.783 7.783 0 0 0-5.472 5.472l-13.76 50.673c-2.079 7.659-12.943 7.659-15.023 0L61.89 109.903a7.783 7.783 0 0 0-5.472-5.472l-.156-.048c10.302-20.85 27.272-37.804 48.122-48.107l.048.14Z"/><path fill="#0B5FFF" d="M132.392 18.941c40.318-21.448 77.859-25.679 97.101-6.45l2.626 2.9c16.193 19.91 12.103 57.659-8.224 95.96-.069-.701.082.697 0 0-10.443 19.384-24.928 39.43-42.96 58.386l-5.511 5.655c-20.6 20.599-42.705 37.01-64.03 48.497.697.083-.701-.069 0 0-40.251 21.364-79.683 24.8-98.894 5.597l-2.612-2.899c-16.228-19.948-11.405-55.569 9.025-93.959 1.733 15.116 5.681 30.986 13.24 43.382-6.681 22.685-1.23 30.329 1.13 32.694 2.379 2.372 13.318 7.987 36.242 1.163-.436-.251.432.256 0 0 1.303-.391 2.66-.793 4.048-1.264 24.2-8.212 53.582-26.539 81.053-54.008 27.469-27.468 45.785-56.85 53.997-81.048.469-1.384.872-2.735 1.263-4.033.256.431-.25-.436 0 0 6.824-22.925 1.194-33.866-1.177-36.24-2.374-2.363-9.847-7.777-32.533-1.092-12.387-7.548-28.682-11.507-43.784-13.24Z"/></svg></span><span class="mv-x"><span class="mv-a">AI Hub</span><span class="mv-b" aria-hidden="true">AI Agents</span></span><span class="mv-p">Product</span></div>
+      <div class="row" style="--k:5"><span class="mv-i"><svg class="pi" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 243 243"><path fill="#B3CDFF" d="M0 121.044 121.044 0l121.045 121.044-121.045 121.045L0 121.044Z"/><path fill="#80ACFF" d="M121.044 121.044H0l60.522-60.522 60.522 60.522Z"/><path fill="#0B5FFF" d="m121.044 121.044-60.522 60.522L0 121.044l60.522-60.522 60.522 60.522Z"/><path fill="#D6E4FF" d="m48.418 121.044 72.626-72.626 69.695 72.626-69.695 72.627-72.626-72.627Z"/><path fill="#5791FF" d="M121.044 121.044H48.418L84.73 84.731l36.313 36.313Zm-60.522 60.522L0 121.044h121.044l-60.522 60.522Z"/><path fill="#80ACFF" d="m84.731 157.358-36.313-36.314h72.626l-36.313 36.314Z"/><path fill="#5791FF" d="M242.089 121.044 121.044 242.089v-48.418l69.695-72.627-69.695-72.626V0l121.045 121.044Z"/><path fill="#0053F0" d="M139.201 102.888h84.767l18.121 18.156-18.121 18.157h-84.767l-18.157-18.157 18.157-18.156Z"/></svg></span><span class="mv-x"><span class="mv-a">Liferay Data Platform</span><span class="mv-b" aria-hidden="true">Data</span></span><span class="mv-p">Product</span></div>
+      <div class="row" style="--k:6"><span class="mv-i"><svg class="pi" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 243 243"><path fill="#B3CDFF" d="M0 56.962c0-7.865 6.376-14.24 14.24-14.24h142.406c7.864 0 14.24 6.375 14.24 14.24v156.646c0 15.729-12.751 28.481-28.481 28.481H28.481C12.751 242.089 0 229.337 0 213.608V56.962Z"/><path fill="#5791FF" d="M85.443 42.721h71.203c7.864 0 14.24 6.376 14.24 14.241v156.646c0 15.729-12.751 28.481-28.481 28.481H85.443V42.721Z"/><path fill="#004AD7" d="M42.721 113.924c0-7.865 6.376-14.24 14.241-14.24h170.886c7.865 0 14.241 6.375 14.241 14.24v85.443c0 7.865-6.376 14.241-14.241 14.241H56.962c-7.865 0-14.24-6.376-14.24-14.241v-85.443Z"/><path fill="#0B5FFF" d="M42.721 113.924c0-7.865 6.376-14.24 14.241-14.24h28.481v113.924H56.962c-7.865 0-14.24-6.376-14.24-14.241v-85.443Z"/><path fill="#F0F5FF" d="M170.886 156.646c0 15.729-12.751 28.481-28.481 28.481-15.73 0-28.481-12.752-28.481-28.481 0-15.73 12.751-28.481 28.481-28.481 15.73 0 28.481 12.751 28.481 28.481Zm14.241 0c0-7.865 6.375-14.241 14.24-14.241s14.241 6.376 14.241 14.241c0 7.864-6.376 14.24-14.241 14.24-7.865 0-14.24-6.376-14.24-14.24Z"/><path fill="#80ACFF" d="M71.203 156.646c0-7.865 6.375-14.241 14.24-14.241s14.24 6.376 14.24 14.241c0 7.864-6.375 14.24-14.24 14.24s-14.24-6.376-14.24-14.24Z"/><path fill="#F0F5FF" d="M85.443 142.405c7.865 0 14.24 6.376 14.24 14.241 0 7.864-6.375 14.24-14.24 14.24v-28.481Z"/><path fill="#004AD7" d="M71.203 14.24c-7.865 0-14.241 6.376-14.241 14.241v35.601a7.12 7.12 0 1 1-14.24 0V28.481C42.721 12.751 55.471 0 71.201 0h28.481c15.73 0 28.482 12.751 28.482 28.481v35.601a7.12 7.12 0 0 1-14.241 0V28.481c0-7.372-5.601-13.44-12.78-14.171l-1.46-.07H71.202Z"/><path fill="#0B5FFF" d="M85.443 0v14.24h-14.24c-7.865 0-14.241 6.376-14.241 14.241v35.601a7.12 7.12 0 1 1-14.24 0V28.481C42.721 12.751 55.471 0 71.201 0h14.241Z"/></svg></span><span class="mv-x"><span class="mv-a">Commerce</span><span class="mv-b" aria-hidden="true">Commerce</span></span><span class="mv-p">Product</span></div>
+      <div class="row" style="--k:7"><span class="mv-i"></span><span class="mv-x"><span class="mv-a">Product Information Management</span><span class="mv-b" aria-hidden="true">Product Information Studio</span></span><span class="mv-p">Add-on</span></div>
+      <div class="row" style="--k:8"><span class="mv-i"></span><span class="mv-x"><span class="mv-a">Content Marketing Platform</span><span class="mv-b" aria-hidden="true">Content Marketing Studio</span></span><span class="mv-p">Add-on</span></div>
+    </div>
+    <span class="f" data-act="cls:is-turned" hidden></span>
+  </div>
+</section>
+
+<!-- ═════════ 08 · where the name appears ═════════ -->
+<section class="dk-slide px" data-bg="neutral" data-notes="prefix">
+  <div class="dk-inner">
+    <div class="dk-head">
+      <p class="dk-eyebrow r">The Liferay prefix</p>
+      <h2 class="dk-title dk-title--mid r">The name stays short. The context adds “Liferay”.</h2>
+    </div>
+    <div class="rows">
+      <div class="row px-h r"><span>Where it appears</span><span>Product</span><span>Add-on</span></div>
+      <div class="row r"><span class="px-k">Inside the product<small>Liferay is already the context</small></span><span class="px-n"><svg class="pi" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 243 243"><path fill="#B3CDFF" d="m145.253 24.209 72.627 72.626v101.678c0 10.696-10.839 19.367-24.209 19.367H60.522c-13.37 0-24.209-8.671-24.209-19.367V43.576c0-10.696 10.839-19.367 24.21-19.367h84.73Z"/><path fill="#80ACFF" d="M242.089 193.671c0 26.74-21.678 48.418-48.418 48.418s-48.418-21.678-48.418-48.418 21.678-48.418 48.418-48.418 48.418 21.678 48.418 48.418ZM.841 73.339 35.327 4.35c2.9-5.801 11.177-5.801 14.078 0L83.89 73.34c2.616 5.234-1.189 11.392-7.039 11.392H7.88c-5.85 0-9.655-6.158-7.039-11.392Z"/><path fill="#004AD7" d="M145.253 72.627V24.209l72.627 72.626h-48.418c-13.37 0-24.209-10.838-24.209-24.208Z"/><path fill="#0B5FFF" d="M193.671 145.253a48.18 48.18 0 0 1 24.209 6.49V197.3c0 11.365-10.839 20.58-24.209 20.58h-41.928a48.18 48.18 0 0 1-6.49-24.209c0-26.74 21.678-48.418 48.418-48.418ZM83.89 73.339c2.616 5.234-1.189 11.392-7.039 11.392H36.313V44.789c0-11.031 10.213-20.014 23.039-20.533L83.89 73.34Z"/><path fill="#5791FF" d="M60.522 127.097c0-10.028 8.13-18.157 18.157-18.157h48.418c10.027 0 18.156 8.129 18.156 18.157 0 10.027-8.129 18.156-18.156 18.156H78.679c-10.028 0-18.157-8.129-18.157-18.156Z"/><path fill="#0B5FFF" d="M60.522 175.514c0-10.027 8.13-18.156 18.157-18.156h24.209c10.027 0 18.156 8.129 18.156 18.156 0 10.028-8.129 18.157-18.156 18.157h-24.21c-10.027 0-18.156-8.129-18.156-18.157Z"/></svg>Content</span><span class="px-n">Product Information Studio</span></div>
+      <div class="row f"><span class="px-k">Marketplace<small>Name and logo identify the product</small></span><span class="px-n"><svg class="pi" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 243 243"><path fill="#B3CDFF" d="m145.253 24.209 72.627 72.626v101.678c0 10.696-10.839 19.367-24.209 19.367H60.522c-13.37 0-24.209-8.671-24.209-19.367V43.576c0-10.696 10.839-19.367 24.21-19.367h84.73Z"/><path fill="#80ACFF" d="M242.089 193.671c0 26.74-21.678 48.418-48.418 48.418s-48.418-21.678-48.418-48.418 21.678-48.418 48.418-48.418 48.418 21.678 48.418 48.418ZM.841 73.339 35.327 4.35c2.9-5.801 11.177-5.801 14.078 0L83.89 73.34c2.616 5.234-1.189 11.392-7.039 11.392H7.88c-5.85 0-9.655-6.158-7.039-11.392Z"/><path fill="#004AD7" d="M145.253 72.627V24.209l72.627 72.626h-48.418c-13.37 0-24.209-10.838-24.209-24.208Z"/><path fill="#0B5FFF" d="M193.671 145.253a48.18 48.18 0 0 1 24.209 6.49V197.3c0 11.365-10.839 20.58-24.209 20.58h-41.928a48.18 48.18 0 0 1-6.49-24.209c0-26.74 21.678-48.418 48.418-48.418ZM83.89 73.339c2.616 5.234-1.189 11.392-7.039 11.392H36.313V44.789c0-11.031 10.213-20.014 23.039-20.533L83.89 73.34Z"/><path fill="#5791FF" d="M60.522 127.097c0-10.028 8.13-18.157 18.157-18.157h48.418c10.027 0 18.156 8.129 18.156 18.157 0 10.027-8.129 18.156-18.156 18.156H78.679c-10.028 0-18.157-8.129-18.157-18.156Z"/><path fill="#0B5FFF" d="M60.522 175.514c0-10.027 8.13-18.156 18.157-18.156h24.209c10.027 0 18.156 8.129 18.156 18.156 0 10.028-8.129 18.157-18.156 18.157h-24.21c-10.027 0-18.156-8.129-18.156-18.157Z"/></svg>Liferay Content</span><span class="px-n px-col">Product Information Studio<span class="vb"><svg class="vb-c" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Liferay</span><small>The official label and Liferay as publisher say it is ours</small></span></div>
+      <div class="row f"><span class="px-k">Marketing pages<small>Owned by Marketing</small></span><span class="px-n px-span">Marketing chooses, with the full name and logo where it helps</span></div>
+    </div>
+    <p class="wi-foot f">Category words like “platform” or “management” go in descriptions, not in names or lists.</p>
+  </div>
+</section>
+
+<!-- ═════════ 09 · bolder option ═════════ -->
+<section class="dk-slide wi wi--verbs" data-bg="neutral" data-notes="bolder">
+  <div class="dk-inner">
+    <div class="dk-head">
+      <p class="dk-eyebrow r">We also explored</p>
+      <h2 class="dk-title dk-title--mid r">Grouping products by what people do with them.</h2>
+    </div>
+    <div class="rows r">
+      <div class="row"><span class="wi-w"><i style="--c:var(--lx-purple)"></i>Plan</span><div class="wi-items" style="--n:3"><p><svg class="pi" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 243 243"><path fill="#5791FF" d="M169.462 0c20.055 0 36.313 16.258 36.313 36.313v133.149c0 20.055-16.258 36.313-36.313 36.313h-24.209c20.055 0 36.313-16.258 36.313-36.313V36.313C181.566 16.258 165.308 0 145.253 0h24.209Z"/><path fill="#B3CDFF" fill-opacity=".8" d="M48.418 36.313C48.418 16.258 64.676 0 84.73 0h60.522c20.055 0 36.313 16.258 36.313 36.313v133.149c0 20.055-16.258 36.313-36.313 36.313H84.731c-20.055 0-36.313-16.258-36.313-36.313V36.313Z"/><path fill="#80ACFF" d="M96.835 199.723c0 23.398-18.967 42.366-42.365 42.366-23.398 0-42.366-18.968-42.366-42.366s18.968-42.365 42.366-42.365 42.365 18.967 42.365 42.365Z"/><path fill="#004AD7" d="M54.47 157.358c23.398 0 42.365 18.967 42.365 42.365 0 2.055-.154 4.075-.437 6.052H84.731c-20.055 0-36.313-16.258-36.313-36.313v-11.679a42.688 42.688 0 0 1 6.052-.425Z"/><path fill="#80ACFF" d="M121.044 72.627c0-13.37 10.839-24.21 24.209-24.21h72.627c13.37 0 24.209 10.84 24.209 24.21v72.626l-24.209 24.209h-72.627c-13.37 0-24.209-10.839-24.209-24.209V72.627Z"/><path fill="#004AD7" d="M121.044 72.627c0-13.37 10.839-24.21 24.209-24.21h72.627c13.37 0 24.209 10.84 24.209 24.21V84.73H121.044V72.627Z"/><path fill="#0B5FFF" d="M157.358 36.313c6.685 0 12.104 5.42 12.104 12.105v12.104c0 6.685-5.419 12.105-12.104 12.105s-12.105-5.42-12.105-12.105V48.418c0-6.685 5.42-12.105 12.105-12.105Zm48.417 0c6.685 0 12.105 5.42 12.105 12.105v12.104c0 6.685-5.42 12.105-12.105 12.105-6.685 0-12.104-5.42-12.104-12.105V48.418c0-6.685 5.419-12.105 12.104-12.105Z"/><path fill="#B3CDFF" d="M169.462 48.418v12.104c0 6.685-5.419 12.105-12.104 12.105s-12.105-5.42-12.105-12.105V48.418h24.209Zm48.418 0v12.104c0 6.685-5.42 12.105-12.105 12.105-6.685 0-12.104-5.42-12.104-12.105V48.418h24.209Z"/><path fill="#004AD7" d="M217.88 151.305a6.052 6.052 0 0 1 6.052-6.052h18.157l-24.209 24.209v-18.157Zm-84.731-42.365c0-6.685 5.419-12.105 12.104-12.105s12.105 5.42 12.105 12.105c0 6.685-5.42 12.104-12.105 12.104-6.685 0-12.104-5.419-12.104-12.104Zm0 36.313c0-6.685 5.419-12.104 12.104-12.104h36.313c6.686 0 12.105 5.419 12.105 12.104s-5.419 12.105-12.105 12.105h-36.313c-6.685 0-12.104-5.42-12.104-12.105Zm36.313-36.313c0-6.685 5.419-12.105 12.104-12.105 6.686 0 12.105 5.42 12.105 12.105 0 6.685-5.419 12.104-12.105 12.104-6.685 0-12.104-5.419-12.104-12.104Zm36.313 0c0-6.685 5.42-12.105 12.105-12.105 6.685 0 12.104 5.42 12.104 12.105 0 6.685-5.419 12.104-12.104 12.104s-12.105-5.419-12.105-12.104ZM4.23 52.315c5.642-5.44 14.788-5.44 20.428 0l34.047 32.84c5.64 5.441 5.64 14.263 0 19.704-5.641 5.441-14.787 5.441-20.428 0L4.231 72.019c-5.641-5.44-5.641-14.263 0-19.704Z"/><path fill="#5791FF" d="M38.31 104.859c-5.64-5.441-5.64-14.263 0-19.704l61.284-59.111c5.641-5.441 14.787-5.441 20.428 0 5.641 5.44 5.641 14.262 0 19.704l-61.283 59.111c-5.641 5.441-14.787 5.441-20.428 0Z"/><path fill="#0B5FFF" d="M58.705 85.155c5.64 5.441 5.64 14.263 0 19.704-2.816 2.716-6.51 4.068-10.2 4.072-3.69-.005-7.378-1.356-10.194-4.072-5.641-5.441-5.641-14.263 0-19.704l10.194-9.84 10.2 9.84Z"/></svg>CMP</p></div></div>
+      <div class="row"><span class="wi-w"><i style="--c:var(--lx-blue)"></i>Create</span><div class="wi-items" style="--n:3"><p><svg class="pi" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 243 243"><path fill="#B3CDFF" d="m145.253 24.209 72.627 72.626v101.678c0 10.696-10.839 19.367-24.209 19.367H60.522c-13.37 0-24.209-8.671-24.209-19.367V43.576c0-10.696 10.839-19.367 24.21-19.367h84.73Z"/><path fill="#80ACFF" d="M242.089 193.671c0 26.74-21.678 48.418-48.418 48.418s-48.418-21.678-48.418-48.418 21.678-48.418 48.418-48.418 48.418 21.678 48.418 48.418ZM.841 73.339 35.327 4.35c2.9-5.801 11.177-5.801 14.078 0L83.89 73.34c2.616 5.234-1.189 11.392-7.039 11.392H7.88c-5.85 0-9.655-6.158-7.039-11.392Z"/><path fill="#004AD7" d="M145.253 72.627V24.209l72.627 72.626h-48.418c-13.37 0-24.209-10.838-24.209-24.208Z"/><path fill="#0B5FFF" d="M193.671 145.253a48.18 48.18 0 0 1 24.209 6.49V197.3c0 11.365-10.839 20.58-24.209 20.58h-41.928a48.18 48.18 0 0 1-6.49-24.209c0-26.74 21.678-48.418 48.418-48.418ZM83.89 73.339c2.616 5.234-1.189 11.392-7.039 11.392H36.313V44.789c0-11.031 10.213-20.014 23.039-20.533L83.89 73.34Z"/><path fill="#5791FF" d="M60.522 127.097c0-10.028 8.13-18.157 18.157-18.157h48.418c10.027 0 18.156 8.129 18.156 18.157 0 10.027-8.129 18.156-18.156 18.156H78.679c-10.028 0-18.157-8.129-18.157-18.156Z"/><path fill="#0B5FFF" d="M60.522 175.514c0-10.027 8.13-18.156 18.157-18.156h24.209c10.027 0 18.156 8.129 18.156 18.156 0 10.028-8.129 18.157-18.156 18.157h-24.21c-10.027 0-18.156-8.129-18.156-18.157Z"/></svg>CMS</p></div></div>
+      <div class="row"><span class="wi-w"><i style="--c:var(--lx-teal-l1)"></i>Publish</span><div class="wi-items" style="--n:3"><p>Sites &amp; Pages</p></div></div>
+      <div class="row"><span class="wi-w"><i style="--c:var(--lx-orange-l1)"></i>Sell</span><div class="wi-items" style="--n:3"><p><svg class="pi" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 243 243"><path fill="#B3CDFF" d="M0 56.962c0-7.865 6.376-14.24 14.24-14.24h142.406c7.864 0 14.24 6.375 14.24 14.24v156.646c0 15.729-12.751 28.481-28.481 28.481H28.481C12.751 242.089 0 229.337 0 213.608V56.962Z"/><path fill="#5791FF" d="M85.443 42.721h71.203c7.864 0 14.24 6.376 14.24 14.241v156.646c0 15.729-12.751 28.481-28.481 28.481H85.443V42.721Z"/><path fill="#004AD7" d="M42.721 113.924c0-7.865 6.376-14.24 14.241-14.24h170.886c7.865 0 14.241 6.375 14.241 14.24v85.443c0 7.865-6.376 14.241-14.241 14.241H56.962c-7.865 0-14.24-6.376-14.24-14.241v-85.443Z"/><path fill="#0B5FFF" d="M42.721 113.924c0-7.865 6.376-14.24 14.241-14.24h28.481v113.924H56.962c-7.865 0-14.24-6.376-14.24-14.241v-85.443Z"/><path fill="#F0F5FF" d="M170.886 156.646c0 15.729-12.751 28.481-28.481 28.481-15.73 0-28.481-12.752-28.481-28.481 0-15.73 12.751-28.481 28.481-28.481 15.73 0 28.481 12.751 28.481 28.481Zm14.241 0c0-7.865 6.375-14.241 14.24-14.241s14.241 6.376 14.241 14.241c0 7.864-6.376 14.24-14.241 14.24-7.865 0-14.24-6.376-14.24-14.24Z"/><path fill="#80ACFF" d="M71.203 156.646c0-7.865 6.375-14.241 14.24-14.241s14.24 6.376 14.24 14.241c0 7.864-6.375 14.24-14.24 14.24s-14.24-6.376-14.24-14.24Z"/><path fill="#F0F5FF" d="M85.443 142.405c7.865 0 14.24 6.376 14.24 14.241 0 7.864-6.375 14.24-14.24 14.24v-28.481Z"/><path fill="#004AD7" d="M71.203 14.24c-7.865 0-14.241 6.376-14.241 14.241v35.601a7.12 7.12 0 1 1-14.24 0V28.481C42.721 12.751 55.471 0 71.201 0h28.481c15.73 0 28.482 12.751 28.482 28.481v35.601a7.12 7.12 0 0 1-14.241 0V28.481c0-7.372-5.601-13.44-12.78-14.171l-1.46-.07H71.202Z"/><path fill="#0B5FFF" d="M85.443 0v14.24h-14.24c-7.865 0-14.241 6.376-14.241 14.241v35.601a7.12 7.12 0 1 1-14.24 0V28.481C42.721 12.751 55.471 0 71.201 0h14.241Z"/></svg>Commerce</p><p>PIM</p><p><svg class="pi" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 243 243"><path fill="#B3CDFF" fill-rule="evenodd" d="M89.529 107.726a18.266 18.266 0 0 1 18.381 11.926l7.855 21.412a18.229 18.229 0 0 1-1.83 16.211l-49.728 76.504c-5.492 8.45-16.802 10.852-25.26 5.364L8.317 219.27c-8.458-5.487-10.862-16.787-5.369-25.237l49.728-76.504a18.264 18.264 0 0 1 14.079-8.264l22.774-1.539Zm-1.27 22.055c-6.344-4.115-14.826-2.314-18.945 4.024-4.12 6.337-2.317 14.812 4.027 18.928 6.343 4.115 14.825 2.313 18.945-4.024 4.12-6.337 2.317-14.812-4.027-18.928Z" clip-rule="evenodd"/><path fill="#80ACFF" d="M100.709 110.627a18.237 18.237 0 0 1 7.201 9.025l7.855 21.412a18.229 18.229 0 0 1-1.83 16.211l-49.728 76.504c-5.492 8.45-16.802 10.852-25.26 5.364l-15.316-9.934 24.855-38.238 24.855-38.238c6.343 4.115 14.825 2.313 18.945-4.024 4.12-6.337 2.317-14.812-4.027-18.928l12.45-19.154Z"/><path fill="#0B5FFF" d="M58.643 168.869c2.412-3.712 8.129-.003 5.716 3.709l-2.075 3.191c2.065 2.104 3.429 4.736 3.87 7.533.634 4.146-6.045 5.472-6.754 1.086-4.07-11.601-19.485-6.256-9.006 3.551l.027.017c11.9 8.856 6.642 26.642-10.345 21.98l-1.882 2.896c-2.489 3.828-8.193.101-5.717-3.709l1.877-2.887c-2.082-2.115-4.9-6.123-5.334-8.929-.62-4.072 6.096-5.413 6.76-1.056 3.697 12.29 23.932 9.307 8.71-4.763-12.057-11.404 1.578-23.882 12.072-19.418l2.08-3.201Z"/><path fill="#5791FF" d="M165.325 87.855c0-30.083-24.409-54.47-54.519-54.47s-54.52 24.387-54.52 54.47 24.41 54.47 54.52 54.47v12.104c-36.802 0-66.636-29.806-66.636-66.574S74.004 21.28 110.806 21.28c36.801 0 66.635 29.807 66.635 66.575s-29.834 66.574-66.635 66.574v-12.104c30.11 0 54.519-24.387 54.519-54.47Z"/><path fill="#80ACFF" d="M94.404 139.804a54.559 54.559 0 0 0 16.402 2.521c1.771 0 3.522-.098 5.25-.263a18.154 18.154 0 0 1-.568 12.175c-1.548.107-3.108.192-4.682.192a66.616 66.616 0 0 1-20.602-3.254c.768-.728 1.48-1.54 2.082-2.466a13.61 13.61 0 0 0 2.118-8.905Z"/><path fill="#5791FF" d="M61.24 110.536a54.614 54.614 0 0 0 13.725 18.345 13.636 13.636 0 0 0-5.651 4.924 13.636 13.636 0 0 0-1.898 4.557 66.837 66.837 0 0 1-15.594-19.528l.854-1.305a18.233 18.233 0 0 1 8.564-6.993Z"/><path fill="#0B5FFF" fill-rule="evenodd" d="M128.657 6.339c28.588-14.553 63.571-3.197 78.138 25.365 14.566 28.562 3.199 63.513-25.389 78.066-28.588 14.553-63.571 3.196-78.137-25.365-14.567-28.562-3.2-63.514 25.388-78.066Zm6.594 12.928c-10.721 5.458-14.983 18.565-9.521 29.275 5.462 10.71 18.581 14.97 29.302 9.512 10.72-5.457 14.983-18.564 9.52-29.275-5.462-10.71-18.581-14.969-29.301-9.512Z" clip-rule="evenodd"/><path fill="#80ACFF" d="M155.278 90.5c-3.641-7.14-.8-15.879 6.347-19.517s15.893-.8 19.535 6.341l59.343 116.361c3.641 7.14.799 15.878-6.348 19.516-7.147 3.638-15.892.799-19.534-6.341L155.278 90.5Z"/><path fill="#004AD7" d="M161.625 70.983c7.147-3.638 15.893-.8 19.535 6.341l12.356 24.229a58.149 58.149 0 0 1-12.11 8.217 58.267 58.267 0 0 1-13.771 4.959l-12.357-24.23c-3.641-7.14-.8-15.878 6.347-19.516Z"/><path fill="#0B5FFF" d="M162.365 168.319c-3.642-7.14-.8-15.878 6.347-19.516l25.882-13.175c7.147-3.639 15.892-.8 19.534 6.341l13.187 25.858c3.642 7.14.8 15.878-6.347 19.516l-25.881 13.175c-7.147 3.639-15.893.8-19.535-6.341l-13.187-25.858Z"/><path fill="#B3CDFF" d="M194.594 135.628c7.147-3.639 15.892-.8 19.534 6.341l13.187 25.858c3.642 7.14.8 15.878-6.347 19.516l-12.941 6.588-26.374-51.716 12.941-6.587Z"/><path fill="#5791FF" d="M110.806 21.28c6.373 0 12.534.905 18.371 2.574a21.788 21.788 0 0 0-5.478 11.064 54.703 54.703 0 0 0-12.893-1.533c-2.952 0-5.852.231-8.676.682a58.031 58.031 0 0 1 7.927-12.778c.248-.003.5-.009.749-.009Z"/></svg>Digital Sales Rooms</p></div></div>
+      <div class="row"><span class="wi-w"><i style="--c:var(--lx-pink)"></i>Measure</span><div class="wi-items" style="--n:3"><p><svg class="pi" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 243 243"><path fill="#B3CDFF" d="M0 121.044 121.044 0l121.045 121.044-121.045 121.045L0 121.044Z"/><path fill="#80ACFF" d="M121.044 121.044H0l60.522-60.522 60.522 60.522Z"/><path fill="#0B5FFF" d="m121.044 121.044-60.522 60.522L0 121.044l60.522-60.522 60.522 60.522Z"/><path fill="#D6E4FF" d="m48.418 121.044 72.626-72.626 69.695 72.626-69.695 72.627-72.626-72.627Z"/><path fill="#5791FF" d="M121.044 121.044H48.418L84.73 84.731l36.313 36.313Zm-60.522 60.522L0 121.044h121.044l-60.522 60.522Z"/><path fill="#80ACFF" d="m84.731 157.358-36.313-36.314h72.626l-36.313 36.314Z"/><path fill="#5791FF" d="M242.089 121.044 121.044 242.089v-48.418l69.695-72.627-69.695-72.626V0l121.045 121.044Z"/><path fill="#0053F0" d="M139.201 102.888h84.767l18.121 18.156-18.121 18.157h-84.767l-18.157-18.157 18.157-18.156Z"/></svg>Data Platform</p><p><svg class="pi" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 40 40"><path d="M30.8915 17.2879C30.8915 24.9546 24.6603 31.1697 16.9738 31.1697C9.28729 31.1697 3.05614 24.9546 3.05614 17.2879C3.05614 9.62118 9.28729 3.40609 16.9738 3.40609C24.6603 3.40609 30.8915 9.62118 30.8915 17.2879Z" fill="#B3CDFF"/><path d="M26.516 7.18939C29.2078 9.72069 30.8915 13.3067 30.8915 17.2879C30.8915 21.6215 28.8983 25.4884 25.7791 28.0342C23.089 25.503 21.408 21.9154 21.408 17.9357C21.4082 13.6035 23.3985 9.73504 26.516 7.18939Z" fill="#80ACFF"/><path d="M8.17906 0.619447C8.40391 -0.206482 9.57855 -0.206482 9.8034 0.619446L11.291 6.08407C11.3693 6.37155 11.5945 6.59612 11.8827 6.67418L17.3614 8.15799C18.1895 8.38226 18.1895 9.55388 17.3614 9.77814L11.8827 11.262C11.5945 11.34 11.3693 11.5646 11.291 11.8521L9.8034 17.3167C9.57855 18.1426 8.40391 18.1426 8.17906 17.3167L6.69142 11.8521C6.61316 11.5646 6.388 11.34 6.09978 11.262L0.621046 9.77814C-0.207015 9.55388 -0.207016 8.38226 0.621046 8.15799L6.09978 6.67418C6.388 6.59612 6.61316 6.37155 6.69142 6.08407L8.17906 0.619447Z" fill="#5791FF"/><path d="M11.291 6.08407C11.3693 6.37155 11.5945 6.59612 11.8827 6.67418L17.3614 8.15799C18.1895 8.38226 18.1895 9.55388 17.3614 9.77814L11.8827 11.262C11.5945 11.34 11.3693 11.5646 11.291 11.8521L9.8034 17.3167C9.57855 18.1426 8.40391 18.1426 8.17906 17.3167L6.69142 11.8521C6.61316 11.5646 6.388 11.34 6.09978 11.262L4.63744 10.8646C6.02379 8.22113 8.2356 6.07762 10.9354 4.7787L11.291 6.08407Z" fill="#0B5FFF"/><path d="M29.6645 20.3674C27.0954 17.805 22.9253 17.8087 20.3516 20.3758C17.7779 22.9429 17.7741 27.1022 20.3432 29.6647C22.9123 32.2271 27.0824 32.2234 29.6561 29.6563L31.8446 31.8391C28.0597 35.6142 21.9288 35.6198 18.1507 31.8515C14.3727 28.0832 14.3783 21.9681 18.1631 18.193C21.948 14.4178 28.0789 14.4123 31.8569 18.1806C35.635 21.9489 35.6294 28.064 31.8446 31.8391L29.6561 29.6563C32.2298 27.0892 32.2335 22.9298 29.6645 20.3674Z" fill="#0053F0"/><path d="M30.1163 32.8495C29.3593 32.0944 29.3593 30.8703 30.1163 30.1153C30.8733 29.3603 32.1006 29.3603 32.8575 30.1153L33.9555 31.2104C34.7125 31.9654 34.7125 33.1896 33.9555 33.9446C33.1985 34.6996 31.9712 34.6996 31.2143 33.9446L30.1163 32.8495Z" fill="#0053F0"/><path d="M33.1997 32.922C33.5472 32.5755 34.0959 32.5334 34.4921 32.8233L34.5031 32.8315C34.4492 33.2383 34.2689 33.632 33.9555 33.9446C33.6124 34.2867 33.1726 34.4726 32.7239 34.5046C32.4715 34.1145 32.521 33.5989 32.8546 33.2662L33.1997 32.922Z" fill="#5791FF"/><path d="M32.699 34.5529C32.4343 34.159 32.4858 33.6333 32.822 33.298L33.2322 32.8889C33.565 32.5569 34.0855 32.5028 34.4798 32.7593L38.9224 35.6483C40.1857 36.4698 40.3709 38.2427 39.3045 39.3063C38.2468 40.3613 36.4864 40.1896 35.6536 38.9502L32.699 34.5529Z" fill="#B3CDFF"/><path d="M33.2322 32.8889C33.565 32.5569 34.0855 32.5028 34.4798 32.7593L38.9224 35.6483C40.1827 36.4683 40.3685 38.2339 39.3095 39.2981L33.0577 33.0624L33.2322 32.8889Z" fill="#5791FF"/><path d="M11.4 22.0054C12.8298 23.5273 13.2404 25.4607 12.3169 26.3238C11.3935 27.1869 9.48576 26.6529 8.05592 25.131C6.62608 23.6091 6.21556 21.6757 7.139 20.8126C8.06245 19.9494 9.97016 20.4835 11.4 22.0054Z" fill="#80ACFF"/><path d="M17.4679 16.0178C17.1838 17.0774 16.0923 17.7065 15.03 17.4231C13.9677 17.1397 13.3369 16.051 13.621 14.9914C13.9052 13.9319 14.9967 13.3027 16.059 13.5861C17.1213 13.8695 17.7521 14.9582 17.4679 16.0178Z" fill="#80ACFF"/></svg>SEO Studio</p></div></div>
+      <div class="row"><span class="wi-w"><i style="--c:var(--lx-blue)"></i>Assistants</span><div class="wi-items" style="--n:3"><p><svg class="pi" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 243 243"><path fill="#80ACFF" d="M230.317 124.482c0 58.454-47.387 105.84-105.841 105.84-58.454 0-105.84-47.386-105.84-105.84s47.386-105.84 105.84-105.84 105.841 47.386 105.841 105.84Z"/><path fill="#B3CDFF" d="M151.2 45.36c22.388 0 43.144 6.965 60.244 18.826 11.886 17.112 18.873 37.883 18.873 60.296 0 58.454-47.387 105.84-105.841 105.84-22.404 0-43.168-6.985-60.275-18.863-11.869-17.104-18.84-37.863-18.84-60.259 0-58.454 47.385-105.84 105.839-105.84Z"/><path fill="#0B5FFF" d="M75.648 5.744c2.08-7.659 12.944-7.659 15.024 0l13.759 50.673a7.783 7.783 0 0 0 5.472 5.472l50.673 13.76c7.659 2.079 7.659 12.943 0 15.023l-50.673 13.759a7.783 7.783 0 0 0-5.472 5.472l-13.76 50.673c-2.079 7.659-12.943 7.659-15.023 0L61.89 109.903a7.783 7.783 0 0 0-5.472-5.472L5.744 90.671c-7.659-2.079-7.659-12.943 0-15.023L56.417 61.89a7.784 7.784 0 0 0 5.472-5.472l13.76-50.673Z"/><path fill="#004AD7" d="M104.431 56.417a7.783 7.783 0 0 0 5.472 5.472l50.673 13.76c7.659 2.079 7.659 12.943 0 15.023l-50.673 13.759a7.783 7.783 0 0 0-5.472 5.472l-13.76 50.673c-2.079 7.659-12.943 7.659-15.023 0L61.89 109.903a7.783 7.783 0 0 0-5.472-5.472l-.156-.048c10.302-20.85 27.272-37.804 48.122-48.107l.048.14Z"/><path fill="#0B5FFF" d="M132.392 18.941c40.318-21.448 77.859-25.679 97.101-6.45l2.626 2.9c16.193 19.91 12.103 57.659-8.224 95.96-.069-.701.082.697 0 0-10.443 19.384-24.928 39.43-42.96 58.386l-5.511 5.655c-20.6 20.599-42.705 37.01-64.03 48.497.697.083-.701-.069 0 0-40.251 21.364-79.683 24.8-98.894 5.597l-2.612-2.899c-16.228-19.948-11.405-55.569 9.025-93.959 1.733 15.116 5.681 30.986 13.24 43.382-6.681 22.685-1.23 30.329 1.13 32.694 2.379 2.372 13.318 7.987 36.242 1.163-.436-.251.432.256 0 0 1.303-.391 2.66-.793 4.048-1.264 24.2-8.212 53.582-26.539 81.053-54.008 27.469-27.468 45.785-56.85 53.997-81.048.469-1.384.872-2.735 1.263-4.033.256.431-.25-.436 0 0 6.824-22.925 1.194-33.866-1.177-36.24-2.374-2.363-9.847-7.777-32.533-1.092-12.387-7.548-28.682-11.507-43.784-13.24Z"/></svg>AI Hub</p></div></div>
+    </div>
+    <div class="dk-links f">
+      <a class="dk-link" href="https://drakonux.github.io/liferay-hub-prototype/" target="_blank" rel="noopener">Liferay Hub prototype by David</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 10 · cost ═════════ -->
+<section class="dk-slide wi" data-bg="neutral" data-notes="cost">
+  <div class="dk-inner">
+    <div class="dk-head">
+      <p class="dk-eyebrow r">Cost</p>
+      <h2 class="dk-title dk-title--mid r">Changing names costs words. Not changing them costs clarity.</h2>
+    </div>
+    <div class="rows r">
+      <div class="row"><span class="wi-w"><i style="--c:var(--lx-blue)"></i>If we change</span><div class="wi-items" style="--n:3"><p>UI labels<small>Language keys, no new screens</small></p><p>Docs and Help<small>Product names in titles</small></p><p>Marketing review<small>External names and timing</small></p></div></div>
+      <div class="row"><span class="wi-w"><i style="--c:var(--lx-orange-l1)"></i>If we don’t</span><div class="wi-items" style="--n:3"><p>More patterns<small>Every new product picks its own</small></p><p>Harder to sell<small>The suite is harder to explain</small></p><p>Harder to design<small>The new Applications Home inherits the mess</small></p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 11 · questions we expect ═════════ -->
+<section class="dk-slide qs" data-bg="neutral" data-notes="objections">
+  <div class="dk-inner">
+    <div class="dk-head">
+      <p class="dk-eyebrow r">Questions we expect</p>
+    </div>
+    <div class="rows">
+      <div class="row r"><span class="qs-i">1</span><span class="qs-q">Doesn’t Gartner expect category names?</span><span class="qs-d">It asks for one integrated product under one name, and readable portfolios. Category words go in descriptions.</span></div>
+      <div class="row f"><span class="qs-i">2</span><span class="qs-q">What happens to the Global Menu?</span><span class="qs-d">Nothing yet. It will read “Content”; navigation is the next workstream.</span></div>
+      <div class="row f"><span class="qs-i">3</span><span class="qs-q">Why rename DXP?</span><span class="qs-d">It names the suite, not one product. Gartner evaluates that umbrella name, so Marketing decides if and when it changes.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 12 · plan and decisions ═════════ -->
+<section class="dk-slide cl is-left" data-bg="grain" data-notes="close">
+  <div class="dk-inner">
+    <p class="dk-eyebrow r">Next steps</p>
+    <h2 class="dk-title dk-title--mid r">With a yes on the rule, we can <span class="ul">start this quarter</span>.</h2>
+    <div class="rows r">
+      <div class="row"><span class="cl-i">1</span><span class="cl-t">Today: approve the rule and name an owner in Marketing</span></div>
+      <div class="row"><span class="cl-i">2</span><span class="cl-t">Marketing reviews the final names and the external prefix</span></div>
+      <div class="row"><span class="cl-i">3</span><span class="cl-t">A naming guide: official names, allowed nouns, retired names</span></div>
+      <div class="row"><span class="cl-i">4</span><span class="cl-t">UI labels, docs and Global Navigation use it</span></div>
+    </div>
+    <div class="dk-links r">
+      <a class="dk-link" href="https://liferay.atlassian.net/wiki/spaces/~712020670179b388424a0dbdd46b640acd03e7/pages/5432934583/Applications+Home+revamp" target="_blank" rel="noopener">Full name map</a>
+      <a class="dk-link" href="https://liferay.atlassian.net/browse/LPD-108523" target="_blank" rel="noopener">LPD-108523</a>
+    </div>
+  </div>
+</section>
+
+<div id="dk-brand" aria-hidden="true"><b>Liferay</b>Platform Experience Design</div>
+
+<footer id="dk-foot">
+  <span class="sp"></span>
+  <span id="dk-num">01 / 15</span>
+  <span class="dk-nav">
+    <button id="dk-prev" type="button" aria-label="Previous slide">Previous</button>
+    <button id="dk-next" type="button" aria-label="Next slide">Next</button>
+  </span>
+  <button id="dk-notes-btn" class="txt" type="button" aria-expanded="false">Notes</button>
+  <span class="dk-sep">·</span>
+  <button id="dk-fs" class="txt dk-fs" type="button" aria-pressed="false" title="Full screen (F)">
+    <span>Full screen</span>
+  </button>
+</footer>
+<aside id="dk-notes" aria-label="Presenter notes"></aside>
+
+<script>
+/* ════════ Presenter notes · one entry per data-notes, times continuous ════════ */
+var NOTES={
+  cover:{t:'0:00 – 0:30',items:[
+    'Straight in. One sentence: we want one naming rule for every Liferay product.'
+  ]},
+  ask:{t:'0:30 – 1:30',items:[
+    'Start with the conclusion and the ask. Two decisions today: the rule, and an owner in Marketing.',
+    'Say the scope out loud: <strong>naming only</strong>. If the Global Menu comes up, it is the next workstream.'
+  ]},
+  problem:{t:'1:30 – 2:30',items:[
+    'Three real examples from the UI and Brand Architecture 2026.',
+    '<strong>[→]</strong> The business angle: clearer names make the suite easier to explain, buy and manage.'
+  ]},
+  today:{t:'2:30 – 3:30',items:[
+    'From Marcos’ benchmark: this is public, in press releases, docs and the website.',
+    'DSR stacks on DXP and CMP on CMS; DSR is an offering in the press release and a beta feature in the docs; four nouns for the same thing; Analytics Cloud still in the LDP docs.'
+  ]},
+  research:{t:'3:30 – 4:30',items:[
+    'The evidence that the effort pays off. Rao, Agarwal and Dahlhoff (Journal of Marketing, 2004) compared 113 US companies by branding strategy against Tobin’s q, a measure of the intangible value investors see in a company.',
+    'Order they found: one corporate brand first, separate brands second, a mix of both last. Rubera and Dröge (2013) report the same order.',
+    'Be honest if asked: it is a company-level correlation, not a controlled test of renaming. What it says is that a mix, which is closest to where we are, is the weakest position.'
+  ]},
+  evidence:{t:'4:30 – 5:15',items:[
+    'A peer that went this way, and the one Luiz already pointed to. Dec 2022: plain names (Content Cloud → Optimizely CMS, Welcome → Optimizely CMP; see their name-changes page). Late 2023: Optimizely One. May 2024: $400M ARR, 52% from multi-product customers, multi-product ARR +21% a year.',
+    'Optimizely credits the suite, not the names. Use it as an example of a clear portfolio sold together, not as proof that renaming grew revenue.'
+  ]},
+  peers:{t:'5:15 – 6:15',items:[
+    'Marcos looked at all 17 vendors in the current Gartner DXP Magic Quadrant (January 2025 edition).',
+    'Brand plus function: 6 of 17, including Leaders Optimizely and Acquia. Builder.io switched to it in September 2026. House of brands is where Gartner raised complexity concerns (Adobe, HCL).',
+    '<strong>[→]</strong> Timing: the market is renaming now, so a clean-up does not stand out. It looks current.'
+  ]},
+  gartner:{t:'6:15 – 7:15',items:[
+    'Gartner penalizes fragmented naming in three places: inclusion (one product under one name), product integrity, and marketing execution.',
+    'Adobe relies most on acronyms and got cautioned on complexity. That backs dropping acronyms as product names.',
+    '<strong>[→]</strong> Conclusion: we do not need a new pattern, we need rules. That is what the next slides propose.',
+    'Also from the benchmark: SaaS, PaaS and Self-Hosted is one of the cleanest deployment naming schemes in the quadrant. Keep it.'
+  ]},
+  rule:{t:'7:15 – 9:00',items:[
+    'The core of the proposal. Four levels, one rule each.',
+    'Studio is already in the product (SEO &amp; AEO Studio) and was used before for the page editor (Design Studio), so it has precedent.',
+    'Any new add-on fits the pattern without a new discussion.'
+  ]},
+  names:{t:'9:00 – 10:30',items:[
+    'Start on today’s names: this is what customers read now.',
+    '<strong>[→]</strong> Each name turns into its proposal in place, and its product icon appears.',
+    'Commerce already works this way and nobody asks what it is; mention it, no need to dwell.',
+    'AI Agents over “AI”: “AI” alone is confused with the AI features inside every product.'
+  ]},
+  prefix:{t:'10:30 – 12:00',items:[
+    'Same name everywhere; what changes is what surrounds it.',
+    'Inside the product we are already in Liferay, so the prefix adds nothing.',
+    '<strong>[→]</strong> Marketplace: products show name and logo, “Liferay Content”. Add-ons keep the short name; the official label and Liferay as publisher mark them as ours, which avoids long names like “Liferay Product Information Studio”. Same rule as the official Marketplace app guidelines.',
+    '<strong>[→]</strong> Marketing pages are Marketing’s call. Category words go in descriptions, not in names or lists.'
+  ]},
+  bolder:{t:'12:00 – 13:30',items:[
+    'David’s prototype groups every product under Liferay Hub by what people do: Plan, Create, Publish, Sell, Measure, Assistants.',
+    'It shows where the rule can go next. It is not today’s decision: the names on the right are still the current ones, and grouping is a navigation question for the next workstream.',
+    'The prototype also puts Liferay Hub in context as the name of the suite, which supports the DXP question later.',
+    '<strong>[→]</strong> The link opens the prototype if they want to see it live.'
+  ]},
+  cost:{t:'13:30 – 15:00',items:[
+    'Cost is mostly text: labels, docs and a Marketing review. No new screens.',
+    'Cost of doing nothing: every new product adds another pattern, and the new Applications Home would carry it.'
+  ]},
+  objections:{t:'15:00 – 18:00',items:[
+    'Answer before they ask.',
+    'Gartner: the MQ asks for one integrated product under one name and scores whether customers understand the offer. Short names plus category words in descriptions fit that.',
+    '<strong>[→]</strong> Global Menu: out of scope here; it will read “Content”.',
+    '<strong>[→]</strong> DXP: Marcos’ benchmark warns that the umbrella is the name Gartner evaluates. Hub is our proposal; Marketing decides, knowing it is the name that goes into the quadrant.'
+  ]},
+  close:{t:'18:00 – 20:00',items:[
+    'Leave the room with the decision or a clear path to it.',
+    'Ask directly: can we approve the rule today, and who in Marketing owns the names?',
+    'The naming guide follows Marcos’ recommendation: official names, allowed nouns and retired names, shipped with Global Navigation (LPD-88120), because the Global Menu is where customers see what counts as a product.'
+  ]}
+};
+
+
+
+
+(function(){
+  'use strict';
+  function $$(sel,root){return [].slice.call((root||document).querySelectorAll(sel))}
+
+  /* ════════ Fragment actions (idempotent: on = shown, off = hidden) ════════
+     data-act="loop:ID" circles #ID · data-act="mark" lights every .mk in the slide · data-act="cls:NAME" toggles NAME on the slide */
+  var ACTIVE_STEP=0;
+  function runAct(f,on){
+    var a=f.dataset.act||'';
+    if(a.indexOf('loop:')===0){var el=document.getElementById(a.slice(5)); if(el) el.classList.toggle('is-looped',on)}
+    if(a.indexOf('cls:')===0){var sl=f.closest('.dk-slide'); if(sl) sl.classList.toggle(a.slice(4),on)}
+    if(a==='mark'){var sm=f.closest('.dk-slide'); if(sm) $$('.mk[data-mk]',sm).forEach(function(m,k){clearTimeout(m._t); if(on) m._t=setTimeout(function(){m.classList.add('is-on')},300+k*160); else m.classList.remove('is-on')})}
+    $$('[data-mk]',f).forEach(function(m,k){clearTimeout(m._t); if(on) m._t=setTimeout(function(){m.classList.add('is-on')},500+k*120); else m.classList.remove('is-on')});
+  }
+
+  var notes=document.getElementById('dk-notes'), notesBtn=document.getElementById('dk-notes-btn');
+  function renderNotes(k){
+    var n=NOTES[k]; if(!n){notes.innerHTML='';return}
+    notes.innerHTML='<h4>Presenter notes<span class="dk-timing">'+n.t+'</span></h4><ul>'+n.items.map(function(i){return '<li>'+i+'</li>'}).join('')+'</ul>';
+  }
+  function toggleNotes(force){
+    var open=force===undefined?!notes.classList.contains('is-open'):force;
+    notes.classList.toggle('is-open',open); notesBtn.classList.toggle('is-on',open); notesBtn.setAttribute('aria-expanded',String(open));
+  }
+  notesBtn.addEventListener('click',function(){toggleNotes()});
+
+  /* ════════ Navigation ════════ */
+  var slides=$$('.dk-slide');
+  slides.forEach(function(s){$$('.r',s).forEach(function(el,i){el.style.setProperty('--i',i)})});
+  var num=document.getElementById('dk-num'), rail=document.getElementById('dk-rail');
+  var layers={}; $$('.dk-bgl').forEach(function(l){layers[l.dataset.name]=l});
+  var bgCur=null, cur=-1, busy=null;
+  function frags(s){return $$('.f',s)}
+  function pad(n){return (n<10?'0':'')+n}
+  function setBg(name){
+    if(!layers[name]) name='neutral';
+    if(name===bgCur) return; bgCur=name;
+    Object.keys(layers).forEach(function(k){layers[k].classList.toggle('is-on',k===name)});
+  }
+  function applyStep(s,n){
+    ACTIVE_STEP=n;
+    frags(s).forEach(function(f,k){var on=k<n; f.classList.toggle('is-shown',on); try{runAct(f,on)}catch(e){console.error(e)}});
+  }
+  function show(n,atEnd){
+    n=Math.max(0,Math.min(slides.length-1,n));
+    if(n===cur) return;
+    var prev=slides[cur], s=slides[n];
+    clearTimeout(busy);
+    slides.forEach(function(x){ if(x!==prev && x!==s) x.classList.remove('is-active','is-in','is-out') });
+    if(prev){prev.classList.remove('is-in'); prev.classList.add('is-out')}
+    cur=n;
+    document.documentElement.classList.toggle('no-strip',s.dataset.strip==='off');
+    setBg(s.dataset.bg||'neutral');
+    num.textContent=pad(n+1)+' / '+pad(slides.length);
+    rail.style.width=((n+1)/slides.length*100)+'%';
+    document.getElementById('dk-prev').disabled=(n===0);
+    document.getElementById('dk-next').disabled=(n===slides.length-1);
+    renderNotes(s.dataset.notes);
+    try{history.replaceState(null,'','#'+(n+1))}catch(e){}
+    busy=setTimeout(function(){
+      if(prev) prev.classList.remove('is-active','is-out');
+      s.scrollTop=0; s.classList.add('is-active');
+      applyStep(s,atEnd?frags(s).length:0);
+      setTimeout(function(){ s.classList.add('is-in') },34);  /* not rAF: it stalls in background tabs */
+    }, prev?420:0);
+  }
+  function next(){
+    var s=slides[cur], fs=frags(s);
+    if(s.classList.contains('is-in') && ACTIVE_STEP<fs.length){ applyStep(s,ACTIVE_STEP+1); return; }
+    show(cur+1);
+  }
+  function back(){
+    var s=slides[cur];
+    if(ACTIVE_STEP>0 && s.classList.contains('is-in')){ applyStep(s,ACTIVE_STEP-1); return; }
+    show(cur-1,true);
+  }
+  document.getElementById('dk-next').addEventListener('click',next);
+  document.getElementById('dk-prev').addEventListener('click',back);
+
+  /* ════════ Keyboard ════════ */
+  document.addEventListener('keydown',function(e){
+    if(e.target.matches && e.target.matches('input, textarea')) return;
+    if(e.metaKey||e.ctrlKey||e.altKey) return;
+    var k=e.key;
+    if(k==='ArrowRight'||k===' '||k==='PageDown'){e.preventDefault();next()}
+    else if(k==='ArrowLeft'||k==='PageUp'){e.preventDefault();back()}
+    else if(k==='Home'){show(0)}
+    else if(k==='End'){show(slides.length-1,true)}
+    else if(k==='n'||k==='N'){toggleNotes()}
+    else if(k==='Escape'){toggleNotes(false)}
+    else if(k==='f'||k==='F'){toggleFs()}
+  });
+
+  /* ════════ Full screen: hides the browser UI ════════ */
+  var fsBtn=document.getElementById('dk-fs');
+  function toggleFs(){
+    var d=document, el=d.documentElement;
+    try{
+      if(d.fullscreenElement||d.webkitFullscreenElement){ (d.exitFullscreen||d.webkitExitFullscreen).call(d) }
+      else { var r=(el.requestFullscreen||el.webkitRequestFullscreen).call(el,{navigationUI:'hide'}); if(r&&r.catch) r.catch(function(){}) }
+    }catch(e){}
+  }
+  function syncFs(){
+    var on=!!(document.fullscreenElement||document.webkitFullscreenElement);
+    fsBtn.classList.toggle('is-on',on); fsBtn.setAttribute('aria-pressed',String(on));
+    document.documentElement.classList.toggle('is-fs',on);
+    fsBtn.querySelector('span').textContent=on?'Exit full screen':'Full screen';
+  }
+  fsBtn.addEventListener('click',function(){toggleFs(); fsBtn.blur()});
+  document.addEventListener('fullscreenchange',syncFs); document.addEventListener('webkitfullscreenchange',syncFs);
+
+  /* ════════ Idle chrome ════════ */
+  var foot=document.getElementById('dk-foot'), idle;
+  function poke(){foot.classList.remove('is-idle');clearTimeout(idle);idle=setTimeout(function(){foot.classList.add('is-idle')},2800)}
+  document.addEventListener('mousemove',poke); document.addEventListener('keydown',poke); poke();
+
+  var h=parseInt((location.hash||'').slice(1),10);
+  slides.forEach(function(s){s.classList.remove('is-active')});
+  show(h>0?h-1:0);
+})();
+</script>
+</body>
+</html>
